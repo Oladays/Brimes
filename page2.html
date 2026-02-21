@@ -6,45 +6,31 @@
     <title>Financial Freedom Academy</title>
     <style>
         * { box-sizing: border-box; }
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #020c1b; color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px 0; overflow-x: hidden; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #020c1b; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-bottom: 40px; }
         
-        .card { background: #0a192f; width: 95%; max-width: 420px; padding: 20px; border-radius: 30px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; z-index: 5; }
+        /* MARKET TICKER TOP */
+        .market-ticker { width: 100%; background: #000; padding: 5px 0; border-bottom: 1px solid #22c55e; font-size: 10px; font-weight: bold; overflow: hidden; white-space: nowrap; }
+        .ticker-move { display: inline-block; animation: marketScroll 20s linear infinite; color: #22c55e; }
+        @keyframes marketScroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        .img-box { width: 100%; height: 200px; margin-bottom: 15px; border-radius: 20px; border: 3px solid #22c55e; overflow: hidden; position: relative; }
+        .card { background: #0a192f; width: 95%; max-width: 420px; padding: 20px; border-radius: 30px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5); margin-top: 20px; position: relative; }
+
+        /* SCARCITY BAR */
+        .scarcity-box { margin-bottom: 15px; text-align: left; }
+        .bar-label { font-size: 11px; font-weight: bold; display: flex; justify-content: space-between; margin-bottom: 5px; color: #8892b0; }
+        .progress-bg { background: #112240; height: 8px; border-radius: 10px; overflow: hidden; border: 1px solid #233554; }
+        .progress-fill { background: #ef4444; height: 100%; width: 85%; animation: drain 60s ease-out forwards; }
+        @keyframes drain { 0% { width: 85%; } 100% { width: 4%; } }
+
+        .img-box { width: 100%; height: 180px; margin-bottom: 15px; border-radius: 20px; border: 3px solid #22c55e; overflow: hidden; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* UNSTOPPABLE CRAWLER */
-        .comments-window { background: rgba(17, 34, 64, 0.95); border: 1px solid #233554; border-radius: 15px; height: 180px; overflow: hidden; position: relative; margin-bottom: 15px; }
-        #comment-stream { position: absolute; width: 100%; animation: moveUpwards 25s linear infinite; }
+        .comments-window { background: rgba(17, 34, 64, 0.95); border: 1px solid #233554; border-radius: 15px; height: 150px; overflow: hidden; position: relative; margin-bottom: 15px; }
+        #comment-stream { position: absolute; width: 100%; animation: moveUpwards 20s linear infinite; }
         @keyframes moveUpwards { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
-        .comment { padding: 10px; border-bottom: 1px solid rgba(35, 53, 84, 0.3); text-align: left; font-size: 11px; }
-        .user-name { color: #22c55e; font-weight: bold; }
+        .comment { padding: 8px 12px; border-bottom: 1px solid rgba(35, 53, 84, 0.3); text-align: left; font-size: 11px; }
 
-        /* PROFIT NOTIFICATION POPUP */
-        #profit-popup {
-            position: fixed;
-            bottom: 20px;
-            left: -300px; /* Hidden initially */
-            background: #112240;
-            border-left: 5px solid #22c55e;
-            padding: 12px 20px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.5s ease-in-out;
-            z-index: 100;
-        }
-        .profit-icon { background: #22c55e; color: #000; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; }
-
-        /* TRUST BADGES */
-        .trust-badges { display: flex; justify-content: space-around; margin: 15px 0; opacity: 0.6; }
-        .badge { font-size: 10px; font-weight: bold; color: #8892b0; }
-
-        .input-area { background: #112240; padding: 10px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #3b82f6; }
-        .input-area input { background: transparent; border: none; color: white; width: 100%; font-size: 12px; outline: none; padding: 5px; border-bottom: 1px solid #233554; }
-        .input-area button { background: #3b82f6; border: none; color: white; border-radius: 8px; font-size: 11px; padding: 8px; width: 100%; font-weight: bold; margin-top: 5px; }
+        #profit-popup { position: fixed; bottom: 100px; left: -300px; background: #112240; border-left: 5px solid #22c55e; padding: 12px; border-radius: 10px; box-shadow: 0 10px 30px #000; transition: 0.5s; z-index: 100; }
 
         .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; font-size: 14px; text-align: center; margin-bottom: 10px; }
         .btn-green { background: #22c55e; color: #020c1b; }
@@ -53,9 +39,14 @@
 </head>
 <body>
 
+    <div class="market-ticker">
+        <div class="ticker-move">
+            BTC/USD 64,231.40 (+2.4%) &nbsp;&nbsp;&nbsp; XAU/USD 2,024.15 (-0.5%) &nbsp;&nbsp;&nbsp; EUR/USD 1.0842 (+0.12%) &nbsp;&nbsp;&nbsp; ETH/USD 3,450.11 (+3.1%)
+        </div>
+    </div>
+
     <div id="profit-popup">
-        <div class="profit-icon">$</div>
-        <div id="profit-text" style="font-size: 12px;">Someone just made **$420** profit!</div>
+        <div id="profit-text" style="font-size: 11px;"></div>
     </div>
 
     <div class="card">
@@ -63,67 +54,48 @@
             <img src="mentor-pro.jpg" alt="Mentor">
         </div>
 
-        <div class="trust-badges">
-            <div class="badge">🛡️ SECURED</div>
-            <div class="badge">✔️ VERIFIED</div>
-            <div class="badge">🚀 FAST-PAY</div>
+        <div class="scarcity-box">
+            <div class="bar-label">
+                <span>VIP DISCOUNT SLOTS</span>
+                <span style="color: #ef4444;">LIMITED AVAILABILITY</span>
+            </div>
+            <div class="progress-bg">
+                <div class="progress-fill"></div>
+            </div>
         </div>
 
         <div class="comments-window">
             <div id="comment-stream">
-                <div class="comment"><span class="user-name">Olawale:</span> Signals hit TP3! 📈</div>
-                <div class="comment"><span class="user-name">Chidi:</span> Withdrew 200k today. 💸</div>
-                <div class="comment"><span class="user-name">Aisha:</span> Mentorship is 🔥!</div>
-                <div class="comment"><span class="user-name">Segun:</span> Best 50 pips ever.</div>
-                <div class="comment"><span class="user-name">Ibrahim:</span> Gold setup was sharp.</div>
-                <div class="comment"><span class="user-name">Nonso:</span> VIP slot secured!</div>
-                <div class="comment"><span class="user-name">Olawale:</span> Signals hit TP3! 📈</div>
-                <div class="comment"><span class="user-name">Chidi:</span> Withdrew 200k today. 💸</div>
-                <div class="comment"><span class="user-name">Aisha:</span> Mentorship is 🔥!</div>
-                <div class="comment"><span class="user-name">Segun:</span> Best 50 pips ever.</div>
+                <div class="comment"><span style="color:#22c55e;font-weight:bold">Victor:</span> Just got the login details!</div>
+                <div class="comment"><span style="color:#22c55e;font-weight:bold">Amaka:</span> Who else took the SELL on EURUSD?</div>
+                <div class="comment"><span style="color:#22c55e;font-weight:bold">Tunde:</span> Brimes, you are a legend. 🐐</div>
+                <div class="comment"><span style="color:#22c55e;font-weight:bold">Uche:</span> The risk management is the best part.</div>
+                <div class="comment"><span style="color:#22c55e;font-weight:bold">Victor:</span> Just got the login details!</div>
+                <div class="comment"><span style="color:#22c55e;font-weight:bold">Amaka:</span> Who else took the SELL on EURUSD?</div>
             </div>
-        </div>
-
-        <div class="input-area">
-            <input type="text" id="uName" placeholder="Name">
-            <input type="text" id="uMsg" placeholder="Live Comment...">
-            <button onclick="postComm()">POST TO FEED</button>
         </div>
 
         <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn btn-green">ACCESS FREE SIGNALS</a>
         <a href="https://wa.me/2348103586138?text=I'm%20ready%20for%20VIP%20mentorship." class="btn btn-blue">CLAIM VIP DISCOUNT</a>
+        
+        <p style="font-size: 10px; color: #4b5563; margin-top: 10px;">🛡️ 256-Bit SSL Encrypted Connection</p>
     </div>
 
     <script>
-        // Profit Pop-up Logic
-        const amounts = [120, 450, 800, 250, 1100, 60, 310];
-        const users = ["Samuel", "Joy", "Tunde", "Blessing", "Musa", "Favor"];
+        const users = ["Musa", "Kemi", "Ifeanyi", "Sarah", "David", "Chidi"];
+        const amounts = [50, 200, 1500, 410, 85, 900];
 
         function showProfit() {
             const pop = document.getElementById('profit-popup');
             const txt = document.getElementById('profit-text');
-            const rUser = users[Math.floor(Math.random() * users.length)];
-            const rAmt = amounts[Math.floor(Math.random() * amounts.length)];
-            
-            txt.innerHTML = `**${rUser}** just made **$${rAmt}** profit!`;
+            const rU = users[Math.floor(Math.random() * users.length)];
+            const rA = amounts[Math.floor(Math.random() * amounts.length)];
+            txt.innerHTML = `💸 **${rU}** just secured **$${rA}** profit!`;
             pop.style.left = "20px";
-            
-            setTimeout(() => { pop.style.left = "-400px"; }, 4000);
+            setTimeout(() => { pop.style.left = "-400px"; }, 3500);
         }
-
-        setInterval(showProfit, 10000); // Shows every 10 seconds
-
-        function postComm() {
-            const n = document.getElementById('uName').value;
-            const m = document.getElementById('uMsg').value;
-            if(n && m) {
-                const s = document.getElementById('comment-stream');
-                const d = document.createElement('div');
-                d.className = 'comment';
-                d.innerHTML = `<span class="user-name">${n}:</span> ${m}`;
-                s.prepend(d);
-            }
-        }
+        setInterval(showProfit, 9000);
     </script>
 </body>
+</html>
                                          </html>
