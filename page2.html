@@ -7,37 +7,38 @@
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #020c1b; color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px 0; }
-        .card { background: #0a192f; width: 95%; max-width: 420px; padding: 20px; border-radius: 30px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; }
         
-        /* IMAGE BOX */
+        .card { background: #0a192f; width: 95%; max-width: 420px; padding: 20px; border-radius: 30px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5); overflow: hidden; }
+
         .img-box { width: 100%; height: 180px; margin-bottom: 15px; border-radius: 20px; border: 3px solid #22c55e; overflow: hidden; position: relative; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .pulse { position: absolute; top: 10px; left: 10px; background: #22c55e; width: 10px; height: 10px; border-radius: 50%; animation: pulse-animation 2s infinite; z-index: 10; }
-        @keyframes pulse-animation { 0% { box-shadow: 0 0 0 0px rgba(34, 197, 94, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0px rgba(34, 197, 94, 0); } }
 
-        /* UNLIMITED LIVE FEED */
-        .live-label { background: #ef4444; color: white; font-size: 10px; font-weight: bold; padding: 4px 10px; border-radius: 5px; margin-bottom: 10px; display: inline-block; animation: blink 1s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-
+        /* THE MOVING WINDOW */
         .comments-window {
             background: rgba(17, 34, 64, 0.95);
             border: 1px solid #233554;
             border-radius: 15px;
             height: 250px;
-            overflow-y: hidden;
+            overflow: hidden; /* Hides the overflow so it looks like a window */
             position: relative;
             margin-bottom: 15px;
         }
 
+        /* THE ACTUAL ANIMATED LIST */
         #comment-stream {
+            position: absolute;
+            width: 100%;
             display: flex;
-            flex-direction: column-reverse; /* New comments appear at top */
-            padding: 10px;
+            flex-direction: column;
+            animation: moveUpwards 30s linear infinite; /* This makes it move non-stop */
         }
 
-        .comment { padding: 10px; border-bottom: 1px solid rgba(35, 53, 84, 0.5); text-align: left; font-size: 11px; animation: slideIn 0.4s ease-out; }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-        
+        @keyframes moveUpwards {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); } /* Loops half-way through the doubled list for infinite feel */
+        }
+
+        .comment { padding: 12px; border-bottom: 1px solid rgba(35, 53, 84, 0.3); text-align: left; font-size: 12px; }
         .user-name { color: #22c55e; font-weight: bold; }
         .user-msg { color: #ccd6f6; margin-left: 5px; }
 
@@ -46,7 +47,7 @@
         .input-area input { background: transparent; border: none; color: white; width: 100%; font-size: 12px; outline: none; padding: 8px; border-bottom: 1px solid #233554; margin-bottom: 5px; }
         .input-area button { background: #3b82f6; border: none; color: white; border-radius: 8px; font-size: 11px; padding: 10px; width: 100%; font-weight: bold; cursor: pointer; }
 
-        .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; font-size: 14px; text-align: center; margin-bottom: 10px; transition: 0.3s; }
+        .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; font-size: 14px; text-align: center; margin-bottom: 10px; }
         .btn-green { background: #22c55e; color: #020c1b; }
         .btn-blue { border: 2px solid #1d4ed8; color: #3b82f6; }
     </style>
@@ -55,21 +56,34 @@
 
     <div class="card">
         <div class="img-box">
-            <div class="pulse"></div>
             <img src="mentor-pro.jpg" alt="Mentor">
         </div>
 
-        <div class="live-label">● LIVE COMMUNITY CHAT</div>
+        <h3 style="font-size: 14px; color: #ef4444; margin-bottom: 10px;">LIVE COMMUNITY ACTIVITY</h3>
 
         <div class="comments-window">
             <div id="comment-stream">
-                </div>
+                <div class="comment"><span class="user-name">Olawale:</span><span class="user-msg">The VIP signals just hit TP3! 🚀</span></div>
+                <div class="comment"><span class="user-name">Chidi:</span><span class="user-msg">I just withdrew 200k Naira today.</span></div>
+                <div class="comment"><span class="user-name">Aisha:</span><span class="user-msg">Mentorship is still open? I want in.</span></div>
+                <div class="comment"><span class="user-name">Segun:</span><span class="user-msg">Best 50 pips ever made. 🔥</span></div>
+                <div class="comment"><span class="user-name">Joy:</span><span class="user-msg">Brimes is the realest boss.</span></div>
+                <div class="comment"><span class="user-name">Ibrahim:</span><span class="user-msg">Gold setup was clean!</span></div>
+                <div class="comment"><span class="user-name">Tunde:</span><span class="user-msg">Withdrawal successful. 💸</span></div>
+                <div class="comment"><span class="user-name">Faith:</span><span class="user-msg">I just joined the private group.</span></div>
+                <div class="comment"><span class="user-name">Olawale:</span><span class="user-msg">The VIP signals just hit TP3! 🚀</span></div>
+                <div class="comment"><span class="user-name">Chidi:</span><span class="user-msg">I just withdrew 200k Naira today.</span></div>
+                <div class="comment"><span class="user-name">Aisha:</span><span class="user-msg">Mentorship is still open? I want in.</span></div>
+                <div class="comment"><span class="user-name">Segun:</span><span class="user-msg">Best 50 pips ever made. 🔥</span></div>
+                <div class="comment"><span class="user-name">Joy:</span><span class="user-msg">Brimes is the realest boss.</span></div>
+                <div class="comment"><span class="user-name">Ibrahim:</span><span class="user-msg">Gold setup was clean!</span></div>
+            </div>
         </div>
 
         <div class="input-area">
-            <input type="text" id="userName" placeholder="Your Name...">
-            <input type="text" id="userMsg" placeholder="Share your profit...">
-            <button onclick="addUserComment()">POST TO LIVE FEED</button>
+            <input type="text" id="userName" placeholder="Name">
+            <input type="text" id="userMsg" placeholder="Message">
+            <button onclick="addUserComment()">SEND TO FEED</button>
         </div>
 
         <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn btn-green">ACCESS FREE SIGNALS</a>
@@ -77,43 +91,18 @@
     </div>
 
     <script>
-        const names = ["Oladimeji", "Chisom", "Abubakar", "Funke", "Emeka", "Zainab", "Tunde", "Blessing", "Ifeanyi", "Kemi", "Musa", "Nneka", "Segun", "Damilola", "Victor", "Amaka"];
-        const messages = ["Just hit TP2 on Gold! 🔥", "Mentorship is 100% worth it.", "Withdrawal received in 10 mins. 💸", "Signals are fire today!", "Is VIP registration still open?", "I just made $150 from the free signal!", "The mindset session is deep.", "Thank you Brimes for the setup.", "Let's go! Green pips only.", "Just secured my VIP slot!"];
-
-        function createComment(name, msg) {
-            const stream = document.getElementById('comment-stream');
-            const div = document.createElement('div');
-            div.className = 'comment';
-            div.innerHTML = `<span class="user-name">${name}:</span><span class="user-msg">${msg}</span>`;
-            stream.prepend(div);
-            
-            // Keep only the last 50 comments to save memory
-            if (stream.children.length > 50) {
-                stream.removeChild(stream.lastChild);
-            }
-        }
-
-        // Auto-generate comments every 3 seconds for unlimited feel
-        setInterval(() => {
-            const randomName = names[Math.floor(Math.random() * names.length)];
-            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-            createComment(randomName, randomMsg);
-        }, 3000);
-
-        // Allow user to add their own
         function addUserComment() {
             const name = document.getElementById('userName').value;
             const msg = document.getElementById('userMsg').value;
             if(name && msg) {
-                createComment(name, msg);
+                const stream = document.getElementById('comment-stream');
+                const div = document.createElement('div');
+                div.className = 'comment';
+                div.innerHTML = `<span class="user-name">${name}:</span><span class="user-msg">${msg}</span>`;
+                stream.prepend(div); // Put it at the top of the moving list
                 document.getElementById('userName').value = '';
                 document.getElementById('userMsg').value = '';
             }
-        }
-
-        // Load some initial comments
-        for(let i=0; i<5; i++) {
-            createComment(names[i], messages[i]);
         }
     </script>
 </body>
