@@ -234,105 +234,165 @@
             position: relative;
             display: flex;
             align-items: center;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Freedom Academy</title>
+    <style>
+        /* Bold, Clean Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;900&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background: #020617; /* Deepest black-blue */
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            border-bottom: 2px solid #22c55e;
+            min-height: 100vh;
+            padding: 15px;
         }
 
-        /* Animated Trading Candle Effect */
-        .chart-visual {
-            width: 80%;
-            height: 100px;
-            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            position: relative;
+        .card {
+            background: #0f172a;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 24px;
+            border: 2px solid #1e293b;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            overflow: hidden;
+        }
+
+        /* PROFESSIONAL TRADING HEADER */
+        .header-chart {
+            width: 100%;
+            height: 180px;
+            background: #000;
             display: flex;
             align-items: flex-end;
-            gap: 8px;
+            justify-content: center;
+            gap: 12px;
+            padding-bottom: 25px;
+            border-bottom: 4px solid #22c55e; /* Success Green */
+            position: relative;
         }
 
-        /* CSS Candles */
-        .candle { width: 12px; border-radius: 2px; background: #22c55e; box-shadow: 0 0 10px #22c55e; }
-        .c1 { height: 40%; } .c2 { height: 70%; } .c3 { height: 50%; } .c4 { height: 90%; } .c5 { height: 60%; }
-
-        .container { padding: 40px 24px; }
-
-        .badge {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22c55e;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 11px;
+        .header-chart::before {
+            content: "LIVE MARKET ANALYSIS";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 10px;
             font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            display: inline-block;
+            color: #22c55e;
+            letter-spacing: 1px;
         }
+
+        /* Visible Trading Candles */
+        .bar { width: 18px; border-radius: 3px; background: #22c55e; }
+        .b1 { height: 40px; opacity: 0.5; }
+        .b2 { height: 70px; opacity: 0.7; }
+        .b3 { height: 50px; opacity: 0.8; }
+        .b4 { height: 100px; box-shadow: 0 0 15px #22c55e; }
+        .b5 { height: 80px; }
+
+        .content { padding: 35px 20px; text-align: center; }
 
         h1 { 
-            font-size: 38px; 
+            font-size: 36px; 
             font-weight: 900; 
-            line-height: 1; 
+            letter-spacing: -2px; 
+            line-height: 0.95; 
             margin-bottom: 12px;
-            letter-spacing: -2px;
-            background: linear-gradient(to bottom, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle { color: #64748b; font-size: 16px; margin-bottom: 30px; font-weight: 500; }
-
-        /* GRID TILES */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 35px; }
-        .item { background: #111; border: 1px solid #222; padding: 15px; border-radius: 12px; font-weight: 700; font-size: 13px; color: #cbd5e1; }
-
-        /* BOLD BUTTONS */
-        .btn { 
-            display: block;
-            padding: 20px;
-            margin-bottom: 12px;
-            text-decoration: none;
-            border-radius: 15px;
-            font-weight: 900;
-            font-size: 15px;
             text-transform: uppercase;
-            transition: 0.2s;
         }
 
-        .primary { background: #22c55e; color: #000; box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3); }
-        .secondary { border: 2px solid #3b82f6; color: #3b82f6; }
+        p { color: #94a3b8; font-size: 16px; margin-bottom: 30px; line-height: 1.4; }
 
-        .back { color: #475569; display: block; margin-top: 25px; text-decoration: none; font-size: 12px; font-weight: 700; }
+        /* BOLD GRID ITEMS */
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 35px;
+        }
+
+        .tag {
+            background: #1e293b;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid #334155;
+        }
+
+        /* HIGH-VISIBILITY BUTTONS */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            text-decoration: none;
+            font-weight: 900;
+            border-radius: 15px;
+            text-transform: uppercase;
+            font-size: 15px;
+            margin-bottom: 15px;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .btn-primary { 
+            background: #22c55e; 
+            color: #052e16; 
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-secondary { 
+            background: #3b82f6; 
+            color: #ffffff; 
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn:active { transform: scale(0.96); }
+
+        .back {
+            display: block;
+            margin-top: 20px;
+            color: #475569;
+            font-size: 13px;
+            text-decoration: none;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <div class="chart-box">
-            <div class="chart-visual">
-                <div class="candle c1"></div>
-                <div class="candle c2"></div>
-                <div class="candle c3"></div>
-                <div class="candle c4"></div>
-                <div class="candle c5"></div>
-                <div style="position: absolute; right: 0; top: 10px; color: #22c55e; font-size: 10px; font-weight: 900;">+ 4.82% ▲</div>
-            </div>
+        <div class="header-chart">
+            <div class="bar b1"></div>
+            <div class="bar b2"></div>
+            <div class="bar b3"></div>
+            <div class="bar b4"></div>
+            <div class="bar b5"></div>
         </div>
 
-        <div class="container">
-            <div class="badge">Market Protocol Active</div>
-            
+        <div class="content">
             <h1>FINANCIAL<br>FREEDOM</h1>
-            <p class="subtitle">Institutional grade analysis for serious retail traders.</p>
+            <p>Master the global markets with high-probability mentorship.</p>
 
-            <div class="grid">
-                <div class="item">📈 SIGNALS</div>
-                <div class="item">📊 ANALYSIS</div>
-                <div class="item">₿ CRYPTO</div>
-                <div class="item">🛡️ RISK MGMT</div>
+            <div class="features">
+                <div class="tag">📈 SIGNALS</div>
+                <div class="tag">📊 ANALYSIS</div>
+                <div class="tag">₿ CRYPTO</div>
+                <div class="tag">🛡️ RISK MGMT</div>
             </div>
 
-            <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn primary">Join Trading Group</a>
-            <a href="https://wa.me/2348103586138" class="btn secondary">Private Mentorship</a>
+            <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn btn-primary">Join Trading Group</a>
+            <a href="https://wa.me/2348103586138" class="btn btn-secondary">Private Mentorship</a>
             
             <a href="index.html" class="back">← RETURN TO HOME</a>
         </div>
