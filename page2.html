@@ -83,21 +83,100 @@
             animation: pulse-animation 2s infinite;
         }
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Freedom Academy</title>
+    <style>
+        * { box-sizing: border-box; }
+        
+        body { 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: #020c1b; 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            padding: 20px 0;
+        }
+
+        .card { 
+            background: #0a192f; 
+            width: 95%; 
+            max-width: 420px; 
+            padding: 25px 20px; 
+            border-radius: 30px; 
+            text-align: center; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .ticker {
+            background: #112240;
+            padding: 8px;
+            font-size: 11px;
+            font-weight: bold;
+            color: #22c55e;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            animation: scroll 15s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .img-box { 
+            width: 100%; 
+            height: 240px; 
+            margin: 0 auto 20px; 
+            border-radius: 20px; 
+            border: 3px solid #22c55e; 
+            overflow: hidden; 
+            position: relative;
+        }
+
+        .img-box img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
+
+        .pulse {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #22c55e;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: pulse-animation 2s infinite;
+        }
+
         @keyframes pulse-animation {
             0% { box-shadow: 0 0 0 0px rgba(34, 197, 94, 0.7); }
             70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
             100% { box-shadow: 0 0 0 0px rgba(34, 197, 94, 0); }
         }
 
-        h1 { font-size: 30px; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; }
-        .description { color: #8892b0; font-size: 14px; margin-bottom: 25px; }
+        h1 { font-size: 28px; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; }
 
-        /* 3. CONVERSION TILES */
         .feature-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .feat-item {
@@ -109,22 +188,34 @@
             border: 1px solid #233554;
         }
 
+        /* TESTIMONIAL BOX */
+        .testimonial {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed #3b82f6;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .stars { color: #fbbf24; font-size: 14px; margin-bottom: 5px; }
+        .quote { font-size: 13px; font-style: italic; color: #ccd6f6; margin-bottom: 5px; }
+        .author { font-size: 11px; font-weight: bold; color: #3b82f6; text-transform: uppercase; }
+
         .btn {
             display: block;
             width: 100%;
-            padding: 20px;
+            padding: 18px;
             text-decoration: none;
             font-weight: 900;
             border-radius: 15px;
             text-transform: uppercase;
             font-size: 15px;
             margin-bottom: 12px;
-            transition: 0.3s;
         }
 
         .btn-green { background: #22c55e; color: #020c1b; }
         .btn-blue { border: 2px solid #1d4ed8; color: #3b82f6; }
-        .btn:hover { transform: translateY(-3px); opacity: 0.9; }
 
         .return-link { display: block; margin-top: 15px; color: #4b5563; text-decoration: none; font-size: 12px; font-weight: 700; }
     </style>
@@ -139,17 +230,23 @@
         </div>
 
         <div class="img-box">
-            <div class="pulse"></div> <img src="IMG-20260221-WA0009.jpg" alt="Mentor">
+            <div class="pulse"></div>
+            <img src="IMG-20260221-WA0009.jpg" alt="Mentor">
         </div>
 
         <h1>FINANCIAL FREEDOM</h1>
-        <p class="description">Stop guessing. Start trading like an institution.</p>
 
         <div class="feature-grid">
             <div class="feat-item">💸 $10k/mo Plan</div>
             <div class="feat-item">🎯 90% Win Rate</div>
             <div class="feat-item">📈 Daily Signals</div>
             <div class="feat-item">🧠 Mindset Pro</div>
+        </div>
+
+        <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p class="quote">"The VIP signals are insane. I doubled my small account in just two weeks following the risk plan!"</p>
+            <p class="author">— Samuel K. (Verified Student)</p>
         </div>
 
         <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn btn-green">ACCESS FREE SIGNALS</a>
