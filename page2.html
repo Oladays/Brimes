@@ -12,4 +12,34 @@
         .subtitle { color: #8b949e; font-size: 16px; margin-bottom: 20px; }
         .features { text-align: left; background: #0d1117; padding: 15px; border-radius: 10px; margin-bottom: 25px; border-left: 4px solid #238636; }
         .features ul { list-style: none; padding: 0; margin: 0; }
-        .features li { margin: 8px 0; font-size: 14px; color: #c9d1
+        .features li { margin: 8px 0; font-size: 14px; color: #c9d1d9; }
+        .features li::before { content: "✅ "; }
+        .btn-container { display: flex; flex-direction: column; gap: 15px; }
+        .btn { padding: 16px; text-decoration: none; border-radius: 10px; color: white; font-weight: bold; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .whatsapp { background-color: #238636; box-shadow: 0 4px 14px rgba(35, 134, 54, 0.4); }
+        .back { color: #8b949e; font-size: 13px; margin-top: 15px; display: block; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="IMG-20260214-WA0006(4).jpg" alt="Trading Mentor">
+        
+        <h1>Financial Freedom</h1>
+        <p class="subtitle">Join my mentorship and master the markets.</p>
+        
+        <div class="features">
+            <ul>
+                <li>Forex & Crypto Strategies</li>
+                <li>Technical Analysis Mastery</li>
+                <li>Risk Management Secrets</li>
+                <li>Live Trading Sessions</li>
+            </ul>
+        </div>
+        
+        <div class="btn-container">
+            <a href="https://wa.me/2348103586138?text=Hello!%20I%20saw%20your%20website.%20I%20want%20to%20learn%20how%20to%20trade%20and%20master%20the%20market.%20Please%20guide%20me!" class="btn whatsapp">Message Now to Join!</a>
+            <a href="index.html" class="back">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
