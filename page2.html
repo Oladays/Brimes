@@ -17,91 +17,6 @@
             align-items: center; 
             justify-content: center; 
             min-height: 100vh; 
-        }
-
-        .card { 
-            background: #0a192f; 
-            width: 95%; 
-            max-width: 420px; 
-            padding: 30px 20px; 
-            border-radius: 30px; 
-            text-align: center; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            position: relative;
-        }
-
-        /* 1. MEMBER SUCCESS TICKER */
-        .ticker {
-            background: #112240;
-            padding: 8px;
-            font-size: 11px;
-            font-weight: bold;
-            color: #22c55e;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .ticker-content {
-            display: inline-block;
-            animation: scroll 15s linear infinite;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* MEDIUM-TO-LARGE RECTANGLE */
-        .img-box { 
-            width: 100%; 
-            height: 240px; 
-            margin: 0 auto 20px; 
-            border-radius: 20px; 
-            border: 3px solid #22c55e; 
-            overflow: hidden; 
-            position: relative;
-        }
-
-        .img-box img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-        }
-
-        /* 2. LIVE PULSE EFFECT */
-        .pulse {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: #22c55e;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            box-shadow: 0 0 0 rgba(34, 197, 94, 0.4);
-            animation: pulse-animation 2s infinite;
-        }
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Freedom Academy</title>
-    <style>
-        * { box-sizing: border-box; }
-        
-        body { 
-            margin: 0; 
-            padding: 0; 
-            font-family: 'Segoe UI', Tahoma, sans-serif; 
-            background: #020c1b; 
-            color: white; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            min-height: 100vh; 
             padding: 20px 0;
         }
 
@@ -115,6 +30,7 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
+        /* SUCCESS TICKER */
         .ticker {
             background: #112240;
             padding: 8px;
@@ -137,9 +53,10 @@
             100% { transform: translateX(-100%); }
         }
 
+        /* MEDIUM-TO-LARGE RECTANGLE BOX */
         .img-box { 
             width: 100%; 
-            height: 240px; 
+            height: 260px; 
             margin: 0 auto 20px; 
             border-radius: 20px; 
             border: 3px solid #22c55e; 
@@ -153,6 +70,7 @@
             object-fit: cover; 
         }
 
+        /* LIVE PULSE EFFECT */
         .pulse {
             position: absolute;
             top: 15px;
@@ -162,6 +80,7 @@
             height: 10px;
             border-radius: 50%;
             animation: pulse-animation 2s infinite;
+            z-index: 10;
         }
 
         @keyframes pulse-animation {
@@ -170,7 +89,7 @@
             100% { box-shadow: 0 0 0 0px rgba(34, 197, 94, 0); }
         }
 
-        h1 { font-size: 28px; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; }
+        h1 { font-size: 28px; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; letter-spacing: -1px; }
 
         .feature-grid {
             display: grid;
@@ -202,6 +121,7 @@
         .quote { font-size: 13px; font-style: italic; color: #ccd6f6; margin-bottom: 5px; }
         .author { font-size: 11px; font-weight: bold; color: #3b82f6; text-transform: uppercase; }
 
+        /* ACTION BUTTONS */
         .btn {
             display: block;
             width: 100%;
@@ -212,10 +132,13 @@
             text-transform: uppercase;
             font-size: 15px;
             margin-bottom: 12px;
+            text-align: center;
+            transition: 0.3s;
         }
 
         .btn-green { background: #22c55e; color: #020c1b; }
-        .btn-blue { border: 2px solid #1d4ed8; color: #3b82f6; }
+        .btn-blue-outline { border: 2px solid #1d4ed8; color: #3b82f6; }
+        .btn:hover { transform: scale(1.02); }
 
         .return-link { display: block; margin-top: 15px; color: #4b5563; text-decoration: none; font-size: 12px; font-weight: 700; }
     </style>
@@ -230,8 +153,7 @@
         </div>
 
         <div class="img-box">
-            <div class="pulse"></div>
-            <img src="IMG-20260221-WA0009.jpg" alt="Mentor">
+            <div class="pulse"></div> <img src="mentor-pro.jpg" alt="Professional Mentor">
         </div>
 
         <h1>FINANCIAL FREEDOM</h1>
@@ -251,7 +173,7 @@
 
         <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn btn-green">ACCESS FREE SIGNALS</a>
         
-        <a href="https://wa.me/2348103586138?text=I'm%20ready%20for%20VIP%20mentorship." class="btn btn-blue">CLAIM VIP DISCOUNT</a>
+        <a href="https://wa.me/2348103586138?text=I'm%20ready%20for%20VIP%20mentorship." class="btn btn-blue-outline">CLAIM VIP DISCOUNT</a>
         
         <a href="index.html" class="return-link">← RETURN TO HOME</a>
     </div>
