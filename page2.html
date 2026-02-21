@@ -90,120 +90,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Freedom Academy</title>
     <style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Freedom Academy</title>
+    <style>
         * { box-sizing: border-box; }
         
         body { 
             margin: 0; 
             padding: 0; 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            background: #0d1117; 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: #020c1b; 
             color: white; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             min-height: 100vh; 
         }
-        
+
         .card { 
-            background: #161b22; 
-            width: 90%; 
-            max-width: 380px; 
-            padding: 30px 20px; 
-            border-radius: 20px; 
+            background: #0a192f; 
+            width: 95%; 
+            max-width: 420px; 
+            padding: 40px 20px; 
+            border-radius: 30px; 
             text-align: center; 
-            border: 1px solid #30363d; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
-        
-        /* THE CIRCLE PHOTO CONTAINER */
-        .img-container { 
-            width: 140px; 
-            height: 140px; 
-            margin: 0 auto 20px; 
-            border-radius: 50%; 
-            border: 4px solid #238636; 
+
+        /* EXACT MEDIUM-TO-LARGE RECTANGLE FROM SCREENSHOT */
+        .img-box { 
+            width: 90%; 
+            height: 280px; 
+            margin: 0 auto 25px; 
+            border-radius: 25px; 
+            border: 4px solid #22c55e; 
             overflow: hidden; 
-            background: #0d1117;
+            background: #112240;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
-        .img-container img { 
+
+        .img-box img { 
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
             display: block; 
         }
 
-        h1 { font-size: 28px; color: #58a6ff; margin: 10px 0; font-weight: 800; }
-        .subtitle { color: #8b949e; margin-bottom: 25px; font-size: 16px; font-weight: 500; }
-        
-        /* CLEAN FEATURE LIST */
-        .features { 
-            text-align: left; 
-            background: #0d1117; 
-            padding: 15px 20px; 
-            border-radius: 12px; 
-            margin-bottom: 25px; 
-            border-left: 4px solid #238636; 
+        .status-pill {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        
-        .features p { 
-            margin: 8px 0; 
-            font-size: 14px; 
-            color: #c9d1d9; 
-            font-weight: 600;
-        }
-        
-        /* SOLID ACTION BUTTONS */
-        .btn-stack { display: flex; flex-direction: column; gap: 12px; }
-        
-        .btn { 
-            display: block;
-            padding: 18px; 
-            text-decoration: none; 
-            border-radius: 12px; 
-            color: white; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            font-size: 14px; 
-            text-align: center; 
-        }
-        
-        .btn-green { background: #238636; } 
-        .btn-blue { background: #1f6feb; } 
 
-        .footer-link { 
+        h1 { 
+            font-size: 34px; 
+            font-weight: 900; 
+            margin-bottom: 12px; 
+            letter-spacing: -1px; 
+            text-transform: uppercase;
+        }
+
+        .description { 
+            color: #8892b0; 
+            font-size: 15px; 
+            margin-bottom: 30px; 
+            line-height: 1.5; 
+        }
+
+        /* CLEAN GRID TILES */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .feat-item {
+            background: #112240;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #ccd6f6;
+            border: 1px solid #233554;
+        }
+
+        /* BOLD BUTTONS FROM YOUR 16:13 SCREENSHOT */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            text-decoration: none;
+            font-weight: 800;
+            border-radius: 15px;
+            text-transform: uppercase;
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .btn-green { 
+            background: #22c55e; 
+            color: #020c1b; 
+        }
+
+        .btn-blue-outline { 
+            border: 2px solid #1d4ed8; 
+            color: #3b82f6; 
+            background: transparent;
+        }
+
+        .return-link { 
             display: block; 
-            margin-top: 25px; 
-            color: #484f58; 
+            margin-top: 20px; 
+            color: #4b5563; 
             text-decoration: none; 
             font-size: 13px; 
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <div class="img-container">
+        <div class="img-box">
             <img src="IMG-20260221-WA0009.jpg" alt="Mentor">
         </div>
 
-        <h1>Financial Freedom</h1>
-        <p class="subtitle">Join 500+ students mastering the markets.</p>
+        <div class="status-pill">● LIVE MARKET ACCESS</div>
 
-        <div class="features">
-            <p>✅ Forex & Crypto Trading</p>
-            <p>✅ Technical Analysis</p>
-            <p>✅ Risk Management</p>
-            <p>✅ 24/7 Support</p>
+        <h1>FINANCIAL FREEDOM</h1>
+        <p class="description">Master Technical Analysis and Market Psychology with personalized mentorship.</p>
+
+        <div class="feature-grid">
+            <div class="feat-item">📈 Real-time Signals</div>
+            <div class="feat-item">🛡️ Capital Protection</div>
+            <div class="feat-item">₿ Crypto Mastery</div>
+            <div class="feat-item">📊 Smart Money</div>
         </div>
 
-        <div class="btn-stack">
-            <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn btn-green">Join Trading Group</a>
-            <a href="https://wa.me/2348103586138" class="btn btn-blue">Private Mentorship</a>
-        </div>
+        <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn btn-green">JOIN TRADING GROUP</a>
+        <a href="https://wa.me/2348103586138" class="btn btn-blue-outline">PRIVATE MENTORSHIP</a>
         
-        <a href="index.html" class="footer-link">← Return to Home</a>
+        <a href="index.html" class="return-link">← RETURN TO HOME</a>
     </div>
 
 </body>
