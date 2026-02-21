@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+            <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Freedom Academy</title>
+    <title>Financial Freedom Academy | Elite Trading</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
@@ -12,113 +12,140 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Segoe UI', sans-serif;
-            /* High-end Trading Background */
-            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
-            color: white;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #020617; /* Deepest Midnight Blue */
+            color: #f8fafc;
             overflow: hidden;
         }
 
-        /* Subtle glowing background shapes */
-        body::before {
-            content: "";
+        /* Subtle ambient glow in the background */
+        .glow {
             position: absolute;
-            width: 300px;
-            height: 300px;
-            background: rgba(35, 134, 54, 0.2);
-            filter: blur(80px);
-            border-radius: 50%;
-            top: 10%;
-            left: -50px;
-            z-index: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.05) 0%, transparent 70%);
+            z-index: -1;
         }
 
         .card {
-            position: relative;
-            z-index: 1;
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            width: 90%;
-            max-width: 380px;
-            padding: 40px 25px;
-            border-radius: 30px;
+            background: #0f172a;
+            width: 95%;
+            max-width: 420px;
+            border-radius: 24px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-        }
-
-        .img-container {
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 20px auto;
-            border-radius: 50%;
-            border: 4px solid #22c55e;
+            border: 1px solid #1e293b;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             overflow: hidden;
-            box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
         }
 
-        .profile-img {
+        /* Professional Header Image (Rectangle) */
+        .mentor-header {
             width: 100%;
-            height: 100%;
+            height: 280px;
             object-fit: cover;
             display: block;
+            border-bottom: 2px solid #22c55e;
+            /* Focus on the face even in rectangular view */
+            object-position: center 20%; 
         }
 
-        h1 { font-size: 26px; color: #60a5fa; margin: 10px 0; font-weight: 800; letter-spacing: 1px; }
-        .subtitle { color: #94a3b8; font-size: 15px; margin-bottom: 25px; }
+        .container { padding: 32px 24px; }
+
+        .brand-label {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        h1 { font-size: 30px; color: #ffffff; margin-bottom: 8px; font-weight: 800; letter-spacing: -0.5px; }
+        .subtitle { color: #94a3b8; font-size: 16px; margin-bottom: 28px; font-weight: 400; line-height: 1.5; }
         
-        .features {
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 32px;
             text-align: left;
-            background: rgba(15, 23, 42, 0.6);
-            padding: 18px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border-left: 5px solid #22c55e;
         }
-        .features li { list-style: none; margin: 10px 0; font-size: 14px; color: #cbd5e1; }
 
-        .btn-container { display: flex; flex-direction: column; gap: 15px; }
+        .feature-item {
+            background: #1e293b;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        .feature-item:hover { border-color: #22c55e; }
+
+        .btn-stack { display: flex; flex-direction: column; gap: 14px; }
         
         .btn {
             padding: 18px;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 14px;
             color: white;
-            font-weight: bold;
+            font-weight: 700;
             text-transform: uppercase;
-            font-size: 13px;
-            transition: 0.3s;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            text-align: center;
         }
-        .group-btn { background: #16a34a; box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3); }
-        .private-btn { background: #2563eb; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
 
-        .back { color: #64748b; margin-top: 25px; text-decoration: none; font-size: 13px; display: block; }
+        .primary-btn { 
+            background: #22c55e; 
+            box-shadow: 0 4px 14px 0 rgba(34, 197, 94, 0.39);
+        }
+        
+        .secondary-btn { 
+            background: transparent; 
+            border: 2px solid #3b82f6; 
+            color: #3b82f6; 
+        }
+
+        .primary-btn:active { transform: scale(0.98); }
+
+        .footer-link { color: #475569; margin-top: 24px; text-decoration: none; font-size: 13px; display: block; font-weight: 500; }
     </style>
 </head>
 <body>
 
+    <div class="glow"></div>
+
     <div class="card">
-        <div class="img-container">
-            <img src="IMG-20260221-WA0009.jpg" alt="Mentor" class="profile-img">
-        </div>
+        <img src="IMG-20260221-WA0009.jpg" alt="Expert Mentor" class="mentor-header">
 
-        <h1>Financial Freedom</h1>
-        <p class="subtitle">Join the academy and master the markets.</p>
+        <div class="container">
+            <span class="brand-label">Certified Mentor</span>
+            <h1>FINANCIAL FREEDOM</h1>
+            <p class="subtitle">Join 500+ students mastering the global financial markets today.</p>
 
-        <div class="features">
-            <li>✅ Forex & Crypto Strategies</li>
-            <li>✅ Technical Analysis Mastery</li>
-            <li>✅ Risk Management Secrets</li>
-            <li>✅ Live Trading Sessions</li>
-        </div>
+            <div class="feature-grid">
+                <div class="feature-item">📈 Forex</div>
+                <div class="feature-item">₿ Crypto</div>
+                <div class="feature-item">📊 Analysis</div>
+                <div class="feature-item">🛡️ Risk Mgmt</div>
+            </div>
 
-        <div class="btn-container">
-            <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn group-btn">Join Trading Group</a>
-            <a href="https://wa.me/2348103586138?text=Hello!%20I'm%20interested%20in%20mentorship." class="btn private-btn">Private Mentorship</a>
+            <div class="btn-stack">
+                <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn primary-btn">Join Training Group</a>
+                <a href="https://wa.me/2348103586138?text=Hello!%20I'm%20ready%20for%20mentorship." class="btn secondary-btn">Private Mentorship</a>
+            </div>
+            
+            <a href="index.html" class="footer-link">← Return to Main Page</a>
         </div>
-        
-        <a href="index.html" class="back">← Back to Home</a>
     </div>
 
 </body>
