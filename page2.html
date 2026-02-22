@@ -7,135 +7,68 @@
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #020c1b; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-bottom: 20px; overflow-x: hidden; }
-        
-        /* TOP MARKET TICKER */
         .market-ticker { width: 100%; background: #000; padding: 6px 0; border-bottom: 1px solid #22c55e; font-size: 10px; font-weight: bold; overflow: hidden; white-space: nowrap; }
         .ticker-move { display: inline-block; animation: mScroll 25s linear infinite; color: #22c55e; }
         @keyframes mScroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-
         .card { background: #0a192f; width: 95%; max-width: 420px; padding: 20px; border-radius: 30px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5); margin-top: 15px; }
-
         .img-box { width: 100%; height: 180px; margin-bottom: 15px; border-radius: 20px; border: 3px solid #22c55e; overflow: hidden; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* LIVE FEED WINDOW */
-        .live-window {
-            background: rgba(17, 34, 64, 0.95);
-            border: 1px solid #233554;
-            border-radius: 15px;
-            height: 280px;
-            overflow-y: hidden; /* We handle the "movement" with JS for unlimited variety */
-            position: relative;
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column-reverse;
-        }
-
-        .comment {
-            padding: 10px 15px;
-            border-bottom: 1px solid rgba(35, 53, 84, 0.4);
-            text-align: left;
-            font-size: 12px;
-            animation: slideUp 0.5s ease-out forwards;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        .audio-section { background: #112240; padding: 15px; border-radius: 20px; margin-bottom: 15px; border: 1px solid #22c55e; }
+        .audio-section p { font-size: 11px; color: #22c55e; margin: 0 0 8px 0; font-weight: bold; text-transform: uppercase; }
+        audio { width: 100%; height: 35px; filter: invert(100%) hue-rotate(90deg); }
+        .live-window { background: rgba(17, 34, 64, 0.95); border: 1px solid #233554; border-radius: 15px; height: 220px; overflow-y: hidden; position: relative; margin-bottom: 15px; display: flex; flex-direction: column-reverse; }
+        .comment { padding: 10px; border-bottom: 1px solid rgba(35, 53, 84, 0.4); text-align: left; font-size: 11px; animation: slideUp 0.5s ease-out forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .user-name { color: #22c55e; font-weight: bold; margin-right: 5px; }
-        .user-msg { color: #ccd6f6; }
-
-        /* INPUT AREA */
         .input-area { background: #112240; padding: 12px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #3b82f6; display: flex; flex-direction: column; gap: 8px; }
         .input-area input { background: transparent; border: none; color: white; width: 100%; font-size: 12px; outline: none; border-bottom: 1px solid #233554; padding: 5px; }
         .input-area button { background: #3b82f6; border: none; color: white; border-radius: 8px; font-size: 11px; padding: 10px; font-weight: bold; cursor: pointer; }
-
         .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; font-size: 14px; text-align: center; margin-bottom: 10px; }
         .btn-green { background: #22c55e; color: #020c1b; }
         .btn-blue { border: 2px solid #1d4ed8; color: #3b82f6; }
     </style>
 </head>
 <body>
-
     <div class="market-ticker">
-        <div class="ticker-move">
-            XAU/USD $2,042.10 (+1.2%) &nbsp;&nbsp;&nbsp; BTC/USD $64,310.50 (+2.4%) &nbsp;&nbsp;&nbsp; EUR/USD 1.0845 (-0.02%) &nbsp;&nbsp;&nbsp; GBP/JPY 190.25 (+0.45%)
-        </div>
+        <div class="ticker-move">XAU/USD $2,042.10 (+1.2%) &nbsp;&nbsp;&nbsp; BTC/USD $64,310.50 (+2.4%) &nbsp;&nbsp;&nbsp; EUR/USD 1.0845 (-0.02%)</div>
     </div>
-
     <div class="card">
-        <div class="img-box">
-            <img src="mentor-pro.jpg" alt="Mentor">
+        <div class="img-box"><img src="mentor-pro.jpg" alt="Mentor"></div>
+        <div class="audio-section">
+            <p>🎧 Masterclass: How we trade</p>
+            <audio controls><source src="explanation.mp3" type="audio/mpeg"></audio>
         </div>
-
-        <div style="font-size: 10px; color: #ef4444; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px;">● LIVE COMMUNITY CHAT</div>
-
-        <div class="live-window" id="comment-container">
-            </div>
-
+        <div class="live-window" id="comment-container"></div>
         <div class="input-area">
-            <input type="text" id="nameInput" placeholder="Your Name">
-            <input type="text" id="msgInput" placeholder="Write a comment...">
-            <button onclick="postUserComment()">POST COMMENT</button>
+            <input type="text" id="nI" placeholder="Your Name">
+            <input type="text" id="mI" placeholder="Comment...">
+            <button onclick="pC()">POST COMMENT</button>
         </div>
-
         <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn btn-green">ACCESS FREE SIGNALS</a>
         <a href="https://wa.me/2348103586138?text=I'm%20ready%20for%20VIP%20mentorship." class="btn btn-blue">PRIVATE MENTORSHIP</a>
     </div>
-
     <script>
-        // Massive data lists to prevent repetition
-        const firstNames = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Tunde", "Blessing", "Ifeanyi", "Kemi", "Musa", "Nneka", "Segun", "Damilola", "Victor", "Amaka", "Kingsley", "Faith", "Samuel", "Joy", "David", "Patience", "Ezekiel", "Mercy", "Daniel"];
-        const lastInitials = ["A.", "O.", "E.", "K.", "M.", "S.", "B.", "W.", "U.", "D."];
-        const phrases = [
-            "Just hit TP3 on Gold! 🔥", "Mentorship is worth every penny.", "Withdrawal received. 200k in the bag! 💸", 
-            "Signals are pure fire today.", "Is the VIP registration still open?", "Up $150 already!", 
-            "Mindset session was life-changing.", "Best trading community in Nigeria.", "Let's go! Green pips only.", 
-            "Just secured my slot!", "Who else is in the EURUSD sell?", "Risk management is key. Thanks boss.",
-            "I'm learning so much here.", "Already up 40 pips. 🚀", "Brimes is a legend!", "Slow and steady wins the race.",
-            "My account is growing fast.", "Finally, a real mentor.", "The signals are 90% accurate."
-        ];
-
-        const container = document.getElementById('comment-container');
-
-        function addComment(name, msg) {
-            const div = document.createElement('div');
-            div.className = 'comment';
-            div.innerHTML = `<span class="user-name">${name}:</span> <span class="user-msg">${msg}</span>`;
-            container.prepend(div);
-            
-            // Remove old comments to keep it clean
-            if (container.children.length > 50) {
-                container.removeChild(container.lastChild);
-            }
+        const fN = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Tunde", "Blessing", "Ifeanyi", "Kemi", "Musa", "Nneka", "Segun", "Damilola", "Victor", "Amaka", "Kingsley", "Faith", "Samuel", "Joy"];
+        const ph = ["Just hit TP3 on Gold! 🔥", "Mentorship is worth every penny.", "Withdrawal received! 💸", "Signals are fire today.", "Is VIP still open?", "Up $150 already!", "Best community in Nigeria.", "Let's go! Green pips only.", "Just secured my slot!", "Risk management is key. Thanks boss."];
+        const con = document.getElementById('comment-container');
+        function addC(n, m) {
+            const d = document.createElement('div');
+            d.className = 'comment';
+            d.innerHTML = `<span class="user-name">${n}:</span> ${m}`;
+            con.prepend(d);
+            if (con.children.length > 50) con.removeChild(con.lastChild);
         }
-
-        // Generate a new unique random comment every 3.5 seconds
         setInterval(() => {
-            const randName = firstNames[Math.floor(Math.random() * firstNames.length)] + " " + lastInitials[Math.floor(Math.random() * lastInitials.length)];
-            const randMsg = phrases[Math.floor(Math.random() * phrases.length)];
-            addComment(randName, randMsg);
-        }, 3500);
-
-        // Function for people to comment live
-        function postUserComment() {
-            const uName = document.getElementById('nameInput').value;
-            const uMsg = document.getElementById('msgInput').value;
-            if(uName && uMsg) {
-                addComment(uName, uMsg);
-                document.getElementById('nameInput').value = '';
-                document.getElementById('msgInput').value = '';
-            }
+            const rN = fN[Math.floor(Math.random() * fN.length)] + " " + (["A.", "O.", "E.", "K."][Math.floor(Math.random()*4)]);
+            const rM = ph[Math.floor(Math.random() * ph.length)];
+            addC(rN, rM);
+        }, 3000);
+        function pC() {
+            const uN = document.getElementById('nI').value;
+            const uM = document.getElementById('mI').value;
+            if(uN && uM) { addC(uN, uM); document.getElementById('nI').value=''; document.getElementById('mI').value=''; }
         }
-
-        // Initial load
-        for(let i=0; i<6; i++) {
-            const randName = firstNames[Math.floor(Math.random() * firstNames.length)] + " " + lastInitials[Math.floor(Math.random() * lastInitials.length)];
-            const randMsg = phrases[Math.floor(Math.random() * phrases.length)];
-            addComment(randName, randMsg);
-        }
+        for(let i=0; i<5; i++) { addC(fN[i], ph[i]); }
     </script>
 </body>
 </html>
