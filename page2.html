@@ -11,9 +11,12 @@
     <meta property="og:image" content="mentor-pro.jpg">
     <meta property="og:type" content="website">
 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#010813">
+
     <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #010813; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #010813; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; scroll-behavior: smooth; }
         
         /* MARKET TICKER */
         .ticker-wrap { width: 100%; overflow: hidden; background: #0a192f; border-bottom: 1px solid #233554; height: 30px; display: flex; align-items: center; }
@@ -65,9 +68,8 @@
         .input-box { background: #112240; border-radius: 12px; padding: 12px; margin-bottom: 15px; border: 1px solid #3b82f6; }
         .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 8px; margin-bottom: 8px; outline: none; width: 100%; }
         .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; transition: 0.3s; }
-        .input-box button:active { background: #1d4ed8; }
         
-        /* ACTION BUTTONS WITH HOVER EFFECTS */
+        /* ACTION BUTTONS */
         .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; transition: 0.3s; }
         .btn:active { transform: translateY(2px); filter: brightness(1.2); }
         .green { background: #22c55e; color: #010813; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2); }
@@ -106,8 +108,8 @@
                 </div>
             </div>
 
-            <audio id="mentorAudio"><source src="explanation.mp3" type="audio/mpeg"></audio>
-            <audio id="bgMusic" loop><source src="song.mp3" type="audio/mpeg"></audio>
+            <audio id="mentorAudio" preload="auto"><source src="explanation.mp3" type="audio/mpeg"></audio>
+            <audio id="bgMusic" loop preload="auto"><source src="song.mp3" type="audio/mpeg"></audio>
 
             <div class="chat-area" id="chat"></div>
 
@@ -133,7 +135,7 @@
 
         function startExperience() {
             trigger.style.display = 'none';
-            mentorAudio.play();
+            mentorAudio.play().catch(e => console.log("Audio play blocked"));
             sessionStarted = true;
             setInterval(showProfit, 10000);
             setInterval(updateLiveCount, 5000);
@@ -170,6 +172,30 @@
 
         setInterval(() => {
             addMsg(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]);
+        }, 4000);
+
+        function postComment() {
+            const n = document.getElementById('vName').value;
+            const m = document.getElementById('vMsg').value;
+            if(n && m) { addMsg(n, m); document.getElementById('vName').value=''; document.getElementById('vMsg').value=''; }
+        }
+
+        function showProfit() {
+            const p = document.getElementById('profit-pop');
+            const rN = names[Math.floor(Math.random()*names.length)];
+            document.getElementById('pop-txt').innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>!`;
+            p.style.left = "20px";
+            setTimeout(() => { p.style.left = "-400px"; }, 4500);
+        }
+
+        function updateLiveCount() {
+            const count = Math.floor(Math.random() * 100) + 1200;
+            const liveEl = document.getElementById('live-users');
+            if(liveEl) liveEl.innerHTML = `● ${count.toLocaleString()} ONLINE`;
+        }
+    </script>
+</body>
+</html>(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]);
         }, 4000);
 
         function postComment() {
