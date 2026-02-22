@@ -8,13 +8,12 @@
         * { box-sizing: border-box; }
         body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #010813; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         
-        /* AUDIO OVERLAY: This fixes the "no sound" issue */
-        #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(1, 8, 19, 0.98); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
-        .play-btn { background: #22c55e; color: #010813; border: none; padding: 22px 45px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 0 25px rgba(34, 197, 94, 0.5); transition: 0.3s; }
-        .play-btn:active { transform: scale(0.9); }
+        /* THE FORCE-START OVERLAY */
+        #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #010813; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+        .play-btn { background: #22c55e; color: #010813; border: none; padding: 22px 45px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 0 25px rgba(34, 197, 94, 0.5); }
 
-        /* MAIN PAGE CONTENT */
-        .card { background: #0a192f; width: 95%; max-width: 400px; padding: 20px; border-radius: 25px; text-align: center; border: 2px solid #22c55e; margin-top: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.7); }
+        /* THE MAIN CONTENT (Initially hidden to ensure they click the button) */
+        .card { background: #0a192f; width: 95%; max-width: 400px; padding: 20px; border-radius: 25px; text-align: center; border: 2px solid #22c55e; margin-top: 20px; }
         .img-box { width: 100%; height: 180px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; border: 1px solid #233554; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -27,25 +26,24 @@
         /* VISITOR INPUT */
         .input-box { background: #112240; border-radius: 12px; padding: 12px; margin-bottom: 15px; border: 1px solid #3b82f6; }
         .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 8px; margin-bottom: 8px; outline: none; font-size: 13px; }
-        .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; }
 
-        /* FINAL BUTTONS */
-        .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; transition: 0.3s; }
-        .green { background: #22c55e; color: #010813; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3); }
+        /* BUTTONS */
+        .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; }
+        .green { background: #22c55e; color: #010813; }
         .blue { border: 2px solid #3b82f6; color: #3b82f6; }
     </style>
 </head>
 <body>
 
     <div id="audio-trigger">
-        <h2 style="margin-bottom: 10px; color: #22c55e;">Brimes Academy</h2>
-        <p style="margin-bottom: 30px; font-size: 14px; color: #ccc;">Private Mentorship Live Session</p>
+        <h2 style="color: #22c55e; margin-bottom: 10px;">Brimes Academy</h2>
+        <p style="color: #ccc; margin-bottom: 30px;">Live Mentorship Session</p>
         <button class="play-btn" onclick="startExperience()">JOIN LIVE MASTERCLASS</button>
-        <p style="margin-top: 25px; font-size: 11px; color: #666;">TAP TO ENABLE SOUND & VIDEO</p>
     </div>
 
-    <div class="card">
-        <div class="img-box"><img src="mentor-pro.jpg" alt="Head Mentor"></div>
+    <div class="card" id="main-content">
+        <div class="img-box"><img src="mentor-pro.jpg" alt="Mentor"></div>
 
         <audio id="mentorAudio" preload="auto">
             <source src="explanation.mp3" type="audio/mpeg">
@@ -55,12 +53,11 @@
 
         <div class="input-box">
             <input type="text" id="vName" placeholder="Your Name">
-            <input type="text" id="vMsg" placeholder="Ask a question...">
+            <input type="text" id="vMsg" placeholder="Type a message...">
             <button onclick="postComment()">POST TO CHAT</button>
         </div>
 
         <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn green">JOIN FREE SIGNALS</a>
-        
         <a href="https://wa.me/2348103586138?text=I'm%20ready%20for%20VIP%20mentorship." class="btn blue">PRIVATE MENTORSHIP</a>
     </div>
 
@@ -69,16 +66,19 @@
         const trigger = document.getElementById('audio-trigger');
 
         function startExperience() {
-            audio.play().then(() => {
-                trigger.style.display = 'none'; // Only enters the site if audio starts
-            }).catch(err => {
-                console.log("Waiting for user tap...");
+            // Force the overlay to disappear immediately
+            trigger.style.display = 'none';
+            
+            // Try to play audio (will work on 99% of phones)
+            audio.muted = false;
+            audio.play().catch(err => {
+                console.log("Audio play blocked, but page is now visible.");
             });
         }
 
         // CHAT ENGINE
-        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Victor", "Amaka", "Tunde", "Faith"];
-        const texts = ["Just hit TP3 on Gold! 🔥", "Is the signals group still free?", "Withdrawal hit! 💸", "Best mentor in Nigeria.", "Up $150 already!", "Green pips only!"];
+        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Victor", "Amaka", "Tunde"];
+        const texts = ["Just hit TP3 on Gold! 🔥", "Mentorship is worth it.", "Withdrawal received! 💸", "Is the signals group still free?", "Up $150 already!"];
         const chatBox = document.getElementById('chat');
 
         function addMsg(name, msg) {
@@ -89,7 +89,6 @@
             if(chatBox.children.length > 20) chatBox.removeChild(chatBox.lastChild);
         }
 
-        // Automatic bot comments every 2 seconds
         setInterval(() => {
             addMsg(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]);
         }, 2000);
@@ -97,10 +96,9 @@
         function postComment() {
             const n = document.getElementById('vName').value;
             const m = document.getElementById('vMsg').value;
-            if(n && m) { addMsg(n, m); document.getElementById('vMsg').value = ''; }
+            if(n && m) { addMsg(n, m); document.getElementById('vName').value = ''; document.getElementById('vMsg').value = ''; }
         }
 
-        // Load some comments immediately
         for(let i=0; i<4; i++) { addMsg(names[i], texts[i]); }
     </script>
 </body>
