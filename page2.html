@@ -3,67 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brimes Academy | VIP Mentorship</title>
+    <title>Brimes Academy | VIP</title>
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #020c1b; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-bottom: 20px; overflow-x: hidden; }
-        
-        /* MARKET TICKER */
         .ticker { width: 100%; background: #000; padding: 6px 0; border-bottom: 1px solid #22c55e; font-size: 10px; font-weight: bold; overflow: hidden; white-space: nowrap; }
         .ticker-wrap { display: inline-block; animation: scroll 25s linear infinite; color: #22c55e; }
         @keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-
-        /* MAIN CONTAINER */
-        .card { background: #0a192f; width: 95%; max-width: 420px; padding: 20px; border-radius: 30px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); margin-top: 15px; position: relative; }
-
+        .card { background: #0a192f; width: 95%; max-width: 420px; padding: 20px; border-radius: 30px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); margin-top: 15px; }
         .img-box { width: 100%; height: 200px; margin-bottom: 15px; border-radius: 20px; border: 3px solid #22c55e; overflow: hidden; position: relative; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .live-status { position:absolute; top:12px; right:12px; background:#ef4444; padding:5px 10px; border-radius:5px; font-size:10px; font-weight:bold; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-        
-        /* COMMENT FEED */
         .comment-box { background: rgba(17, 34, 64, 0.95); border: 1px solid #233554; border-radius: 15px; height: 240px; overflow-y: hidden; position: relative; margin-bottom: 15px; display: flex; flex-direction: column-reverse; }
-        .msg { padding: 12px; border-bottom: 1px solid rgba(35, 53, 84, 0.4); text-align: left; font-size: 12px; animation: fadeInUp 0.5s ease-out; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .msg { padding: 12px; border-bottom: 1px solid rgba(35, 53, 84, 0.4); text-align: left; font-size: 12px; }
         .u-name { color: #22c55e; font-weight: bold; margin-right: 6px; }
-
-        /* INPUTS */
-        .input-group { background: #112240; padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #3b82f6; display: flex; flex-direction: column; gap: 10px; }
-        .input-group input { background: transparent; border: none; color: white; width: 100%; font-size: 13px; outline: none; border-bottom: 1px solid #233554; padding: 5px; }
-        .input-group button { background: #3b82f6; border: none; color: white; border-radius: 8px; font-size: 12px; padding: 12px; font-weight: bold; cursor: pointer; }
-
-        /* BUTTONS */
         .cta { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; font-size: 14px; text-align: center; margin-bottom: 10px; }
-        .btn-free { background: #22c55e; color: #020c1b; box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4); }
+        .btn-free { background: #22c55e; color: #020c1b; }
         .btn-vip { border: 2px solid #3b82f6; color: #3b82f6; }
-
-        /* POPUP NOTIFICATION */
-        #profit-pop { position: fixed; bottom: 25px; left: -400px; background: #112240; border-left: 5px solid #22c55e; padding: 15px; border-radius: 12px; box-shadow: 0 15px 35px #000; transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999; display: flex; align-items: center; gap: 12px; width: 280px; }
+        #profit-pop { position: fixed; bottom: 25px; left: -400px; background: #112240; border-left: 5px solid #22c55e; padding: 15px; border-radius: 12px; box-shadow: 0 15px 35px #000; transition: 0.8s; z-index: 9999; display: flex; align-items: center; gap: 12px; width: 280px; }
     </style>
 </head>
 <body>
 
     <div class="ticker">
-        <div class="ticker-wrap">XAU/USD $2,042.10 (+1.2%) &nbsp;&nbsp;&nbsp; BTC/USD $64,310.50 (+2.4%) &nbsp;&nbsp;&nbsp; EUR/USD 1.0845 (-0.02%) &nbsp;&nbsp;&nbsp; GBP/JPY 190.25 (+0.45%)</div>
+        <div class="ticker-wrap">XAU/USD $2,042.10 (+1.2%) &nbsp;&nbsp;&nbsp; BTC/USD $64,310.50 (+2.4%) &nbsp;&nbsp;&nbsp; EUR/USD 1.0845 (-0.02%)</div>
     </div>
 
     <div class="card">
         <div class="img-box">
-            <img src="mentor-pro.jpg" alt="Head Mentor">
-            <div class="live-status">● LIVE SESSION</div>
+            <img src="mentor-pro.jpg" alt="Mentor">
         </div>
 
-        <audio id="mentorAudio" preload="auto">
-            <source src="https://oladays.github.io/Brimes/explanation.mp3" type="audio/mpeg">
+        <audio id="mentorVoice" preload="auto">
+            <source src="explanation.mp3" type="audio/mpeg">
         </audio>
 
         <div class="comment-box" id="chat"></div>
-
-        <div class="input-group">
-            <input type="text" id="n" placeholder="Your Name">
-            <input type="text" id="m" placeholder="Ask a question or comment...">
-            <button onclick="send()">POST COMMENT</button>
-        </div>
 
         <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="cta btn-free">JOIN FREE SIGNAL GROUP</a>
         <a href="https://wa.me/2348103586138?text=I'm%20ready%20for%20VIP%20mentorship." class="cta btn-vip">MESSAGE ME FOR VIP</a>
@@ -75,15 +49,24 @@
     </div>
 
     <script>
-        // 1. AUDIO TRIGGERS (Plays on any touch)
-        const snd = document.getElementById('mentorAudio');
-        function go() { snd.play(); }
-        document.addEventListener('touchstart', go, { once: true });
-        document.addEventListener('click', go, { once: true });
+        // AUDIO START LOGIC
+        const audio = document.getElementById('mentorVoice');
+        
+        function tryPlay() {
+            audio.play().then(() => {
+                console.log("Audio playing");
+            }).catch(e => {
+                console.log("Playback failed: ", e);
+            });
+        }
 
-        // 2. LIVE CHAT SYSTEM
-        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Tunde", "Blessing", "Ifeanyi", "Kemi", "Musa", "Nneka", "Segun", "Damilola", "Victor", "Amaka", "Kingsley", "Faith", "Samuel", "Joy"];
-        const texts = ["Just hit TP3 on Gold! 🔥", "This strategy is pure gold.", "Withdrawal received! Thanks Brimes.", "Signals are 100% accurate.", "I want to join VIP.", "Up $250 this morning!", "Best community in Africa.", "Ready for the next signal!", "Masterclass is eye-opening.", "Risk management saved me today."];
+        // Must click or touch to start audio
+        document.addEventListener('click', tryPlay, { once: true });
+        document.addEventListener('touchstart', tryPlay, { once: true });
+
+        // CHAT AND POPUP LOGIC
+        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka"];
+        const texts = ["Just hit TP3 on Gold! 🔥", "This strategy is pure gold.", "Withdrawal received!", "Signals are 100% accurate.", "I want to join VIP."];
         const box = document.getElementById('chat');
 
         function push(un, msg) {
@@ -91,39 +74,20 @@
             d.className = 'msg';
             d.innerHTML = `<span class="u-name">${un}:</span> ${msg}`;
             box.prepend(d);
-            if (box.children.length > 30) box.removeChild(box.lastChild);
         }
 
         setInterval(() => {
-            const rN = names[Math.floor(Math.random() * names.length)] + " " + (["A.", "O.", "E.", "M."][Math.floor(Math.random()*4)]);
-            const rM = texts[Math.floor(Math.random() * texts.length)];
-            push(rN, rM);
-        }, 3200);
+            push(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]);
+        }, 4000);
 
-        function send() {
-            const un = document.getElementById('n').value;
-            const um = document.getElementById('m').value;
-            if(un && um) { push(un, um); document.getElementById('n').value=''; document.getElementById('m').value=''; }
-        }
-
-        // 3. PROFIT POPUPS
-        const traders = ["Emeka", "Sarah", "Tunde", "Amaka", "Victor", "Blessing", "Musa", "Chidi", "Fola", "Ibrahim"];
-        const gains = ["$45.00", "$120.50", "$300.00", "$85.20", "$500.00", "$210.15", "$95.00", "$1,200.00"];
-        
-        function pop() {
+        setInterval(() => {
             const p = document.getElementById('profit-pop');
-            const t = document.getElementById('pop-txt');
-            const rT = traders[Math.floor(Math.random() * traders.length)];
-            const rG = gains[Math.floor(Math.random() * gains.length)];
-            
-            t.innerHTML = `<strong>${rT}</strong> just secured <strong>${rG}</strong> profit!`;
+            document.getElementById('pop-txt').innerHTML = `Trader just secured <strong>$${Math.floor(Math.random()*500)}</strong> profit!`;
             p.style.left = "20px";
-            setTimeout(() => { p.style.left = "-400px"; }, 4500);
-        }
-        setInterval(pop, 11000);
+            setTimeout(() => { p.style.left = "-400px"; }, 4000);
+        }, 12000);
 
-        // Initial messages
-        for(let i=0; i<5; i++) { push(names[i], texts[i]); }
+        for(let i=0; i<3; i++) { push(names[i], texts[i]); }
     </script>
 </body>
 </html>
