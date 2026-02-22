@@ -9,24 +9,20 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #010813; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
         
-        /* TICKER */
         .ticker-wrap { width: 100%; overflow: hidden; background: #0a192f; border-bottom: 1px solid #233554; height: 30px; display: flex; align-items: center; }
         .ticker { display: inline-block; white-space: nowrap; animation: marquee 30s linear infinite; font-size: 10px; color: #22c55e; font-weight: bold; }
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        /* NAVBAR */
         .navbar { width: 100%; background: #0a192f; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #233554; position: sticky; top: 0; z-index: 1000; }
         .logo { color: #22c55e; font-weight: 900; font-size: 13px; text-transform: uppercase; }
         .live-count { font-size: 11px; color: #22c55e; background: rgba(34, 197, 94, 0.1); padding: 5px 10px; border-radius: 20px; border: 1px solid #22c55e; }
 
-        /* ENTRY SCREEN */
         #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, #0a192f 0%, #010813 100%); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
         .entry-title { color: #22c55e; font-size: 18px; font-weight: 900; letter-spacing: 1px; margin-bottom: 5px; text-transform: uppercase; }
         .entry-sub { color: #64748b; font-size: 14px; margin-bottom: 30px; }
         .play-btn { background: #22c55e; color: #010813; border: none; padding: 22px 60px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 0 40px rgba(34, 197, 94, 0.5); animation: pulse 2s infinite; text-transform: uppercase; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-        /* MAIN CARD */
         .container { width: 95%; max-width: 450px; margin-top: 10px; padding-bottom: 50px; }
         .card { background: #0a192f; padding: 20px; border-radius: 25px; border: 1px solid #233554; margin-bottom: 20px; }
         .mentor-display { width: 100%; height: 260px; background: linear-gradient(135deg, #0a192f 0%, #112240 100%); border-radius: 15px; border: 1px solid #22c55e; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
@@ -35,13 +31,14 @@
         .stat-row { display: flex; justify-content: space-around; width: 100%; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
         .stat-value { color: #22c55e; font-weight: 900; font-size: 16px; }
 
-        /* CHAT */
-        .chat-area { background: rgba(2, 12, 27, 0.9); height: 160px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; padding: 10px; display: flex; flex-direction: column-reverse; border: 1px solid #233554; font-size: 12px; }
+        /* UPDATED CHAT AREA WITH MORE SPACE */
+        .chat-area { background: rgba(2, 12, 27, 0.9); height: 200px; border-radius: 15px; overflow-y: auto; margin-bottom: 15px; padding: 15px; display: flex; flex-direction: column-reverse; border: 1px solid #233554; font-size: 12px; }
+        .msg { margin-bottom: 12px; padding: 8px; border-radius: 8px; background: rgba(255, 255, 255, 0.03); line-height: 1.4; }
+        
         .input-box { background: #112240; border-radius: 12px; padding: 12px; margin-bottom: 15px; border: 1px solid #3b82f6; }
-        .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 8px; margin-bottom: 8px; outline: none; }
+        .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 8px; margin-bottom: 8px; outline: none; width: 100%; }
         .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; width: 100%; }
 
-        /* BUTTONS */
         .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; }
         .green { background: #22c55e; color: #010813; }
         .blue { border: 2px solid #3b82f6; color: #3b82f6; }
@@ -117,7 +114,6 @@
             bgMusic.play();
         };
 
-        // AUDIO PAUSE ON MINIMIZE FIX
         document.addEventListener("visibilitychange", function() {
             if (sessionActive) {
                 if (document.hidden) {
@@ -135,6 +131,7 @@
         
         function addMsg(n, m) {
             const d = document.createElement('div');
+            d.className = 'msg';
             d.innerHTML = `<span style="color:#22c55e;font-weight:bold">${n}:</span> ${m}`;
             document.getElementById('chat').prepend(d);
             if(document.getElementById('chat').children.length > 10) document.getElementById('chat').lastChild.remove();
