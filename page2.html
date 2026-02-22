@@ -1,153 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brimes Academy | Official</title>
-    <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #010813; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
-        
-        /* NAVBAR */
-        .navbar { width: 100%; background: #0a192f; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #233554; position: sticky; top: 0; z-index: 1000; }
-        .logo { color: #22c55e; font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
-        .live-count { font-size: 11px; background: rgba(34, 197, 94, 0.1); color: #22c55e; padding: 5px 10px; border-radius: 20px; border: 1px solid #22c55e; animation: pulse 2s infinite; }
+<style>
+    .mentor-display {
+        width: 100%;
+        height: 250px;
+        background: linear-gradient(45deg, #0a192f, #112240);
+        border-radius: 15px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #22c55e;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .verified-tag {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #3b82f6;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .stat-row {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-top: 15px;
+    }
+    .stat-item {
+        text-align: center;
+    }
+    .stat-value {
+        color: #22c55e;
+        font-weight: 900;
+        font-size: 18px;
+        display: block;
+    }
+    .stat-label {
+        font-size: 10px;
+        color: #64748b;
+    }
+</style>
 
-        /* OVERLAY */
-        #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #010813; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .play-btn { background: #22c55e; color: #010813; border: none; padding: 20px 50px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 0 30px rgba(34, 197, 94, 0.4); }
-
-        /* CONTENT */
-        .container { width: 95%; max-width: 450px; margin-top: 20px; padding-bottom: 50px; }
-        .card { background: #0a192f; padding: 20px; border-radius: 25px; border: 1px solid #233554; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-
-        .chart-box { width: 100%; height: 250px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; border: 1px solid #233554; }
-        .timer-box { color: #ef4444; font-size: 12px; font-weight: bold; margin-bottom: 10px; text-align: center; }
-
-        /* CHAT & INPUT */
-        .chat-area { background: rgba(2, 12, 27, 0.9); height: 160px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; padding: 10px; border: 1px solid #233554; display: flex; flex-direction: column-reverse; }
-        .msg { font-size: 12px; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px; }
-        .user { color: #22c55e; font-weight: bold; }
-
-        .input-box { background: #112240; border-radius: 12px; padding: 12px; margin-bottom: 15px; border: 1px solid #3b82f6; }
-        .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 8px; margin-bottom: 8px; outline: none; font-size: 13px; }
-        .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
-
-        /* BUTTONS */
-        .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; }
-        .green { background: #22c55e; color: #010813; }
-        .blue { border: 2px solid #3b82f6; color: #3b82f6; }
-
-        #profit-pop { position: fixed; bottom: 20px; left: -400px; background: #112240; border-left: 5px solid #22c55e; padding: 12px; border-radius: 10px; transition: 0.6s; z-index: 998; width: 260px; display: flex; align-items: center; gap: 10px; }
-
-        .footer { text-align: center; padding: 20px; font-size: 11px; color: #64748b; border-top: 1px solid #233554; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-    </style>
-</head>
-<body>
-
-    <nav class="navbar">
-        <div class="logo">Brimes Academy</div>
-        <div class="live-count">● 1,248 ONLINE</div>
-    </nav>
-
-    <div id="audio-trigger">
-        <h2 style="color: #22c55e; margin-bottom: 5px;">OFFICIAL ENTRY</h2>
-        <button class="play-btn" onclick="startExperience()">ACCESS MASTERCLASS</button>
-    </div>
-
-    <div class="container">
-        <div class="card">
-            <div class="timer-box">⚠️ SIGNAL WINDOW EXPIRES IN: <span id="timer">10:00</span></div>
-            <div class="chart-box">
-                <iframe src="https://s.tradingview.com/widgetembed/?symbol=FX%3AXAUUSD&interval=1&theme=dark" width="100%" height="100%" frameborder="0"></iframe>
-            </div>
-
-            <audio id="mentorAudio"><source src="explanation.mp3" type="audio/mpeg"></audio>
-
-            <div class="chat-area" id="chat"></div>
-
-            <div class="input-box">
-                <input type="text" id="vName" placeholder="Your Name">
-                <input type="text" id="vMsg" placeholder="Type a comment...">
-                <button onclick="postComment()">POST TO LIVE CHAT</button>
-            </div>
-
-            <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn green">JOIN FREE SIGNALS</a>
-            <a href="https://wa.me/2348103586138?text=I'm%20ready%20for%20VIP%20mentorship." class="btn blue">PRIVATE MENTORSHIP</a>
+<div class="mentor-display">
+    <div class="verified-tag">✓ Verified Results</div>
+    <img src="mentor-pro.jpg" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid #22c55e; margin-bottom: 10px;">
+    <h3 style="margin: 0; font-size: 16px;">Head Mentor: Brimes</h3>
+    <p style="font-size: 11px; color: #aaa; margin: 5px 0;">92% Signal Accuracy This Month</p>
+    
+    <div class="stat-row">
+        <div class="stat-item">
+            <span class="stat-value">+4,200</span>
+            <span class="stat-label">PIPS GAINED</span>
         </div>
-
-        <div class="footer">
-            <p><strong>RISK WARNING:</strong> Trading involves risk. &copy; 2026 Brimes Academy.</p>
+        <div class="stat-item">
+            <span class="stat-value">150+</span>
+            <span class="stat-label">VIP MEMBERS</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-value">$10k+</span>
+            <span class="stat-label">WITHDRAWALS</span>
         </div>
     </div>
-
-    <div id="profit-pop">
-        <div style="background:#22c55e;padding:5px;border-radius:50%;color:black;font-weight:bold;width:25px;height:25px;display:flex;justify-content:center;align-items:center;">$</div>
-        <div id="pop-txt" style="font-size: 11px;"></div>
-    </div>
-
-    <script>
-        const audio = document.getElementById('mentorAudio');
-        const trigger = document.getElementById('audio-trigger');
-
-        function startExperience() {
-            trigger.style.display = 'none';
-            audio.play();
-            startTimer(600);
-            setInterval(showProfit, 12000);
-        }
-
-        function startTimer(duration) {
-            let timer = duration, min, sec;
-            setInterval(() => {
-                min = parseInt(timer / 60, 10);
-                sec = parseInt(timer % 60, 10);
-                sec = sec < 10 ? "0" + sec : sec;
-                document.getElementById('timer').textContent = min + ":" + sec;
-                if (--timer < 0) timer = duration;
-            }, 1000);
-        }
-
-        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka"];
-        const texts = ["Gold is flying! 🔥", "Best signals ever.", "Just hit TP2.", "I love this academy."];
-        
-        function addMsg(name, msg) {
-            const d = document.createElement('div');
-            d.className = 'msg';
-            d.innerHTML = `<span class="user">${name}:</span> ${msg}`;
-            document.getElementById('chat').prepend(d);
-            if(document.getElementById('chat').children.length > 15) document.getElementById('chat').removeChild(document.getElementById('chat').lastChild);
-        }
-
-        // Automated comments
-        setInterval(() => {
-            const rN = names[Math.floor(Math.random()*names.length)];
-            const rT = texts[Math.floor(Math.random()*texts.length)];
-            addMsg(rN, rT);
-        }, 3000);
-
-        // Allow user to post
-        function postComment() {
-            const n = document.getElementById('vName').value;
-            const m = document.getElementById('vMsg').value;
-            if(n && m) { 
-                addMsg(n, m); 
-                document.getElementById('vMsg').value = ''; 
-            } else {
-                alert("Please enter both your name and message!");
-            }
-        }
-
-        function showProfit() {
-            const p = document.getElementById('profit-pop');
-            const t = document.getElementById('pop-txt');
-            const rN = names[Math.floor(Math.random()*names.length)];
-            t.innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong> profit!`;
-            p.style.left = "20px";
-            setTimeout(() => { p.style.left = "-400px"; }, 4000);
-        }
-    </script>
-</body>
-</html>
+</div>
                                          </html>
