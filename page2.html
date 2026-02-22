@@ -3,45 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brimes Academy | Live Mentorship</title>
+    <title>Brimes Academy | Live</title>
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #010813; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
-        
-        /* THE MAIN CARD */
         .card { background: #0a192f; width: 95%; max-width: 400px; padding: 20px; border-radius: 25px; text-align: center; border: 2px solid #22c55e; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-        
-        .status { font-size: 10px; font-weight: bold; color: #ef4444; margin-bottom: 10px; text-transform: uppercase; animation: blink 1.5s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
-        .img-box { width: 100%; height: 180px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; border: 1px solid #233554; }
+        .img-box { width: 100%; height: 180px; border-radius: 15px; overflow: hidden; margin-bottom: 10px; border: 1px solid #233554; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* AUDIO UNMUTE BUTTON (Only shows if needed) */
+        #unmute-btn { background: #ef4444; color: white; border: none; padding: 10px; border-radius: 10px; font-size: 12px; font-weight: bold; cursor: pointer; margin-bottom: 15px; width: 100%; display: block; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-        /* THE LIVE CHAT */
-        .chat-area { background: rgba(2, 12, 27, 0.9); height: 200px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; border: 1px solid #233554; display: flex; flex-direction: column-reverse; padding: 10px; }
-        .msg { padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: left; font-size: 13px; animation: slideIn 0.3s ease-out; }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+        .chat-area { background: rgba(2, 12, 27, 0.9); height: 180px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; border: 1px solid #233554; display: flex; flex-direction: column-reverse; padding: 10px; }
+        .msg { padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: left; font-size: 13px; }
         .user { color: #22c55e; font-weight: bold; margin-right: 5px; }
-
-        /* THE VISITOR COMMENT BOX */
         .input-box { background: #112240; border-radius: 12px; padding: 12px; margin-bottom: 15px; border: 1px solid #3b82f6; }
         .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 8px; margin-bottom: 8px; outline: none; font-size: 13px; }
-        .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .input-box button:active { transform: scale(0.95); background: #2563eb; }
-
-        /* ACTION BUTTONS */
-        .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; transition: 0.3s; }
-        .green { background: #22c55e; color: #010813; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3); }
+        .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; }
+        .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; }
+        .green { background: #22c55e; color: #010813; }
         .blue { border: 2px solid #3b82f6; color: #3b82f6; }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <div class="status">● LIVE SESSION ACTIVE</div>
         <div class="img-box"><img src="mentor-pro.jpg" alt="Mentor"></div>
 
-        <audio id="bgVoice" playsinline>
+        <button id="unmute-btn" onclick="forcePlay()">🔊 TAP TO ENABLE AUDIO</button>
+
+        <audio id="bgVoice" preload="auto" loop>
             <source src="explanation.mp3" type="audio/mpeg">
         </audio>
 
@@ -49,7 +41,7 @@
 
         <div class="input-box">
             <input type="text" id="visitorName" placeholder="Your Name">
-            <input type="text" id="visitorMsg" placeholder="Ask a question or comment...">
+            <input type="text" id="visitorMsg" placeholder="Ask a question...">
             <button onclick="userComment()">POST TO CHAT</button>
         </div>
 
@@ -59,20 +51,21 @@
 
     <script>
         const audio = document.getElementById('bgVoice');
+        const muteBtn = document.getElementById('unmute-btn');
 
-        // FORCED AUDIO ACTIVATION
-        function activateAudio() {
-            audio.muted = false; 
-            audio.play().catch(e => console.log("Waiting for interaction..."));
+        // THE FORCE PLAY FUNCTION
+        function forcePlay() {
+            audio.muted = false;
+            audio.play();
+            muteBtn.style.display = 'none'; // Hide button once audio starts
         }
 
-        // Trigger on any touch or click
-        document.body.addEventListener('click', activateAudio, { once: true });
-        document.body.addEventListener('touchstart', activateAudio, { once: true });
+        // Also try playing when they touch anywhere
+        document.body.addEventListener('touchstart', forcePlay, { once: true });
 
-        // LIVE CHAT ENGINE
-        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Victor", "Amaka", "Tunde", "Joy"];
-        const msgs = ["Just secured 50 pips! 🔥", "TP hit! 🎯", "Withdrawal hit my bank 💸", "Is the gold signal coming?", "Best mentor in Nigeria 🇳🇬", "VIP is pure fire!", "I'm in! Let's go!"];
+        // CHAT LOGIC
+        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab"];
+        const msgs = ["TP hit! 🔥", "Withdrawal received!", "Best community!", "VIP is pure fire!"];
         const box = document.getElementById('chat');
 
         function addMsg(name, text) {
@@ -80,27 +73,23 @@
             d.className = 'msg';
             d.innerHTML = `<span class="user">${name}:</span> ${text}`;
             box.prepend(d);
-            if(box.children.length > 20) box.removeChild(box.lastChild);
+            if(box.children.length > 15) box.removeChild(box.lastChild);
         }
 
-        // Fast Bot Comments (Every 2 seconds)
         setInterval(() => {
             addMsg(names[Math.floor(Math.random()*names.length)], msgs[Math.floor(Math.random()*msgs.length)]);
         }, 2000);
 
-        // Visitor Post Function
         function userComment() {
-            const uName = document.getElementById('visitorName').value;
-            const uMsg = document.getElementById('visitorMsg').value;
-            if(uName && uMsg) {
-                addMsg(uName, uMsg);
+            const uN = document.getElementById('visitorName').value;
+            const uM = document.getElementById('visitorMsg').value;
+            if(uN && uM) {
+                addMsg(uN, uM);
                 document.getElementById('visitorMsg').value = '';
-                activateAudio(); // Also triggers audio when they post
+                forcePlay(); 
             }
         }
-
-        // Load initial comments
-        for(let i=0; i<4; i++) { addMsg(names[i], msgs[i]); }
+        for(let i=0; i<3; i++) { addMsg(names[i], msgs[i]); }
     </script>
 </body>
 </html>
