@@ -23,39 +23,44 @@
         #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #010813; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .play-btn { background: #22c55e; color: #010813; border: none; padding: 20px 50px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 0 30px rgba(34, 197, 94, 0.4); }
 
-        /* CONTENT */
+        /* CONTENT CONTAINER */
         .container { width: 95%; max-width: 450px; margin-top: 10px; padding-bottom: 50px; animation: fadeIn 1s ease-in; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .card { background: #0a192f; padding: 20px; border-radius: 25px; border: 1px solid #233554; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
+        /* MENTOR DISPLAY */
         .mentor-display { width: 100%; height: 260px; background: linear-gradient(135deg, #0a192f 0%, #112240 100%); border-radius: 15px; border: 1px solid #22c55e; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
         .verified-badge { position: absolute; top: 10px; right: 10px; background: #3b82f6; color: white; padding: 4px 8px; border-radius: 20px; font-size: 9px; font-weight: bold; }
         .profile-img { width: 85px; height: 85px; border-radius: 50%; border: 3px solid #22c55e; margin-bottom: 10px; object-fit: cover; }
         
         .stat-row { display: flex; justify-content: space-around; width: 100%; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
         .stat-value { color: #22c55e; font-weight: 900; font-size: 16px; display: block; }
+        .stat-label { font-size: 9px; color: #64748b; text-transform: uppercase; }
 
-        /* CHAT */
-        .chat-area { background: rgba(2, 12, 27, 0.9); height: 160px; border-radius: 15px; overflow-y: hidden; margin-bottom: 15px; padding: 10px; display: flex; flex-direction: column-reverse; border: 1px solid #233554; font-size: 12px; }
+        /* CHAT SYSTEM */
+        .chat-area { background: rgba(2, 12, 27, 0.9); height: 160px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; padding: 10px; display: flex; flex-direction: column-reverse; border: 1px solid #233554; font-size: 12px; }
         .msg { margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px; }
         
+        /* INPUT AREA */
         .input-box { background: #112240; border-radius: 12px; padding: 12px; margin-bottom: 15px; border: 1px solid #3b82f6; }
-        .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 8px; margin-bottom: 8px; outline: none; }
+        .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 8px; margin-bottom: 8px; outline: none; width: 100%; }
         .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
-        /* BUTTONS */
+        /* ACTION BUTTONS */
         .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; }
         .green { background: #22c55e; color: #010813; }
         .blue { border: 2px solid #3b82f6; color: #3b82f6; }
 
-        /* POPUP */
+        /* POPUP NOTIFICATION */
         #profit-pop { position: fixed; bottom: 20px; left: -400px; background: #112240; border-left: 5px solid #22c55e; padding: 12px; border-radius: 10px; transition: 0.6s; z-index: 998; width: 260px; display: flex; align-items: center; gap: 10px; }
     </style>
 </head>
 <body>
 
     <div class="ticker-wrap">
-        <div class="ticker"><span>XAUUSD: 2,024.45 ▲</span> <span>EURUSD: 1.0821 ▼</span> <span>GBPUSD: 1.2644 ▲</span> <span>BTCUSD: 51,204.10 ▲</span></div>
+        <div class="ticker">
+            <span>XAUUSD: 2,024.45 ▲</span> <span>EURUSD: 1.0821 ▼</span> <span>GBPUSD: 1.2644 ▲</span> <span>BTCUSD: 51,204.10 ▲</span>
+        </div>
     </div>
 
     <nav class="navbar">
@@ -75,9 +80,9 @@
                 <img src="mentor-pro.jpg" class="profile-img">
                 <h3 style="margin: 0;">Master Trader: Brimes</h3>
                 <div class="stat-row">
-                    <div style="text-align:center"><span class="stat-value">+4,200</span><span style="font-size:9px">Pips Gained</span></div>
-                    <div style="text-align:center"><span class="stat-value">92%</span><span style="font-size:9px">Win Rate</span></div>
-                    <div style="text-align:center"><span class="stat-value">$10K+</span><span style="font-size:9px">Payouts</span></div>
+                    <div style="text-align:center"><span class="stat-value">+4,200</span><span class="stat-label">Pips Gained</span></div>
+                    <div style="text-align:center"><span class="stat-value">92%</span><span class="stat-label">Win Rate</span></div>
+                    <div style="text-align:center"><span class="stat-value">$10K+</span><span class="stat-label">Payouts</span></div>
                 </div>
             </div>
 
@@ -120,7 +125,7 @@
             bgMusic.play();
         };
 
-        // SMART RESUME
+        // SMART RESUME LOGIC
         document.addEventListener("visibilitychange", function() {
             if (sessionStarted) {
                 if (document.hidden) {
@@ -144,8 +149,10 @@
             if(document.getElementById('chat').children.length > 10) document.getElementById('chat').removeChild(document.getElementById('chat').lastChild);
         }
 
-        // Add history immediately
-        for(let i=0; i<5; i++) { addMsg(names[i], texts[i]); }
+        // Initialize chat with 4 messages
+        for(let i=0; i<4; i++) { 
+            addMsg(names[i], texts[i]); 
+        }
 
         setInterval(() => {
             addMsg(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]);
@@ -154,7 +161,11 @@
         function postComment() {
             const n = document.getElementById('vName').value;
             const m = document.getElementById('vMsg').value;
-            if(n && m) { addMsg(n, m); document.getElementById('vName').value=''; document.getElementById('vMsg').value=''; }
+            if(n && m) { 
+                addMsg(n, m); 
+                document.getElementById('vName').value=''; 
+                document.getElementById('vMsg').value=''; 
+            }
         }
 
         function showProfit() {
@@ -167,15 +178,12 @@
 
         function updateLiveCount() {
             const count = Math.floor(Math.random() * 100) + 1200;
-            document.getElementById('live-users').innerHTML = `● ${count.toLocaleString()} ONLINE`;
+            const liveEl = document.getElementById('live-users');
+            if(liveEl) liveEl.innerHTML = `● ${count.toLocaleString()} ONLINE`;
         }
     </script>
 </body>
-</html>h.floor(Math.random()*400)+50}</strong>!`;
-            p.style.left = "20px";
-            setTimeout(() => { p.style.left = "-400px"; }, 4500);
-        }
-        
+</html>   
         // Load initial messages
         for(let i=0; i<4; i++) { addMsg(names[i], texts[i]); }
     </script>
