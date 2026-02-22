@@ -7,33 +7,32 @@
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #010813; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
-        
-        /* CARD BOX */
         .card { background: #0a192f; width: 95%; max-width: 400px; padding: 20px; border-radius: 25px; text-align: center; border: 2px solid #22c55e; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        
-        /* IMAGE */
-        .img-box { width: 100%; height: 200px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; border: 1px solid #233554; }
+        .img-box { width: 100%; height: 180px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; border: 1px solid #233554; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* COMMENT SECTION (FAST & SMOOTH) */
-        .chat-area { background: rgba(2, 12, 27, 0.8); height: 250px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; border: 1px solid #233554; display: flex; flex-direction: column-reverse; padding: 10px; }
+        
+        /* CHAT AREA */
+        .chat-area { background: rgba(2, 12, 27, 0.8); height: 220px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; border: 1px solid #233554; display: flex; flex-direction: column-reverse; padding: 10px; }
         .msg { padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: left; font-size: 13px; animation: slideIn 0.3s ease-out; }
         @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
         .user { color: #22c55e; font-weight: bold; margin-right: 5px; }
 
+        /* INPUT BOX FOR VISITORS */
+        .input-box { background: #112240; border-radius: 12px; padding: 10px; margin-bottom: 15px; border: 1px solid #3b82f6; }
+        .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 8px; margin-bottom: 8px; outline: none; font-size: 13px; }
+        .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
         /* BUTTONS */
-        .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 14px; text-align: center; margin-bottom: 10px; }
+        .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; }
         .green { background: #22c55e; color: #010813; }
         .blue { border: 2px solid #3b82f6; color: #3b82f6; }
-        
-        /* STATUS TAG */
-        .status { font-size: 10px; font-weight: bold; color: #ef4444; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .status { font-size: 10px; font-weight: bold; color: #ef4444; margin-bottom: 10px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <div class="status">● Connecting to Live Mentorship...</div>
+        <div class="status">● LIVE SESSION ACTIVE</div>
         <div class="img-box"><img src="mentor-pro.jpg" alt="Mentor"></div>
 
         <audio id="bgVoice" preload="auto">
@@ -42,54 +41,55 @@
 
         <div class="chat-area" id="chat"></div>
 
+        <div class="input-box">
+            <input type="text" id="visitorName" placeholder="Your Name">
+            <input type="text" id="visitorMsg" placeholder="Ask a question...">
+            <button onclick="userComment()">POST TO CHAT</button>
+        </div>
+
         <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn green">JOIN FREE SIGNALS</a>
         <a href="https://wa.me/2348103586138" class="btn blue">PRIVATE MENTORSHIP</a>
     </div>
 
     <script>
-        // 1. AUDIO LOGIC: PLAYS ON FIRST TOUCH
+        // AUDIO START
         const audio = document.getElementById('bgVoice');
-        function playSnd() {
-            audio.play();
-        }
+        function playSnd() { audio.play(); }
         document.addEventListener('click', playSnd, { once: true });
         document.addEventListener('touchstart', playSnd, { once: true });
 
-        // 2. FAST COMMENT SECTION
-        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Victor", "Amaka", "Tunde", "Blessing"];
-        const msgs = [
-            "Just secured 50 pips! 🔥", 
-            "Is the gold signal coming now?", 
-            "Mentorship changed my life, thanks boss.", 
-            "Withdrawal hit my bank 💸", 
-            "Best community in Nigeria 🇳🇬", 
-            "TP hit! 🎯🎯🎯", 
-            "I'm ready for the next trade.", 
-            "VIP signals are fire!"
-        ];
-        
+        // CHAT LOGIC
+        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Victor", "Amaka"];
+        const msgs = ["Just secured 50 pips! 🔥", "TP hit! 🎯", "Best community!", "VIP is fire!", "Withdrawal hit! 💸"];
         const box = document.getElementById('chat');
 
-        function addMsg() {
+        function addMsg(name, text) {
             const d = document.createElement('div');
             d.className = 'msg';
-            const randomName = names[Math.floor(Math.random() * names.length)];
-            const randomMsg = msgs[Math.floor(Math.random() * msgs.length)];
-            d.innerHTML = `<span class="user">${randomName}:</span> ${randomMsg}`;
+            d.innerHTML = `<span class="user">${name}:</span> ${text}`;
             box.prepend(d);
-            
-            if(box.children.length > 20) {
-                box.removeChild(box.lastChild);
+            if(box.children.length > 25) box.removeChild(box.lastChild);
+        }
+
+        // Auto-generate bot comments
+        setInterval(() => {
+            addMsg(names[Math.floor(Math.random()*names.length)], msgs[Math.floor(Math.random()*msgs.length)]);
+        }, 2500);
+
+        // Visitor Post Function
+        function userComment() {
+            const uName = document.getElementById('visitorName').value;
+            const uMsg = document.getElementById('visitorMsg').value;
+            if(uName && uMsg) {
+                addMsg(uName, uMsg);
+                document.getElementById('visitorMsg').value = ''; // clear message box
+            } else {
+                alert("Please enter both Name and Message");
             }
         }
 
-        // Add 5 starting comments
-        for(let i=0; i<5; i++) { addMsg(); }
-
-        // FAST FEED: Adds a new comment every 1.8 seconds
-        setInterval(addMsg, 1800);
+        for(let i=0; i<4; i++) { addMsg(names[i], msgs[i]); }
     </script>
-
 </body>
 </html>
                                          </html>
