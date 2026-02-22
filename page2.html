@@ -173,6 +173,35 @@
         for(let i=0; i<5; i++) addMsg(names[i], texts[i]);
     </script>
 </body>
+</html>m = document.getElementById('vMsg').value;
+            if(n && m) { addMsg(n, m); document.getElementById('vName').value=''; document.getElementById('vMsg').value=''; }
+        }
+
+        function showProfit() {
+            const p = document.getElementById('profit-pop');
+            const rN = names[Math.floor(Math.random()*names.length)];
+            document.getElementById('pop-txt').innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>!`;
+            p.style.left = "20px";
+            setTimeout(() => p.style.left = "-400px", 4500);
+        }
+
+        function updateStats() {
+            const pEl = document.getElementById('total-profits');
+            const sEl = document.getElementById('signals-sent');
+            const liveEl = document.getElementById('live-users');
+            
+            let current = parseInt(pEl.innerText.replace(',', ''));
+            pEl.innerText = (current + Math.floor(Math.random() * 50)).toLocaleString();
+            
+            if(Math.random() > 0.8) sEl.innerText = parseInt(sEl.innerText) + 1;
+            
+            const count = Math.floor(Math.random() * 100) + 1200;
+            liveEl.innerHTML = `● ${count.toLocaleString()} ONLINE`;
+        }
+
+        for(let i=0; i<5; i++) addMsg(names[i], texts[i]);
+    </script>
+</body>
 </html> document.getElementById('signals-sent');
             let current = parseInt(pEl.innerText.replace(',', ''));
             pEl.innerText = (current + Math.floor(Math.random() * 50)).toLocaleString();
