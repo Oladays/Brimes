@@ -1,4 +1,4 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,11 +24,9 @@
         .logo { color: #22c55e; font-weight: 900; font-size: 13px; text-transform: uppercase; }
         .live-count { font-size: 11px; color: #22c55e; background: rgba(34, 197, 94, 0.1); padding: 5px 10px; border-radius: 20px; border: 1px solid #22c55e; }
 
-        /* LIVE STATS WIDGET */
-        .stats-widget { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; border-radius: 15px; padding: 15px; margin-bottom: 20px; display: flex; justify-content: space-around; text-align: center; }
-        .stat-item span { display: block; }
-        .stat-label { font-size: 9px; text-transform: uppercase; color: #64748b; margin-top: 5px; }
-        .stat-num { font-size: 18px; font-weight: 900; color: #22c55e; }
+        .stats-widget { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; border-radius: 15px; padding: 15px; margin-bottom: 20px; display: flex; justify-content: space-around; text-align: center; width: 100%; }
+        .stat-num { font-size: 18px; font-weight: 900; color: #22c55e; display: block; }
+        .stat-label { font-size: 9px; text-transform: uppercase; color: #64748b; }
 
         #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(10, 25, 47, 0.95) 0%, #010813 100%); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
         .play-btn { background: #22c55e; color: #010813; border: none; padding: 22px 60px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 0 40px rgba(34, 197, 94, 0.5); animation: pulse 2s infinite; text-transform: uppercase; }
@@ -45,7 +43,7 @@
         
         .input-box { background: rgba(17, 34, 64, 0.8); border-radius: 12px; padding: 12px; margin-bottom: 15px; border: 1px solid #3b82f6; }
         .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 8px; margin-bottom: 8px; outline: none; width: 100%; }
-        .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; width: 100%; }
+        .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; }
 
         .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; }
         .green { background: #22c55e; color: #010813; }
@@ -57,7 +55,7 @@
 <body>
 
     <div class="ticker-wrap">
-        <div class="ticker"><span>XAUUSD: 2,024.45 ▲</span> <span>EURUSD: 1.0821 ▼</span> <span>GBPUSD: 1.2644 ▲</span> <span>BTCUSD: 51,204.10 ▲</span></div>
+        <div class="ticker">XAUUSD: 2,024.45 ▲ | EURUSD: 1.0821 ▼ | GBPUSD: 1.2644 ▲ | BTCUSD: 51,204.10 ▲</div>
     </div>
 
     <nav class="navbar">
@@ -66,31 +64,22 @@
     </nav>
 
     <div id="audio-trigger">
-        <div class="entry-title">BRIMES Trading Signals Academy</div>
-        <div class="entry-sub">OFFICIAL ENTRY</div>
+        <div style="color: #22c55e; font-size: 18px; font-weight: 900; margin-bottom: 5px;">BRIMES ACADEMY</div>
         <button class="play-btn" onclick="startExperience()">ACCESS MASTERCLASS</button>
     </div>
 
     <div class="container">
         <div class="stats-widget">
-            <div class="stat-item">
-                <span class="stat-num">$<span id="total-profits">42,550</span></span>
-                <span class="stat-label">Total Student Profits</span>
-            </div>
-            <div style="width:1px; background:rgba(255,255,255,0.1);"></div>
-            <div class="stat-item">
-                <span class="stat-num" id="signals-sent">14</span>
-                <span class="stat-label">Signals Today</span>
-            </div>
+            <div class="stat-item"><span class="stat-num">$<span id="total-profits">42,550</span></span><span class="stat-label">Student Profits</span></div>
+            <div class="stat-item"><span class="stat-num" id="signals-sent">14</span><span class="stat-label">Signals Today</span></div>
         </div>
 
         <div class="card">
             <div class="mentor-display">
-                <div class="verified-badge" style="position: absolute; top: 10px; right: 10px; background: #3b82f6; color: white; padding: 4px 8px; border-radius: 20px; font-size: 9px; font-weight: bold;">✓ VERIFIED</div>
                 <img src="mentor-pro.jpg" class="profile-img">
                 <h3 style="margin: 0;">Master Trader: Brimes</h3>
-                <div style="display: flex; justify-content: space-around; width: 100%; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                    <div style="text-align:center"><span style="color:#22c55e;font-weight:900;">+4,200</span><br><span style="font-size:9px">Pips Gained</span></div>
+                <div style="display: flex; justify-content: space-around; width: 100%; margin-top: 15px;">
+                    <div style="text-align:center"><span style="color:#22c55e;font-weight:900;">+4,200</span><br><span style="font-size:9px">Pips</span></div>
                     <div style="text-align:center"><span style="color:#22c55e;font-weight:900;">92%</span><br><span style="font-size:9px">Win Rate</span></div>
                 </div>
             </div>
@@ -106,8 +95,8 @@
                 <button onclick="postComment()">POST TO CHAT</button>
             </div>
 
-            <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn green">JOIN FREE SIGNALS GROUP</a>
-            <a href="https://wa.me/2348103586138?text=Hello%20Brimes,%20I'm%20ready%20for%20VIP%20mentorship." class="btn blue">PRIVATE MENTORSHIP (VIP)</a>
+            <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn green">JOIN FREE GROUP</a>
+            <a href="https://wa.me/2348103586138?text=Hello%20Brimes,%20I'm%20ready%20for%20VIP." class="btn blue">VIP MENTORSHIP</a>
         </div>
     </div>
 
@@ -121,26 +110,27 @@
         let sessionActive = false;
         let playingMusic = false;
 
+        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab"];
+        const texts = ["Gold hit TP! 🔥", "Best mentor.", "Withdrawal received.", "Up $100!", "Signals are 10/10"];
+
         function startExperience() {
             trigger.style.display = 'none';
             sessionActive = true;
-            mentorAudio.play().catch(e => console.log("Play error"));
+            mentorAudio.play();
             setInterval(showProfit, 10000);
             setInterval(updateStats, 7000);
+            setInterval(() => addMsg(names[Math.floor(Math.random()*6)], texts[Math.floor(Math.random()*5)]), 4500);
         }
 
-        mentorAudio.onended = function() { playingMusic = true; bgMusic.play(); };
+        mentorAudio.onended = () => { playingMusic = true; bgMusic.play(); };
 
-        document.addEventListener("visibilitychange", function() {
+        document.addEventListener("visibilitychange", () => {
             if (sessionActive) {
                 if (document.hidden) { mentorAudio.pause(); bgMusic.pause(); } 
                 else { if (playingMusic) bgMusic.play(); else mentorAudio.play(); }
             }
         });
 
-        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab"];
-        const texts = ["Gold hit TP! 🔥", "Best mentor.", "Withdrawal received.", "Up $100!", "Signals are 10/10"];
-        
         function addMsg(n, m) {
             const d = document.createElement('div');
             d.className = 'msg';
@@ -149,9 +139,6 @@
             chatBox.scrollTop = chatBox.scrollHeight;
             if(chatBox.children.length > 20) chatBox.firstChild.remove();
         }
-
-        for(let i=0; i<4; i++) addMsg(names[i], texts[i]);
-        setInterval(() => addMsg(names[Math.floor(Math.random()*6)], texts[Math.floor(Math.random()*5)]), 4500);
 
         function postComment() {
             const n = document.getElementById('vName').value;
@@ -170,37 +157,13 @@
         function updateStats() {
             const pEl = document.getElementById('total-profits');
             const sEl = document.getElementById('signals-sent');
-            const liveEl = document.getElementById('live-users');
-            
-            let currentProfits = parseInt(pEl.innerText.replace(',', ''));
-            pEl.innerText = (currentProfits + Math.floor(Math.random() * 50)).toLocaleString();
-            
+            let current = parseInt(pEl.innerText.replace(',', ''));
+            pEl.innerText = (current + Math.floor(Math.random() * 50)).toLocaleString();
             if(Math.random() > 0.8) sEl.innerText = parseInt(sEl.innerText) + 1;
-            
-            const count = Math.floor(Math.random() * 100) + 1200;
-            liveEl.innerHTML = `● ${count.toLocaleString()} ONLINE`;
-        }
-    </script>
-</body>
-</html>ostComment() {
-            const n = document.getElementById('vName').value;
-            const m = document.getElementById('vMsg').value;
-            if(n && m) { addMsg(n, m); document.getElementById('vName').value=''; document.getElementById('vMsg').value=''; }
         }
 
-        function showProfit() {
-            const p = document.getElementById('profit-pop');
-            const rN = names[Math.floor(Math.random()*6)];
-            document.getElementById('pop-txt').innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>!`;
-            p.style.left = "20px";
-            setTimeout(() => p.style.left = "-400px", 4500);
-        }
-
-        function updateCount() {
-            const c = Math.floor(Math.random() * 100) + 1200;
-            const el = document.getElementById('live-users');
-            if(el) el.innerHTML = `● ${c.toLocaleString()} ONLINE`;
-        }
+        // Pre-fill initial messages
+        for(let i=0; i<4; i++) addMsg(names[i], texts[i]);
     </script>
 </body>
 </html>
