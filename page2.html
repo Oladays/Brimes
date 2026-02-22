@@ -3,128 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Freedom Academy | VIP</title>
+    <title>Brimes Academy | VIP Mentorship</title>
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #020c1b; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-bottom: 20px; overflow-x: hidden; }
         
-        /* TICKER SECTION */
-        .market-ticker { width: 100%; background: #000; padding: 6px 0; border-bottom: 1px solid #22c55e; font-size: 10px; font-weight: bold; overflow: hidden; white-space: nowrap; }
-        .ticker-move { display: inline-block; animation: mScroll 25s linear infinite; color: #22c55e; }
-        @keyframes mScroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        /* MARKET TICKER */
+        .ticker { width: 100%; background: #000; padding: 6px 0; border-bottom: 1px solid #22c55e; font-size: 10px; font-weight: bold; overflow: hidden; white-space: nowrap; }
+        .ticker-wrap { display: inline-block; animation: scroll 25s linear infinite; color: #22c55e; }
+        @keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        /* MAIN CARD */
+        /* MAIN CONTAINER */
         .card { background: #0a192f; width: 95%; max-width: 420px; padding: 20px; border-radius: 30px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); margin-top: 15px; position: relative; }
 
         .img-box { width: 100%; height: 200px; margin-bottom: 15px; border-radius: 20px; border: 3px solid #22c55e; overflow: hidden; position: relative; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .live-tag { position:absolute; top:10px; right:10px; background:#ef4444; padding:4px 8px; border-radius:5px; font-size:9px; font-weight:bold; animation: blink 1s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .live-status { position:absolute; top:12px; right:12px; background:#ef4444; padding:5px 10px; border-radius:5px; font-size:10px; font-weight:bold; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
         
-        /* COMMENT SECTION */
-        .live-window { background: rgba(17, 34, 64, 0.95); border: 1px solid #233554; border-radius: 15px; height: 220px; overflow-y: hidden; position: relative; margin-bottom: 15px; display: flex; flex-direction: column-reverse; }
-        .comment { padding: 10px 15px; border-bottom: 1px solid rgba(35, 53, 84, 0.4); text-align: left; font-size: 11px; animation: slideUp 0.5s ease-out forwards; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .user-name { color: #22c55e; font-weight: bold; margin-right: 5px; }
+        /* COMMENT FEED */
+        .comment-box { background: rgba(17, 34, 64, 0.95); border: 1px solid #233554; border-radius: 15px; height: 240px; overflow-y: hidden; position: relative; margin-bottom: 15px; display: flex; flex-direction: column-reverse; }
+        .msg { padding: 12px; border-bottom: 1px solid rgba(35, 53, 84, 0.4); text-align: left; font-size: 12px; animation: fadeInUp 0.5s ease-out; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .u-name { color: #22c55e; font-weight: bold; margin-right: 6px; }
 
         /* INPUTS */
-        .input-area { background: #112240; padding: 12px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #3b82f6; display: flex; flex-direction: column; gap: 8px; }
-        .input-area input { background: transparent; border: none; color: white; width: 100%; font-size: 12px; outline: none; border-bottom: 1px solid #233554; padding: 5px; }
-        .input-area button { background: #3b82f6; border: none; color: white; border-radius: 8px; font-size: 11px; padding: 10px; font-weight: bold; cursor: pointer; }
+        .input-group { background: #112240; padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #3b82f6; display: flex; flex-direction: column; gap: 10px; }
+        .input-group input { background: transparent; border: none; color: white; width: 100%; font-size: 13px; outline: none; border-bottom: 1px solid #233554; padding: 5px; }
+        .input-group button { background: #3b82f6; border: none; color: white; border-radius: 8px; font-size: 12px; padding: 12px; font-weight: bold; cursor: pointer; }
 
         /* BUTTONS */
-        .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; font-size: 14px; text-align: center; margin-bottom: 10px; transition: 0.3s; }
-        .btn-green { background: #22c55e; color: #020c1b; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3); }
-        .btn-blue { border: 2px solid #1d4ed8; color: #3b82f6; }
+        .cta { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; font-size: 14px; text-align: center; margin-bottom: 10px; }
+        .btn-free { background: #22c55e; color: #020c1b; box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4); }
+        .btn-vip { border: 2px solid #3b82f6; color: #3b82f6; }
 
-        /* PROFIT POPUP */
-        #profit-alert { position: fixed; bottom: 20px; left: -350px; background: #112240; border-left: 5px solid #22c55e; padding: 12px; border-radius: 10px; box-shadow: 0 10px 30px #000; transition: 0.8s; z-index: 999; display: flex; align-items: center; gap: 10px; width: 260px; }
+        /* POPUP NOTIFICATION */
+        #profit-pop { position: fixed; bottom: 25px; left: -400px; background: #112240; border-left: 5px solid #22c55e; padding: 15px; border-radius: 12px; box-shadow: 0 15px 35px #000; transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999; display: flex; align-items: center; gap: 12px; width: 280px; }
     </style>
 </head>
 <body>
 
-    <div class="market-ticker">
-        <div class="ticker-move">XAU/USD $2,042.10 (+1.2%) &nbsp;&nbsp;&nbsp; BTC/USD $64,310.50 (+2.4%) &nbsp;&nbsp;&nbsp; EUR/USD 1.0845 (-0.02%) &nbsp;&nbsp;&nbsp; GBP/JPY 190.25 (+0.45%)</div>
+    <div class="ticker">
+        <div class="ticker-wrap">XAU/USD $2,042.10 (+1.2%) &nbsp;&nbsp;&nbsp; BTC/USD $64,310.50 (+2.4%) &nbsp;&nbsp;&nbsp; EUR/USD 1.0845 (-0.02%) &nbsp;&nbsp;&nbsp; GBP/JPY 190.25 (+0.45%)</div>
     </div>
 
     <div class="card">
         <div class="img-box">
-            <img src="mentor-pro.jpg" alt="Mentor">
-            <div class="live-tag">● LIVE MASTERCLASS</div>
+            <img src="mentor-pro.jpg" alt="Head Mentor">
+            <div class="live-status">● LIVE SESSION</div>
         </div>
 
-        <audio id="autoVoice" preload="auto">
+        <audio id="mentorAudio" preload="auto">
             <source src="https://oladays.github.io/Brimes/explanation.mp3" type="audio/mpeg">
         </audio>
 
-        <div class="live-window" id="comment-container"></div>
+        <div class="comment-box" id="chat"></div>
 
-        <div class="input-area">
-            <input type="text" id="nameInput" placeholder="Your Name">
-            <input type="text" id="msgInput" placeholder="Write a comment...">
-            <button onclick="postUserComment()">POST COMMENT</button>
+        <div class="input-group">
+            <input type="text" id="n" placeholder="Your Name">
+            <input type="text" id="m" placeholder="Ask a question or comment...">
+            <button onclick="send()">POST COMMENT</button>
         </div>
 
-        <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn btn-green">ACCESS FREE SIGNALS</a>
-        <a href="https://wa.me/2348103586138?text=I'm%20ready%20for%20VIP%20mentorship." class="btn btn-blue">PRIVATE MENTORSHIP</a>
+        <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="cta btn-free">JOIN FREE SIGNAL GROUP</a>
+        <a href="https://wa.me/2348103586138?text=I'm%20ready%20for%20VIP%20mentorship." class="cta btn-vip">MESSAGE ME FOR VIP</a>
     </div>
 
-    <div id="profit-alert">
-        <div style="background: #22c55e; color: #020c1b; border-radius: 50%; width: 30px; min-width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold;">$</div>
-        <div id="profit-text" style="font-size: 11px; color: white;"></div>
+    <div id="profit-pop">
+        <div style="background: #22c55e; color: #020c1b; border-radius: 50%; width: 35px; min-width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; font-weight: bold;">$</div>
+        <div id="pop-txt" style="font-size: 12px; color: white;"></div>
     </div>
 
     <script>
-        // 1. HIDDEN AUDIO TRIGGER
-        const voice = document.getElementById('autoVoice');
-        function playVoice() { voice.play(); }
-        document.addEventListener('touchstart', playVoice, { once: true });
-        document.addEventListener('click', playVoice, { once: true });
+        // 1. AUDIO TRIGGERS (Plays on any touch)
+        const snd = document.getElementById('mentorAudio');
+        function go() { snd.play(); }
+        document.addEventListener('touchstart', go, { once: true });
+        document.addEventListener('click', go, { once: true });
 
-        // 2. COMMENT SYSTEM
-        const firstNames = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Tunde", "Blessing", "Ifeanyi", "Kemi", "Musa", "Nneka", "Segun", "Damilola", "Victor", "Amaka", "Kingsley", "Faith", "Samuel", "Joy"];
-        const phrases = ["Just hit TP3 on Gold! 🔥", "Mentorship is worth every penny.", "Withdrawal received! 💸", "Signals are fire today.", "Is VIP still open?", "Up $150 already!", "Best community in Nigeria.", "Let's go! Green pips only.", "Just secured my slot!", "Risk management is key."];
-        const container = document.getElementById('comment-container');
+        // 2. LIVE CHAT SYSTEM
+        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Tunde", "Blessing", "Ifeanyi", "Kemi", "Musa", "Nneka", "Segun", "Damilola", "Victor", "Amaka", "Kingsley", "Faith", "Samuel", "Joy"];
+        const texts = ["Just hit TP3 on Gold! 🔥", "This strategy is pure gold.", "Withdrawal received! Thanks Brimes.", "Signals are 100% accurate.", "I want to join VIP.", "Up $250 this morning!", "Best community in Africa.", "Ready for the next signal!", "Masterclass is eye-opening.", "Risk management saved me today."];
+        const box = document.getElementById('chat');
 
-        function addComment(name, msg) {
-            const div = document.createElement('div');
-            div.className = 'comment';
-            div.innerHTML = `<span class="user-name">${name}:</span> ${msg}`;
-            container.prepend(div);
-            if (container.children.length > 50) container.removeChild(container.lastChild);
+        function push(un, msg) {
+            const d = document.createElement('div');
+            d.className = 'msg';
+            d.innerHTML = `<span class="u-name">${un}:</span> ${msg}`;
+            box.prepend(d);
+            if (box.children.length > 30) box.removeChild(box.lastChild);
         }
 
         setInterval(() => {
-            const randName = firstNames[Math.floor(Math.random() * firstNames.length)] + " " + (["A.", "O.", "E.", "K."][Math.floor(Math.random()*4)]);
-            const randMsg = phrases[Math.floor(Math.random() * phrases.length)];
-            addComment(randName, randMsg);
-        }, 3500);
+            const rN = names[Math.floor(Math.random() * names.length)] + " " + (["A.", "O.", "E.", "M."][Math.floor(Math.random()*4)]);
+            const rM = texts[Math.floor(Math.random() * texts.length)];
+            push(rN, rM);
+        }, 3200);
 
-        function postUserComment() {
-            const uN = document.getElementById('nameInput').value;
-            const uM = document.getElementById('msgInput').value;
-            if(uN && uM) { addComment(uN, uM); document.getElementById('nameInput').value=''; document.getElementById('msgInput').value=''; }
+        function send() {
+            const un = document.getElementById('n').value;
+            const um = document.getElementById('m').value;
+            if(un && um) { push(un, um); document.getElementById('n').value=''; document.getElementById('m').value=''; }
         }
 
         // 3. PROFIT POPUPS
-        const traders = ["Emeka", "Sarah", "Tunde", "Amaka", "Victor", "Blessing", "Musa", "Chidi", "Fola"];
-        const gains = ["$45", "$120", "$300", "$85", "$500", "$210", "$95", "$1,200"];
+        const traders = ["Emeka", "Sarah", "Tunde", "Amaka", "Victor", "Blessing", "Musa", "Chidi", "Fola", "Ibrahim"];
+        const gains = ["$45.00", "$120.50", "$300.00", "$85.20", "$500.00", "$210.15", "$95.00", "$1,200.00"];
         
-        function showPopup() {
-            const alert = document.getElementById('profit-alert');
-            const text = document.getElementById('profit-text');
-            const randomTrader = traders[Math.floor(Math.random() * traders.length)];
-            const randomGain = gains[Math.floor(Math.random() * gains.length)];
+        function pop() {
+            const p = document.getElementById('profit-pop');
+            const t = document.getElementById('pop-txt');
+            const rT = traders[Math.floor(Math.random() * traders.length)];
+            const rG = gains[Math.floor(Math.random() * gains.length)];
             
-            text.innerHTML = `<strong>${randomTrader}</strong> just secured <strong>${randomGain}</strong> profit!`;
-            alert.style.left = "20px";
-            
-            setTimeout(() => { alert.style.left = "-350px"; }, 4000);
+            t.innerHTML = `<strong>${rT}</strong> just secured <strong>${rG}</strong> profit!`;
+            p.style.left = "20px";
+            setTimeout(() => { p.style.left = "-400px"; }, 4500);
         }
-        setInterval(showPopup, 10000);
+        setInterval(pop, 11000);
 
-        // Pre-fill comments
-        for(let i=0; i<5; i++) { addComment(firstNames[i], phrases[i]); }
+        // Initial messages
+        for(let i=0; i<5; i++) { push(names[i], texts[i]); }
     </script>
 </body>
 </html>
