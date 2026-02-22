@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!D<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -167,6 +167,27 @@
 
         setInterval(() => {
             addMsg(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]);
+        }, 3000);
+
+        function postComment() {
+            const n = document.getElementById('vName').value;
+            const m = document.getElementById('vMsg').value;
+            if(n && m) { addMsg(n, m); document.getElementById('vName').value = ''; }
+        }
+
+        function showProfit() {
+            const p = document.getElementById('profit-pop');
+            const t = document.getElementById('pop-txt');
+            const rN = names[Math.floor(Math.random()*names.length)];
+            t.innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>!`;
+            p.style.left = "20px";
+            setTimeout(() => { p.style.left = "-400px"; }, 4500);
+        }
+        
+        for(let i=0; i<4; i++) { addMsg(names[i], texts[i]); }
+    </script>
+</body>
+</html>gth)], texts[Math.floor(Math.random()*texts.length)]);
         }, 3000);
 
         function postComment() {
