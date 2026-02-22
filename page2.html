@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brimes Academy | Official Entry</title>
+    
+    <title>Brimes Academy | Official Masterclass</title>
+    <meta name="description" content="Join Brimes Academy and master the markets with a 92% win rate. Official Entry.">
+    <meta property="og:title" content="Brimes Academy | Official Masterclass">
+    <meta property="og:description" content="Catch 4,200+ Pips with Brimes. Click to access the masterclass.">
+    <meta property="og:image" content="mentor-pro.jpg">
+    <meta property="og:type" content="website">
+
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #010813; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
@@ -19,7 +26,7 @@
         .logo { color: #22c55e; font-weight: 900; font-size: 18px; text-transform: uppercase; }
         .live-count { font-size: 11px; color: #22c55e; background: rgba(34, 197, 94, 0.1); padding: 5px 10px; border-radius: 20px; border: 1px solid #22c55e; }
 
-        /* UPDATED OFFICIAL ENTRY OVERLAY */
+        /* OFFICIAL ENTRY OVERLAY */
         #audio-trigger { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: radial-gradient(circle, #0a192f 0%, #010813 100%); 
@@ -34,7 +41,10 @@
             border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; 
             box-shadow: 0 0 40px rgba(34, 197, 94, 0.5); 
             animation: pulse 2s infinite; text-transform: uppercase;
+            transition: 0.3s;
         }
+        .play-btn:active { transform: scale(0.95); }
+
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 20px rgba(34, 197, 94, 0.4); }
             50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(34, 197, 94, 0.7); }
@@ -53,14 +63,17 @@
         /* CHAT & INPUT */
         .chat-area { background: rgba(2, 12, 27, 0.9); height: 160px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; padding: 10px; display: flex; flex-direction: column-reverse; border: 1px solid #233554; font-size: 12px; }
         .input-box { background: #112240; border-radius: 12px; padding: 12px; margin-bottom: 15px; border: 1px solid #3b82f6; }
-        .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 8px; margin-bottom: 8px; outline: none; }
-        .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; width: 100%; }
+        .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 8px; margin-bottom: 8px; outline: none; width: 100%; }
+        .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; transition: 0.3s; }
+        .input-box button:active { background: #1d4ed8; }
         
-        /* ACTION BUTTONS */
-        .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; }
-        .green { background: #22c55e; color: #010813; }
+        /* ACTION BUTTONS WITH HOVER EFFECTS */
+        .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; transition: 0.3s; }
+        .btn:active { transform: translateY(2px); filter: brightness(1.2); }
+        .green { background: #22c55e; color: #010813; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2); }
         .blue { border: 2px solid #3b82f6; color: #3b82f6; }
-        #profit-pop { position: fixed; bottom: 20px; left: -400px; background: #112240; border-left: 5px solid #22c55e; padding: 12px; border-radius: 10px; transition: 0.6s; z-index: 998; width: 260px; }
+
+        #profit-pop { position: fixed; bottom: 20px; left: -400px; background: #112240; border-left: 5px solid #22c55e; padding: 12px; border-radius: 10px; transition: 0.6s; z-index: 998; width: 260px; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
     </style>
 </head>
 <body>
@@ -172,6 +185,15 @@
             p.style.left = "20px";
             setTimeout(() => { p.style.left = "-400px"; }, 4500);
         }
+
+        function updateLiveCount() {
+            const count = Math.floor(Math.random() * 100) + 1200;
+            const liveEl = document.getElementById('live-users');
+            if(liveEl) liveEl.innerHTML = `● ${count.toLocaleString()} ONLINE`;
+        }
+    </script>
+</body>
+</html>  }
 
         function updateLiveCount() {
             const count = Math.floor(Math.random() * 100) + 1200;
