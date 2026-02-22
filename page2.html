@@ -3,92 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brimes Academy | VIP</title>
+    <title>Brimes Academy</title>
     <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #020c1b; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-bottom: 20px; overflow-x: hidden; }
-        .ticker { width: 100%; background: #000; padding: 6px 0; border-bottom: 1px solid #22c55e; font-size: 10px; font-weight: bold; overflow: hidden; white-space: nowrap; }
-        .ticker-wrap { display: inline-block; animation: scroll 25s linear infinite; color: #22c55e; }
-        @keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        .card { background: #0a192f; width: 95%; max-width: 420px; padding: 20px; border-radius: 30px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); margin-top: 15px; }
-        .img-box { width: 100%; height: 200px; margin-bottom: 15px; border-radius: 20px; border: 3px solid #22c55e; overflow: hidden; position: relative; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .comment-box { background: rgba(17, 34, 64, 0.95); border: 1px solid #233554; border-radius: 15px; height: 240px; overflow-y: hidden; position: relative; margin-bottom: 15px; display: flex; flex-direction: column-reverse; }
-        .msg { padding: 12px; border-bottom: 1px solid rgba(35, 53, 84, 0.4); text-align: left; font-size: 12px; }
-        .u-name { color: #22c55e; font-weight: bold; margin-right: 6px; }
-        .cta { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; font-size: 14px; text-align: center; margin-bottom: 10px; }
-        .btn-free { background: #22c55e; color: #020c1b; }
-        .btn-vip { border: 2px solid #3b82f6; color: #3b82f6; }
-        #profit-pop { position: fixed; bottom: 25px; left: -400px; background: #112240; border-left: 5px solid #22c55e; padding: 15px; border-radius: 12px; box-shadow: 0 15px 35px #000; transition: 0.8s; z-index: 9999; display: flex; align-items: center; gap: 12px; width: 280px; }
+        body { margin: 0; font-family: sans-serif; background: #020c1b; color: white; text-align: center; padding: 20px; }
+        .card { background: #0a192f; padding: 20px; border-radius: 20px; max-width: 400px; margin: auto; border: 1px solid #22c55e; }
+        img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
+        audio { width: 100%; margin: 15px 0; }
+        .chat { background: rgba(0,0,0,0.3); height: 200px; overflow: hidden; text-align: left; padding: 10px; font-size: 13px; border-radius: 10px; margin-bottom: 15px; }
+        .msg { margin-bottom: 8px; animation: slide 0.3s ease; }
+        @keyframes slide { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+        .un { color: #22c55e; font-weight: bold; }
+        .btn { display: block; padding: 15px; margin: 10px 0; text-decoration: none; border-radius: 10px; font-weight: bold; text-transform: uppercase; }
+        .green { background: #22c55e; color: black; }
+        .blue { border: 2px solid #3b82f6; color: #3b82f6; }
     </style>
 </head>
 <body>
 
-    <div class="ticker">
-        <div class="ticker-wrap">XAU/USD $2,042.10 (+1.2%) &nbsp;&nbsp;&nbsp; BTC/USD $64,310.50 (+2.4%) &nbsp;&nbsp;&nbsp; EUR/USD 1.0845 (-0.02%)</div>
-    </div>
-
     <div class="card">
-        <div class="img-box">
-            <img src="mentor-pro.jpg" alt="Mentor">
-        </div>
-
-        <audio id="mentorVoice" preload="auto">
+        <img src="mentor-pro.jpg">
+        
+        <p style="color:#22c55e; font-weight:bold;">LISTEN TO MASTERCLASS:</p>
+        <audio controls>
             <source src="explanation.mp3" type="audio/mpeg">
         </audio>
 
-        <div class="comment-box" id="chat"></div>
+        <div class="chat" id="chat"></div>
 
-        <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="cta btn-free">JOIN FREE SIGNAL GROUP</a>
-        <a href="https://wa.me/2348103586138?text=I'm%20ready%20for%20VIP%20mentorship." class="cta btn-vip">MESSAGE ME FOR VIP</a>
-    </div>
-
-    <div id="profit-pop">
-        <div style="background: #22c55e; color: #020c1b; border-radius: 50%; width: 35px; min-width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; font-weight: bold;">$</div>
-        <div id="pop-txt" style="font-size: 12px; color: white;"></div>
+        <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn green">JOIN FREE GROUP</a>
+        <a href="https://wa.me/2348103586138" class="btn blue">MESSAGE MENTOR</a>
     </div>
 
     <script>
-        // AUDIO START LOGIC
-        const audio = document.getElementById('mentorVoice');
-        
-        function tryPlay() {
-            audio.play().then(() => {
-                console.log("Audio playing");
-            }).catch(e => {
-                console.log("Playback failed: ", e);
-            });
-        }
-
-        // Must click or touch to start audio
-        document.addEventListener('click', tryPlay, { once: true });
-        document.addEventListener('touchstart', tryPlay, { once: true });
-
-        // CHAT AND POPUP LOGIC
-        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka"];
-        const texts = ["Just hit TP3 on Gold! 🔥", "This strategy is pure gold.", "Withdrawal received!", "Signals are 100% accurate.", "I want to join VIP."];
+        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Victor", "Joy"];
+        const msgs = ["TP hit! 🔥", "Legit signals.", "I'm in VIP now!", "Withdrawal successful.", "Best mentor.", "Let's gooo!"];
         const box = document.getElementById('chat');
 
-        function push(un, msg) {
+        function add() {
             const d = document.createElement('div');
             d.className = 'msg';
-            d.innerHTML = `<span class="u-name">${un}:</span> ${msg}`;
+            d.innerHTML = `<span class="un">${names[Math.floor(Math.random()*names.length)]}:</span> ${msgs[Math.floor(Math.random()*msgs.length)]}`;
             box.prepend(d);
+            if(box.children.length > 10) box.removeChild(box.lastChild);
         }
-
-        setInterval(() => {
-            push(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]);
-        }, 4000);
-
-        setInterval(() => {
-            const p = document.getElementById('profit-pop');
-            document.getElementById('pop-txt').innerHTML = `Trader just secured <strong>$${Math.floor(Math.random()*500)}</strong> profit!`;
-            p.style.left = "20px";
-            setTimeout(() => { p.style.left = "-400px"; }, 4000);
-        }, 12000);
-
-        for(let i=0; i<3; i++) { push(names[i], texts[i]); }
+        
+        // Faster comments (every 1.5 seconds)
+        setInterval(add, 1500);
+        for(let i=0; i<4; i++) add();
     </script>
+
 </body>
 </html>
                                          </html>
