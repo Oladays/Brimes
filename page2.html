@@ -48,7 +48,7 @@
         .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; }
 
         /* ACTION BUTTONS */
-        .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; transition: 0.3s; }
+        .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; }
         .green { background: #22c55e; color: #010813; }
         .blue { border: 2px solid #3b82f6; color: #3b82f6; }
 
@@ -92,6 +92,7 @@
             </div>
 
             <audio id="mentorAudio"><source src="explanation.mp3" type="audio/mpeg"></audio>
+            <audio id="bgMusic" loop><source src="song.mp3" type="audio/mpeg"></audio>
 
             <div class="chat-area" id="chat"></div>
 
@@ -117,30 +118,44 @@
     </div>
 
     <script>
-        const audio = document.getElementById('mentorAudio');
+        const mentorAudio = document.getElementById('mentorAudio');
+        const bgMusic = document.getElementById('bgMusic');
         const trigger = document.getElementById('audio-trigger');
         let sessionStarted = false;
+        let isMusicPhase = false;
 
         function startExperience() {
             trigger.style.display = 'none';
-            audio.play();
+            mentorAudio.play();
             sessionStarted = true;
             setInterval(showProfit, 10000);
         }
 
-        // AUTO-PAUSE & AUTO-RESUME LOGIC
+        // TRANSITION TO SONG
+        mentorAudio.onended = function() {
+            isMusicPhase = true;
+            bgMusic.play();
+        };
+
+        // SMART AUTO-PAUSE & RESUME
         document.addEventListener("visibilitychange", function() {
             if (sessionStarted) {
                 if (document.hidden) {
-                    audio.pause();
+                    mentorAudio.pause();
+                    bgMusic.pause();
                 } else {
-                    audio.play(); // Continues from where it stopped
+                    // Logic to check which one to resume
+                    if (isMusicPhase) {
+                        bgMusic.play();
+                    } else {
+                        mentorAudio.play();
+                    }
                 }
             }
         });
 
         const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab"];
-        const texts = ["Gold hit TP! 🔥", "Best signals ever.", "Withdrawal received.", "Up $100 today!", "Signals are 100% accurate"];
+        const texts = ["Gold hit TP! 🔥", "Best mentor in Africa.", "Withdrawal received safely.", "Up $100 today!", "Signals are 100% accurate"];
         
         function addMsg(name, msg) {
             const d = document.createElement('div');
@@ -164,6 +179,15 @@
             const p = document.getElementById('profit-pop');
             const t = document.getElementById('pop-txt');
             const rN = names[Math.floor(Math.random()*names.length)];
+            t.innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>!`;
+            p.style.left = "20px";
+            setTimeout(() => { p.style.left = "-400px"; }, 4500);
+        }
+        
+        for(let i=0; i<4; i++) { addMsg(names[i], texts[i]); }
+    </script>
+</body>
+</html>s.length)];
             t.innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>!`;
             p.style.left = "20px";
             setTimeout(() => { p.style.left = "-400px"; }, 4500);
