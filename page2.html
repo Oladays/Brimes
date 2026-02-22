@@ -3,32 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Freedom Academy</title>
+    <title>Financial Freedom Academy | VIP</title>
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #020c1b; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-bottom: 20px; overflow-x: hidden; }
         
+        /* TICKER SECTION */
         .market-ticker { width: 100%; background: #000; padding: 6px 0; border-bottom: 1px solid #22c55e; font-size: 10px; font-weight: bold; overflow: hidden; white-space: nowrap; }
         .ticker-move { display: inline-block; animation: mScroll 25s linear infinite; color: #22c55e; }
         @keyframes mScroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        .card { background: #0a192f; width: 95%; max-width: 420px; padding: 20px; border-radius: 30px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5); margin-top: 15px; }
+        /* MAIN CARD */
+        .card { background: #0a192f; width: 95%; max-width: 420px; padding: 20px; border-radius: 30px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); margin-top: 15px; position: relative; }
 
         .img-box { width: 100%; height: 200px; margin-bottom: 15px; border-radius: 20px; border: 3px solid #22c55e; overflow: hidden; position: relative; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .live-tag { position:absolute; top:10px; right:10px; background:#ef4444; padding:4px 8px; border-radius:5px; font-size:9px; font-weight:bold; animation: blink 1s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
         
-        .live-window { background: rgba(17, 34, 64, 0.95); border: 1px solid #233554; border-radius: 15px; height: 250px; overflow-y: hidden; position: relative; margin-bottom: 15px; display: flex; flex-direction: column-reverse; }
+        /* COMMENT SECTION */
+        .live-window { background: rgba(17, 34, 64, 0.95); border: 1px solid #233554; border-radius: 15px; height: 220px; overflow-y: hidden; position: relative; margin-bottom: 15px; display: flex; flex-direction: column-reverse; }
         .comment { padding: 10px 15px; border-bottom: 1px solid rgba(35, 53, 84, 0.4); text-align: left; font-size: 11px; animation: slideUp 0.5s ease-out forwards; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .user-name { color: #22c55e; font-weight: bold; margin-right: 5px; }
 
+        /* INPUTS */
         .input-area { background: #112240; padding: 12px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #3b82f6; display: flex; flex-direction: column; gap: 8px; }
         .input-area input { background: transparent; border: none; color: white; width: 100%; font-size: 12px; outline: none; border-bottom: 1px solid #233554; padding: 5px; }
         .input-area button { background: #3b82f6; border: none; color: white; border-radius: 8px; font-size: 11px; padding: 10px; font-weight: bold; cursor: pointer; }
 
-        .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; font-size: 14px; text-align: center; margin-bottom: 10px; }
-        .btn-green { background: #22c55e; color: #020c1b; }
+        /* BUTTONS */
+        .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; font-size: 14px; text-align: center; margin-bottom: 10px; transition: 0.3s; }
+        .btn-green { background: #22c55e; color: #020c1b; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3); }
         .btn-blue { border: 2px solid #1d4ed8; color: #3b82f6; }
+
+        /* PROFIT POPUP */
+        #profit-alert { position: fixed; bottom: 20px; left: -350px; background: #112240; border-left: 5px solid #22c55e; padding: 12px; border-radius: 10px; box-shadow: 0 10px 30px #000; transition: 0.8s; z-index: 999; display: flex; align-items: center; gap: 10px; width: 260px; }
     </style>
 </head>
 <body>
@@ -40,7 +50,7 @@
     <div class="card">
         <div class="img-box">
             <img src="mentor-pro.jpg" alt="Mentor">
-            <div style="position:absolute; top:10px; right:10px; background:#ef4444; padding:4px 8px; border-radius:5px; font-size:9px; font-weight:bold; animation: blink 1s infinite;">● LIVE MASTERCLASS</div>
+            <div class="live-tag">● LIVE MASTERCLASS</div>
         </div>
 
         <audio id="autoVoice" preload="auto">
@@ -59,16 +69,19 @@
         <a href="https://wa.me/2348103586138?text=I'm%20ready%20for%20VIP%20mentorship." class="btn btn-blue">PRIVATE MENTORSHIP</a>
     </div>
 
+    <div id="profit-alert">
+        <div style="background: #22c55e; color: #020c1b; border-radius: 50%; width: 30px; min-width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold;">$</div>
+        <div id="profit-text" style="font-size: 11px; color: white;"></div>
+    </div>
+
     <script>
-        // 1. AUDIO AUTOPLAY LOGIC
+        // 1. HIDDEN AUDIO TRIGGER
         const voice = document.getElementById('autoVoice');
-        function playVoice() {
-            voice.play();
-        }
+        function playVoice() { voice.play(); }
         document.addEventListener('touchstart', playVoice, { once: true });
         document.addEventListener('click', playVoice, { once: true });
 
-        // 2. INFINITE COMMENT ENGINE
+        // 2. COMMENT SYSTEM
         const firstNames = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Tunde", "Blessing", "Ifeanyi", "Kemi", "Musa", "Nneka", "Segun", "Damilola", "Victor", "Amaka", "Kingsley", "Faith", "Samuel", "Joy"];
         const phrases = ["Just hit TP3 on Gold! 🔥", "Mentorship is worth every penny.", "Withdrawal received! 💸", "Signals are fire today.", "Is VIP still open?", "Up $150 already!", "Best community in Nigeria.", "Let's go! Green pips only.", "Just secured my slot!", "Risk management is key."];
         const container = document.getElementById('comment-container');
@@ -85,7 +98,7 @@
             const randName = firstNames[Math.floor(Math.random() * firstNames.length)] + " " + (["A.", "O.", "E.", "K."][Math.floor(Math.random()*4)]);
             const randMsg = phrases[Math.floor(Math.random() * phrases.length)];
             addComment(randName, randMsg);
-        }, 3000);
+        }, 3500);
 
         function postUserComment() {
             const uN = document.getElementById('nameInput').value;
@@ -93,7 +106,24 @@
             if(uN && uM) { addComment(uN, uM); document.getElementById('nameInput').value=''; document.getElementById('msgInput').value=''; }
         }
 
-        // Initialize feed
+        // 3. PROFIT POPUPS
+        const traders = ["Emeka", "Sarah", "Tunde", "Amaka", "Victor", "Blessing", "Musa", "Chidi", "Fola"];
+        const gains = ["$45", "$120", "$300", "$85", "$500", "$210", "$95", "$1,200"];
+        
+        function showPopup() {
+            const alert = document.getElementById('profit-alert');
+            const text = document.getElementById('profit-text');
+            const randomTrader = traders[Math.floor(Math.random() * traders.length)];
+            const randomGain = gains[Math.floor(Math.random() * gains.length)];
+            
+            text.innerHTML = `<strong>${randomTrader}</strong> just secured <strong>${randomGain}</strong> profit!`;
+            alert.style.left = "20px";
+            
+            setTimeout(() => { alert.style.left = "-350px"; }, 4000);
+        }
+        setInterval(showPopup, 10000);
+
+        // Pre-fill comments
         for(let i=0; i<5; i++) { addComment(firstNames[i], phrases[i]); }
     </script>
 </body>
