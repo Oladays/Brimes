@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>BRIMES Trading Signals Academy | Official</title>
-    <meta name="description" content="Join BRIMES Trading Signals Academy and master the markets. Official Entry.">
-    <meta property="og:title" content="BRIMES Trading Signals Academy | Official">
+    
+    <meta property="og:title" content="BRIMES Trading Signals Academy">
+    <meta property="og:description" content="Master the markets with elite signals and mentorship.">
     <meta property="og:image" content="mentor-pro.jpg">
     <meta name="theme-color" content="#010813">
 
@@ -14,64 +14,39 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #010813; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
         
-        /* TICKER */
         .ticker-wrap { width: 100%; overflow: hidden; background: #0a192f; border-bottom: 1px solid #233554; height: 30px; display: flex; align-items: center; }
         .ticker { display: inline-block; white-space: nowrap; animation: marquee 30s linear infinite; font-size: 10px; color: #22c55e; font-weight: bold; }
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        /* NAVBAR */
         .navbar { width: 100%; background: #0a192f; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #233554; position: sticky; top: 0; z-index: 1000; }
-        .logo { color: #22c55e; font-weight: 900; font-size: 14px; text-transform: uppercase; }
+        .logo { color: #22c55e; font-weight: 900; font-size: 13px; text-transform: uppercase; }
         .live-count { font-size: 11px; color: #22c55e; background: rgba(34, 197, 94, 0.1); padding: 5px 10px; border-radius: 20px; border: 1px solid #22c55e; }
 
-        /* OFFICIAL ENTRY OVERLAY */
-        #audio-trigger { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: radial-gradient(circle, #0a192f 0%, #010813 100%); 
-            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            text-align: center; padding: 20px;
-        }
+        #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, #0a192f 0%, #010813 100%); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
         .entry-title { color: #22c55e; font-size: 18px; font-weight: 900; letter-spacing: 1px; margin-bottom: 5px; text-transform: uppercase; }
         .entry-sub { color: #64748b; font-size: 14px; margin-bottom: 30px; }
         
-        .play-btn { 
-            background: #22c55e; color: #010813; border: none; padding: 22px 60px; 
-            border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; 
-            box-shadow: 0 0 40px rgba(34, 197, 94, 0.5); 
-            animation: pulse 2s infinite; text-transform: uppercase;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+        .play-btn { background: #22c55e; color: #010813; border: none; padding: 22px 60px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 0 40px rgba(34, 197, 94, 0.5); animation: pulse 2s infinite; text-transform: uppercase; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-        /* CONTENT */
         .container { width: 95%; max-width: 450px; margin-top: 10px; padding-bottom: 50px; }
         .card { background: #0a192f; padding: 20px; border-radius: 25px; border: 1px solid #233554; margin-bottom: 20px; }
-        
         .mentor-display { width: 100%; height: 260px; background: linear-gradient(135deg, #0a192f 0%, #112240 100%); border-radius: 15px; border: 1px solid #22c55e; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
         .verified-badge { position: absolute; top: 10px; right: 10px; background: #3b82f6; color: white; padding: 4px 8px; border-radius: 20px; font-size: 9px; font-weight: bold; }
         .profile-img { width: 85px; height: 85px; border-radius: 50%; border: 3px solid #22c55e; margin-bottom: 10px; object-fit: cover; }
-        
         .stat-row { display: flex; justify-content: space-around; width: 100%; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
         .stat-value { color: #22c55e; font-weight: 900; font-size: 16px; display: block; }
 
-        /* CHAT */
         .chat-area { background: rgba(2, 12, 27, 0.9); height: 160px; border-radius: 15px; overflow: hidden; margin-bottom: 15px; padding: 10px; display: flex; flex-direction: column-reverse; border: 1px solid #233554; font-size: 12px; }
-        .msg { margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px; }
-        
         .input-box { background: #112240; border-radius: 12px; padding: 12px; margin-bottom: 15px; border: 1px solid #3b82f6; }
         .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 8px; margin-bottom: 8px; outline: none; width: 100%; }
         .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
 
-        /* BUTTONS */
         .btn { display: block; width: 100%; padding: 16px; text-decoration: none; font-weight: 900; border-radius: 12px; text-transform: uppercase; font-size: 13px; text-align: center; margin-bottom: 10px; transition: 0.3s; }
-        .btn:active { transform: translateY(2px); }
         .green { background: #22c55e; color: #010813; }
         .blue { border: 2px solid #3b82f6; color: #3b82f6; }
 
-        #profit-pop { position: fixed; bottom: 20px; left: -400px; background: #112240; border-left: 5px solid #22c55e; padding: 12px; border-radius: 10px; transition: 0.6s; z-index: 998; width: 260px; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        #profit-pop { position: fixed; bottom: 20px; left: -400px; background: #112240; border-left: 5px solid #22c55e; padding: 12px; border-radius: 10px; transition: 0.6s; z-index: 998; width: 260px; }
     </style>
 </head>
 <body>
@@ -82,7 +57,7 @@
 
     <nav class="navbar">
         <div class="logo">BRIMES Trading Signals Academy</div>
-        <div class="live-count" id="live-users">● 1,248 ONLINE</div>
+        <div class="live-count" id="live-users">● 1,200 ONLINE</div>
     </nav>
 
     <div id="audio-trigger">
@@ -104,8 +79,8 @@
                 </div>
             </div>
 
-            <audio id="mentorAudio" preload="auto"><source src="explanation.mp3" type="audio/mpeg"></audio>
-            <audio id="bgMusic" loop preload="auto"><source src="song.mp3" type="audio/mpeg"></audio>
+            <audio id="mentorAudio"><source src="explanation.mp3" type="audio/mpeg"></audio>
+            <audio id="bgMusic" loop><source src="song.mp3" type="audio/mpeg"></audio>
 
             <div class="chat-area" id="chat"></div>
 
@@ -131,40 +106,26 @@
 
         function startExperience() {
             trigger.style.display = 'none';
-            mentorAudio.play().catch(e => console.log("Blocked"));
+            mentorAudio.play().catch(() => {});
             sessionStarted = true;
             setInterval(showProfit, 10000);
             setInterval(updateLiveCount, 5000);
         }
 
-        mentorAudio.onended = function() {
-            isMusicPhase = true;
-            bgMusic.play();
-        };
-
-        document.addEventListener("visibilitychange", function() {
-            if (sessionStarted) {
-                if (document.hidden) { mentorAudio.pause(); bgMusic.pause(); } 
-                else { if (isMusicPhase) bgMusic.play(); else mentorAudio.play(); }
-            }
-        });
+        mentorAudio.onended = () => { isMusicPhase = true; bgMusic.play(); };
 
         const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab"];
         const texts = ["Gold hit TP! 🔥", "Best mentor.", "Withdrawal received.", "Up $100!", "Signals are 10/10"];
         
         function addMsg(name, msg) {
             const d = document.createElement('div');
-            d.className = 'msg';
             d.innerHTML = `<span style="color:#22c55e;font-weight:bold">${name}:</span> ${msg}`;
             document.getElementById('chat').prepend(d);
-            if(document.getElementById('chat').children.length > 10) document.getElementById('chat').removeChild(document.getElementById('chat').lastChild);
+            if(document.getElementById('chat').children.length > 10) document.getElementById('chat').lastChild.remove();
         }
 
-        for(let i=0; i<4; i++) { addMsg(names[i], texts[i]); }
-
-        setInterval(() => {
-            addMsg(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]);
-        }, 4000);
+        for(let i=0; i<4; i++) addMsg(names[i], texts[i]);
+        setInterval(() => addMsg(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]), 4000);
 
         function postComment() {
             const n = document.getElementById('vName').value;
@@ -177,85 +138,8 @@
             const rN = names[Math.floor(Math.random()*names.length)];
             document.getElementById('pop-txt').innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>!`;
             p.style.left = "20px";
-            setTimeout(() => { p.style.left = "-400px"; }, 4500);
+            setTimeout(() => p.style.left = "-400px", 4500);
         }
-
-        function updateLiveCount() {
-            const count = Math.floor(Math.random() * 100) + 1200;
-            const liveEl = document.getElementById('live-users');
-            if(liveEl) liveEl.innerHTML = `● ${count.toLocaleString()} ONLINE`;
-        }
-    </script>
-</body>
-</html> p = document.getElementById('profit-pop');
-            const rN = names[Math.floor(Math.random()*names.length)];
-            document.getElementById('pop-txt').innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>!`;
-            p.style.left = "20px";
-            setTimeout(() => { p.style.left = "-400px"; }, 4500);
-        }
-
-        function updateLiveCount() {
-            const count = Math.floor(Math.random() * 100) + 1200;
-            const liveEl = document.getElementById('live-users');
-            if(liveEl) liveEl.innerHTML = `● ${count.toLocaleString()} ONLINE`;
-        }
-    </script>
-</body>
-</html>getElementById('chat').lastChild);
-        }
-
-        for(let i=0; i<4; i++) { addMsg(names[i], texts[i]); }
-
-        setInterval(() => {
-            addMsg(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]);
-        }, 4000);
-
-        function postComment() {
-            const n = document.getElementById('vName').value;
-            const m = document.getElementById('vMsg').value;
-            if(n && m) { addMsg(n, m); document.getElementById('vName').value=''; document.getElementById('vMsg').value=''; }
-        }
-
-        function showProfit() {
-            const p = document.getElementById('profit-pop');
-            const rN = names[Math.floor(Math.random()*names.length)];
-            document.getElementById('pop-txt').innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>!`;
-            p.style.left = "20px";
-            setTimeout(() => { p.style.left = "-400px"; }, 4500);
-        }
-
-        function updateLiveCount() {
-            const count = Math.floor(Math.random() * 100) + 1200;
-            const liveEl = document.getElementById('live-users');
-            if(liveEl) liveEl.innerHTML = `● ${count.toLocaleString()} ONLINE`;
-        }
-    </script>
-</body>
-</html>(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]);
-        }, 4000);
-
-        function postComment() {
-            const n = document.getElementById('vName').value;
-            const m = document.getElementById('vMsg').value;
-            if(n && m) { addMsg(n, m); document.getElementById('vName').value=''; document.getElementById('vMsg').value=''; }
-        }
-
-        function showProfit() {
-            const p = document.getElementById('profit-pop');
-            const rN = names[Math.floor(Math.random()*names.length)];
-            document.getElementById('pop-txt').innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>!`;
-            p.style.left = "20px";
-            setTimeout(() => { p.style.left = "-400px"; }, 4500);
-        }
-
-        function updateLiveCount() {
-            const count = Math.floor(Math.random() * 100) + 1200;
-            const liveEl = document.getElementById('live-users');
-            if(liveEl) liveEl.innerHTML = `● ${count.toLocaleString()} ONLINE`;
-        }
-    </script>
-</body>
-</html>  }
 
         function updateLiveCount() {
             const count = Math.floor(Math.random() * 100) + 1200;
