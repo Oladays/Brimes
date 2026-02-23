@@ -10,40 +10,58 @@
         
         body { 
             margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; 
-            background: linear-gradient(rgba(1, 8, 19, 0.92), rgba(1, 8, 19, 0.92)), 
+            background: linear-gradient(rgba(1, 8, 19, 0.9), rgba(1, 8, 19, 0.9)), 
                         url('https://images.unsplash.com/photo-1611974714025-e6148a234e5f?auto=format&fit=crop&q=80&w=2070');
             background-size: cover; background-position: center; background-attachment: fixed;
             color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; 
         }
+        
+        .ticker-wrap { width: 100%; overflow: hidden; background: rgba(10, 25, 47, 0.8); border-bottom: 1px solid #233554; height: 30px; display: flex; align-items: center; backdrop-filter: blur(5px); }
+        .ticker { display: inline-block; white-space: nowrap; animation: marquee 30s linear infinite; font-size: 10px; color: #22c55e; font-weight: bold; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
         .navbar { width: 100%; background: rgba(10, 25, 47, 0.9); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #233554; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
         .logo { color: #22c55e; font-weight: 900; font-size: 13px; text-transform: uppercase; }
         .live-count { font-size: 11px; color: #22c55e; background: rgba(34, 197, 94, 0.1); padding: 5px 10px; border-radius: 20px; border: 1px solid #22c55e; }
 
-        /* HEADER */
-        #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #010813; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .welcome-text { color: #22c55e; font-size: 32px; font-weight: 950; margin-bottom: 25px; text-transform: uppercase; }
-        .play-btn { background: #22c55e; color: #010813; border: none; padding: 22px 60px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 0 30px rgba(34, 197, 94, 0.4); }
+        /* HEADER TEXT - MAXIMUM BOLD */
+        #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(10, 25, 47, 0.98) 0%, #010813 100%); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+        .welcome-text { color: #22c55e; font-size: 32px; font-weight: 950; letter-spacing: 1px; margin-bottom: 25px; text-transform: uppercase; text-shadow: 0 0 25px rgba(34, 197, 94, 0.7); line-height: 1.1; }
+        
+        .play-btn { background: #22c55e; color: #010813; border: none; padding: 22px 60px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 0 40px rgba(34, 197, 94, 0.5); animation: pulse 2s infinite; text-transform: uppercase; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
         .container { width: 95%; max-width: 450px; margin-top: 20px; padding-bottom: 50px; }
+        .stats-widget { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; border-radius: 15px; padding: 20px; margin-bottom: 25px; display: flex; justify-content: space-around; text-align: center; width: 100%; }
+        .stat-num { font-size: 20px; font-weight: 900; color: #22c55e; display: block; margin-bottom: 5px; }
+        .stat-label { font-size: 10px; text-transform: uppercase; color: #64748b; }
+
+        .card { background: rgba(10, 25, 47, 0.7); backdrop-filter: blur(15px); padding: 25px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 25px; }
+        .mentor-display { width: 100%; height: 260px; background: rgba(255, 255, 255, 0.05); border-radius: 20px; border: 1px solid #22c55e; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; margin-bottom: 25px; }
+        .profile-img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid #22c55e; margin-bottom: 12px; object-fit: cover; }
+
+        .chat-area { background: rgba(0, 0, 0, 0.4); height: 220px; border-radius: 20px; overflow-y: auto; margin-bottom: 20px; padding: 18px; border: 1px solid rgba(255,255,255,0.05); font-size: 12px; scroll-behavior: smooth; }
+        .msg { margin-bottom: 15px; padding: 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); line-height: 1.5; border-left: 4px solid #3b82f6; text-align: left; }
         
-        /* VIDEO CARD SECTION */
-        .card { background: rgba(10, 25, 47, 0.7); backdrop-filter: blur(15px); padding: 20px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 25px; }
-        .video-box { width: 100%; height: 260px; background: #000; border-radius: 20px; border: 2px solid #22c55e; overflow: hidden; margin-bottom: 15px; position: relative; }
-        .video-box video { width: 100%; height: 100%; object-fit: cover; }
+        .input-box { background: rgba(17, 34, 64, 0.8); border-radius: 15px; padding: 15px; margin-bottom: 20px; border: 1px solid #3b82f6; }
+        .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 10px; margin-bottom: 12px; outline: none; font-size: 14px; }
+        .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 
-        .chat-area { background: rgba(0, 0, 0, 0.4); height: 220px; border-radius: 20px; overflow-y: auto; margin-bottom: 20px; padding: 15px; font-size: 12px; border: 1px solid rgba(255,255,255,0.05); scroll-behavior: smooth; }
-        .msg { margin-bottom: 10px; padding: 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.05); border-left: 4px solid #3b82f6; text-align: left; }
-
-        .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; text-align: center; margin-bottom: 10px; }
+        .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; font-size: 14px; text-align: center; margin-bottom: 15px; }
         .green { background: #22c55e; color: #010813; }
         .blue { border: 2px solid #3b82f6; color: #3b82f6; }
+
+        #profit-pop { position: fixed; bottom: 20px; left: -400px; background: #112240; border-left: 5px solid #22c55e; padding: 15px; border-radius: 12px; transition: 0.6s; z-index: 998; width: 280px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
 
+    <div class="ticker-wrap">
+        <div class="ticker">XAUUSD: 2,024.45 ▲ | EURUSD: 1.0821 ▼ | GBPUSD: 1.2644 ▲ | BTCUSD: 51,204.10 ▲</div>
+    </div>
+
     <nav class="navbar">
-        <div class="logo">BRIMES Academy</div>
+        <div class="logo">BRIMES Trading Signals Academy</div>
         <div class="live-count" id="live-users">● 1,200 ONLINE</div>
     </nav>
 
@@ -53,44 +71,68 @@
     </div>
 
     <div class="container">
+        <div class="stats-widget">
+            <div class="stat-item"><span class="stat-num">$<span id="total-profits">42,550</span></span><span class="stat-label">Academy Profits</span></div>
+            <div class="stat-item"><span class="stat-num" id="signals-sent">14</span><span class="stat-label">Live Signals</span></div>
+        </div>
+
         <div class="card">
-            <div class="video-box">
-                <video id="academyVideo" loop playsinline>
-                    <source src="btc-live.mp4" type="video/mp4">
-                </video>
+            <div class="mentor-display">
+                <div style="position: absolute; top: 12px; right: 12px; background: #3b82f6; color: white; padding: 5px 10px; border-radius: 20px; font-size: 10px; font-weight: bold;">✓ VERIFIED</div>
+                <img src="mentor-pro.jpg" class="profile-img">
+                <h3 style="margin: 0; font-size: 18px;">Master Trader: Brimes</h3>
+                <div style="display: flex; justify-content: space-around; width: 100%; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                    <div style="text-align:center"><span style="color:#22c55e;font-weight:900; font-size: 16px;">+4,200</span><br><span style="font-size:10px; color: #64748b;">Pips Gained</span></div>
+                    <div style="text-align:center"><span style="color:#22c55e;font-weight:900; font-size: 16px;">92%</span><br><span style="font-size:10px; color: #64748b;">Win Rate</span></div>
+                </div>
             </div>
 
-            <h3 style="text-align: center; margin: 10px 0; font-size: 18px;">Master Trader: Brimes</h3>
-
             <audio id="mentorAudio"><source src="explanation.mp3" type="audio/mpeg"></audio>
+            <audio id="bgMusic" loop><source src="song.mp3" type="audio/mpeg"></audio>
 
             <div class="chat-area" id="chat"></div>
 
+            <div class="input-box">
+                <input type="text" id="vName" placeholder="Enter your name...">
+                <input type="text" id="vMsg" placeholder="Write a message...">
+                <button onclick="postComment()">POST TO LIVE CHAT</button>
+            </div>
+
             <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn green">JOIN FREE SIGNALS GROUP</a>
-            <a href="https://wa.me/2348103586138?text=VIP" class="btn blue">PRIVATE VIP MENTORSHIP</a>
+            <a href="https://wa.me/2348103586138?text=Hello%20Brimes,%20I'm%20ready%20for%20VIP." class="btn blue">PRIVATE VIP MENTORSHIP</a>
         </div>
     </div>
 
+    <div id="profit-pop"><div id="pop-txt" style="font-size: 12px; color: white;"></div></div>
+
     <script>
         const mentorAudio = document.getElementById('mentorAudio');
-        const mainVideo = document.getElementById('academyVideo');
+        const bgMusic = document.getElementById('bgMusic');
         const trigger = document.getElementById('audio-trigger');
         const chatBox = document.getElementById('chat');
+        let sessionActive = false;
+        let playingMusic = false;
 
-        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab"];
-        const texts = ["Gold hit TP! 🔥", "Up $100!", "Signals are 10/10", "Blue everywhere! 💎", "Withdrawal confirmed."];
+        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Tunde", "Blessing"];
+        const texts = ["Gold hit TP! 🔥", "Best mentor.", "Withdrawal received.", "Up $100!", "Signals are 10/10", "Blue everywhere! 💎"];
 
         function startExperience() {
             trigger.style.display = 'none';
+            sessionActive = true;
             mentorAudio.play().catch(e => console.log("Audio play failed"));
-            mainVideo.play();
-            
-            setInterval(() => {
-                const n = names[Math.floor(Math.random() * names.length)];
-                const t = texts[Math.floor(Math.random() * texts.length)];
-                addMsg(n, t);
-            }, 4500);
+            setInterval(showProfit, 10000);
+            setInterval(updateStats, 7000);
+            setInterval(() => addMsg(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]), 4500);
         }
+
+        mentorAudio.onended = () => { playingMusic = true; bgMusic.play(); };
+
+        document.addEventListener("visibilitychange", () => {
+            if (sessionActive) {
+                if (document.hidden) { mentorAudio.pause(); bgMusic.pause(); } 
+                else { if (playingMusic) bgMusic.play(); else mentorAudio.play(); }
+            }
+        });
 
         function addMsg(n, m) {
             const d = document.createElement('div');
@@ -98,11 +140,39 @@
             d.innerHTML = `<span style="color:#22c55e;font-weight:bold">${n}:</span> ${m}`;
             chatBox.appendChild(d);
             chatBox.scrollTop = chatBox.scrollHeight;
-            if(chatBox.children.length > 20) chatBox.firstChild.remove();
+            if(chatBox.children.length > 25) chatBox.firstChild.remove();
         }
 
-        // Add initial messages
-        for(let i=0; i<4; i++) addMsg(names[i], texts[i]);
+        function postComment() {
+            const n = document.getElementById('vName').value;
+            const m = document.getElementById('vMsg').value;
+            if(n && m) { addMsg(n, m); document.getElementById('vName').value=''; document.getElementById('vMsg').value=''; }
+        }
+
+        function showProfit() {
+            const p = document.getElementById('profit-pop');
+            const rN = names[Math.floor(Math.random()*names.length)];
+            document.getElementById('pop-txt').innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>!`;
+            p.style.left = "20px";
+            setTimeout(() => p.style.left = "-400px", 4500);
+        }
+
+        function updateStats() {
+            const pEl = document.getElementById('total-profits');
+            const sEl = document.getElementById('signals-sent');
+            const liveEl = document.getElementById('live-users');
+            if(!pEl || !sEl || !liveEl) return;
+            
+            let current = parseInt(pEl.innerText.replace(',', ''));
+            pEl.innerText = (current + Math.floor(Math.random() * 50)).toLocaleString();
+            
+            if(Math.random() > 0.8) sEl.innerText = parseInt(sEl.innerText) + 1;
+            
+            const count = Math.floor(Math.random() * 100) + 1200;
+            liveEl.innerHTML = `● ${count.toLocaleString()} ONLINE`;
+        }
+
+        for(let i=0; i<5; i++) addMsg(names[i], texts[i]);
     </script>
 </body>
 </html>
