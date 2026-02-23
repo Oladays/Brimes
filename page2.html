@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,7 +28,10 @@
         .stat-num { font-size: 20px; font-weight: 900; color: #22c55e; display: block; margin-bottom: 5px; }
         .stat-label { font-size: 10px; text-transform: uppercase; color: #64748b; letter-spacing: 1px; }
 
+        /* UPDATED WELCOME SCREEN */
         #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(10, 25, 47, 0.98) 0%, #010813 100%); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+        .welcome-text { color: #22c55e; font-size: 22px; font-weight: 900; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; text-shadow: 0 0 15px rgba(34, 197, 94, 0.4); }
+        
         .play-btn { background: #22c55e; color: #010813; border: none; padding: 22px 60px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 0 40px rgba(34, 197, 94, 0.5); animation: pulse 2s infinite; text-transform: uppercase; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
@@ -38,7 +41,6 @@
         .mentor-display { width: 100%; height: 260px; background: rgba(255, 255, 255, 0.05); border-radius: 20px; border: 1px solid #22c55e; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; margin-bottom: 25px; }
         .profile-img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid #22c55e; margin-bottom: 12px; object-fit: cover; }
 
-        /* SPACED CHAT AREA */
         .chat-area { background: rgba(0, 0, 0, 0.4); height: 220px; border-radius: 20px; overflow-y: auto; margin-bottom: 20px; padding: 18px; border: 1px solid rgba(255,255,255,0.05); font-size: 12px; scroll-behavior: smooth; }
         .msg { margin-bottom: 15px; padding: 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); line-height: 1.5; border-left: 4px solid #3b82f6; }
         
@@ -65,7 +67,7 @@
     </nav>
 
     <div id="audio-trigger">
-        <div style="color: #22c55e; font-size: 14px; font-weight: 900; letter-spacing: 3px; margin-bottom: 10px;">WELCOME TO BRIMES</div>
+        <div class="welcome-text">WELCOME TO BRIMES ACADEMY</div>
         <button class="play-btn" onclick="startExperience()">ACCESS MASTERCLASS</button>
     </div>
 
@@ -145,6 +147,35 @@
         function postComment() {
             const n = document.getElementById('vName').value;
             const m = document.getElementById('vMsg').value;
+            if(n && m) { addMsg(n, m); document.getElementById('vName').value=''; document.getElementById('vMsg').value=''; }
+        }
+
+        function showProfit() {
+            const p = document.getElementById('profit-pop');
+            const rN = names[Math.floor(Math.random()*names.length)];
+            document.getElementById('pop-txt').innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>!`;
+            p.style.left = "20px";
+            setTimeout(() => p.style.left = "-400px", 4500);
+        }
+
+        function updateStats() {
+            const pEl = document.getElementById('total-profits');
+            const sEl = document.getElementById('signals-sent');
+            const liveEl = document.getElementById('live-users');
+            
+            let current = parseInt(pEl.innerText.replace(',', ''));
+            pEl.innerText = (current + Math.floor(Math.random() * 50)).toLocaleString();
+            
+            if(Math.random() > 0.8) sEl.innerText = parseInt(sEl.innerText) + 1;
+            
+            const count = Math.floor(Math.random() * 100) + 1200;
+            liveEl.innerHTML = `● ${count.toLocaleString()} ONLINE`;
+        }
+
+        for(let i=0; i<5; i++) addMsg(names[i], texts[i]);
+    </script>
+</body>
+</html>m = document.getElementById('vMsg').value;
             if(n && m) { addMsg(n, m); document.getElementById('vName').value=''; document.getElementById('vMsg').value=''; }
         }
 
