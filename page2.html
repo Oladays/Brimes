@@ -29,15 +29,11 @@
         
         /* VIDEO CARD SECTION */
         .card { background: rgba(10, 25, 47, 0.7); backdrop-filter: blur(15px); padding: 20px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 25px; }
-        .video-box { width: 100%; height: 240px; background: #000; border-radius: 20px; border: 2px solid #22c55e; overflow: hidden; margin-bottom: 15px; position: relative; }
+        .video-box { width: 100%; height: 260px; background: #000; border-radius: 20px; border: 2px solid #22c55e; overflow: hidden; margin-bottom: 15px; position: relative; }
         .video-box video { width: 100%; height: 100%; object-fit: cover; }
 
-        /* MOVIE STYLE SUBTITLES */
-        #subtitle-box { background: rgba(0,0,0,0.8); padding: 10px; border-radius: 10px; margin-bottom: 15px; text-align: center; border: 1px solid rgba(34, 197, 94, 0.2); min-height: 50px; display: flex; align-items: center; justify-content: center; }
-        #subtitle-text { font-size: 14px; font-weight: 600; color: #fff; }
-
-        .chat-area { background: rgba(0, 0, 0, 0.4); height: 200px; border-radius: 20px; overflow-y: auto; margin-bottom: 20px; padding: 15px; font-size: 12px; border: 1px solid rgba(255,255,255,0.05); }
-        .msg { margin-bottom: 10px; padding: 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.05); border-left: 4px solid #3b82f6; }
+        .chat-area { background: rgba(0, 0, 0, 0.4); height: 220px; border-radius: 20px; overflow-y: auto; margin-bottom: 20px; padding: 15px; font-size: 12px; border: 1px solid rgba(255,255,255,0.05); scroll-behavior: smooth; }
+        .msg { margin-bottom: 10px; padding: 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.05); border-left: 4px solid #3b82f6; text-align: left; }
 
         .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; text-align: center; margin-bottom: 10px; }
         .green { background: #22c55e; color: #010813; }
@@ -64,10 +60,6 @@
                 </video>
             </div>
 
-            <div id="subtitle-box">
-                <div id="subtitle-text">Waiting for audio to start...</div>
-            </div>
-
             <h3 style="text-align: center; margin: 10px 0; font-size: 18px;">Master Trader: Brimes</h3>
 
             <audio id="mentorAudio"><source src="explanation.mp3" type="audio/mpeg"></audio>
@@ -83,31 +75,21 @@
         const mentorAudio = document.getElementById('mentorAudio');
         const mainVideo = document.getElementById('academyVideo');
         const trigger = document.getElementById('audio-trigger');
-        const subText = document.getElementById('subtitle-text');
         const chatBox = document.getElementById('chat');
 
-        // SUBTITLE SCRIPT - Update times to match your 'explanation.mp3'
-        const script = [
-            { time: 0, text: "Welcome to Brimes Academy. Let's look at the BTC Live charts." },
-            { time: 5, text: "As you can see, the market is currently in a strong buy position." },
-            { time: 10, text: "Our members are already securing profits on this move." },
-            { time: 15, text: "Follow our signals to catch the next big breakout." },
-            { time: 20, text: "Join the VIP mentorship below to trade like a pro." }
-        ];
+        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab"];
+        const texts = ["Gold hit TP! 🔥", "Up $100!", "Signals are 10/10", "Blue everywhere! 💎", "Withdrawal confirmed."];
 
         function startExperience() {
             trigger.style.display = 'none';
-            mentorAudio.play().catch(e => console.log("Play failed"));
+            mentorAudio.play().catch(e => console.log("Audio play failed"));
             mainVideo.play();
             
-            // Sync Subtitles
-            mentorAudio.ontimeupdate = () => {
-                const current = mentorAudio.currentTime;
-                const active = script.findLast(s => current >= s.time);
-                if(active) subText.innerText = active.text;
-            };
-
-            setInterval(() => addMsg("Student", "This BTC setup is crazy! 🔥"), 6000);
+            setInterval(() => {
+                const n = names[Math.floor(Math.random() * names.length)];
+                const t = texts[Math.floor(Math.random() * texts.length)];
+                addMsg(n, t);
+            }, 4500);
         }
 
         function addMsg(n, m) {
@@ -116,7 +98,11 @@
             d.innerHTML = `<span style="color:#22c55e;font-weight:bold">${n}:</span> ${m}`;
             chatBox.appendChild(d);
             chatBox.scrollTop = chatBox.scrollHeight;
+            if(chatBox.children.length > 20) chatBox.firstChild.remove();
         }
+
+        // Add initial messages
+        for(let i=0; i<4; i++) addMsg(names[i], texts[i]);
     </script>
 </body>
 </html>
