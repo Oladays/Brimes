@@ -10,31 +10,30 @@
         
         body { 
             margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; 
-            background: #010813;
+            background: linear-gradient(rgba(1, 8, 19, 0.9), rgba(1, 8, 19, 0.9)), 
+                        url('https://images.unsplash.com/photo-1611974714025-e6148a234e5f?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover; background-position: center; background-attachment: fixed;
             color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; 
         }
-
-        /* FULL SCREEN VIDEO BACKGROUND */
-        #bgVideo {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -1; opacity: 0; transition: opacity 1s;
-        }
-
-        .navbar { width: 100%; background: rgba(10, 25, 47, 0.8); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #233554; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
+        
+        .navbar { width: 100%; background: rgba(10, 25, 47, 0.9); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #233554; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
         .logo { color: #22c55e; font-weight: 900; font-size: 13px; text-transform: uppercase; }
+        .live-count { font-size: 11px; color: #22c55e; background: rgba(34, 197, 94, 0.1); padding: 5px 10px; border-radius: 20px; border: 1px solid #22c55e; }
 
-        /* THE BOLD ENTRANCE */
+        /* BOLD ENTRANCE */
         #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #010813; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .welcome-text { color: #22c55e; font-size: 32px; font-weight: 950; margin-bottom: 25px; text-transform: uppercase; text-shadow: 0 0 20px rgba(34, 197, 94, 0.5); }
         .play-btn { background: #22c55e; color: #010813; border: none; padding: 22px 60px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; }
 
-        .container { width: 95%; max-width: 450px; margin-top: 20px; padding-bottom: 50px; z-index: 10; }
+        .container { width: 95%; max-width: 450px; margin-top: 20px; padding-bottom: 50px; }
         
-        /* SEMI-TRANSPARENT CARD FOR VISIBILITY */
-        .card { background: rgba(10, 25, 47, 0.6); backdrop-filter: blur(8px); padding: 25px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 50px; }
-        
-        .chat-area { background: rgba(0, 0, 0, 0.5); height: 250px; border-radius: 20px; overflow-y: auto; margin-bottom: 20px; padding: 15px; font-size: 12px; border: 1px solid rgba(255,255,255,0.05); }
-        .msg { margin-bottom: 10px; padding: 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.1); border-left: 4px solid #3b82f6; text-align: left; }
+        /* ORIGINAL MENTOR CARD */
+        .card { background: rgba(10, 25, 47, 0.7); backdrop-filter: blur(15px); padding: 25px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 25px; }
+        .mentor-display { width: 100%; height: 200px; background: rgba(255, 255, 255, 0.05); border-radius: 20px; border: 1px solid #22c55e; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 20px; }
+        .profile-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid #22c55e; margin-bottom: 10px; object-fit: cover; }
+
+        .chat-area { background: rgba(0, 0, 0, 0.4); height: 220px; border-radius: 20px; overflow-y: auto; margin-bottom: 20px; padding: 15px; font-size: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        .msg { margin-bottom: 10px; padding: 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.05); border-left: 4px solid #3b82f6; text-align: left; }
 
         .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; text-align: center; margin-bottom: 10px; }
         .green { background: #22c55e; color: #010813; }
@@ -43,12 +42,9 @@
 </head>
 <body>
 
-    <video id="bgVideo" loop playsinline muted>
-        <source src="btc-live.mp4" type="video/mp4">
-    </video>
-
     <nav class="navbar">
         <div class="logo">BRIMES Academy</div>
+        <div class="live-count">● 1,200 ONLINE</div>
     </nav>
 
     <div id="audio-trigger">
@@ -58,7 +54,10 @@
 
     <div class="container">
         <div class="card">
-            <h3 style="text-align: center; margin-bottom: 20px; font-size: 22px; color: #22c55e;">Master Trader: Brimes</h3>
+            <div class="mentor-display">
+                <img src="mentor-pro.jpg" class="profile-img">
+                <h3 style="margin: 0; font-size: 18px;">Master Trader: Brimes</h3>
+            </div>
 
             <audio id="mentorAudio"><source src="explanation.mp3" type="audio/mpeg"></audio>
 
@@ -71,40 +70,17 @@
 
     <script>
         const mentorAudio = document.getElementById('mentorAudio');
-        const bgVideo = document.getElementById('bgVideo');
         const trigger = document.getElementById('audio-trigger');
         const chatBox = document.getElementById('chat');
-        let sessionStarted = false;
 
         function startExperience() {
             trigger.style.display = 'none';
-            sessionStarted = true;
-            
-            // Show and Play Video
-            bgVideo.style.opacity = "0.6";
-            bgVideo.play();
-            
-            // Play Audio
-            mentorAudio.play().catch(e => console.log("Audio error"));
-
-            setInterval(addRandomMsg, 4000);
+            mentorAudio.play().catch(e => console.log("Audio failed"));
+            setInterval(addRandomMsg, 4500);
         }
 
-        // STOP AUDIO/VIDEO WHEN MINIMIZED
-        document.addEventListener("visibilitychange", () => {
-            if (sessionStarted) {
-                if (document.hidden) {
-                    mentorAudio.pause();
-                    bgVideo.pause();
-                } else {
-                    mentorAudio.play();
-                    bgVideo.play();
-                }
-            }
-        });
-
         const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab"];
-        const texts = ["BTC is pumping! 🚀", "Up $250 today!", "Brimes is the best.", "Signals are fire! 🔥", "Blue pips only!"];
+        const texts = ["Gold hit TP! 🔥", "Up $100!", "Signals are 10/10", "Blue everywhere! 💎"];
 
         function addRandomMsg() {
             const n = names[Math.floor(Math.random() * names.length)];
@@ -114,7 +90,6 @@
             d.innerHTML = `<span style="color:#22c55e;font-weight:bold">${n}:</span> ${t}`;
             chatBox.appendChild(d);
             chatBox.scrollTop = chatBox.scrollHeight;
-            if(chatBox.children.length > 20) chatBox.firstChild.remove();
         }
 
         for(let i=0; i<4; i++) addRandomMsg();
