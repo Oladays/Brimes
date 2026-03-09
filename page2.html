@@ -1,122 +1,123 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BRIMES Live Webinar</title>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
-
+    <title>BRIMES Trading Signals Academy</title>
+    
     <style>
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
         body { 
             margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; 
-            background: #010813; color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+            background: #010813;
+            color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; 
         }
-        .navbar { width: 100%; background: rgba(10, 25, 47, 0.9); padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #233554; position: sticky; top: 0; z-index: 1000; }
+
+        /* FULL SCREEN VIDEO BACKGROUND */
+        #bgVideo {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1; opacity: 0; transition: opacity 1s;
+        }
+
+        .navbar { width: 100%; background: rgba(10, 25, 47, 0.8); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #233554; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
         .logo { color: #22c55e; font-weight: 900; font-size: 13px; text-transform: uppercase; }
-        
+
+        /* THE BOLD ENTRANCE */
         #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #010813; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .play-btn { background: #22c55e; color: #010813; border: none; padding: 20px 50px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; }
+        .welcome-text { color: #22c55e; font-size: 32px; font-weight: 950; margin-bottom: 25px; text-transform: uppercase; text-shadow: 0 0 20px rgba(34, 197, 94, 0.5); }
+        .play-btn { background: #22c55e; color: #010813; border: none; padding: 22px 60px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; }
 
-        .container { width: 95%; max-width: 450px; margin-top: 20px; padding-bottom: 50px; }
-        .card { background: rgba(10, 25, 47, 0.7); padding: 20px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .container { width: 95%; max-width: 450px; margin-top: 20px; padding-bottom: 50px; z-index: 10; }
         
-        /* CHAT AREA */
-        .chat-area { background: rgba(0, 0, 0, 0.4); height: 250px; border-radius: 15px; overflow-y: auto; margin-bottom: 15px; padding: 15px; font-size: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; }
-        .msg { margin-bottom: 8px; padding: 8px 12px; border-radius: 10px; background: rgba(255, 255, 255, 0.05); animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-        .input-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
-        input { background: rgba(255,255,255,0.05); border: 1px solid #233554; padding: 12px; border-radius: 10px; color: white; outline: none; }
-        .send-btn { background: #3b82f6; color: white; border: none; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        /* SEMI-TRANSPARENT CARD FOR VISIBILITY */
+        .card { background: rgba(10, 25, 47, 0.6); backdrop-filter: blur(8px); padding: 25px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 50px; }
+        
+        .chat-area { background: rgba(0, 0, 0, 0.5); height: 250px; border-radius: 20px; overflow-y: auto; margin-bottom: 20px; padding: 15px; font-size: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        .msg { margin-bottom: 10px; padding: 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.1); border-left: 4px solid #3b82f6; text-align: left; }
 
         .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; text-align: center; margin-bottom: 10px; }
         .green { background: #22c55e; color: #010813; }
+        .blue { border: 2px solid #3b82f6; color: #3b82f6; }
     </style>
 </head>
 <body>
 
+    <video id="bgVideo" loop playsinline muted>
+        <source src="btc-live.mp4" type="video/mp4">
+    </video>
+
     <nav class="navbar">
-        <div class="logo">BRIMES LIVE WEBINAR</div>
-        <div style="color: #22c55e; font-size: 10px;">● LIVE CHAT SYNCED</div>
+        <div class="logo">BRIMES Academy</div>
     </nav>
 
     <div id="audio-trigger">
-        <h1 style="color: #22c55e; margin-bottom: 20px;">READY TO BEGIN?</h1>
-        <button class="play-btn" onclick="startExperience()">ENTER WEBINAR</button>
+        <div class="welcome-text">WELCOME TO<br>BRIMES ACADEMY</div>
+        <button class="play-btn" onclick="startExperience()">ACCESS MASTERCLASS</button>
     </div>
 
     <div class="container">
         <div class="card">
-            <div class="chat-area" id="chat">
-                <div class="msg"><i>Connecting to live chat...</i></div>
-            </div>
+            <h3 style="text-align: center; margin-bottom: 20px; font-size: 22px; color: #22c55e;">Master Trader: Brimes</h3>
 
-            <div class="input-group">
-                <input type="text" id="userName" placeholder="Your Name">
-                <input type="text" id="userMsg" placeholder="Type a message...">
-                <button class="send-btn" onclick="sendMessage()">SEND TO EVERYONE</button>
-            </div>
+            <audio id="mentorAudio"><source src="explanation.mp3" type="audio/mpeg"></audio>
 
-            <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="btn green">JOIN THE OFFICIAL GROUP</a>
+            <div class="chat-area" id="chat"></div>
+
+            <a href="https://chat.whatsapp.com/BTiq3H4Atbo3T2aMePQlr7" class="btn green">JOIN FREE SIGNALS GROUP</a>
+            <a href="https://wa.me/2348103586138?text=VIP" class="btn blue">PRIVATE VIP MENTORSHIP</a>
         </div>
     </div>
 
     <script>
-        // --- STEP 1: CONFIGURATION ---
-        // You need to create a free Firebase account at console.firebase.google.com
-        // and paste your "Config" here. 
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-        const chatRef = database.ref('live_chat');
+        const mentorAudio = document.getElementById('mentorAudio');
+        const bgVideo = document.getElementById('bgVideo');
+        const trigger = document.getElementById('audio-trigger');
+        const chatBox = document.getElementById('chat');
+        let sessionStarted = false;
 
         function startExperience() {
-            document.getElementById('audio-trigger').style.display = 'none';
-            // Start listening for messages from other people
-            loadMessages();
+            trigger.style.display = 'none';
+            sessionStarted = true;
+            
+            // Show and Play Video
+            bgVideo.style.opacity = "0.6";
+            bgVideo.play();
+            
+            // Play Audio
+            mentorAudio.play().catch(e => console.log("Audio error"));
+
+            setInterval(addRandomMsg, 4000);
         }
 
-        // SEND MESSAGE TO EVERYONE
-        function sendMessage() {
-            const name = document.getElementById('userName').value;
-            const msg = document.getElementById('userMsg').value;
-
-            if(name && msg) {
-                chatRef.push({
-                    username: name,
-                    message: msg,
-                    timestamp: Date.now()
-                });
-                document.getElementById('userMsg').value = ''; // clear input
+        // STOP AUDIO/VIDEO WHEN MINIMIZED
+        document.addEventListener("visibilitychange", () => {
+            if (sessionStarted) {
+                if (document.hidden) {
+                    mentorAudio.pause();
+                    bgVideo.pause();
+                } else {
+                    mentorAudio.play();
+                    bgVideo.play();
+                }
             }
+        });
+
+        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab"];
+        const texts = ["BTC is pumping! 🚀", "Up $250 today!", "Brimes is the best.", "Signals are fire! 🔥", "Blue pips only!"];
+
+        function addRandomMsg() {
+            const n = names[Math.floor(Math.random() * names.length)];
+            const t = texts[Math.floor(Math.random() * texts.length)];
+            const d = document.createElement('div');
+            d.className = 'msg';
+            d.innerHTML = `<span style="color:#22c55e;font-weight:bold">${n}:</span> ${t}`;
+            chatBox.appendChild(d);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            if(chatBox.children.length > 20) chatBox.firstChild.remove();
         }
 
-        // LISTEN FOR EVERYONE'S COMMENTS
-        function loadMessages() {
-            const chatBox = document.getElementById('chat');
-            chatBox.innerHTML = ''; // Clear "Connecting" text
-
-            chatRef.limitToLast(15).on('child_added', (snapshot) => {
-                const data = snapshot.val();
-                const d = document.createElement('div');
-                d.className = 'msg';
-                d.innerHTML = `<span style="color:#22c55e;font-weight:bold">${data.username}:</span> ${data.message}`;
-                chatBox.appendChild(d);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            });
-        }
+        for(let i=0; i<4; i++) addRandomMsg();
     </script>
 </body>
 </html>
