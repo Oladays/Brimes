@@ -209,9 +209,71 @@
         /* ── DISCLAIMER ── */
         .disclaimer { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; margin-bottom: 20px; font-size: 9px; color: #475569; line-height: 1.6; text-align: center; }
 
+        /* ── PARTICLES ── */
+        #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+        .particle { position: absolute; border-radius: 50%; opacity: 0.15; animation: floatUp linear infinite; }
+        @keyframes floatUp { 0%{transform:translateY(100vh) scale(0);opacity:0} 20%{opacity:0.15} 80%{opacity:0.1} 100%{transform:translateY(-100px) scale(1);opacity:0} }
+
+        /* ── TYPING ANIMATION ── */
+        .typing-text { font-size: 13px; color: #94a3b8; margin-top: 10px; min-height: 20px; }
+        .typing-cursor { display: inline-block; width: 2px; height: 14px; background: #22c55e; animation: cursorBlink 0.7s infinite; vertical-align: middle; margin-left: 2px; }
+        @keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        /* ── ANIMATED CHART ── */
+        .chart-section { margin-bottom: 20px; }
+        .chart-section h4 { font-size: 13px; text-transform: uppercase; color: #94a3b8; margin: 0 0 12px 0; letter-spacing: 1px; }
+        .chart-wrap { background: rgba(0,0,0,0.3); border: 1px solid rgba(34,197,94,0.2); border-radius: 15px; padding: 15px; position: relative; overflow: hidden; }
+        .chart-label { font-size: 9px; color: #22c55e; font-weight: bold; margin-bottom: 8px; }
+
+        /* ── MEDIA LOGOS ── */
+        .media-bar { margin-bottom: 20px; text-align: center; }
+        .media-bar p { font-size: 10px; color: #475569; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 10px 0; }
+        .media-logos { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .media-logo { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 7px 14px; font-size: 11px; font-weight: bold; color: #64748b; letter-spacing: 1px; }
+
+        /* ── VIEWING COUNT ── */
+        .viewing-bar { display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 10px; padding: 8px 15px; margin-bottom: 15px; font-size: 11px; color: #ef4444; font-weight: bold; }
+
+        /* ── PROGRESS BAR ── */
+        .progress-section { margin-bottom: 20px; }
+        .progress-label { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 6px; }
+        .progress-label span:first-child { color: #94a3b8; }
+        .progress-label span:last-child { color: #ef4444; font-weight: bold; }
+        .progress-track { background: rgba(255,255,255,0.05); border-radius: 10px; height: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #22c55e, #ef4444); border-radius: 10px; transition: width 2s ease; width: 0%; }
+
+        /* ── WA CHAT BUBBLE ── */
+        #wa-bubble { position: fixed; bottom: 95px; right: 20px; background: #112240; border: 1px solid rgba(37,211,102,0.3); border-radius: 15px 15px 0 15px; padding: 12px 15px; font-size: 11px; width: 220px; z-index: 9989; box-shadow: 0 5px 20px rgba(0,0,0,0.4); display: none; }
+        #wa-bubble.show { display: block; animation: popIn 0.3s ease; }
+        @keyframes popIn { 0%{transform:scale(0.8);opacity:0} 100%{transform:scale(1);opacity:1} }
+        .wa-bubble-name { color: #22c55e; font-weight: bold; font-size: 10px; margin-bottom: 4px; }
+        .wa-bubble-msg { color: #cbd5e1; line-height: 1.5; }
+        .wa-bubble-time { color: #475569; font-size: 9px; margin-top: 4px; text-align: right; }
+
+        /* ── STAR RATING ── */
+        .star-widget { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.3); border-radius: 15px; padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
+        .star-widget .stars { font-size: 22px; letter-spacing: 3px; }
+        .star-widget-text { flex: 1; }
+        .star-widget-text p { margin: 0; font-size: 12px; font-weight: bold; color: #fbbf24; }
+        .star-widget-text small { font-size: 10px; color: #64748b; }
+
+        /* ── CONFETTI ── */
+        .confetti-piece { position: fixed; width: 8px; height: 8px; top: -10px; opacity: 0; z-index: 99999; pointer-events: none; animation: confettiFall 3s ease forwards; border-radius: 2px; }
+        @keyframes confettiFall { 0%{transform:translateY(0) rotate(0deg);opacity:1} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
+
     </style>
 </head>
 <body>
+
+    <!-- PARTICLES -->
+    <div id="particles"></div>
+
+    <!-- WA CHAT BUBBLE -->
+    <div id="wa-bubble">
+        <div class="wa-bubble-name">💬 Brimes</div>
+        <div class="wa-bubble-msg" id="wa-bubble-msg">Hey! 👋 Are you ready to start making money from trading?</div>
+        <div class="wa-bubble-time">Just now</div>
+    </div>
 
     <!-- PAGE LOADER -->
     <div id="page-loader">
@@ -243,6 +305,8 @@
 
     <div id="audio-trigger">
         <div class="welcome-text">WELCOME TO<br>BRIMES ACADEMY</div>
+        <div class="typing-text" id="typingText"><span class="typing-cursor"></span></div>
+        <br>
         <button class="play-btn" id="masterBtn" onclick="startExperience()">ACCESS MASTERCLASS</button>
     </div>
 
@@ -291,6 +355,23 @@
                 <div style="text-align:center"><span style="color:#22c55e;font-weight:900;font-size:18px;">+4,200</span><br><span style="font-size:10px;color:#64748b;">Pips Gained</span></div>
                 <div style="text-align:center"><span style="color:#22c55e;font-weight:900;font-size:18px;">92%</span><br><span style="font-size:10px;color:#64748b;">Win Rate</span></div>
                 <div style="text-align:center"><span style="color:#22c55e;font-weight:900;font-size:18px;">5★</span><br><span style="font-size:10px;color:#64748b;">Rating</span></div>
+            </div>
+
+            <!-- VIEWING COUNT -->
+            <div class="viewing-bar">
+                <span style="animation:blink 1s infinite;display:inline-block;">👁️</span>
+                <span id="viewing-count">127 people are viewing this page right now</span>
+            </div>
+
+            <!-- VIP PROGRESS BAR -->
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>🎓 VIP Class Capacity</span>
+                    <span id="progress-pct">87% Full!</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
             </div>
 
             <!-- SCROLL DOWN INDICATOR -->
@@ -422,6 +503,35 @@
                 </div>
                 <button class="spin-btn" id="spinBtn" onclick="spinWheel()">🎰 SPIN NOW! (3 left)</button>
                 <div class="spin-result" id="spinResult"></div>
+            </div>
+
+            <!-- ANIMATED CHART -->
+            <div class="chart-section">
+                <h4>📈 Live Account Growth</h4>
+                <div class="chart-wrap">
+                    <div class="chart-label">XAUUSD — Account +$4,200 this month</div>
+                    <canvas id="chartCanvas" width="380" height="100" style="width:100%;height:100px;"></canvas>
+                </div>
+            </div>
+
+            <!-- STAR RATING -->
+            <div class="star-widget">
+                <div class="stars">★★★★★</div>
+                <div class="star-widget-text">
+                    <p>4.9 / 5.0 Rating</p>
+                    <small>Based on 312 student reviews</small>
+                </div>
+            </div>
+
+            <!-- MEDIA LOGOS -->
+            <div class="media-bar">
+                <p>🌍 Trusted by traders across Africa & beyond</p>
+                <div class="media-logos">
+                    <div class="media-logo">FOREX</div>
+                    <div class="media-logo">GOLD</div>
+                    <div class="media-logo">NASDAQ</div>
+                    <div class="media-logo">CRYPTO</div>
+                </div>
             </div>
 
             <!-- URGENCY BAR -->
@@ -787,6 +897,7 @@
                         localStorage.setItem('brimes_won', 'true');
                         btn.disabled = true;
                         btn.textContent = '🏆 You Already Won!';
+                        launchConfetti();
                     } else if (spinTrials <= 0) {
                         btn.disabled = true;
                         btn.textContent = '❌ No Spins Left!';
@@ -800,6 +911,121 @@
 
         drawWheel(0);
         initSpinUI();
+
+        // ── PARTICLES ──
+        (function() {
+            const container = document.getElementById('particles');
+            const colors = ['#22c55e','#3b82f6','#f59e0b','#8b5cf6'];
+            for (let i = 0; i < 18; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                const size = Math.random() * 6 + 3;
+                p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*12+8}s;animation-delay:${Math.random()*8}s;`;
+                container.appendChild(p);
+            }
+        })();
+
+        // ── TYPING ANIMATION ──
+        const typingLines = [
+            "We turn beginners into pro traders...",
+            "Join 1,200+ students making daily profits...",
+            "92% win rate — verified results...",
+            "Daily Gold signals straight to WhatsApp..."
+        ];
+        let tLine = 0, tChar = 0, tDeleting = false;
+        function typeEffect() {
+            const el = document.getElementById('typingText');
+            if (!el) return;
+            const current = typingLines[tLine];
+            if (!tDeleting) {
+                tChar++;
+                el.innerHTML = current.substring(0, tChar) + '<span class="typing-cursor"></span>';
+                if (tChar === current.length) { tDeleting = true; setTimeout(typeEffect, 1800); return; }
+            } else {
+                tChar--;
+                el.innerHTML = current.substring(0, tChar) + '<span class="typing-cursor"></span>';
+                if (tChar === 0) { tDeleting = false; tLine = (tLine + 1) % typingLines.length; }
+            }
+            setTimeout(typeEffect, tDeleting ? 40 : 70);
+        }
+        typeEffect();
+
+        // ── ANIMATED CHART ──
+        function drawChart() {
+            const canvas = document.getElementById('chartCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.offsetWidth || 380, h = 100;
+            canvas.width = w; canvas.height = h;
+            const points = [20, 35, 28, 45, 40, 60, 55, 72, 65, 80, 75, 90, 85, 95];
+            const step = w / (points.length - 1);
+            ctx.clearRect(0, 0, w, h);
+            // Gradient fill
+            const grad = ctx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, 'rgba(34,197,94,0.3)');
+            grad.addColorStop(1, 'rgba(34,197,94,0)');
+            ctx.beginPath();
+            ctx.moveTo(0, h - (points[0] / 100) * h);
+            points.forEach((p, i) => { ctx.lineTo(i * step, h - (p / 100) * h); });
+            ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath();
+            ctx.fillStyle = grad; ctx.fill();
+            // Line
+            ctx.beginPath();
+            ctx.moveTo(0, h - (points[0] / 100) * h);
+            points.forEach((p, i) => { ctx.lineTo(i * step, h - (p / 100) * h); });
+            ctx.strokeStyle = '#22c55e'; ctx.lineWidth = 2.5; ctx.stroke();
+            // Dot at end
+            const last = points[points.length - 1];
+            ctx.beginPath();
+            ctx.arc(w - 1, h - (last / 100) * h, 5, 0, 2 * Math.PI);
+            ctx.fillStyle = '#22c55e'; ctx.fill();
+        }
+        setTimeout(drawChart, 500);
+
+        // ── VIEWING COUNT ──
+        setInterval(() => {
+            const el = document.getElementById('viewing-count');
+            if (el) el.textContent = `${Math.floor(Math.random()*40)+110} people are viewing this page right now`;
+        }, 6000);
+
+        // ── PROGRESS BAR ──
+        setTimeout(() => {
+            const fill = document.getElementById('progressFill');
+            if (fill) fill.style.width = '87%';
+        }, 800);
+
+        // ── WA CHAT BUBBLE ──
+        const waMsgs = [
+            "Hey! 👋 Are you ready to start making money from trading?",
+            "Our Gold signal just hit TP! +$340 profit 🔥",
+            "Join now — 3 VIP spots left this week! 💎",
+            "Students are withdrawing daily 💰 Don't miss out!"
+        ];
+        let waMsgIndex = 0;
+        setTimeout(() => {
+            const bubble = document.getElementById('wa-bubble');
+            bubble.classList.add('show');
+            setTimeout(() => bubble.classList.remove('show'), 6000);
+        }, 5000);
+        setInterval(() => {
+            waMsgIndex = (waMsgIndex + 1) % waMsgs.length;
+            const bubble = document.getElementById('wa-bubble');
+            document.getElementById('wa-bubble-msg').textContent = waMsgs[waMsgIndex];
+            bubble.classList.add('show');
+            setTimeout(() => bubble.classList.remove('show'), 5000);
+        }, 20000);
+
+        // ── CONFETTI ──
+        function launchConfetti() {
+            const colors = ['#22c55e','#3b82f6','#fbbf24','#ef4444','#8b5cf6','#f59e0b'];
+            for (let i = 0; i < 60; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti-piece';
+                c.style.cssText = `left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*1.5}s;animation-duration:${Math.random()*2+2}s;width:${Math.random()*8+4}px;height:${Math.random()*8+4}px;`;
+                document.body.appendChild(c);
+                setTimeout(() => c.remove(), 4000);
+            }
+        }
 
         // ── PAGE LOADER ──
         window.addEventListener('load', () => {
