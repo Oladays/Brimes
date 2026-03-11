@@ -179,8 +179,8 @@
                     if (!player) { clearInterval(checkEnd); return; }
                     let current = player.getCurrentTime();
                     let duration = player.getDuration();
-                    // Stop video 3 seconds before end to avoid blank/end screen
-                    if (duration > 0 && current >= duration - 3) {
+                    // Stop video 0.5 seconds before end to avoid blank/end screen
+                    if (duration > 0 && current >= duration - 0.5) {
                         clearInterval(checkEnd);
                         player.stopVideo();
                         // Show cover and start music immediately
@@ -259,6 +259,7 @@
     </script>
 </body>
 </html>
+
 
 
 
