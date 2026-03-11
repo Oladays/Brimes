@@ -46,12 +46,15 @@
 
         /* Video container */
         .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; margin-bottom: 15px; border-radius: 15px; overflow: hidden; border: 2px solid #22c55e; background: #000; }
-        .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; pointer-events: none; }
-
-        /* Fully transparent overlay — blocks all clicks on video (pause/play/YouTube logo) */
+        /* Make iframe slightly taller to cut off end screen */
+        .video-wrap iframe { position: absolute; top: -40px; left: 0; width: 100%; height: calc(100% + 80px); border: none; pointer-events: none; }
+        /* Transparent overlay — blocks all taps */
         .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; background: transparent; cursor: default; }
-
-        /* Live label bottom left */
+        /* After video ends - show poster image instead of blank/end screen */
+        .video-end-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 9; background: linear-gradient(135deg, #0a192f, #112240); display: none; align-items: center; justify-content: center; flex-direction: column; }
+        .video-end-cover.show { display: flex; }
+        .video-end-cover p { color: #22c55e; font-weight: 900; font-size: 14px; text-align: center; margin: 0; }
+        /* Live tag */
         .video-live-tag { position: absolute; bottom: 8px; left: 8px; background: rgba(34,197,94,0.2); color: #22c55e; font-size: 9px; font-weight: bold; padding: 4px 10px; border-radius: 20px; z-index: 11; text-transform: uppercase; letter-spacing: 1px; border: 1px solid #22c55e; }
 
         /* Mentor stats */
@@ -95,7 +98,6 @@
 
         <div class="card">
 
-            <!-- Mentor picture + name above video -->
             <div class="mentor-header">
                 <img src="mentor-pro.jpg" alt="Brimes">
                 <div class="mentor-header-text">
@@ -105,19 +107,20 @@
                 </div>
             </div>
 
-            <!-- Video with transparent overlay to block controls -->
             <div class="video-wrap">
                 <iframe id="ytVideo"
-                    src="https://www.youtube.com/embed/cXovfksZV08?enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&controls=0"
+                    src="https://www.youtube.com/embed/cXovfksZV08?enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&controls=0&end=0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen>
                 </iframe>
-                <!-- Transparent overlay blocks all clicks on video -->
+                <!-- Cover shown when video ends — hides YouTube end screen -->
+                <div class="video-end-cover" id="endCover">
+                    <p>🎵 Session In Progress...<br>Scroll down to join! 👇</p>
+                </div>
                 <div class="video-overlay"></div>
-                <div class="video-live-tag">🔴 LIVE Masterclass</div>
+                <div class="video-live-tag" id="liveTag">🔴 LIVE Masterclass</div>
             </div>
 
-            <!-- Stats -->
             <div class="mentor-stats">
                 <div style="text-align:center"><span style="color:#22c55e;font-weight:900;font-size:18px;">+4,200</span><br><span style="font-size:10px;color:#64748b;">Pips Gained</span></div>
                 <div style="text-align:center"><span style="color:#22c55e;font-weight:900;font-size:18px;">92%</span><br><span style="font-size:10px;color:#64748b;">Win Rate</span></div>
@@ -146,21 +149,53 @@
         const bgMusic = document.getElementById('bgMusic');
         const trigger = document.getElementById('audio-trigger');
         const chatBox = document.getElementById('chat');
+        const endCover = document.getElementById('endCover');
+        const liveTag = document.getElementById('liveTag');
         let sessionActive = false;
         let player;
+        let videoDuration = 0;
 
         const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Tunde", "Blessing"];
         const texts = ["Gold hit TP! 🔥", "Best mentor.", "Withdrawal received.", "Up $100!", "Signals are 10/10", "Blue everywhere! 💎"];
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('ytVideo', {
-                events: { 'onStateChange': onPlayerStateChange }
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
             });
         }
 
+        function onPlayerReady(event) {
+            // Get video duration to stop it 3 seconds before end
+            videoDuration = player.getDuration();
+        }
+
         function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                // Check every second if we're near the end
+                let checkEnd = setInterval(() => {
+                    if (!player) { clearInterval(checkEnd); return; }
+                    let current = player.getCurrentTime();
+                    let duration = player.getDuration();
+                    // Stop video 3 seconds before end to avoid blank/end screen
+                    if (duration > 0 && current >= duration - 3) {
+                        clearInterval(checkEnd);
+                        player.stopVideo();
+                        // Show cover and start music immediately
+                        endCover.classList.add('show');
+                        liveTag.innerHTML = '🎵 Now Playing';
+                        bgMusic.volume = 0.5;
+                        bgMusic.play().catch(() => {});
+                    }
+                }, 500);
+            }
+
             if (event.data === YT.PlayerState.ENDED) {
-                bgMusic.volume = 0.4;
+                endCover.classList.add('show');
+                liveTag.innerHTML = '🎵 Now Playing';
+                bgMusic.volume = 0.5;
                 bgMusic.play().catch(() => {});
             }
         }
@@ -180,7 +215,8 @@
                 player.pauseVideo();
                 bgMusic.pause();
             } else {
-                if (sessionActive) player.playVideo();
+                if (sessionActive && !endCover.classList.contains('show')) player.playVideo();
+                if (endCover.classList.contains('show')) bgMusic.play().catch(() => {});
             }
         });
 
@@ -223,6 +259,7 @@
     </script>
 </body>
 </html>
+
 
 
 
