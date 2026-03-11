@@ -249,4 +249,225 @@
             <!-- FREE GIFT BANNER -->
             <div class="gift-banner">
                 <p>🎁 FREE BONUS — Join Today!</p>
-                <small>Get our exclusive Gold Trading Strategy PDF FREE when
+                <small>Get our exclusive Gold Trading Strategy PDF FREE when you join the VIP group today!</small>
+            </div>
+
+            <!-- WITHDRAWAL PROOF -->
+            <div class="proof-section">
+                <h4>💰 Student Withdrawal Proof</h4>
+                <div class="proof-grid">
+                    <div class="proof-card"><div class="proof-amount">$1,240</div><div class="proof-name">Olamide T.</div><div class="proof-date">Today</div></div>
+                    <div class="proof-card"><div class="proof-amount">$870</div><div class="proof-name">Chisom A.</div><div class="proof-date">Today</div></div>
+                    <div class="proof-card"><div class="proof-amount">$2,100</div><div class="proof-name">Abubakar M.</div><div class="proof-date">Yesterday</div></div>
+                    <div class="proof-card"><div class="proof-amount">$650</div><div class="proof-name">Funmi B.</div><div class="proof-date">Yesterday</div></div>
+                </div>
+            </div>
+
+            <!-- TESTIMONIALS -->
+            <div class="testimonials">
+                <h4>⭐ What Students Are Saying</h4>
+                <div class="tcard">
+                    <div class="tcard-top">
+                        <div class="tavatar">O</div>
+                        <div><div class="tname">Olamide T.</div><div class="tstars">★★★★★</div></div>
+                        <div class="tprofit">+$1,240</div>
+                    </div>
+                    <div class="ttext">"Before Brimes I was losing every trade. Now I'm consistent. The signals are accurate and the explanations make sense. Best investment I ever made!"</div>
+                </div>
+                <div class="tcard">
+                    <div class="tcard-top">
+                        <div class="tavatar" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">E</div>
+                        <div><div class="tname">Emeka S.</div><div class="tstars">★★★★★</div></div>
+                        <div class="tprofit">+$2,100</div>
+                    </div>
+                    <div class="ttext">"The 1-on-1 mentorship changed everything. Brimes doesn't just give signals — he teaches you to think like a professional trader. 100% recommended!"</div>
+                </div>
+                <div class="tcard">
+                    <div class="tcard-top">
+                        <div class="tavatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">Z</div>
+                        <div><div class="tname">Zainab K.</div><div class="tstars">★★★★★</div></div>
+                        <div class="tprofit">+$870</div>
+                    </div>
+                    <div class="ttext">"I was skeptical at first but the free signals group proved the quality. Joined VIP last month and already withdrew $870. This is real!"</div>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="faq-section">
+                <h4>❓ Frequently Asked Questions</h4>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q">Is this suitable for beginners? <span>+</span></div>
+                    <div class="faq-a">Yes! Whether you are a complete beginner or an experienced trader, BRIMES Academy has a program for you. We start from the basics and build you up to professional level.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q">How much do I need to start trading? <span>+</span></div>
+                    <div class="faq-a">You can start with as little as $100. We teach proper risk management so your account grows steadily regardless of your starting capital.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q">What markets do you trade? <span>+</span></div>
+                    <div class="faq-a">We primarily trade Gold (XAUUSD), EURUSD, GBPUSD, NASDAQ and Bitcoin. These are the highest probability markets for consistent profits.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-q">How do I receive the signals? <span>+</span></div>
+                    <div class="faq-a">All signals are delivered directly to your WhatsApp. Free signals go to the group, while VIP members get priority signals with full analysis sent personally.</div>
+                </div>
+            </div>
+
+            <audio id="bgMusic" loop><source src="song.mp3" type="audio/mpeg"></audio>
+
+            <div class="chat-area" id="chat"></div>
+
+            <div class="input-box">
+                <input type="text" id="vName" placeholder="Enter your name...">
+                <input type="text" id="vMsg" placeholder="Write a message...">
+                <button onclick="postComment()">POST TO LIVE CHAT</button>
+            </div>
+
+            <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="btn green">JOIN FREE SIGNALS GROUP</a>
+            <a href="https://wa.me/2348103586138?text=Hello%20Brimes,%20I'm%20ready%20for%20VIP." class="btn blue">PRIVATE VIP MENTORSHIP</a>
+        </div>
+    </div>
+
+    <div id="profit-pop"><div id="pop-txt" style="font-size: 12px; color: white;"></div></div>
+    <div id="join-pop"><div id="join-txt" style="color: white;"></div></div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        const bgMusic = document.getElementById('bgMusic');
+        const trigger = document.getElementById('audio-trigger');
+        const chatBox = document.getElementById('chat');
+        const endCover = document.getElementById('endCover');
+        const liveTag = document.getElementById('liveTag');
+        let sessionActive = false;
+        let player;
+
+        const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Tunde", "Blessing"];
+        const texts = ["Gold hit TP! 🔥", "Best mentor.", "Withdrawal received.", "Up $100!", "Signals are 10/10", "Blue everywhere! 💎"];
+
+        // ── COUNTDOWN TIMER ──
+        let countdownEnd = Date.now() + (2 * 60 * 60 * 1000);
+        function updateCountdown() {
+            let diff = Math.max(0, countdownEnd - Date.now());
+            let h = Math.floor(diff / 3600000);
+            let m = Math.floor((diff % 3600000) / 60000);
+            let s = Math.floor((diff % 60000) / 1000);
+            document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+            document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+            document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+            if (diff === 0) countdownEnd = Date.now() + (2 * 60 * 60 * 1000);
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // ── FAQ TOGGLE ──
+        function toggleFaq(el) { el.classList.toggle('open'); }
+
+        // ── YOUTUBE ──
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('ytVideo', {
+                events: {
+                    'onReady': function(e) {},
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                let checkEnd = setInterval(() => {
+                    if (!player) { clearInterval(checkEnd); return; }
+                    let current = player.getCurrentTime();
+                    let duration = player.getDuration();
+                    if (duration > 0 && current >= duration - 0.5) {
+                        clearInterval(checkEnd);
+                        player.stopVideo();
+                        endCover.classList.add('show');
+                        liveTag.innerHTML = '🎵 Now Playing';
+                        bgMusic.volume = 0.5;
+                        bgMusic.play().catch(() => {});
+                    }
+                }, 500);
+            }
+            if (event.data === YT.PlayerState.ENDED) {
+                endCover.classList.add('show');
+                liveTag.innerHTML = '🎵 Now Playing';
+                bgMusic.volume = 0.5;
+                bgMusic.play().catch(() => {});
+            }
+        }
+
+        function startExperience() {
+            // Gemini's simple working method
+            document.getElementById('audio-trigger').style.display = 'none';
+            sessionActive = true;
+            // Start video by updating src with autoplay
+            const iframe = document.getElementById('ytVideo');
+            iframe.src = iframe.src + "&autoplay=1&mute=0";
+            setInterval(showProfit, 10000);
+            setInterval(updateStats, 7000);
+            setInterval(() => addMsg(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]), 4500);
+            setInterval(showJoinNotif, 15000);
+        }
+
+        // Gemini's simple onclick method - most reliable on mobile
+        document.getElementById('masterBtn').onclick = startExperience;
+
+        document.addEventListener("visibilitychange", () => {
+            if (!player) return;
+            if (document.hidden) { player.pauseVideo(); bgMusic.pause(); }
+            else {
+                if (sessionActive && !endCover.classList.contains('show')) player.playVideo();
+                if (endCover.classList.contains('show')) bgMusic.play().catch(() => {});
+            }
+        });
+
+        function addMsg(n, m) {
+            const d = document.createElement('div');
+            d.className = 'msg';
+            d.innerHTML = `<span style="color:#22c55e;font-weight:bold">${n}:</span> ${m}`;
+            chatBox.appendChild(d);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            if(chatBox.children.length > 25) chatBox.firstChild.remove();
+        }
+
+        function postComment() {
+            const n = document.getElementById('vName').value;
+            const m = document.getElementById('vMsg').value;
+            if(n && m) { addMsg(n, m); document.getElementById('vName').value=''; document.getElementById('vMsg').value=''; }
+        }
+
+        // ── PROFIT POPUP ──
+        function showProfit() {
+            const p = document.getElementById('profit-pop');
+            const rN = names[Math.floor(Math.random()*names.length)];
+            document.getElementById('pop-txt').innerHTML = `<strong>${rN}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>! 💰`;
+            p.style.left = "20px";
+            setTimeout(() => p.style.left = "-400px", 4500);
+        }
+
+        // ── JOIN NOTIFICATION ──
+        function showJoinNotif() {
+            const p = document.getElementById('join-pop');
+            const rN = names[Math.floor(Math.random()*names.length)];
+            const actions = ["just joined VIP! 🔥", "just joined the Free Group! ✅", "just sent a message to Brimes! 💬"];
+            document.getElementById('join-txt').innerHTML = `🔔 <strong>${rN}</strong> ${actions[Math.floor(Math.random()*actions.length)]}`;
+            p.style.right = "20px";
+            setTimeout(() => p.style.right = "-400px", 4000);
+        }
+
+        function updateStats() {
+            const pEl = document.getElementById('total-profits');
+            const sEl = document.getElementById('signals-sent');
+            const liveEl = document.getElementById('live-users');
+            if(!pEl || !sEl || !liveEl) return;
+            let current = parseInt(pEl.innerText.replace(',', ''));
+            pEl.innerText = (current + Math.floor(Math.random() * 50)).toLocaleString();
+            if(Math.random() > 0.8) sEl.innerText = parseInt(sEl.innerText) + 1;
+            const count = Math.floor(Math.random() * 100) + 1200;
+            liveEl.innerHTML = `● ${count.toLocaleString()} ONLINE`;
+        }
+
+        for(let i=0; i<5; i++) addMsg(names[i], texts[i]);
+    </script>
+</body>
+</html>
