@@ -137,10 +137,100 @@
         #profit-pop { position: fixed; bottom: 20px; left: -400px; background: #112240; border-left: 5px solid #22c55e; padding: 15px; border-radius: 12px; transition: 0.6s; z-index: 998; width: 280px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
         /* Join notification */
-        #join-pop { position: fixed; top: 70px; right: -400px; background: #112240; border-left: 5px solid #3b82f6; padding: 12px 15px; border-radius: 12px; transition: 0.6s; z-index: 997; width: 250px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-size: 11px; }
+        #join-pop { position: fixed; bottom: 90px; right: -400px; background: #112240; border-left: 5px solid #3b82f6; padding: 14px 15px; border-radius: 12px; transition: 0.6s; z-index: 9995; width: 265px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-size: 12px; color: white; }
+
+        /* ── SPIN WHEEL ── */
+        .spin-section { margin-bottom: 20px; text-align: center; }
+        .spin-section h4 { font-size: 13px; text-transform: uppercase; color: #94a3b8; margin: 0 0 12px 0; letter-spacing: 1px; }
+        .wheel-wrap { position: relative; width: 260px; height: 260px; margin: 0 auto 15px; }
+        .wheel-canvas { border-radius: 50%; box-shadow: 0 0 30px rgba(34,197,94,0.3); }
+        .wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); font-size: 28px; z-index: 10; }
+        .spin-btn { background: linear-gradient(135deg, #22c55e, #16a34a); color: #010813; border: none; padding: 14px 40px; border-radius: 50px; font-size: 15px; font-weight: 900; cursor: pointer; box-shadow: 0 0 20px rgba(34,197,94,0.4); text-transform: uppercase; }
+        .spin-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .spin-result { margin-top: 12px; padding: 12px; background: rgba(34,197,94,0.1); border: 1px solid #22c55e; border-radius: 12px; font-size: 13px; font-weight: bold; color: #22c55e; display: none; }
+
+        /* ── FLOATING WHATSAPP BUTTON ── */
+        .float-wa { position: fixed; bottom: 25px; right: 20px; background: #25d366; color: white; width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 9990; box-shadow: 0 4px 20px rgba(37,211,102,0.5); text-decoration: none; animation: waPulse 2s infinite; }
+        @keyframes waPulse { 0%,100%{box-shadow: 0 0 0 0 rgba(37,211,102,0.5)} 50%{box-shadow: 0 0 0 12px rgba(37,211,102,0)} }
+
+        /* ── EXIT POPUP ── */
+        #exit-pop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99998; display: none; align-items: center; justify-content: center; padding: 20px; }
+        #exit-pop.show { display: flex; }
+        .exit-box { background: linear-gradient(135deg, #0a192f, #112240); border: 2px solid #22c55e; border-radius: 25px; padding: 30px 25px; text-align: center; max-width: 380px; width: 100%; }
+        .exit-box h3 { color: #ef4444; font-size: 18px; margin: 0 0 10px 0; }
+        .exit-box p { color: #94a3b8; font-size: 12px; margin: 0 0 20px 0; line-height: 1.6; }
+        .exit-close { background: none; border: 1px solid #233554; color: #64748b; padding: 8px 20px; border-radius: 10px; cursor: pointer; font-size: 11px; margin-top: 10px; }
+
+        /* ── URGENCY BAR ── */
+        .urgency-bar { background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(239,68,68,0.1)); border: 1px solid #ef4444; border-radius: 12px; padding: 10px 15px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .urgency-bar span { font-size: 11px; color: #ef4444; font-weight: bold; }
+        .urgency-dot { width: 8px; height: 8px; background: #ef4444; border-radius: 50%; animation: blink 1s infinite; flex-shrink: 0; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        /* ── BEFORE/AFTER ── */
+        .before-after { margin-bottom: 20px; }
+        .before-after h4 { font-size: 13px; text-transform: uppercase; color: #94a3b8; margin: 0 0 12px 0; letter-spacing: 1px; }
+        .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .ba-card { border-radius: 12px; padding: 14px; text-align: center; }
+        .ba-card.before { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); }
+        .ba-card.after { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.3); }
+        .ba-label { font-size: 9px; text-transform: uppercase; font-weight: bold; margin-bottom: 8px; display: block; }
+        .ba-card.before .ba-label { color: #ef4444; }
+        .ba-card.after .ba-label { color: #22c55e; }
+        .ba-item { font-size: 10px; color: #94a3b8; margin-bottom: 5px; }
+
+        /* ── VISITOR MAP ── */
+        .visitor-map { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 15px; padding: 15px; margin-bottom: 20px; }
+        .visitor-map h4 { font-size: 13px; text-transform: uppercase; color: #94a3b8; margin: 0 0 12px 0; letter-spacing: 1px; }
+        .country-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .country-item { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); border-radius: 8px; padding: 5px 10px; font-size: 10px; }
+
+        /* ── LEADERBOARD ── */
+        .leaderboard { margin-bottom: 20px; }
+        .leaderboard h4 { font-size: 13px; text-transform: uppercase; color: #94a3b8; margin: 0 0 12px 0; letter-spacing: 1px; }
+        .lb-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(255,255,255,0.03); border-radius: 12px; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.06); }
+        .lb-rank { font-size: 16px; width: 25px; text-align: center; flex-shrink: 0; }
+        .lb-name { flex: 1; font-size: 12px; font-weight: bold; }
+        .lb-profit { color: #22c55e; font-size: 12px; font-weight: 900; }
+        .lb-days { font-size: 9px; color: #64748b; }
+
+        /* ── PAGE LOADER ── */
+        #page-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #010813; z-index: 999999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s; }
+        #page-loader.hide { opacity: 0; pointer-events: none; }
+        .loader-logo { color: #22c55e; font-size: 22px; font-weight: 900; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 2px; }
+        .loader-bar { width: 200px; height: 3px; background: rgba(34,197,94,0.2); border-radius: 3px; overflow: hidden; }
+        .loader-fill { height: 100%; background: #22c55e; border-radius: 3px; animation: load 1.5s ease forwards; }
+        @keyframes load { 0%{width:0%} 100%{width:100%} }
+
+        /* ── TRUST BADGES ── */
+        .trust-badges { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+        .trust-badge { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 7px 12px; font-size: 10px; color: #94a3b8; }
+
+        /* ── DISCLAIMER ── */
+        .disclaimer { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; margin-bottom: 20px; font-size: 9px; color: #475569; line-height: 1.6; text-align: center; }
+
     </style>
 </head>
 <body>
+
+    <!-- PAGE LOADER -->
+    <div id="page-loader">
+        <div class="loader-logo">⚡ BRIMES ACADEMY</div>
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+        <p style="color:#64748b;font-size:11px;margin-top:15px;">Loading your masterclass...</p>
+    </div>
+
+    <!-- EXIT POPUP -->
+    <div id="exit-pop">
+        <div class="exit-box">
+            <div style="font-size:40px;margin-bottom:10px;">⚠️</div>
+            <h3>Wait! Don't Leave Yet!</h3>
+            <p>You're about to miss out on <strong style="color:#22c55e;">FREE daily trading signals</strong> that are making our students hundreds of dollars every week!</p>
+            <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="btn green" style="margin-bottom:10px;">🔥 JOIN FREE — Last Chance!</a>
+            <br>
+            <button class="exit-close" onclick="document.getElementById('exit-pop').classList.remove('show')">No thanks, I'll miss out</button>
+        </div>
+    </div>
 
     <div class="ticker-wrap">
         <div class="ticker">XAUUSD: 2,024.45 ▲ | EURUSD: 1.0821 ▼ | GBPUSD: 1.2644 ▲ | BTCUSD: 51,204.10 ▲</div>
@@ -323,10 +413,102 @@
                 <button onclick="postComment()">POST TO LIVE CHAT</button>
             </div>
 
+            <!-- SPIN WHEEL -->
+            <div class="spin-section">
+                <h4>🎰 Spin To Win A Free Gift!</h4>
+                <div class="wheel-wrap">
+                    <div class="wheel-pointer">▼</div>
+                    <canvas id="wheelCanvas" class="wheel-canvas" width="260" height="260"></canvas>
+                </div>
+                <button class="spin-btn" id="spinBtn" onclick="spinWheel()">🎰 SPIN NOW! (3 left)</button>
+                <div class="spin-result" id="spinResult"></div>
+            </div>
+
+            <!-- URGENCY BAR -->
+            <div class="urgency-bar">
+                <div class="urgency-dot"></div>
+                <span>⚡ Only 3 VIP spots remaining this week!</span>
+            </div>
+
+            <!-- BEFORE / AFTER -->
+            <div class="before-after">
+                <h4>📊 Student Transformation</h4>
+                <div class="ba-grid">
+                    <div class="ba-card before">
+                        <span class="ba-label">❌ Before Brimes</span>
+                        <div class="ba-item">Losing every trade</div>
+                        <div class="ba-item">No strategy</div>
+                        <div class="ba-item">Blowing accounts</div>
+                        <div class="ba-item">Confused & stressed</div>
+                    </div>
+                    <div class="ba-card after">
+                        <span class="ba-label">✅ After Brimes</span>
+                        <div class="ba-item">92% win rate</div>
+                        <div class="ba-item">Clear daily signals</div>
+                        <div class="ba-item">Consistent profits</div>
+                        <div class="ba-item">Confident trader</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISITOR MAP -->
+            <div class="visitor-map">
+                <h4>🌍 Live Visitors Right Now</h4>
+                <div class="country-list">
+                    <div class="country-item">🇳🇬 Nigeria <span style="color:#22c55e;font-weight:bold;" id="ng-count">342</span></div>
+                    <div class="country-item">🇬🇭 Ghana <span style="color:#22c55e;font-weight:bold;">128</span></div>
+                    <div class="country-item">🇿🇦 S.Africa <span style="color:#22c55e;font-weight:bold;">94</span></div>
+                    <div class="country-item">🇰🇪 Kenya <span style="color:#22c55e;font-weight:bold;">76</span></div>
+                    <div class="country-item">🇺🇬 Uganda <span style="color:#22c55e;font-weight:bold;">61</span></div>
+                    <div class="country-item">🇬🇧 UK <span style="color:#22c55e;font-weight:bold;">55</span></div>
+                </div>
+            </div>
+
+            <!-- LEADERBOARD -->
+            <div class="leaderboard">
+                <h4>🏅 Top Earners This Week</h4>
+                <div class="lb-item">
+                    <div class="lb-rank">🥇</div>
+                    <div><div class="lb-name">Emeka S.</div><div class="lb-days">Joined 3 days ago</div></div>
+                    <div class="lb-profit">+$2,100</div>
+                </div>
+                <div class="lb-item">
+                    <div class="lb-rank">🥈</div>
+                    <div><div class="lb-name">Olamide T.</div><div class="lb-days">Joined 5 days ago</div></div>
+                    <div class="lb-profit">+$1,240</div>
+                </div>
+                <div class="lb-item">
+                    <div class="lb-rank">🥉</div>
+                    <div><div class="lb-name">Chisom A.</div><div class="lb-days">Joined 1 week ago</div></div>
+                    <div class="lb-profit">+$870</div>
+                </div>
+                <div class="lb-item">
+                    <div class="lb-rank">4️⃣</div>
+                    <div><div class="lb-name">Zainab K.</div><div class="lb-days">Joined 2 weeks ago</div></div>
+                    <div class="lb-profit">+$650</div>
+                </div>
+            </div>
+
+            <!-- TRUST BADGES -->
+            <div class="trust-badges">
+                <div class="trust-badge">🔒 Secure & Trusted</div>
+                <div class="trust-badge">✅ Verified Results</div>
+                <div class="trust-badge">💯 100% Real</div>
+            </div>
+
             <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="btn green">JOIN FREE SIGNALS GROUP</a>
             <a href="https://wa.me/2348103586138?text=Hello%20Brimes,%20I'm%20ready%20for%20VIP." class="btn blue">PRIVATE VIP MENTORSHIP</a>
+
+            <!-- DISCLAIMER -->
+            <div class="disclaimer">
+                ⚠️ Risk Disclaimer: Trading forex and financial instruments involves significant risk of loss. Past performance is not indicative of future results. Only trade with money you can afford to lose. BRIMES Academy provides educational content and signals for informational purposes only.
+            </div>
+
         </div>
     </div>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="float-wa" title="Join WhatsApp">💬</a>
 
     <div id="profit-pop"><div id="pop-txt" style="font-size: 12px; color: white;"></div></div>
     <div id="join-pop"><div id="join-txt" style="color: white;"></div></div>
@@ -469,6 +651,188 @@
             const count = Math.floor(Math.random() * 100) + 1200;
             liveEl.innerHTML = `● ${count.toLocaleString()} ONLINE`;
         }
+
+        // ── SPIN WHEEL ──
+        function drawWheel(angle) {
+            const canvas = document.getElementById('wheelCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const cx = 130, cy = 130, r = 125;
+            const sliceAngle = (2 * Math.PI) / wheelPrizes.length;
+            ctx.clearRect(0, 0, 260, 260);
+            wheelPrizes.forEach((prize, i) => {
+                const start = angle + i * sliceAngle;
+                const end = start + sliceAngle;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.arc(cx, cy, r, start, end);
+                ctx.fillStyle = prize.color;
+                ctx.fill();
+                ctx.strokeStyle = '#0a192f';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.save();
+                ctx.translate(cx, cy);
+                ctx.rotate(start + sliceAngle / 2);
+                ctx.textAlign = 'right';
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 11px Segoe UI';
+                ctx.fillText(prize.label, r - 10, 4);
+                ctx.restore();
+            });
+            // Center circle
+            ctx.beginPath();
+            ctx.arc(cx, cy, 18, 0, 2 * Math.PI);
+            ctx.fillStyle = '#010813';
+            ctx.fill();
+            ctx.strokeStyle = '#22c55e';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        }
+
+        // ── SPIN WHEEL ──
+        const wheelPrizes = [
+            { label: "Free PDF! 📘", color: "#22c55e", msg: "🎉 You won our FREE Gold Trading Strategy PDF! Join the group to claim it!" },
+            { label: "Try Again!", color: "#1e3a5f", msg: "😅 Unlucky! You still have spins left, try again!" },
+            { label: "VIP Discount!", color: "#3b82f6", msg: "🔥 You won a special VIP discount! Message Brimes now to claim!" },
+            { label: "Try Again!", color: "#1e3a5f", msg: "😅 Unlucky! You still have spins left, try again!" },
+            { label: "Free Signal!", color: "#f59e0b", msg: "⚡ You won a FREE premium trade signal! Join the group to receive it!" },
+            { label: "Try Again!", color: "#1e3a5f", msg: "😅 Unlucky! You still have spins left, try again!" },
+            { label: "1-on-1 Call!", color: "#8b5cf6", msg: "💎 You won a FREE 1-on-1 strategy call with Brimes! Message him now!" },
+            { label: "Try Again!", color: "#1e3a5f", msg: "😅 Spin one more time!" },
+        ];
+        let wheelAngle = 0;
+        let spinning = false;
+
+        // Load saved state from localStorage
+        let spinTrials = parseInt(localStorage.getItem('brimes_spins') ?? '3');
+        let hasWon = localStorage.getItem('brimes_won') === 'true';
+        // Track if guaranteed win has been assigned
+        let guaranteedWinSpin = parseInt(localStorage.getItem('brimes_win_spin') ?? '-1');
+        if (guaranteedWinSpin === -1) {
+            // Randomly assign which spin (1, 2, or 3) will be the guaranteed win
+            guaranteedWinSpin = Math.floor(Math.random() * 3) + 1;
+            localStorage.setItem('brimes_win_spin', guaranteedWinSpin);
+        }
+        let spinCount = parseInt(localStorage.getItem('brimes_spin_count') ?? '0');
+
+        function initSpinUI() {
+            const btn = document.getElementById('spinBtn');
+            const res = document.getElementById('spinResult');
+            if (hasWon) {
+                btn.disabled = true;
+                btn.textContent = '🏆 You Already Won!';
+                res.textContent = '✅ You already claimed a prize! Join the group to redeem it. 🔥';
+                res.style.display = 'block';
+            } else if (spinTrials <= 0) {
+                btn.disabled = true;
+                btn.textContent = '❌ No Spins Left!';
+                res.textContent = '😅 No more spins! Join the VIP group anyway — signals are 🔥!';
+                res.style.display = 'block';
+            } else {
+                btn.textContent = `🎰 SPIN NOW! (${spinTrials} left)`;
+            }
+        }
+
+        function spinWheel() {
+            if (spinning || spinTrials <= 0 || hasWon) return;
+            spinTrials--;
+            spinCount++;
+            localStorage.setItem('brimes_spins', spinTrials);
+            localStorage.setItem('brimes_spin_count', spinCount);
+            spinning = true;
+            document.getElementById('spinBtn').disabled = true;
+            document.getElementById('spinResult').style.display = 'none';
+            document.getElementById('spinBtn').textContent = spinTrials > 0 ? `🎰 SPIN NOW! (${spinTrials} left)` : `🎰 LAST SPIN!`;
+
+            // Prize indices (non "Try Again" slices: 0, 2, 4, 6)
+            const prizeIndices = [0, 2, 4, 6];
+            const tryAgainIndices = [1, 3, 5, 7];
+            const sliceAngle = (2 * Math.PI) / wheelPrizes.length;
+            let targetIndex;
+
+            if (spinCount === guaranteedWinSpin) {
+                // Force land on a prize slice
+                targetIndex = prizeIndices[Math.floor(Math.random() * prizeIndices.length)];
+            } else {
+                // Force land on a Try Again slice
+                targetIndex = tryAgainIndices[Math.floor(Math.random() * tryAgainIndices.length)];
+            }
+
+            // Calculate angle to land on target slice
+            const extraSpins = (Math.floor(Math.random() * 5) + 5) * 2 * Math.PI;
+            const targetAngle = -(targetIndex * sliceAngle + sliceAngle / 2 - Math.PI / 2);
+            const totalAngle = extraSpins + ((targetAngle - wheelAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+            let start = null;
+            const duration = 4000;
+            const startAngle = wheelAngle;
+            function animate(ts) {
+                if (!start) start = ts;
+                const elapsed = ts - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                wheelAngle = startAngle + totalAngle * ease;
+                drawWheel(wheelAngle);
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    spinning = false;
+                    const prize = wheelPrizes[targetIndex];
+                    const res = document.getElementById('spinResult');
+                    res.textContent = prize.msg;
+                    res.style.display = 'block';
+                    const btn = document.getElementById('spinBtn');
+                    if (!prize.label.includes('Try Again')) {
+                        hasWon = true;
+                        localStorage.setItem('brimes_won', 'true');
+                        btn.disabled = true;
+                        btn.textContent = '🏆 You Already Won!';
+                    } else if (spinTrials <= 0) {
+                        btn.disabled = true;
+                        btn.textContent = '❌ No Spins Left!';
+                    } else {
+                        btn.disabled = false;
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        drawWheel(0);
+        initSpinUI();
+
+        // ── PAGE LOADER ──
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('page-loader').classList.add('hide');
+                setTimeout(() => {
+                    document.getElementById('page-loader').style.display = 'none';
+                    // Show Tunde notification immediately after loader
+                    const p = document.getElementById('join-pop');
+                    document.getElementById('join-txt').innerHTML = `🔔 <strong>Tunde</strong> just joined the Free Group! ✅`;
+                    p.style.right = "20px";
+                    setTimeout(() => p.style.right = "-400px", 5000);
+                }, 600);
+            }, 1800);
+        });
+
+        // ── EXIT POPUP ── (fires when user scrolls back to top fast)
+        let lastScroll = 0;
+        let exitShown = false;
+        window.addEventListener('scroll', () => {
+            const curr = window.scrollY;
+            if (!exitShown && lastScroll > 300 && curr < lastScroll - 80) {
+                document.getElementById('exit-pop').classList.add('show');
+                exitShown = true;
+            }
+            lastScroll = curr;
+        });
+
+        // ── VISITOR COUNT FLICKER ──
+        setInterval(() => {
+            const el = document.getElementById('ng-count');
+            if (el) el.textContent = Math.floor(Math.random() * 20) + 335;
+        }, 5000);
 
         for(let i=0; i<5; i++) addMsg(names[i], texts[i]);
     </script>
