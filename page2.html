@@ -16,6 +16,7 @@
             color: white; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; 
         }
         
+        /* Ticker */
         .ticker-wrap { width: 100%; overflow: hidden; background: rgba(10, 25, 47, 0.8); border-bottom: 1px solid #233554; height: 30px; display: flex; align-items: center; backdrop-filter: blur(5px); }
         .ticker { display: inline-block; white-space: nowrap; animation: marquee 30s linear infinite; font-size: 10px; color: #22c55e; font-weight: bold; }
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
@@ -24,229 +25,97 @@
         .logo { color: #22c55e; font-weight: 900; font-size: 13px; text-transform: uppercase; }
         .live-count { font-size: 11px; color: #22c55e; background: rgba(34, 197, 94, 0.1); padding: 5px 10px; border-radius: 20px; border: 1px solid #22c55e; }
 
+        /* Welcome Overlay */
         #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(10, 25, 47, 0.98) 0%, #010813 100%); z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
         .welcome-text { color: #22c55e; font-size: 32px; font-weight: 950; letter-spacing: 1px; margin-bottom: 25px; text-transform: uppercase; text-shadow: 0 0 25px rgba(34, 197, 94, 0.7); line-height: 1.1; }
-        .play-btn { background: #22c55e; color: #010813; border: none; padding: 22px 60px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 0 40px rgba(34, 197, 94, 0.5); animation: pulse 2s infinite; text-transform: uppercase; position: relative; z-index: 100000; }
+        .play-btn { background: #22c55e; color: #010813; border: none; padding: 22px 60px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 0 40px rgba(34, 197, 94, 0.5); animation: pulse 2s infinite; text-transform: uppercase; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
         .container { width: 95%; max-width: 450px; margin-top: 20px; padding-bottom: 50px; }
 
-        /* ── COUNTDOWN TIMER ── */
-        .countdown-banner { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05)); border: 1px solid #ef4444; border-radius: 15px; padding: 14px 20px; margin-bottom: 20px; text-align: center; }
-        .countdown-banner p { margin: 0 0 8px 0; font-size: 11px; color: #ef4444; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-        .countdown-boxes { display: flex; justify-content: center; gap: 10px; }
-        .cbox { background: rgba(239,68,68,0.2); border: 1px solid #ef4444; border-radius: 10px; padding: 8px 14px; text-align: center; }
-        .cbox span { display: block; font-size: 22px; font-weight: 900; color: #ef4444; line-height: 1; }
-        .cbox small { font-size: 9px; color: #94a3b8; text-transform: uppercase; }
-
-        .stats-widget { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; border-radius: 15px; padding: 20px; margin-bottom: 25px; display: flex; justify-content: space-around; text-align: center; width: 100%; }
-        .stat-num { font-size: 20px; font-weight: 900; color: #22c55e; display: block; margin-bottom: 5px; }
-        .stat-label { font-size: 10px; text-transform: uppercase; color: #64748b; }
-
+        /* Card Elements */
         .card { background: rgba(10, 25, 47, 0.7); backdrop-filter: blur(15px); padding: 25px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 25px; }
 
-        /* Mentor header */
-        .mentor-header { display: flex; align-items: center; gap: 14px; margin-bottom: 15px; background: rgba(255,255,255,0.04); border-radius: 15px; padding: 12px; border: 1px solid rgba(34,197,94,0.2); }
-        .mentor-header img { width: 60px; height: 60px; border-radius: 10px; border: 2px solid #22c55e; object-fit: cover; flex-shrink: 0; }
-        .mentor-header-text { flex: 1; }
-        .mentor-header-text h3 { margin: 0 0 4px 0; font-size: 15px; font-weight: 900; }
-        .mentor-header-text p { margin: 0; font-size: 11px; color: #64748b; }
-        .verified-badge { background: #3b82f6; color: white; padding: 3px 8px; border-radius: 20px; font-size: 9px; font-weight: bold; display: inline-block; margin-bottom: 5px; }
-
-        /* Video */
         .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; margin-bottom: 15px; border-radius: 15px; overflow: hidden; border: 2px solid #22c55e; background: #000; }
-        .video-wrap iframe { position: absolute; top: -40px; left: 0; width: 100%; height: calc(100% + 80px); border: none; pointer-events: none; }
-        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; background: transparent; cursor: default; }
-        .video-end-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 9; background: linear-gradient(135deg, #0a192f, #112240); display: none; align-items: center; justify-content: center; flex-direction: column; }
-        .video-end-cover.show { display: flex; }
-        .video-end-cover p { color: #22c55e; font-weight: 900; font-size: 14px; text-align: center; margin: 0; }
-        .video-live-tag { position: absolute; bottom: 8px; left: 8px; background: rgba(34,197,94,0.2); color: #22c55e; font-size: 9px; font-weight: bold; padding: 4px 10px; border-radius: 20px; z-index: 11; text-transform: uppercase; letter-spacing: 1px; border: 1px solid #22c55e; }
+        .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        /* Mentor stats */
-        .mentor-stats { display: flex; justify-content: space-around; margin-bottom: 20px; background: rgba(255,255,255,0.04); border-radius: 12px; padding: 12px; border: 1px solid rgba(255,255,255,0.06); }
-
-        /* ── LIVE SIGNAL TICKER ── */
-        .signal-ticker-wrap { background: rgba(34,197,94,0.05); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px; padding: 10px 15px; margin-bottom: 20px; overflow: hidden; }
-        .signal-ticker-label { font-size: 9px; color: #22c55e; font-weight: bold; text-transform: uppercase; margin-bottom: 6px; }
-        .signal-ticker { display: flex; gap: 20px; animation: signalScroll 18s linear infinite; white-space: nowrap; }
-        .signal-item { font-size: 11px; font-weight: bold; padding: 4px 10px; border-radius: 8px; }
-        .signal-item.buy { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid #22c55e; }
-        .signal-item.sell { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid #ef4444; }
-        @keyframes signalScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        /* ── VIP BENEFITS ── */
-        .vip-section { background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(34,197,94,0.05)); border: 1px solid rgba(59,130,246,0.3); border-radius: 20px; padding: 20px; margin-bottom: 20px; }
-        .vip-section h4 { margin: 0 0 15px 0; font-size: 14px; color: #3b82f6; text-transform: uppercase; letter-spacing: 1px; }
-        .vip-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 12px; }
-        .vip-icon { width: 28px; height: 28px; border-radius: 8px; background: rgba(34,197,94,0.15); border: 1px solid #22c55e; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
-
-        /* ── TESTIMONIALS ── */
-        .testimonials { margin-bottom: 20px; }
-        .testimonials h4 { font-size: 13px; text-transform: uppercase; color: #94a3b8; margin: 0 0 12px 0; letter-spacing: 1px; }
-        .tcard { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 15px; padding: 14px; margin-bottom: 12px; }
-        .tcard-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .tavatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #22c55e, #3b82f6); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 14px; flex-shrink: 0; }
-        .tname { font-size: 12px; font-weight: bold; }
-        .tstars { color: #fbbf24; font-size: 11px; }
-        .tprofit { background: rgba(34,197,94,0.15); color: #22c55e; font-size: 10px; font-weight: bold; padding: 2px 8px; border-radius: 10px; border: 1px solid #22c55e; margin-left: auto; }
-        .ttext { font-size: 11px; color: #94a3b8; line-height: 1.5; }
-
-        /* ── WITHDRAWAL PROOF ── */
-        .proof-section { margin-bottom: 20px; }
-        .proof-section h4 { font-size: 13px; text-transform: uppercase; color: #94a3b8; margin: 0 0 12px 0; letter-spacing: 1px; }
-        .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .proof-card { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); border-radius: 12px; padding: 14px; text-align: center; }
-        .proof-amount { font-size: 20px; font-weight: 900; color: #22c55e; }
-        .proof-name { font-size: 10px; color: #64748b; margin-top: 3px; }
-        .proof-date { font-size: 9px; color: #3b82f6; margin-top: 2px; }
-
-        /* ── FAQ ── */
-        .faq-section { margin-bottom: 20px; }
-        .faq-section h4 { font-size: 13px; text-transform: uppercase; color: #94a3b8; margin: 0 0 12px 0; letter-spacing: 1px; }
-        .faq-item { border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
-        .faq-q { padding: 14px; font-size: 12px; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); }
-        .faq-q span { color: #22c55e; font-size: 16px; transition: 0.3s; }
-        .faq-a { padding: 0 14px; font-size: 11px; color: #94a3b8; line-height: 1.6; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; }
-        .faq-item.open .faq-a { max-height: 200px; padding: 0 14px 14px; }
-        .faq-item.open .faq-q span { transform: rotate(45deg); }
-
-        /* ── ACHIEVEMENTS ── */
-        .achievements { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
-        .achievements::-webkit-scrollbar { display: none; }
-        .badge { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; text-align: center; min-width: 80px; flex-shrink: 0; }
-        .badge-icon { font-size: 24px; display: block; margin-bottom: 5px; }
-        .badge-label { font-size: 9px; color: #64748b; text-transform: uppercase; }
-
-        /* Chat */
-        .chat-area { background: rgba(0, 0, 0, 0.4); height: 220px; border-radius: 20px; overflow-y: auto; margin-bottom: 20px; padding: 18px; border: 1px solid rgba(255,255,255,0.05); font-size: 12px; scroll-behavior: smooth; }
-        .msg { margin-bottom: 15px; padding: 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); line-height: 1.5; border-left: 4px solid #3b82f6; text-align: left; }
+        /* Chat Logic Styling */
+        .chat-area { background: rgba(0, 0, 0, 0.4); height: 220px; border-radius: 20px; overflow-y: auto; margin-bottom: 20px; padding: 18px; border: 1px solid rgba(255,255,255,0.05); font-size: 12px; }
+        .msg { margin-bottom: 10px; padding: 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.05); border-left: 3px solid #22c55e; text-align: left; }
         
         .input-box { background: rgba(17, 34, 64, 0.8); border-radius: 15px; padding: 15px; margin-bottom: 20px; border: 1px solid #3b82f6; }
-        .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 10px; margin-bottom: 12px; outline: none; font-size: 14px; }
-        .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .input-box input { background: transparent; border: none; border-bottom: 1px solid #233554; color: white; width: 100%; padding: 10px; margin-bottom: 12px; outline: none; }
+        .input-box button { background: #3b82f6; color: white; border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; width: 100%; }
 
-        /* Free gift banner */
+        .whatsapp-btn { display: block; width: 100%; padding: 18px; background: #25d366; color: white; text-align: center; text-decoration: none; border-radius: 15px; font-weight: 900; text-transform: uppercase; margin-top: 10px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
+
         .gift-banner { background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(251,191,36,0.05)); border: 1px solid #fbbf24; border-radius: 15px; padding: 15px; margin-bottom: 20px; text-align: center; }
-        .gift-banner p { margin: 0 0 5px 0; font-size: 13px; font-weight: 900; color: #fbbf24; }
-        .gift-banner small { font-size: 11px; color: #94a3b8; }
-
-        .btn { display: block; width: 100%; padding: 18px; text-decoration: none; font-weight: 900; border-radius: 15px; text-transform: uppercase; font-size: 14px; text-align: center; margin-bottom: 15px; }
-        .green { background: #22c55e; color: #010813; }
-        .blue { border: 2px solid #3b82f6; color: #3b82f6; }
-
-        #profit-pop { position: fixed; bottom: 20px; left: -400px; background: #112240; border-left: 5px solid #22c55e; padding: 15px; border-radius: 12px; transition: 0.6s; z-index: 998; width: 280px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-
-        /* Join notification */
-        #join-pop { position: fixed; top: 70px; right: -400px; background: #112240; border-left: 5px solid #3b82f6; padding: 12px 15px; border-radius: 12px; transition: 0.6s; z-index: 997; width: 250px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-size: 11px; }
     </style>
 </head>
 <body>
 
     <div class="ticker-wrap">
-        <div class="ticker">XAUUSD: 2,024.45 ▲ | EURUSD: 1.0821 ▼ | GBPUSD: 1.2644 ▲ | BTCUSD: 51,204.10 ▲</div>
+        <div class="ticker">XAUUSD: 2,024.45 ▲ | EURUSD: 1.0821 ▼ | BTCUSD: 51,204.10 ▲</div>
     </div>
 
     <nav class="navbar">
-        <div class="logo">BRIMES Trading Signals Academy</div>
-        <div class="live-count" id="live-users">● 1,200 ONLINE</div>
+        <div class="logo">BRIMES Academy</div>
+        <div class="live-count">● 1,200 ONLINE</div>
     </nav>
 
     <div id="audio-trigger">
         <div class="welcome-text">WELCOME TO<br>BRIMES ACADEMY</div>
-        <button class="play-btn" id="masterBtn">ACCESS MASTERCLASS</button>
+        <button class="play-btn" onclick="startSession()">ACCESS MASTERCLASS</button>
     </div>
 
     <div class="container">
-
-        <!-- COUNTDOWN TIMER -->
-        <div class="countdown-banner">
-            <p>🔥 VIP Offer Closes In:</p>
-            <div class="countdown-boxes">
-                <div class="cbox"><span id="cd-h">02</span><small>Hrs</small></div>
-                <div class="cbox"><span id="cd-m">00</span><small>Min</small></div>
-                <div class="cbox"><span id="cd-s">00</span><small>Sec</small></div>
-            </div>
-        </div>
-
-        <div class="stats-widget">
-            <div class="stat-item"><span class="stat-num">$<span id="total-profits">42,550</span></span><span class="stat-label">Academy Profits</span></div>
-            <div class="stat-item"><span class="stat-num" id="signals-sent">14</span><span class="stat-label">Live Signals</span></div>
-        </div>
-
         <div class="card">
-
-            <div class="mentor-header">
-                <img src="mentor-pro.jpg" alt="Brimes">
-                <div class="mentor-header-text">
-                    <div class="verified-badge">✓ VERIFIED MENTOR</div>
-                    <h3>Master Trader: Brimes</h3>
-                    <p>🔴 LIVE — Masterclass In Progress</p>
-                </div>
-            </div>
-
             <div class="video-wrap">
-                <iframe id="ytVideo"
-                    src="https://www.youtube.com/embed/cXovfksZV08?enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&controls=0&end=0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-                <div class="video-end-cover" id="endCover">
-                    <p>🎵 Session In Progress...<br>Scroll down to join! 👇</p>
-                </div>
-                <div class="video-overlay"></div>
-                <div class="video-live-tag" id="liveTag">🔴 LIVE Masterclass</div>
+                <iframe src="https://www.youtube.com/embed/cXovfksZV08" allowfullscreen></iframe>
             </div>
 
-            <div class="mentor-stats">
-                <div style="text-align:center"><span style="color:#22c55e;font-weight:900;font-size:18px;">+4,200</span><br><span style="font-size:10px;color:#64748b;">Pips Gained</span></div>
-                <div style="text-align:center"><span style="color:#22c55e;font-weight:900;font-size:18px;">92%</span><br><span style="font-size:10px;color:#64748b;">Win Rate</span></div>
-                <div style="text-align:center"><span style="color:#22c55e;font-weight:900;font-size:18px;">5★</span><br><span style="font-size:10px;color:#64748b;">Rating</span></div>
+            <div class="chat-area" id="chat">
+                <div class="msg"><b>System:</b> Welcome! Introduce yourself in the chat below.</div>
             </div>
 
-            <!-- SCROLL DOWN INDICATOR -->
-            <div style="text-align:center; margin-bottom: 20px; animation: bounce 1.5s infinite;">
-                <p style="margin:0; font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:1px;">👇 Scroll Down To See More</p>
-            </div>
-            <style>@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }</style>
-
-            <!-- LIVE SIGNAL TICKER -->
-            <div class="signal-ticker-wrap">
-                <div class="signal-ticker-label">📡 Live Signals Feed</div>
-                <div class="signal-ticker">
-                    <span class="signal-item buy">XAUUSD BUY @ 2,024 🎯 TP: 2,041</span>
-                    <span class="signal-item sell">EURUSD SELL @ 1.0821 🎯 TP: 1.0790</span>
-                    <span class="signal-item buy">NASDAQ BUY @ 18,240 🎯 TP: 18,310</span>
-                    <span class="signal-item buy">GBPUSD BUY @ 1.2644 🎯 TP: 1.2690</span>
-                    <span class="signal-item sell">BTCUSD SELL @ 51,204 🎯 TP: 50,800</span>
-                    <span class="signal-item buy">XAUUSD BUY @ 2,024 🎯 TP: 2,041</span>
-                    <span class="signal-item sell">EURUSD SELL @ 1.0821 🎯 TP: 1.0790</span>
-                    <span class="signal-item buy">NASDAQ BUY @ 18,240 🎯 TP: 18,310</span>
-                    <span class="signal-item buy">GBPUSD BUY @ 1.2644 🎯 TP: 1.2690</span>
-                    <span class="signal-item sell">BTCUSD SELL @ 51,204 🎯 TP: 50,800</span>
-                </div>
+            <div class="input-box">
+                <input type="text" id="userName" placeholder="Your Name">
+                <input type="text" id="userMsg" placeholder="Ask a question...">
+                <button onclick="postMsg()">Post Comment</button>
             </div>
 
-            <!-- ACHIEVEMENTS/BADGES -->
-            <div class="achievements">
-                <div class="badge"><span class="badge-icon">🏆</span><span class="badge-label">Top Mentor</span></div>
-                <div class="badge"><span class="badge-icon">💎</span><span class="badge-label">VIP Elite</span></div>
-                <div class="badge"><span class="badge-icon">🎯</span><span class="badge-label">92% Win Rate</span></div>
-                <div class="badge"><span class="badge-icon">🔥</span><span class="badge-label">4,200 Pips</span></div>
-                <div class="badge"><span class="badge-icon">⚡</span><span class="badge-label">Live Signals</span></div>
-            </div>
-
-            <!-- VIP BENEFITS -->
-            <div class="vip-section">
-                <h4>💎 What You Get In VIP</h4>
-                <div class="vip-item"><div class="vip-icon">📡</div><div>Daily live signals on Gold, EURUSD & NASDAQ</div></div>
-                <div class="vip-item"><div class="vip-icon">🎯</div><div>Full trade breakdown — entry, SL & TP explained</div></div>
-                <div class="vip-item"><div class="vip-icon">🧠</div><div>1-on-1 mentorship & mindset coaching</div></div>
-                <div class="vip-item"><div class="vip-icon">📊</div><div>Real-time market analysis every morning</div></div>
-                <div class="vip-item"><div class="vip-icon">💰</div><div>Risk management system that protects your account</div></div>
-                <div class="vip-item"><div class="vip-icon">🏆</div><div>Access to private VIP-only trade setups</div></div>
-            </div>
-
-            <!-- FREE GIFT BANNER -->
             <div class="gift-banner">
-                <p>🎁 FREE BONUS — Join Today!</p>
-                <small>Get our exclusive Gold Trading Strategy PDF FREE when you join the VIP group today
+                <p style="color: #fbbf24; margin: 0; font-weight: bold;">🎁 FREE BONUS — Join Today!</p>
+                <small style="color: #94a3b8;">Get our exclusive Gold Strategy PDF FREE!</small>
+            </div>
+
+            <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="whatsapp-btn">
+                Join VIP WhatsApp Group
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Makes the welcome screen disappear
+        function startSession() {
+            document.getElementById('audio-trigger').style.display = 'none';
+        }
+
+        // Makes the chat box work locally
+        function postMsg() {
+            const name = document.getElementById('userName').value || "Guest";
+            const msg = document.getElementById('userMsg').value;
+            if(msg.trim() !== "") {
+                const chat = document.getElementById('chat');
+                const div = document.createElement('div');
+                div.className = 'msg';
+                div.innerHTML = `<b>${name}:</b> ${msg}`;
+                chat.appendChild(div);
+                document.getElementById('userMsg').value = '';
+                chat.scrollTop = chat.scrollHeight;
+            }
+        }
+    </script>
+
+</body>
+</html>
