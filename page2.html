@@ -26,7 +26,6 @@
 
         #audio-trigger { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(10, 25, 47, 0.98) 0%, #010813 100%); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
         .welcome-text { color: #22c55e; font-size: 32px; font-weight: 950; letter-spacing: 1px; margin-bottom: 25px; text-transform: uppercase; text-shadow: 0 0 25px rgba(34, 197, 94, 0.7); line-height: 1.1; }
-        
         .play-btn { background: #22c55e; color: #010813; border: none; padding: 22px 60px; border-radius: 50px; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 0 40px rgba(34, 197, 94, 0.5); animation: pulse 2s infinite; text-transform: uppercase; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
@@ -36,8 +35,30 @@
         .stat-label { font-size: 10px; text-transform: uppercase; color: #64748b; }
 
         .card { background: rgba(10, 25, 47, 0.7); backdrop-filter: blur(15px); padding: 25px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 25px; }
-        .mentor-display { width: 100%; height: 260px; background: rgba(255, 255, 255, 0.05); border-radius: 20px; border: 1px solid #22c55e; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; margin-bottom: 25px; }
-        .profile-img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid #22c55e; margin-bottom: 12px; object-fit: cover; }
+
+        /* Video container - wide and short */
+        .video-container { position: relative; width: 100%; margin-bottom: 20px; border-radius: 15px; overflow: hidden; border: 2px solid #22c55e; background: #000; }
+        .video-container video { width: 100%; height: 200px; object-fit: cover; display: block; }
+
+        /* Picture overlaid bottom-right corner of video, not covering face */
+        .overlay-pic { 
+            position: absolute; 
+            bottom: 10px; 
+            right: 10px; 
+            width: 65px; 
+            height: 65px; 
+            border-radius: 8px; 
+            border: 2px solid #22c55e; 
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+
+        .video-label { text-align: center; font-size: 10px; color: #22c55e; font-weight: bold; padding: 6px; background: rgba(34, 197, 94, 0.1); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Mentor name and stats */
+        .mentor-info { text-align: center; margin-bottom: 20px; }
+        .mentor-info h3 { margin: 0 0 12px 0; font-size: 18px; }
+        .mentor-stats { display: flex; justify-content: space-around; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; }
 
         .chat-area { background: rgba(0, 0, 0, 0.4); height: 220px; border-radius: 20px; overflow-y: auto; margin-bottom: 20px; padding: 18px; border: 1px solid rgba(255,255,255,0.05); font-size: 12px; scroll-behavior: smooth; }
         .msg { margin-bottom: 15px; padding: 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); line-height: 1.5; border-left: 4px solid #3b82f6; text-align: left; }
@@ -76,15 +97,29 @@
         </div>
 
         <div class="card">
-            <div class="mentor-display">
-                <div style="position: absolute; top: 12px; right: 12px; background: #3b82f6; color: white; padding: 5px 10px; border-radius: 20px; font-size: 10px; font-weight: bold;">✓ VERIFIED</div>
-                <img src="mentor-pro.jpg" class="profile-img">
-                <h3 style="margin: 0; font-size: 18px;">Master Trader: Brimes</h3>
-                <div style="display: flex; justify-content: space-around; width: 100%; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                    <div style="text-align:center"><span style="color:#22c55e;font-weight:900; font-size: 16px;">+4,200</span><br><span style="font-size:10px; color: #64748b;">Pips Gained</span></div>
-                    <div style="text-align:center"><span style="color:#22c55e;font-weight:900; font-size: 16px;">92%</span><br><span style="font-size:10px; color: #64748b;">Win Rate</span></div>
+
+            <!-- Wide short video with picture overlay bottom-right -->
+            <div class="video-container">
+                <div class="video-label">🎥 Live Masterclass — Master Trader Brimes</div>
+                <video id="brimsVideo" playsinline muted autoplay>
+                    <source src="BRIMES.mp4" type="video/mp4">
+                </video>
+                <!-- Picture overlaid bottom-right, not covering face -->
+                <img src="mentor-pro.jpg" class="overlay-pic" alt="Brimes">
+            </div>
+
+            <!-- Name and Stats -->
+            <div class="mentor-info">
+                <div style="display:inline-block; background:#3b82f6; color:white; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:bold; margin-bottom:8px;">✓ VERIFIED</div>
+                <h3>Master Trader: Brimes</h3>
+                <div class="mentor-stats">
+                    <div style="text-align:center"><span style="color:#22c55e;font-weight:900;font-size:16px;">+4,200</span><br><span style="font-size:10px;color:#64748b;">Pips Gained</span></div>
+                    <div style="text-align:center"><span style="color:#22c55e;font-weight:900;font-size:16px;">92%</span><br><span style="font-size:10px;color:#64748b;">Win Rate</span></div>
                 </div>
             </div>
+
+            <audio id="mentorAudio"><source src="explanation.mp3" type="audio/mpeg"></audio>
+            <audio id="bgMusic" loop><source src="song.mp3" type="audio/mpeg"></audio>
 
             <div class="chat-area" id="chat"></div>
 
@@ -102,17 +137,14 @@
     <div id="profit-pop"><div id="pop-txt" style="font-size: 12px; color: white;"></div></div>
 
     <script>
+        const mentorAudio = document.getElementById('mentorAudio');
+        const bgMusic = document.getElementById('bgMusic');
+        const brimsVideo = document.getElementById('brimsVideo');
         const trigger = document.getElementById('audio-trigger');
         const chatBox = document.getElementById('chat');
         let sessionActive = false;
         let playingMusic = false;
-
-        // Create audio using JavaScript so browser treats it as user-initiated
-        const mentorAudio = new Audio('explanation.mp3');
-        const bgMusic = new Audio('song.mp3');
-        bgMusic.loop = true;
-        mentorAudio.volume = 1.0;
-        bgMusic.volume = 0.4;
+        let videoWasPlaying = false;
 
         const names = ["Olamide", "Chisom", "Abubakar", "Funmi", "Emeka", "Zainab", "Tunde", "Blessing"];
         const texts = ["Gold hit TP! 🔥", "Best mentor.", "Withdrawal received.", "Up $100!", "Signals are 10/10", "Blue everywhere! 💎"];
@@ -121,44 +153,45 @@
             trigger.style.display = 'none';
             sessionActive = true;
 
-            // Unlock AudioContext — must happen inside user gesture
+            // Unmute and play video with sound
+            brimsVideo.muted = false;
+            brimsVideo.play().catch(() => { brimsVideo.muted = true; brimsVideo.play(); });
+
+            // Play background audio
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
                 ctx.resume().then(() => {
-                    mentorAudio.play().then(() => {
-                        console.log("✅ Audio playing");
-                    }).catch(err => {
-                        console.warn("explanation.mp3 failed, trying song.mp3:", err);
+                    mentorAudio.play().catch(() => {
                         playingMusic = true;
-                        bgMusic.play().catch(e => console.warn("song.mp3 also failed:", e));
+                        bgMusic.play().catch(() => {});
                     });
                 });
             } catch(e) {
-                // Fallback if AudioContext not supported
                 mentorAudio.play().catch(() => {
                     playingMusic = true;
                     bgMusic.play().catch(() => {});
                 });
             }
 
-            mentorAudio.onended = () => {
-                playingMusic = true;
-                bgMusic.play().catch(() => {});
-            };
+            mentorAudio.onended = () => { playingMusic = true; bgMusic.play().catch(() => {}); };
 
             setInterval(showProfit, 10000);
             setInterval(updateStats, 7000);
             setInterval(() => addMsg(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]), 4500);
         }
 
+        // Pause video when minimised, resume when back
         document.addEventListener("visibilitychange", () => {
-            if (!sessionActive) return;
             if (document.hidden) {
-                mentorAudio.pause();
-                bgMusic.pause();
+                videoWasPlaying = !brimsVideo.paused;
+                brimsVideo.pause();
+                if (sessionActive) { mentorAudio.pause(); bgMusic.pause(); }
             } else {
-                if (playingMusic) bgMusic.play().catch(() => {});
-                else mentorAudio.play().catch(() => {});
+                if (videoWasPlaying) brimsVideo.play().catch(() => {});
+                if (sessionActive) {
+                    if (playingMusic) bgMusic.play().catch(() => {});
+                    else mentorAudio.play().catch(() => {});
+                }
             }
         });
 
@@ -200,6 +233,7 @@
         for(let i=0; i<5; i++) addMsg(names[i], texts[i]);
     </script>
 </body>
-</html>
+                </html>
+
 
                                                                                         </html>
