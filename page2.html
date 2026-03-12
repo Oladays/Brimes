@@ -500,7 +500,7 @@ function doSpin(){
   btn.disabled=true;
   document.getElementById('spinResult').style.display='none';
   const wins=[0,2,4,6],loses=[1,3,5,7];
-  const target=(!isAdmin&&spinsDone===winSpin)?wins[r(4)]:loses[r(4)];
+  const target=isAdmin ? wins[r(4)] : ((!isAdmin&&spinsDone===winSpin)?wins[r(4)]:loses[r(4)]);
   const sa=(2*Math.PI)/prizes.length;
   const extra=(r(5)+5)*2*Math.PI;
   const dest=-(target*sa+sa/2-Math.PI/2);
