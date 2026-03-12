@@ -4,643 +4,366 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BRIMES Trading Signals Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
-body{font-family:'Segoe UI',sans-serif;background:linear-gradient(rgba(1,8,19,0.92),rgba(1,8,19,0.92)),url('https://images.unsplash.com/photo-1611974714025-e6148a234e5f?auto=format&fit=crop&q=80&w=2070') center/cover fixed;color:white;display:flex;flex-direction:column;align-items:center;min-height:100vh;overflow-x:hidden}
+:root{
+  --green:#00d97e;
+  --green-dim:rgba(0,217,126,0.12);
+  --green-glow:rgba(0,217,126,0.35);
+  --red:#ff4d6d;
+  --blue:#4f8ef7;
+  --gold:#f5c542;
+  --bg:#080c14;
+  --surface:#0e1420;
+  --surface2:#141b28;
+  --border:rgba(255,255,255,0.07);
+  --text:#e8edf5;
+  --muted:#5a6478;
+  --font-head:'Syne',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;display:flex;flex-direction:column;align-items:center}
 
-/* PARTICLES */
-#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
-.particle{position:absolute;border-radius:50%;opacity:0.12;animation:floatUp linear infinite}
-@keyframes floatUp{0%{transform:translateY(100vh);opacity:0}20%{opacity:0.12}80%{opacity:0.08}100%{transform:translateY(-100px);opacity:0}}
+/* BG GLOW */
+body::before{content:'';position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,217,126,0.06) 0%,transparent 70%);pointer-events:none;z-index:0}
 
 /* PAGE LOADER */
-#page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#010813;z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s ease}
-#page-loader.hide{opacity:0;pointer-events:none}
-.loader-logo{color:#22c55e;font-size:22px;font-weight:900;text-transform:uppercase;margin-bottom:20px;letter-spacing:3px}
-.loader-bar{width:200px;height:3px;background:rgba(34,197,94,0.2);border-radius:3px;overflow:hidden}
-.loader-fill{height:100%;background:#22c55e;border-radius:3px;animation:loadFill 1.6s ease forwards}
-@keyframes loadFill{0%{width:0%}100%{width:100%}}
+#loader{position:fixed;inset:0;background:var(--bg);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity 0.5s,visibility 0.5s}
+#loader.out{opacity:0;visibility:hidden}
+.loader-logo{font-family:var(--font-head);font-size:20px;font-weight:800;letter-spacing:4px;color:var(--green);text-transform:uppercase}
+.loader-track{width:180px;height:2px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
+.loader-prog{height:100%;background:var(--green);border-radius:2px;animation:lprog 1.6s ease forwards}
+@keyframes lprog{from{width:0}to{width:100%}}
+
+/* RISK OVERLAY */
+#risk-overlay{position:fixed;inset:0;background:rgba(8,12,20,0.97);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(8px)}
+.risk-box{background:var(--surface);border:1px solid rgba(255,77,109,0.3);border-radius:20px;padding:28px 22px;max-width:400px;width:100%;text-align:center}
+.risk-icon{font-size:36px;margin-bottom:14px}
+.risk-title{font-family:var(--font-head);font-size:15px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px}
+.risk-text{font-size:12px;color:#94a3b8;line-height:1.8;margin-bottom:22px;font-weight:500}
+.risk-text strong{color:var(--text);font-weight:700}
+.risk-btn{width:100%;padding:18px;background:var(--green);color:var(--bg);border:none;border-radius:50px;font-family:var(--font-head);font-size:15px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;box-shadow:0 0 35px var(--green-glow);animation:btnpulse 2s infinite}
+@keyframes btnpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
 
 /* TICKER */
-.ticker-wrap{width:100%;overflow:hidden;background:rgba(10,25,47,0.85);border-bottom:1px solid #233554;height:30px;display:flex;align-items:center;position:relative;z-index:10}
-.ticker{display:inline-block;white-space:nowrap;animation:marquee 35s linear infinite;font-size:10px;color:#22c55e;font-weight:bold;padding-left:100%}
-@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+.ticker-bar{width:100%;background:var(--surface);border-bottom:1px solid var(--border);height:28px;overflow:hidden;display:flex;align-items:center;position:relative;z-index:10}
+.ticker-inner{display:inline-flex;white-space:nowrap;animation:tick 40s linear infinite;font-size:10px;font-weight:600;color:var(--green);letter-spacing:0.5px;padding-left:100%}
+.ticker-sep{margin:0 16px;opacity:0.3}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 
-/* NAVBAR */
-.navbar{width:100%;background:rgba(10,25,47,0.95);padding:13px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #233554;position:sticky;top:0;z-index:1000;backdrop-filter:blur(10px)}
-.logo{color:#22c55e;font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:1px}
-.live-count{font-size:11px;color:#22c55e;background:rgba(34,197,94,0.1);padding:5px 10px;border-radius:20px;border:1px solid #22c55e;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.3)}50%{box-shadow:0 0 0 6px rgba(34,197,94,0)}}
-
-/* WELCOME OVERLAY */
-#audio-trigger{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at center,rgba(10,25,47,0.99) 0%,#010813 100%);z-index:99999;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:30px}
-.welcome-text{color:#22c55e;font-size:30px;font-weight:900;letter-spacing:2px;margin-bottom:12px;text-transform:uppercase;text-shadow:0 0 30px rgba(34,197,94,0.6);line-height:1.2}
-.typing-text{font-size:13px;color:#94a3b8;margin-bottom:30px;min-height:22px}
-.typing-cursor{display:inline-block;width:2px;height:14px;background:#22c55e;animation:blink 0.7s infinite;vertical-align:middle;margin-left:2px}
+/* NAV */
+.nav{width:100%;background:rgba(8,12,20,0.95);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000;backdrop-filter:blur(16px)}
+.nav-logo{font-family:var(--font-head);font-size:12px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:2px}
+.nav-pill{font-size:10px;font-weight:600;color:var(--green);background:var(--green-dim);border:1px solid rgba(0,217,126,0.25);padding:5px 12px;border-radius:20px;display:flex;align-items:center;gap:5px}
+.nav-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 1s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-.play-btn{background:#22c55e;color:#010813;border:none;padding:20px 55px;border-radius:50px;font-size:17px;font-weight:900;cursor:pointer;box-shadow:0 0 40px rgba(34,197,94,0.5);animation:btnPulse 2s infinite;text-transform:uppercase;letter-spacing:1px}
-@keyframes btnPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 
-/* EXIT POPUP */
-#exit-pop{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99998;display:none;align-items:center;justify-content:center;padding:20px}
-#exit-pop.show{display:flex}
-.exit-box{background:linear-gradient(135deg,#0a192f,#112240);border:2px solid #22c55e;border-radius:25px;padding:30px 22px;text-align:center;max-width:380px;width:100%}
-.exit-box h3{color:#ef4444;font-size:18px;margin-bottom:10px}
-.exit-box p{color:#94a3b8;font-size:12px;line-height:1.7;margin-bottom:20px}
-.exit-close{background:none;border:1px solid #233554;color:#64748b;padding:9px 22px;border-radius:10px;cursor:pointer;font-size:11px;margin-top:10px;width:100%}
+/* MAIN */
+.main{width:100%;max-width:440px;padding:20px 16px 80px;position:relative;z-index:1}
 
-/* WA BUBBLE */
-#wa-bubble{position:fixed;bottom:95px;right:-300px;background:#112240;border:1px solid rgba(37,211,102,0.4);border-radius:15px 15px 0 15px;padding:13px 15px;font-size:11px;width:220px;z-index:9989;box-shadow:0 5px 25px rgba(0,0,0,0.5);transition:right 0.5s ease}
-#wa-bubble.show{right:20px}
-.wa-name{color:#22c55e;font-weight:bold;font-size:10px;margin-bottom:4px}
-.wa-msg{color:#cbd5e1;line-height:1.5}
-.wa-time{color:#475569;font-size:9px;margin-top:5px;text-align:right}
-
-/* JOIN NOTIFICATION */
-#join-pop{position:fixed;bottom:90px;right:-350px;background:#112240;border-left:5px solid #3b82f6;padding:13px 15px;border-radius:12px;transition:right 0.5s ease;z-index:9995;width:265px;box-shadow:0 10px 30px rgba(0,0,0,0.5);font-size:12px;color:white}
-
-/* PROFIT POPUP */
-#profit-pop{position:fixed;bottom:20px;left:-350px;background:#112240;border-left:5px solid #22c55e;padding:14px 16px;border-radius:12px;transition:left 0.5s ease;z-index:9994;width:275px;box-shadow:0 10px 30px rgba(0,0,0,0.5);font-size:12px;color:white}
-
-/* FLOAT WA BUTTON */
-.float-wa{position:fixed;bottom:25px;right:20px;background:#25d366;color:white;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:27px;z-index:9990;box-shadow:0 4px 20px rgba(37,211,102,0.5);text-decoration:none;animation:waPulse 2s infinite}
-@keyframes waPulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,0.5)}50%{box-shadow:0 0 0 14px rgba(37,211,102,0)}}
-
-/* CONFETTI */
-.confetti-piece{position:fixed;top:-10px;opacity:0;z-index:99999;pointer-events:none;animation:confettiFall linear forwards;border-radius:2px}
-@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(105vh) rotate(720deg);opacity:0}}
-
-/* CONTAINER */
-.container{width:95%;max-width:450px;margin-top:20px;padding-bottom:60px;position:relative;z-index:1}
-
-/* COUNTDOWN */
-.countdown-banner{background:linear-gradient(135deg,rgba(239,68,68,0.15),rgba(239,68,68,0.05));border:1px solid #ef4444;border-radius:15px;padding:14px 20px;margin-bottom:20px;text-align:center}
-.countdown-banner p{font-size:11px;color:#ef4444;font-weight:bold;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.countdown-boxes{display:flex;justify-content:center;gap:10px}
-.cbox{background:rgba(239,68,68,0.2);border:1px solid #ef4444;border-radius:10px;padding:8px 14px;text-align:center}
-.cbox span{display:block;font-size:22px;font-weight:900;color:#ef4444;line-height:1}
-.cbox small{font-size:9px;color:#94a3b8;text-transform:uppercase}
-
-/* STATS WIDGET */
-.stats-widget{background:rgba(34,197,94,0.1);border:1px solid #22c55e;border-radius:15px;padding:18px 20px;margin-bottom:22px;display:flex;justify-content:space-around;text-align:center;width:100%}
-.stat-num{font-size:20px;font-weight:900;color:#22c55e;display:block;margin-bottom:4px}
-.stat-label{font-size:10px;text-transform:uppercase;color:#64748b}
-
-/* CARD */
-.card{background:rgba(10,25,47,0.75);backdrop-filter:blur(15px);padding:22px;border-radius:28px;border:1px solid rgba(255,255,255,0.08);margin-bottom:25px}
-
-/* MENTOR HEADER */
-.mentor-header{display:flex;align-items:center;gap:13px;margin-bottom:15px;background:rgba(255,255,255,0.04);border-radius:14px;padding:12px;border:1px solid rgba(34,197,94,0.2)}
-.mentor-header img{width:60px;height:60px;border-radius:10px;border:2px solid #22c55e;object-fit:cover;flex-shrink:0}
-.mentor-header-text{flex:1}
-.mentor-header-text h3{font-size:15px;font-weight:900;margin-bottom:3px}
-.mentor-header-text p{font-size:11px;color:#64748b}
-.verified-badge{background:#3b82f6;color:white;padding:3px 8px;border-radius:20px;font-size:9px;font-weight:bold;display:inline-block;margin-bottom:4px}
+/* MENTOR CARD */
+.mentor-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:14px;display:flex;align-items:center;gap:14px}
+.mentor-img{width:56px;height:56px;border-radius:12px;object-fit:cover;border:2px solid var(--green);flex-shrink:0}
+.mentor-info{flex:1;min-width:0}
+.mentor-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(79,142,247,0.15);border:1px solid rgba(79,142,247,0.3);color:var(--blue);font-size:9px;font-weight:700;padding:3px 8px;border-radius:20px;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.5px}
+.mentor-name{font-family:var(--font-head);font-size:14px;font-weight:800;color:var(--text);margin-bottom:3px}
+.mentor-live{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.live-dot{width:6px;height:6px;background:var(--red);border-radius:50%;animation:blink 1s infinite;flex-shrink:0}
 
 /* VIDEO */
-.video-wrap{position:relative;width:100%;padding-bottom:56.25%;margin-bottom:15px;border-radius:14px;overflow:hidden;border:2px solid #22c55e;background:#000}
-.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;pointer-events:none}
-.video-overlay{position:absolute;top:0;left:0;width:100%;height:100%;z-index:10;background:transparent}
-.video-end-cover{position:absolute;top:0;left:0;width:100%;height:100%;z-index:9;background:linear-gradient(135deg,#0a192f,#112240);display:none;align-items:center;justify-content:center;flex-direction:column}
-.video-end-cover.show{display:flex}
-.video-end-cover p{color:#22c55e;font-weight:900;font-size:14px;text-align:center}
-.video-live-tag{position:absolute;bottom:8px;left:8px;background:rgba(34,197,94,0.2);color:#22c55e;font-size:9px;font-weight:bold;padding:4px 10px;border-radius:20px;z-index:11;text-transform:uppercase;letter-spacing:1px;border:1px solid #22c55e}
+.video-wrap{position:relative;width:100%;padding-bottom:56.25%;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;margin-bottom:14px}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none}
+.video-overlay{position:absolute;inset:0;z-index:5}
+.video-end{position:absolute;inset:0;z-index:4;background:var(--surface);display:none;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.video-end.show{display:flex}
+.video-end p{font-family:var(--font-head);font-size:13px;font-weight:700;color:var(--green);text-align:center}
+.live-badge{position:absolute;bottom:10px;left:10px;z-index:6;background:rgba(8,12,20,0.85);border:1px solid var(--green);color:var(--green);font-size:9px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;backdrop-filter:blur(4px)}
 
-/* MENTOR STATS */
-.mentor-stats{display:flex;justify-content:space-around;margin-bottom:18px;background:rgba(255,255,255,0.04);border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.06)}
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 10px;text-align:center}
+.stat-val{font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--green);display:block;margin-bottom:4px}
+.stat-lbl{font-size:9px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px}
 
-/* VIEWING COUNT */
-.viewing-bar{display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:8px 15px;margin-bottom:14px;font-size:11px;color:#ef4444;font-weight:bold}
-.blink-dot{width:7px;height:7px;background:#ef4444;border-radius:50%;animation:blinkDot 1s infinite;flex-shrink:0}
-@keyframes blinkDot{0%,100%{opacity:1}50%{opacity:0}}
+/* VIEWERS */
+.viewers{display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,77,109,0.07);border:1px solid rgba(255,77,109,0.15);border-radius:10px;padding:9px 14px;margin-bottom:14px}
+.viewers span{font-size:11px;font-weight:600;color:var(--red)}
 
-/* PROGRESS BAR */
-.progress-section{margin-bottom:18px}
-.progress-label{display:flex;justify-content:space-between;font-size:11px;margin-bottom:6px}
-.progress-label span:first-child{color:#94a3b8}
-.progress-label span:last-child{color:#ef4444;font-weight:bold}
-.progress-track{background:rgba(255,255,255,0.05);border-radius:10px;height:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.08)}
-.progress-fill{height:100%;background:linear-gradient(90deg,#22c55e,#ef4444);border-radius:10px;width:0%;transition:width 2s ease}
-
-/* SCROLL INDICATOR */
-.scroll-hint{text-align:center;margin-bottom:18px;animation:bounce 1.5s infinite}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
-
-/* SIGNAL TICKER */
-.signal-ticker-wrap{background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.25);border-radius:12px;padding:10px 15px;margin-bottom:18px;overflow:hidden}
-.signal-ticker-label{font-size:9px;color:#22c55e;font-weight:bold;text-transform:uppercase;margin-bottom:6px}
-.signal-ticker{display:flex;gap:18px;animation:signalScroll 20s linear infinite;white-space:nowrap}
-.signal-item{font-size:11px;font-weight:bold;padding:4px 10px;border-radius:8px;flex-shrink:0}
-.signal-item.buy{background:rgba(34,197,94,0.15);color:#22c55e;border:1px solid #22c55e}
-.signal-item.sell{background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid #ef4444}
-@keyframes signalScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* ACHIEVEMENTS */
-.achievements{display:flex;gap:10px;margin-bottom:18px;overflow-x:auto;padding-bottom:4px}
-.achievements::-webkit-scrollbar{display:none}
-.badge{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:12px;text-align:center;min-width:80px;flex-shrink:0}
-.badge-icon{font-size:24px;display:block;margin-bottom:5px}
-.badge-label{font-size:9px;color:#64748b;text-transform:uppercase}
-
-/* CHART */
-.chart-section{margin-bottom:18px}
-.chart-section h4{font-size:13px;text-transform:uppercase;color:#94a3b8;margin-bottom:10px;letter-spacing:1px}
-.chart-wrap{background:rgba(0,0,0,0.3);border:1px solid rgba(34,197,94,0.2);border-radius:14px;padding:14px;overflow:hidden}
-.chart-label{font-size:9px;color:#22c55e;font-weight:bold;margin-bottom:8px}
-
-/* STAR RATING */
-.star-widget{background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.3);border-radius:14px;padding:14px;margin-bottom:18px;display:flex;align-items:center;gap:14px}
-.star-widget .stars{font-size:20px;letter-spacing:2px}
-.star-widget-text p{font-size:12px;font-weight:bold;color:#fbbf24;margin-bottom:2px}
-.star-widget-text small{font-size:10px;color:#64748b}
-
-/* MEDIA BAR */
-.media-bar{margin-bottom:18px;text-align:center}
-.media-bar p{font-size:10px;color:#475569;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
-.media-logos{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
-.media-logo{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:7px 13px;font-size:11px;font-weight:bold;color:#64748b;letter-spacing:1px}
-
-/* VIP SECTION */
-.vip-section{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(34,197,94,0.05));border:1px solid rgba(59,130,246,0.3);border-radius:18px;padding:18px;margin-bottom:18px}
-.vip-section h4{font-size:13px;color:#3b82f6;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
-.vip-item{display:flex;align-items:center;gap:10px;margin-bottom:11px;font-size:12px}
-.vip-icon{width:28px;height:28px;border-radius:8px;background:rgba(34,197,94,0.15);border:1px solid #22c55e;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
-
-/* GIFT BANNER */
-.gift-banner{background:linear-gradient(135deg,rgba(251,191,36,0.15),rgba(251,191,36,0.05));border:1px solid #fbbf24;border-radius:14px;padding:14px;margin-bottom:18px;text-align:center}
-.gift-banner p{font-size:13px;font-weight:900;color:#fbbf24;margin-bottom:4px}
-.gift-banner small{font-size:11px;color:#94a3b8}
-
-/* SPIN WHEEL */
-.spin-section{margin-bottom:18px;text-align:center}
-.spin-section h4{font-size:13px;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;letter-spacing:1px}
-.wheel-wrap{position:relative;width:260px;height:260px;margin:0 auto 15px}
-.wheel-pointer{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:28px;z-index:10;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))}
-.wheel-canvas{border-radius:50%;box-shadow:0 0 30px rgba(34,197,94,0.25)}
-.spin-btn{background:linear-gradient(135deg,#22c55e,#16a34a);color:#010813;border:none;padding:14px 38px;border-radius:50px;font-size:14px;font-weight:900;cursor:pointer;box-shadow:0 0 20px rgba(34,197,94,0.4);text-transform:uppercase;letter-spacing:1px}
-.spin-btn:disabled{opacity:0.5;cursor:not-allowed}
-.spin-result{margin-top:12px;padding:12px 15px;background:rgba(34,197,94,0.1);border:1px solid #22c55e;border-radius:12px;font-size:12px;font-weight:bold;color:#22c55e;display:none;line-height:1.5}
-
-/* URGENCY */
-.urgency-bar{background:linear-gradient(135deg,rgba(239,68,68,0.18),rgba(239,68,68,0.08));border:1px solid #ef4444;border-radius:12px;padding:10px 15px;margin-bottom:15px;display:flex;align-items:center;gap:10px}
-.urgency-bar span{font-size:11px;color:#ef4444;font-weight:bold}
-
-/* BEFORE AFTER */
-.before-after{margin-bottom:18px}
-.before-after h4{font-size:13px;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;letter-spacing:1px}
-.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.ba-card{border-radius:12px;padding:13px;text-align:center}
-.ba-card.before{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3)}
-.ba-card.after{background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.3)}
-.ba-label{font-size:9px;text-transform:uppercase;font-weight:bold;margin-bottom:8px;display:block}
-.ba-card.before .ba-label{color:#ef4444}
-.ba-card.after .ba-label{color:#22c55e}
-.ba-item{font-size:10px;color:#94a3b8;margin-bottom:5px}
-
-/* WITHDRAWAL PROOF */
-.proof-section{margin-bottom:18px}
-.proof-section h4{font-size:13px;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;letter-spacing:1px}
-.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.proof-card{background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:12px;padding:13px;text-align:center}
-.proof-amount{font-size:20px;font-weight:900;color:#22c55e}
-.proof-name{font-size:10px;color:#64748b;margin-top:3px}
-.proof-date{font-size:9px;color:#3b82f6;margin-top:2px}
-
-/* TESTIMONIALS */
-.testimonials{margin-bottom:18px}
-.testimonials h4{font-size:13px;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;letter-spacing:1px}
-.tcard{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:13px;margin-bottom:11px}
-.tcard-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.tavatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#3b82f6);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
-.tname{font-size:12px;font-weight:bold}
-.tstars{color:#fbbf24;font-size:11px}
-.tprofit{background:rgba(34,197,94,0.15);color:#22c55e;font-size:10px;font-weight:bold;padding:2px 8px;border-radius:10px;border:1px solid #22c55e;margin-left:auto}
-.ttext{font-size:11px;color:#94a3b8;line-height:1.55}
-
-/* VISITOR MAP */
-.visitor-map{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px;margin-bottom:18px}
-.visitor-map h4{font-size:13px;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;letter-spacing:1px}
-.country-list{display:flex;flex-wrap:wrap;gap:8px}
-.country-item{background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:5px 10px;font-size:10px}
-
-/* LEADERBOARD */
-.leaderboard{margin-bottom:18px}
-.leaderboard h4{font-size:13px;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;letter-spacing:1px}
-.lb-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.06)}
-.lb-rank{font-size:16px;width:25px;text-align:center;flex-shrink:0}
-.lb-name{flex:1;font-size:12px;font-weight:bold}
-.lb-profit{color:#22c55e;font-size:12px;font-weight:900}
-.lb-days{font-size:9px;color:#64748b}
-
-/* FAQ */
-.faq-section{margin-bottom:18px}
-.faq-section h4{font-size:13px;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;letter-spacing:1px}
-.faq-item{border:1px solid rgba(255,255,255,0.08);border-radius:12px;margin-bottom:9px;overflow:hidden}
-.faq-q{padding:13px 15px;font-size:12px;font-weight:bold;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.03);user-select:none}
-.faq-q .faq-icon{color:#22c55e;font-size:18px;transition:transform 0.3s;flex-shrink:0}
-.faq-item.open .faq-icon{transform:rotate(45deg)}
-.faq-a{font-size:11px;color:#94a3b8;line-height:1.65;max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.35s}
-.faq-item.open .faq-a{max-height:200px;padding:0 15px 13px}
+/* SECTION LABEL */
+.section-label{font-family:var(--font-head);font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
 
 /* CHAT */
-.chat-area{background:rgba(0,0,0,0.4);height:220px;border-radius:18px;overflow-y:auto;margin-bottom:18px;padding:15px;border:1px solid rgba(255,255,255,0.05);font-size:12px;scroll-behavior:smooth}
-.chat-area::-webkit-scrollbar{width:4px}
-.chat-area::-webkit-scrollbar-track{background:transparent}
-.chat-area::-webkit-scrollbar-thumb{background:#233554;border-radius:4px}
-.msg{margin-bottom:12px;padding:11px 13px;border-radius:12px;background:rgba(255,255,255,0.05);line-height:1.5;border-left:3px solid #3b82f6}
+.chat-wrap{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:14px}
+.chat-feed{height:200px;overflow-y:auto;padding:14px;scroll-behavior:smooth}
+.chat-feed::-webkit-scrollbar{width:3px}
+.chat-feed::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.chat-msg{margin-bottom:10px;font-size:12px;line-height:1.55;padding:9px 12px;background:var(--surface2);border-radius:10px;border-left:2px solid var(--green)}
+.chat-author{color:var(--green);font-weight:700;margin-right:5px}
+.chat-input{border-top:1px solid var(--border);padding:12px 14px;display:flex;flex-direction:column;gap:8px;background:var(--surface2)}
+.chat-input input{background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);font-family:var(--font-body);font-size:12px;padding:8px 0;outline:none;width:100%}
+.chat-input input::placeholder{color:var(--muted)}
+.chat-submit{background:var(--blue);color:white;border:none;padding:10px;border-radius:10px;font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;width:100%}
 
-/* INPUT BOX */
-.input-box{background:rgba(17,34,64,0.8);border-radius:14px;padding:14px;margin-bottom:18px;border:1px solid #3b82f6}
-.input-box input{background:transparent;border:none;border-bottom:1px solid #233554;color:white;width:100%;padding:10px 0;margin-bottom:12px;outline:none;font-size:13px}
-.input-box input::placeholder{color:#475569}
-.input-box button{background:#3b82f6;color:white;border:none;width:100%;padding:12px;border-radius:10px;font-weight:bold;cursor:pointer;text-transform:uppercase;font-size:13px;letter-spacing:1px}
+/* SPIN */
+.spin-wrap{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:14px;text-align:center}
+.spin-title{font-family:var(--font-head);font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px}
+.spin-sub{font-size:11px;color:var(--muted);margin-bottom:16px}
+.wheel-container{position:relative;width:240px;height:240px;margin:0 auto 16px}
+.wheel-ptr{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:24px;z-index:5;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))}
+.spin-btn{background:var(--green);color:var(--bg);border:none;padding:13px 36px;border-radius:50px;font-family:var(--font-head);font-size:13px;font-weight:800;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:opacity 0.2s}
+.spin-btn:disabled{opacity:0.4;cursor:not-allowed}
+.spin-result{display:none;margin-top:12px;padding:12px;background:var(--green-dim);border:1px solid rgba(0,217,126,0.25);border-radius:12px;font-size:12px;font-weight:600;color:var(--green);line-height:1.6}
+
+/* TESTIMONIALS */
+.testi-wrap{margin-bottom:14px;display:flex;flex-direction:column;gap:10px}
+.tcard{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px}
+.tcard-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.t-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;font-size:15px;flex-shrink:0}
+.t-name{font-size:13px;font-weight:700;color:var(--text)}
+.t-stars{font-size:10px;color:var(--gold);letter-spacing:1px}
+.t-profit{margin-left:auto;background:var(--green-dim);border:1px solid rgba(0,217,126,0.2);color:var(--green);font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px}
+.t-text{font-size:12px;color:#7a8699;line-height:1.65;font-style:italic}
 
 /* BUTTONS */
-.btn{display:block;width:100%;padding:17px;text-decoration:none;font-weight:900;border-radius:14px;text-transform:uppercase;font-size:14px;text-align:center;margin-bottom:13px;letter-spacing:1px;transition:opacity 0.2s}
-.btn:active{opacity:0.85}
-.green{background:#22c55e;color:#010813}
-.blue{border:2px solid #3b82f6;color:#3b82f6}
+.cta-stack{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.cta-primary{display:flex;align-items:center;justify-content:center;gap:8px;padding:16px;background:var(--green);color:var(--bg);border-radius:14px;font-family:var(--font-head);font-size:13px;font-weight:800;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:opacity 0.2s}
+.cta-primary:active{opacity:0.85}
+.cta-secondary{display:flex;align-items:center;justify-content:center;gap:8px;padding:15px;background:transparent;color:var(--blue);border:1.5px solid rgba(79,142,247,0.4);border-radius:14px;font-family:var(--font-head);font-size:13px;font-weight:800;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:opacity 0.2s}
+.cta-secondary:active{opacity:0.85}
 
-/* TRUST BADGES */
-.trust-badges{display:flex;justify-content:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}
-.trust-badge{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:7px 12px;font-size:10px;color:#94a3b8}
+/* TRUST ROW */
+.trust-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.trust-chip{display:flex;align-items:center;gap:5px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:6px 12px;font-size:10px;font-weight:600;color:var(--muted)}
 
 /* DISCLAIMER */
-.disclaimer{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:13px;margin-bottom:18px;font-size:9px;color:#475569;line-height:1.7;text-align:center}
+.disclaimer{font-size:9px;color:var(--muted);line-height:1.8;text-align:center;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:14px}
+
+/* FLOAT WA */
+.float-wa{position:fixed;bottom:22px;right:18px;width:54px;height:54px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;z-index:900;box-shadow:0 4px 20px rgba(37,211,102,0.4);text-decoration:none;animation:wapulse 2.5s infinite}
+@keyframes wapulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,0.4)}50%{box-shadow:0 0 0 12px rgba(37,211,102,0)}}
+
+/* WA BUBBLE */
+#wa-bubble{position:fixed;bottom:88px;right:-260px;background:var(--surface2);border:1px solid rgba(0,217,126,0.2);border-radius:14px 14px 0 14px;padding:12px 14px;width:210px;z-index:890;box-shadow:0 8px 30px rgba(0,0,0,0.4);transition:right 0.4s cubic-bezier(0.34,1.56,0.64,1)}
+#wa-bubble.show{right:78px}
+.wb-name{font-size:10px;font-weight:700;color:var(--green);margin-bottom:4px}
+.wb-msg{font-size:11px;color:#94a3b8;line-height:1.5}
+.wb-time{font-size:9px;color:var(--muted);text-align:right;margin-top:5px}
+
+/* POPUPS */
+#profit-pop{position:fixed;bottom:22px;left:-320px;background:var(--surface2);border-left:3px solid var(--green);border-radius:12px;padding:12px 14px;width:260px;z-index:880;box-shadow:0 8px 25px rgba(0,0,0,0.4);font-size:12px;transition:left 0.4s ease}
+#join-pop{position:fixed;bottom:88px;right:-320px;background:var(--surface2);border-left:3px solid var(--blue);border-radius:12px;padding:12px 14px;width:260px;z-index:880;box-shadow:0 8px 25px rgba(0,0,0,0.4);font-size:12px;transition:right 0.4s ease}
+
+/* EXIT OVERLAY */
+#exit-pop{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:9990;display:none;align-items:center;justify-content:center;padding:20px}
+#exit-pop.show{display:flex}
+.exit-box{background:var(--surface);border:1px solid rgba(0,217,126,0.25);border-radius:20px;padding:28px 22px;max-width:380px;width:100%;text-align:center}
+.exit-box h3{font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--red);margin-bottom:10px}
+.exit-box p{font-size:12px;color:#94a3b8;line-height:1.7;margin-bottom:20px}
+.exit-close{background:none;border:1px solid var(--border);color:var(--muted);padding:9px 22px;border-radius:10px;cursor:pointer;font-size:11px;margin-top:8px;width:100%;font-family:var(--font-body)}
+
+/* CONFETTI */
+.confetti-piece{position:fixed;top:-10px;pointer-events:none;z-index:99999;border-radius:2px;animation:cfall linear forwards}
+@keyframes cfall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(105vh) rotate(720deg);opacity:0}}
 </style>
 </head>
 <body>
 
-<!-- PARTICLES -->
-<div id="particles"></div>
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">⚡ Brimes Academy</div>
+  <div class="loader-track"><div class="loader-prog"></div></div>
+  <p style="font-size:10px;color:var(--muted);margin-top:6px;letter-spacing:1px">LOADING MASTERCLASS...</p>
+</div>
 
-<!-- PAGE LOADER -->
-<div id="page-loader">
-    <div class="loader-logo">⚡ BRIMES ACADEMY</div>
-    <div class="loader-bar"><div class="loader-fill"></div></div>
-    <p style="color:#64748b;font-size:11px;margin-top:15px">Loading your masterclass...</p>
+<!-- WELCOME OVERLAY -->
+<div id="risk-overlay">
+  <div style="text-align:center;padding:30px 24px;max-width:400px;width:100%">
+    <div style="font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:3px;margin-bottom:10px;line-height:1.2;text-shadow:0 0 30px var(--green-glow)">WELCOME TO<br>BRIMES ACADEMY</div>
+    <div style="font-size:13px;color:#5a6478;margin-bottom:28px;min-height:22px" id="typingText"><span id="tcursor" style="display:inline-block;width:2px;height:14px;background:var(--green);animation:blink 0.7s infinite;vertical-align:middle"></span></div>
+
+    <div style="background:rgba(255,77,109,0.08);border:1px solid rgba(255,77,109,0.25);border-radius:14px;padding:14px 16px;margin-bottom:26px;text-align:left">
+      <p style="color:var(--red);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">⚠️ Risk Warning</p>
+      <p style="color:#94a3b8;font-size:11px;font-weight:500;line-height:1.7"><strong style="color:var(--text)">Trading forex involves HIGH RISK of losing your capital.</strong> Only trade with money you can afford to lose. Past results do not guarantee future profits.</p>
+    </div>
+
+    <button class="risk-btn" onclick="startExperience()">ACCESS MASTERCLASS</button>
+  </div>
 </div>
 
 <!-- EXIT POPUP -->
 <div id="exit-pop">
-    <div class="exit-box">
-        <div style="font-size:40px;margin-bottom:12px">⚠️</div>
-        <h3>Wait! Don't Leave Yet!</h3>
-        <p>You're about to miss out on <strong style="color:#22c55e">FREE daily trading signals</strong> that are making our students hundreds of dollars every week!</p>
-        <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="btn green">🔥 JOIN FREE — Last Chance!</a>
-        <button class="exit-close" onclick="document.getElementById('exit-pop').classList.remove('show')">No thanks, I'll miss out</button>
-    </div>
+  <div class="exit-box">
+    <div style="font-size:38px;margin-bottom:12px">⚡</div>
+    <h3>Don't Leave Yet!</h3>
+    <p>You're about to miss <strong style="color:var(--green)">FREE daily trading signals</strong> that are helping our students make money every week!</p>
+    <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="cta-primary" style="margin-bottom:0">🔥 Join Free — Last Chance</a>
+    <button class="exit-close" onclick="document.getElementById('exit-pop').classList.remove('show')">No thanks, I'll pass</button>
+  </div>
 </div>
 
 <!-- WA BUBBLE -->
 <div id="wa-bubble">
-    <div class="wa-name">💬 Brimes</div>
-    <div class="wa-msg" id="wa-msg">Hey! 👋 Are you ready to start making money from trading?</div>
-    <div class="wa-time">Just now ✓✓</div>
-</div>
-
-<!-- WELCOME OVERLAY -->
-<div id="audio-trigger">
-    <div class="welcome-text">WELCOME TO<br>BRIMES ACADEMY</div>
-    <div class="typing-text" id="typingText"><span class="typing-cursor"></span></div>
-    <button class="play-btn" onclick="startExperience()">ACCESS MASTERCLASS</button>
+  <div class="wb-name">💬 Brimes</div>
+  <div class="wb-msg" id="wa-msg">Hey! 👋 Ready to start making money from trading?</div>
+  <div class="wb-time">Just now ✓✓</div>
 </div>
 
 <!-- TICKER -->
-<div class="ticker-wrap">
-    <div class="ticker">📈 XAUUSD: 2,024.45 ▲ &nbsp;|&nbsp; EURUSD: 1.0821 ▼ &nbsp;|&nbsp; GBPUSD: 1.2644 ▲ &nbsp;|&nbsp; BTCUSD: 51,204.10 ▲ &nbsp;|&nbsp; NASDAQ: 18,240 ▲ &nbsp;|&nbsp; XAUUSD: 2,024.45 ▲ &nbsp;|&nbsp; EURUSD: 1.0821 ▼ &nbsp;|&nbsp; GBPUSD: 1.2644 ▲</div>
+<div class="ticker-bar">
+  <div class="ticker-inner">
+    📈 XAUUSD 2,024.45 ▲ <span class="ticker-sep">|</span>
+    EURUSD 1.0821 ▼ <span class="ticker-sep">|</span>
+    GBPUSD 1.2644 ▲ <span class="ticker-sep">|</span>
+    BTCUSD 51,204 ▲ <span class="ticker-sep">|</span>
+    NASDAQ 18,240 ▲ <span class="ticker-sep">|</span>
+    XAUUSD 2,024.45 ▲ <span class="ticker-sep">|</span>
+    EURUSD 1.0821 ▼ <span class="ticker-sep">|</span>
+    GBPUSD 1.2644 ▲ <span class="ticker-sep">|</span>
+    BTCUSD 51,204 ▲ <span class="ticker-sep">|</span>
+    NASDAQ 18,240 ▲ <span class="ticker-sep">|</span>
+  </div>
 </div>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-    <div class="logo">BRIMES Trading Signals Academy</div>
-    <div class="live-count" id="live-users">● 1,200 ONLINE</div>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Brimes Academy</div>
+  <div class="nav-pill"><div class="nav-dot"></div><span id="live-users">1,200 Online</span></div>
 </nav>
 
-<div class="container">
+<div class="main">
 
-    <!-- COUNTDOWN -->
-    <div class="countdown-banner">
-        <p>🔥 VIP Offer Closes In:</p>
-        <div class="countdown-boxes">
-            <div class="cbox"><span id="cd-h">02</span><small>Hrs</small></div>
-            <div class="cbox"><span id="cd-m">00</span><small>Min</small></div>
-            <div class="cbox"><span id="cd-s">00</span><small>Sec</small></div>
-        </div>
+  <!-- MENTOR CARD -->
+  <div class="mentor-card">
+    <img src="mentor-pro.jpg" class="mentor-img" alt="Brimes">
+    <div class="mentor-info">
+      <div class="mentor-badge">✓ Verified Mentor</div>
+      <div class="mentor-name">Master Trader: Brimes</div>
+      <div class="mentor-live"><div class="live-dot"></div> LIVE — Masterclass In Progress</div>
     </div>
+  </div>
 
-    <!-- STATS -->
-    <div class="stats-widget">
-        <div><span class="stat-num">$<span id="total-profits">42,550</span></span><span class="stat-label">Academy Profits</span></div>
-        <div><span class="stat-num" id="signals-sent">14</span><span class="stat-label">Live Signals</span></div>
+  <!-- VIDEO -->
+  <div class="video-wrap">
+    <iframe id="ytVideo" src="https://www.youtube.com/embed/cXovfksZV08?enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&controls=0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+    <div class="video-end" id="endCover"><p>🎵 Session In Progress<br>Scroll down to join 👇</p></div>
+    <div class="video-overlay"></div>
+    <div class="live-badge" id="liveTag">🔴 Live Masterclass</div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box"><span class="stat-val">+4,200</span><span class="stat-lbl">Pips Gained</span></div>
+    <div class="stat-box"><span class="stat-val">92%</span><span class="stat-lbl">Win Rate</span></div>
+    <div class="stat-box"><span class="stat-val">5★</span><span class="stat-lbl">Rating</span></div>
+  </div>
+
+  <!-- VIEWERS -->
+  <div class="viewers">
+    <div class="nav-dot" style="background:var(--red)"></div>
+    <span id="viewing-count">127 people are viewing this page right now</span>
+  </div>
+
+  <audio id="bgMusic" loop><source src="song.mp3" type="audio/mpeg"></audio>
+
+  <!-- LIVE CHAT -->
+  <div class="section-label">💬 Live Chat</div>
+  <div class="chat-wrap">
+    <div class="chat-feed" id="chat"></div>
+    <div class="chat-input">
+      <input type="text" id="vName" placeholder="Your name...">
+      <input type="text" id="vMsg" placeholder="Write a message...">
+      <button class="chat-submit" onclick="postComment()">Post to Live Chat</button>
     </div>
+  </div>
 
-    <div class="card">
-
-        <!-- MENTOR HEADER -->
-        <div class="mentor-header">
-            <img src="mentor-pro.jpg" alt="Brimes">
-            <div class="mentor-header-text">
-                <div class="verified-badge">✓ VERIFIED MENTOR</div>
-                <h3>Master Trader: Brimes</h3>
-                <p>🔴 LIVE — Masterclass In Progress</p>
-            </div>
-        </div>
-
-        <!-- VIDEO -->
-        <div class="video-wrap">
-            <iframe id="ytVideo" src="https://www.youtube.com/embed/cXovfksZV08?enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&controls=0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
-            <div class="video-end-cover" id="endCover"><p>🎵 Session In Progress...<br>Scroll down to join! 👇</p></div>
-            <div class="video-overlay"></div>
-            <div class="video-live-tag" id="liveTag">🔴 LIVE Masterclass</div>
-        </div>
-
-        <!-- MENTOR STATS -->
-        <div class="mentor-stats">
-            <div style="text-align:center"><span style="color:#22c55e;font-weight:900;font-size:18px">+4,200</span><br><span style="font-size:10px;color:#64748b">Pips Gained</span></div>
-            <div style="text-align:center"><span style="color:#22c55e;font-weight:900;font-size:18px">92%</span><br><span style="font-size:10px;color:#64748b">Win Rate</span></div>
-            <div style="text-align:center"><span style="color:#22c55e;font-weight:900;font-size:18px">5★</span><br><span style="font-size:10px;color:#64748b">Rating</span></div>
-        </div>
-
-        <audio id="bgMusic" loop><source src="song.mp3" type="audio/mpeg"></audio>
-
-        <!-- CHAT -->
-        <div class="chat-area" id="chat"></div>
-        <div class="input-box">
-            <input type="text" id="vName" placeholder="Enter your name...">
-            <input type="text" id="vMsg" placeholder="Write a message...">
-            <button onclick="postComment()">POST TO LIVE CHAT</button>
-        </div>
-
-        <!-- VIEWING COUNT -->
-        <div class="viewing-bar">
-            <div class="blink-dot"></div>
-            <span id="viewing-count">127 people are viewing this page right now</span>
-        </div>
-
-        <!-- PROGRESS BAR -->
-        <div class="progress-section">
-            <div class="progress-label"><span>🎓 VIP Class Capacity</span><span id="progress-pct">87% Full!</span></div>
-            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-        </div>
-
-        <!-- SCROLL HINT -->
-        <div class="scroll-hint"><p style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px">👇 Scroll Down To See More</p></div>
-
-        <!-- SIGNAL TICKER -->
-        <div class="signal-ticker-wrap">
-            <div class="signal-ticker-label">📡 Live Signals Feed</div>
-            <div class="signal-ticker">
-                <span class="signal-item buy">XAUUSD BUY @ 2,024 🎯 TP: 2,041</span>
-                <span class="signal-item sell">EURUSD SELL @ 1.0821 🎯 TP: 1.0790</span>
-                <span class="signal-item buy">NASDAQ BUY @ 18,240 🎯 TP: 18,310</span>
-                <span class="signal-item buy">GBPUSD BUY @ 1.2644 🎯 TP: 1.2690</span>
-                <span class="signal-item sell">BTCUSD SELL @ 51,204 🎯 TP: 50,800</span>
-                <span class="signal-item buy">XAUUSD BUY @ 2,024 🎯 TP: 2,041</span>
-                <span class="signal-item sell">EURUSD SELL @ 1.0821 🎯 TP: 1.0790</span>
-                <span class="signal-item buy">NASDAQ BUY @ 18,240 🎯 TP: 18,310</span>
-                <span class="signal-item buy">GBPUSD BUY @ 1.2644 🎯 TP: 1.2690</span>
-                <span class="signal-item sell">BTCUSD SELL @ 51,204 🎯 TP: 50,800</span>
-            </div>
-        </div>
-
-        <!-- ACHIEVEMENTS -->
-        <div class="achievements">
-            <div class="badge"><span class="badge-icon">🏆</span><span class="badge-label">Top Mentor</span></div>
-            <div class="badge"><span class="badge-icon">💎</span><span class="badge-label">VIP Elite</span></div>
-            <div class="badge"><span class="badge-icon">🎯</span><span class="badge-label">92% Win Rate</span></div>
-            <div class="badge"><span class="badge-icon">🔥</span><span class="badge-label">4,200 Pips</span></div>
-            <div class="badge"><span class="badge-icon">⚡</span><span class="badge-label">Live Signals</span></div>
-        </div>
-
-        <!-- CHART -->
-        <div class="chart-section">
-            <h4>📈 Live Account Growth</h4>
-            <div class="chart-wrap">
-                <div class="chart-label">XAUUSD — Account +$4,200 this month</div>
-                <canvas id="chartCanvas" style="width:100%;height:90px"></canvas>
-            </div>
-        </div>
-
-        <!-- STAR RATING -->
-        <div class="star-widget">
-            <div class="stars">★★★★★</div>
-            <div class="star-widget-text">
-                <p>4.9 / 5.0 Rating</p>
-                <small>Based on 312 student reviews</small>
-            </div>
-        </div>
-
-        <!-- MEDIA BAR -->
-        <div class="media-bar">
-            <p>🌍 Trusted by traders across Africa & beyond</p>
-            <div class="media-logos">
-                <div class="media-logo">FOREX</div>
-                <div class="media-logo">GOLD</div>
-                <div class="media-logo">NASDAQ</div>
-                <div class="media-logo">CRYPTO</div>
-            </div>
-        </div>
-
-        <!-- URGENCY BAR -->
-        <div class="urgency-bar">
-            <div class="blink-dot"></div>
-            <span>⚡ Only 3 VIP spots remaining this week!</span>
-        </div>
-
-        <!-- SPIN WHEEL -->
-        <div class="spin-section">
-            <h4>🎰 Spin To Win A Free Gift!</h4>
-            <div class="wheel-wrap">
-                <div class="wheel-pointer">▼</div>
-                <canvas id="wheelCanvas" class="wheel-canvas" width="260" height="260"></canvas>
-            </div>
-            <button class="spin-btn" id="spinBtn" onclick="spinWheel()">🎰 SPIN NOW! (3 left)</button>
-            <div class="spin-result" id="spinResult"></div>
-        </div>
-
-        <!-- VIP BENEFITS -->
-        <div class="vip-section">
-            <h4>💎 What You Get In VIP</h4>
-            <div class="vip-item"><div class="vip-icon">📡</div><div>Daily live signals on Gold, EURUSD & NASDAQ</div></div>
-            <div class="vip-item"><div class="vip-icon">🎯</div><div>Full trade breakdown — entry, SL & TP explained</div></div>
-            <div class="vip-item"><div class="vip-icon">🧠</div><div>1-on-1 mentorship & mindset coaching</div></div>
-            <div class="vip-item"><div class="vip-icon">📊</div><div>Real-time market analysis every morning</div></div>
-            <div class="vip-item"><div class="vip-icon">💰</div><div>Risk management system that protects your account</div></div>
-            <div class="vip-item"><div class="vip-icon">🏆</div><div>Access to private VIP-only trade setups</div></div>
-        </div>
-
-        <!-- FREE GIFT -->
-        <div class="gift-banner">
-            <p>🎁 FREE BONUS — Join Today!</p>
-            <small>Get our exclusive Gold Trading Strategy PDF FREE when you join the VIP group today!</small>
-        </div>
-
-        <!-- BEFORE AFTER -->
-        <div class="before-after">
-            <h4>📊 Student Transformation</h4>
-            <div class="ba-grid">
-                <div class="ba-card before">
-                    <span class="ba-label">❌ Before Brimes</span>
-                    <div class="ba-item">Losing every trade</div>
-                    <div class="ba-item">No strategy</div>
-                    <div class="ba-item">Blowing accounts</div>
-                    <div class="ba-item">Confused & stressed</div>
-                </div>
-                <div class="ba-card after">
-                    <span class="ba-label">✅ After Brimes</span>
-                    <div class="ba-item">92% win rate</div>
-                    <div class="ba-item">Clear daily signals</div>
-                    <div class="ba-item">Consistent profits</div>
-                    <div class="ba-item">Confident trader</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- WITHDRAWAL PROOF -->
-        <div class="proof-section">
-            <h4>💰 Student Withdrawal Proof</h4>
-            <div class="proof-grid">
-                <div class="proof-card"><div class="proof-amount">$1,240</div><div class="proof-name">Olamide T.</div><div class="proof-date">Today</div></div>
-                <div class="proof-card"><div class="proof-amount">$870</div><div class="proof-name">Chisom A.</div><div class="proof-date">Today</div></div>
-                <div class="proof-card"><div class="proof-amount">$2,100</div><div class="proof-name">Abubakar M.</div><div class="proof-date">Yesterday</div></div>
-                <div class="proof-card"><div class="proof-amount">$650</div><div class="proof-name">Funmi B.</div><div class="proof-date">Yesterday</div></div>
-            </div>
-        </div>
-
-        <!-- TESTIMONIALS -->
-        <div class="testimonials">
-            <h4>⭐ What Students Are Saying</h4>
-            <div class="tcard">
-                <div class="tcard-top">
-                    <div class="tavatar">O</div>
-                    <div><div class="tname">Olamide T.</div><div class="tstars">★★★★★</div></div>
-                    <div class="tprofit">+$1,240</div>
-                </div>
-                <div class="ttext">"Before Brimes I was losing every trade. Now I'm consistent. Best investment I ever made!"</div>
-            </div>
-            <div class="tcard">
-                <div class="tcard-top">
-                    <div class="tavatar" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6)">E</div>
-                    <div><div class="tname">Emeka S.</div><div class="tstars">★★★★★</div></div>
-                    <div class="tprofit">+$2,100</div>
-                </div>
-                <div class="ttext">"Brimes teaches you to think like a professional trader. 100% recommended!"</div>
-            </div>
-            <div class="tcard">
-                <div class="tcard-top">
-                    <div class="tavatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">Z</div>
-                    <div><div class="tname">Zainab K.</div><div class="tstars">★★★★★</div></div>
-                    <div class="tprofit">+$870</div>
-                </div>
-                <div class="ttext">"Joined VIP last month and already withdrew $870. This is real!"</div>
-            </div>
-        </div>
-
-        <!-- VISITOR MAP -->
-        <div class="visitor-map">
-            <h4>🌍 Live Visitors Right Now</h4>
-            <div class="country-list">
-                <div class="country-item">🇳🇬 Nigeria <span style="color:#22c55e;font-weight:bold" id="ng-count">342</span></div>
-                <div class="country-item">🇬🇭 Ghana <span style="color:#22c55e;font-weight:bold">128</span></div>
-                <div class="country-item">🇿🇦 S.Africa <span style="color:#22c55e;font-weight:bold">94</span></div>
-                <div class="country-item">🇰🇪 Kenya <span style="color:#22c55e;font-weight:bold">76</span></div>
-                <div class="country-item">🇺🇬 Uganda <span style="color:#22c55e;font-weight:bold">61</span></div>
-                <div class="country-item">🇬🇧 UK <span style="color:#22c55e;font-weight:bold">55</span></div>
-            </div>
-        </div>
-
-        <!-- LEADERBOARD -->
-        <div class="leaderboard">
-            <h4>🏅 Top Earners This Week</h4>
-            <div class="lb-item"><div class="lb-rank">🥇</div><div><div class="lb-name">Emeka S.</div><div class="lb-days">Joined 3 days ago</div></div><div class="lb-profit">+$2,100</div></div>
-            <div class="lb-item"><div class="lb-rank">🥈</div><div><div class="lb-name">Olamide T.</div><div class="lb-days">Joined 5 days ago</div></div><div class="lb-profit">+$1,240</div></div>
-            <div class="lb-item"><div class="lb-rank">🥉</div><div><div class="lb-name">Chisom A.</div><div class="lb-days">Joined 1 week ago</div></div><div class="lb-profit">+$870</div></div>
-            <div class="lb-item"><div class="lb-rank">4️⃣</div><div><div class="lb-name">Zainab K.</div><div class="lb-days">Joined 2 weeks ago</div></div><div class="lb-profit">+$650</div></div>
-        </div>
-
-        <!-- FAQ -->
-        <div class="faq-section">
-            <h4>❓ Frequently Asked Questions</h4>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-q">Is this suitable for beginners? <span class="faq-icon">+</span></div>
-                <div class="faq-a">Yes! Whether you are a complete beginner or experienced, BRIMES Academy has a program for you. We start from basics and build you to professional level.</div>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-q">How much do I need to start? <span class="faq-icon">+</span></div>
-                <div class="faq-a">You can start with as little as $100. We teach proper risk management so your account grows steadily regardless of your starting capital.</div>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-q">What markets do you trade? <span class="faq-icon">+</span></div>
-                <div class="faq-a">We primarily trade Gold (XAUUSD), EURUSD, GBPUSD, NASDAQ and Bitcoin — the highest probability markets for consistent profits.</div>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-q">How do I receive the signals? <span class="faq-icon">+</span></div>
-                <div class="faq-a">All signals are delivered directly to your WhatsApp. Free signals go to the group, VIP members get priority signals with full analysis personally.</div>
-            </div>
-        </div>
-
-        <!-- TRUST BADGES -->
-        <div class="trust-badges">
-            <div class="trust-badge">🔒 Secure & Trusted</div>
-            <div class="trust-badge">✅ Verified Results</div>
-            <div class="trust-badge">💯 100% Real</div>
-        </div>
-
-        <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="btn green">JOIN FREE SIGNALS GROUP</a>
-        <a href="https://wa.me/2348103586138?text=Hello%20Brimes,%20I'm%20ready%20for%20VIP." class="btn blue">PRIVATE VIP MENTORSHIP</a>
-
-        <!-- DISCLAIMER -->
-        <div class="disclaimer">⚠️ Risk Disclaimer: Trading forex involves significant risk of loss. Past performance is not indicative of future results. Only trade with money you can afford to lose. BRIMES Academy provides educational content for informational purposes only.</div>
-
+  <!-- SPIN WHEEL -->
+  <div class="spin-wrap">
+    <div class="spin-title">🎰 Spin & Win a Free Gift</div>
+    <div class="spin-sub">Every new visitor gets 3 free spins!</div>
+    <div class="wheel-container">
+      <div class="wheel-ptr">▼</div>
+      <canvas id="wheelCanvas" width="240" height="240" style="border-radius:50%;box-shadow:0 0 30px rgba(0,217,126,0.2)"></canvas>
     </div>
+    <button class="spin-btn" id="spinBtn" onclick="spinWheel()">Spin Now — 3 Left</button>
+    <div class="spin-result" id="spinResult"></div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="section-label">⭐ Student Results</div>
+  <div class="testi-wrap">
+    <div class="tcard">
+      <div class="tcard-head">
+        <div class="t-avatar" style="background:linear-gradient(135deg,#00d97e,#0aaf60)">O</div>
+        <div><div class="t-name">Olamide T.</div><div class="t-stars">★★★★★</div></div>
+        <div class="t-profit">+$1,240</div>
+      </div>
+      <div class="t-text">"Before Brimes I was losing every trade. Now I'm consistent. Best investment I ever made!"</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-head">
+        <div class="t-avatar" style="background:linear-gradient(135deg,#4f8ef7,#6c63ff)">E</div>
+        <div><div class="t-name">Emeka S.</div><div class="t-stars">★★★★★</div></div>
+        <div class="t-profit">+$2,100</div>
+      </div>
+      <div class="t-text">"Brimes teaches you to think like a professional trader. 100% recommended!"</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-head">
+        <div class="t-avatar" style="background:linear-gradient(135deg,#f5c542,#f97316)">Z</div>
+        <div><div class="t-name">Zainab K.</div><div class="t-stars">★★★★★</div></div>
+        <div class="t-profit">+$870</div>
+      </div>
+      <div class="t-text">"Joined VIP last month and already withdrew $870. This is real!"</div>
+    </div>
+  </div>
+
+  <!-- TRUST -->
+  <div class="trust-row">
+    <div class="trust-chip">🔒 Secure</div>
+    <div class="trust-chip">✅ Verified</div>
+    <div class="trust-chip">💯 100% Real</div>
+  </div>
+
+  <!-- CTA BUTTONS -->
+  <div class="cta-stack">
+    <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="cta-primary">💬 Join Free Signals Group</a>
+    <a href="https://wa.me/2348103586138?text=Hello%20Brimes,%20I'm%20ready%20for%20VIP." class="cta-secondary">💎 Private VIP Mentorship</a>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">⚠️ Risk Disclaimer: Trading forex involves significant risk of loss. Past performance does not guarantee future results. Only trade with money you can afford to lose. This is for educational purposes only.</div>
+
 </div>
 
-<!-- FLOATING WA -->
+<!-- FLOAT WA -->
 <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="float-wa">💬</a>
 
 <!-- POPUPS -->
-<div id="profit-pop"><div id="pop-txt" style="font-size:12px;color:white"></div></div>
-<div id="join-pop"><div id="join-txt" style="color:white"></div></div>
+<div id="profit-pop"></div>
+<div id="join-pop"></div>
 
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
 'use strict';
 
-// ── PARTICLES ──
-(function(){
-    const c = document.getElementById('particles');
-    const colors = ['#22c55e','#3b82f6','#f59e0b','#8b5cf6'];
-    for(let i=0;i<18;i++){
-        const p = document.createElement('div');
-        p.className = 'particle';
-        const s = Math.random()*6+3;
-        p.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*12+8}s;animation-delay:${Math.random()*8}s`;
-        c.appendChild(p);
-    }
-})();
-
-// ── TYPING ANIMATION ──
-const typingLines = [
-    "We turn beginners into pro traders...",
-    "Join 1,200+ students making daily profits...",
-    "92% win rate — verified results...",
-    "Daily Gold signals straight to WhatsApp..."
-];
-let tLine=0, tChar=0, tDeleting=false;
+// TYPING ANIMATION
+const typingLines=["We turn beginners into pro traders...","Join 1,200+ students making daily profits...","92% win rate — verified results...","Daily Gold signals straight to WhatsApp..."];
+let tLine=0,tChar=0,tDeleting=false;
 function typeEffect(){
-    const el = document.getElementById('typingText');
-    if(!el) return;
-    const cur = typingLines[tLine];
-    tDeleting ? tChar-- : tChar++;
-    el.innerHTML = cur.substring(0,tChar) + '<span class="typing-cursor"></span>';
-    if(!tDeleting && tChar === cur.length){ tDeleting=true; setTimeout(typeEffect,1800); return; }
-    if(tDeleting && tChar === 0){ tDeleting=false; tLine=(tLine+1)%typingLines.length; }
-    setTimeout(typeEffect, tDeleting ? 38 : 65);
+  const el=document.getElementById('typingText');
+  if(!el) return;
+  const cur=typingLines[tLine];
+  tDeleting?tChar--:tChar++;
+  el.innerHTML=cur.substring(0,tChar)+'<span id="tcursor" style="display:inline-block;width:2px;height:14px;background:var(--green);animation:blink 0.7s infinite;vertical-align:middle;margin-left:2px"></span>';
+  if(!tDeleting&&tChar===cur.length){tDeleting=true;setTimeout(typeEffect,1800);return;}
+  if(tDeleting&&tChar===0){tDeleting=false;tLine=(tLine+1)%typingLines.length;}
+  setTimeout(typeEffect,tDeleting?38:65);
 }
 typeEffect();
 
-// ── YOUTUBE ──
+// YOUTUBE
 let player;
 const bgMusic = document.getElementById('bgMusic');
 const endCover = document.getElementById('endCover');
@@ -648,343 +371,252 @@ const liveTag = document.getElementById('liveTag');
 let sessionActive = false;
 
 function onYouTubeIframeAPIReady(){
-    player = new YT.Player('ytVideo',{
-        events:{ 'onStateChange': onPlayerStateChange }
-    });
+  player = new YT.Player('ytVideo',{
+    events:{ onStateChange: onPlayerState }
+  });
 }
-
-function onPlayerStateChange(e){
-    if(e.data === YT.PlayerState.PLAYING){
-        const check = setInterval(()=>{
-            if(!player){ clearInterval(check); return; }
-            const cur = player.getCurrentTime();
-            const dur = player.getDuration();
-            if(dur > 0 && cur >= dur - 0.2){
-                clearInterval(check);
-                player.stopVideo();
-                endCover.classList.add('show');
-                liveTag.innerHTML = '🎵 Now Playing';
-                bgMusic.volume = 0.5;
-                bgMusic.play().catch(()=>{});
-            }
-        }, 400);
-    }
-    if(e.data === YT.PlayerState.ENDED){
+function onPlayerState(e){
+  if(e.data === YT.PlayerState.PLAYING){
+    const t = setInterval(()=>{
+      if(!player){ clearInterval(t); return; }
+      const c = player.getCurrentTime(), d = player.getDuration();
+      if(d > 0 && c >= d - 0.2){
+        clearInterval(t);
+        player.stopVideo();
         endCover.classList.add('show');
-        liveTag.innerHTML = '🎵 Now Playing';
+        liveTag.innerHTML = '🎵 Session In Progress';
         bgMusic.volume = 0.5;
         bgMusic.play().catch(()=>{});
-    }
+      }
+    }, 400);
+  }
+  if(e.data === YT.PlayerState.ENDED){
+    endCover.classList.add('show');
+    liveTag.innerHTML = '🎵 Session In Progress';
+    bgMusic.volume = 0.5;
+    bgMusic.play().catch(()=>{});
+  }
 }
 
 function startExperience(){
-    document.getElementById('audio-trigger').style.display = 'none';
-    sessionActive = true;
-    // Unlock audio on mobile
-    bgMusic.volume = 0;
-    bgMusic.play().then(()=>{ bgMusic.pause(); bgMusic.currentTime=0; bgMusic.volume=0.5; }).catch(()=>{});
-    // Start video
-    const iframe = document.getElementById('ytVideo');
-    iframe.src = iframe.src + '&autoplay=1&mute=0';
-    // Start all intervals
-    setInterval(showProfit, 10000);
-    setInterval(updateStats, 7000);
-    setInterval(()=> addMsg(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]), 4500);
-    setInterval(showJoinNotif, 18000);
-    // Animate progress bar
-    setTimeout(()=>{ const f=document.getElementById('progressFill'); if(f) f.style.width='87%'; }, 500);
+  document.getElementById('risk-overlay').style.display = 'none';
+  sessionActive = true;
+  bgMusic.volume = 0;
+  bgMusic.play().then(()=>{ bgMusic.pause(); bgMusic.currentTime = 0; bgMusic.volume = 0.5; }).catch(()=>{});
+  const iframe = document.getElementById('ytVideo');
+  iframe.src = iframe.src + '&autoplay=1&mute=0';
+  setTimeout(showProfit, 15000);
+  setInterval(()=> addMsg(names[Math.floor(Math.random()*names.length)], texts[Math.floor(Math.random()*texts.length)]), 4500);
 }
 
 document.addEventListener('visibilitychange',()=>{
-    if(!player) return;
-    if(document.hidden){ try{ player.pauseVideo(); }catch(e){} bgMusic.pause(); }
-    else{
-        if(sessionActive && !endCover.classList.contains('show')){ try{ player.playVideo(); }catch(e){} }
-        if(endCover.classList.contains('show')) bgMusic.play().catch(()=>{});
-    }
+  if(!player) return;
+  if(document.hidden){ try{ player.pauseVideo(); }catch(e){} bgMusic.pause(); }
+  else{
+    if(sessionActive && !endCover.classList.contains('show')){ try{ player.playVideo(); }catch(e){} }
+    if(endCover.classList.contains('show')) bgMusic.play().catch(()=>{});
+  }
 });
 
-// ── CHAT ──
+// CHAT
 const chatBox = document.getElementById('chat');
 const names = ["Olamide","Chisom","Abubakar","Funmi","Emeka","Zainab","Tunde","Blessing"];
-const texts = ["Gold hit TP! 🔥","Best mentor ever!","Withdrawal received 💰","Up $100 today!","Signals are 10/10","Blue everywhere! 💎","This is life changing!","Thank you Brimes 🙏"];
+const texts = ["Gold hit TP! 🔥","Best mentor ever!","Withdrawal received 💰","Up $100 today!","Signals are 10/10","Blue everywhere! 💎","Life changing!","Thank you Brimes 🙏"];
 
-function addMsg(n,m){
-    const d = document.createElement('div');
-    d.className = 'msg';
-    d.innerHTML = `<span style="color:#22c55e;font-weight:bold">${n}:</span> ${m}`;
-    chatBox.appendChild(d);
-    chatBox.scrollTop = chatBox.scrollHeight;
-    if(chatBox.children.length > 30) chatBox.firstChild.remove();
+function addMsg(n, m){
+  const d = document.createElement('div');
+  d.className = 'chat-msg';
+  d.innerHTML = `<span class="chat-author">${n}</span>${m}`;
+  chatBox.appendChild(d);
+  chatBox.scrollTop = chatBox.scrollHeight;
+  if(chatBox.children.length > 30) chatBox.firstChild.remove();
 }
 function postComment(){
-    const n = document.getElementById('vName').value.trim();
-    const m = document.getElementById('vMsg').value.trim();
-    if(n && m){ addMsg(n,m); document.getElementById('vName').value=''; document.getElementById('vMsg').value=''; }
+  const n = document.getElementById('vName').value.trim();
+  const m = document.getElementById('vMsg').value.trim();
+  if(n && m){ addMsg(n, m); document.getElementById('vName').value=''; document.getElementById('vMsg').value=''; }
 }
-for(let i=0;i<5;i++) addMsg(names[i], texts[i]);
+for(let i = 0; i < 5; i++) addMsg(names[i], texts[i]);
 
-// ── FAQ ──
-function toggleFaq(el){ el.classList.toggle('open'); }
-
-// ── COUNTDOWN ──
-let cdEnd = Date.now() + 2*60*60*1000;
-function updateCountdown(){
-    let diff = Math.max(0, cdEnd - Date.now());
-    let h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
-    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
-    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
-    if(diff===0) cdEnd = Date.now() + 2*60*60*1000;
-}
-setInterval(updateCountdown, 1000);
-updateCountdown();
-
-// ── STATS UPDATE ──
-function updateStats(){
-    const pEl=document.getElementById('total-profits');
-    const sEl=document.getElementById('signals-sent');
-    const lEl=document.getElementById('live-users');
-    if(pEl){ let v=parseInt(pEl.innerText.replace(/,/g,'')); pEl.innerText=(v+Math.floor(Math.random()*60)).toLocaleString(); }
-    if(sEl && Math.random()>0.75) sEl.innerText = parseInt(sEl.innerText)+1;
-    if(lEl) lEl.innerHTML = `● ${(Math.floor(Math.random()*120)+1180).toLocaleString()} ONLINE`;
-}
-setInterval(updateStats, 7000);
-
-// ── PROFIT POPUP ──
-function showProfit(){
-    const p = document.getElementById('profit-pop');
-    const n = names[Math.floor(Math.random()*names.length)];
-    document.getElementById('pop-txt').innerHTML = `<strong>${n}</strong> just made <strong>$${Math.floor(Math.random()*400)+50}</strong>! 💰`;
-    p.style.left = '20px';
-    setTimeout(()=> p.style.left='-350px', 4500);
-}
-
-// ── JOIN NOTIFICATION ──
-function showJoinNotif(){
-    const p = document.getElementById('join-pop');
-    const n = names[Math.floor(Math.random()*names.length)];
-    const actions = ["just joined VIP! 🔥","just joined the Free Group! ✅","just sent a message to Brimes! 💬"];
-    document.getElementById('join-txt').innerHTML = `🔔 <strong>${n}</strong> ${actions[Math.floor(Math.random()*actions.length)]}`;
-    p.style.right = '20px';
-    setTimeout(()=> p.style.right='-350px', 4500);
-}
-
-// ── VIEWING COUNT ──
+// LIVE USERS
 setInterval(()=>{
-    const el = document.getElementById('viewing-count');
-    if(el) el.textContent = `${Math.floor(Math.random()*40)+110} people are viewing this page right now`;
+  const el = document.getElementById('live-users');
+  if(el) el.textContent = `${(Math.floor(Math.random()*120)+1180).toLocaleString()} Online`;
+}, 7000);
+
+// VIEWING COUNT
+setInterval(()=>{
+  const el = document.getElementById('viewing-count');
+  if(el) el.textContent = `${Math.floor(Math.random()*40)+110} people are viewing this page right now`;
 }, 6000);
 
-// ── VISITOR COUNT ──
-setInterval(()=>{
-    const el = document.getElementById('ng-count');
-    if(el) el.textContent = Math.floor(Math.random()*20)+335;
-}, 5000);
-
-// ── ANIMATED CHART ──
-function drawChart(){
-    const canvas = document.getElementById('chartCanvas');
-    if(!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const w = canvas.parentElement.offsetWidth - 28 || 340;
-    const h = 90;
-    canvas.width = w; canvas.height = h;
-    const pts = [15,28,22,40,35,55,48,68,60,75,70,85,80,92];
-    const step = w/(pts.length-1);
-    ctx.clearRect(0,0,w,h);
-    const grad = ctx.createLinearGradient(0,0,0,h);
-    grad.addColorStop(0,'rgba(34,197,94,0.35)');
-    grad.addColorStop(1,'rgba(34,197,94,0)');
-    ctx.beginPath();
-    ctx.moveTo(0, h-(pts[0]/100)*h);
-    pts.forEach((p,i)=> ctx.lineTo(i*step, h-(p/100)*h));
-    ctx.lineTo(w,h); ctx.lineTo(0,h); ctx.closePath();
-    ctx.fillStyle = grad; ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(0, h-(pts[0]/100)*h);
-    pts.forEach((p,i)=> ctx.lineTo(i*step, h-(p/100)*h));
-    ctx.strokeStyle='#22c55e'; ctx.lineWidth=2.5; ctx.lineJoin='round'; ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(w-1, h-(pts[pts.length-1]/100)*h, 5, 0, 2*Math.PI);
-    ctx.fillStyle='#22c55e'; ctx.fill();
+// PROFIT POPUP
+function showProfit(){
+  const p = document.getElementById('profit-pop');
+  const n = names[Math.floor(Math.random()*names.length)];
+  p.innerHTML = `<strong>${n}</strong> just made <strong style="color:var(--green)">$${Math.floor(Math.random()*400)+50}</strong> 💰`;
+  p.style.left = '16px';
+  setTimeout(()=>{ p.style.left = '-320px'; setTimeout(showJoinNotif, 15000); }, 5000);
 }
-setTimeout(drawChart, 600);
-window.addEventListener('resize', drawChart);
 
-// ── WA BUBBLE ──
-const waMsgs = [
-    "Hey! 👋 Are you ready to start making money from trading?",
-    "Our Gold signal just hit TP! +$340 profit 🔥",
-    "Join now — 3 VIP spots left this week! 💎",
-    "Students are withdrawing daily 💰 Don't miss out!"
-];
+// JOIN NOTIFICATION
+function showJoinNotif(){
+  const p = document.getElementById('join-pop');
+  const n = names[Math.floor(Math.random()*names.length)];
+  const a = ["just joined VIP! 🔥","just joined the Free Group! ✅","just messaged Brimes! 💬"];
+  p.innerHTML = `🔔 <strong>${n}</strong> ${a[Math.floor(Math.random()*a.length)]}`;
+  p.style.right = '16px';
+  setTimeout(()=>{ p.style.right = '-320px'; setTimeout(showProfit, 15000); }, 5000);
+}
+
+// WA BUBBLE
+const waMsgs = ["Hey! 👋 Ready to start making money from trading?","Gold just hit TP! +$340 profit 🔥","Only 3 VIP spots left this week! 💎","Students are withdrawing daily 💰"];
 let waMsgIdx = 0;
 function showWaBubble(){
-    const b = document.getElementById('wa-bubble');
-    document.getElementById('wa-msg').textContent = waMsgs[waMsgIdx];
-    waMsgIdx = (waMsgIdx+1) % waMsgs.length;
-    b.classList.add('show');
-    setTimeout(()=> b.classList.remove('show'), 6000);
+  const b = document.getElementById('wa-bubble');
+  document.getElementById('wa-msg').textContent = waMsgs[waMsgIdx];
+  waMsgIdx = (waMsgIdx+1) % waMsgs.length;
+  b.classList.add('show');
+  setTimeout(()=> b.classList.remove('show'), 5500);
 }
-setTimeout(showWaBubble, 5000);
-setInterval(showWaBubble, 22000);
+setTimeout(showWaBubble, 8000);
+setInterval(showWaBubble, 30000);
 
-// ── CONFETTI ──
+// CONFETTI
 function launchConfetti(){
-    const colors = ['#22c55e','#3b82f6','#fbbf24','#ef4444','#8b5cf6','#f59e0b'];
-    for(let i=0;i<60;i++){
-        const c = document.createElement('div');
-        c.className = 'confetti-piece';
-        const s = Math.random()*8+4;
-        c.style.cssText = `left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};width:${s}px;height:${s}px;animation-delay:${Math.random()*1.5}s;animation-duration:${Math.random()*2+2.5}s`;
-        document.body.appendChild(c);
-        setTimeout(()=> c.remove(), 5000);
-    }
+  const colors = ['#00d97e','#4f8ef7','#f5c542','#ff4d6d','#a855f7'];
+  for(let i = 0; i < 60; i++){
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    const s = Math.random()*8+4;
+    c.style.cssText = `left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};width:${s}px;height:${s}px;animation-delay:${Math.random()*1.5}s;animation-duration:${Math.random()*2+2.5}s`;
+    document.body.appendChild(c);
+    setTimeout(()=> c.remove(), 5000);
+  }
 }
 
-// ── ADMIN RESET (only you know this) ──
-// Visit: your-url?reset=brimes2024
+// ADMIN
 const urlParams = new URLSearchParams(window.location.search);
 if(urlParams.get('reset') === 'brimes2024'){
-    localStorage.setItem('brimes_admin', 'true');
-    localStorage.removeItem('brimes_spins');
-    localStorage.removeItem('brimes_won');
-    localStorage.removeItem('brimes_win_spin');
-    localStorage.removeItem('brimes_spin_count');
-    window.history.replaceState({}, document.title, window.location.pathname);
-    alert('✅ Admin mode ON! You have unlimited spins!');
+  localStorage.setItem('brimes_admin','true');
+  ['brimes_spins','brimes_won','brimes_win_spin','brimes_spin_count'].forEach(k=> localStorage.removeItem(k));
+  window.history.replaceState({}, document.title, window.location.pathname);
+  alert('✅ Admin mode ON! Unlimited spins enabled!');
 }
 const isAdmin = localStorage.getItem('brimes_admin') === 'true';
 
-// ── SPIN WHEEL ──
-const wheelPrizes = [
-    { label:"Free PDF! 📘", color:"#22c55e", msg:"🎉 You won our FREE Gold Trading Strategy PDF! Join the group to claim it!" },
-    { label:"Try Again!", color:"#1e3a5f", msg:"😅 Unlucky! You still have spins left, try again!" },
-    { label:"VIP Discount!", color:"#3b82f6", msg:"🔥 You won a special VIP discount! Message Brimes now to claim!" },
-    { label:"Try Again!", color:"#1e3a5f", msg:"😅 Unlucky! You still have spins left, try again!" },
-    { label:"Free Signal!", color:"#f59e0b", msg:"⚡ You won a FREE premium trade signal! Join the group to receive it!" },
-    { label:"Try Again!", color:"#1e3a5f", msg:"😅 Unlucky! You still have spins left, try again!" },
-    { label:"1-on-1 Call!", color:"#8b5cf6", msg:"💎 You won a FREE 1-on-1 strategy call with Brimes! Message him now!" },
-    { label:"Try Again!", color:"#1e3a5f", msg:"😅 Keep going, spin again!" },
+// SPIN WHEEL
+const prizes = [
+  {label:"Free PDF!",color:"#00d97e",msg:"🎉 You won our FREE Gold Trading Strategy PDF! Join the group to claim it!"},
+  {label:"Try Again",color:"#1a2438",msg:"😅 Unlucky! Keep spinning!"},
+  {label:"VIP Discount",color:"#4f8ef7",msg:"🔥 You won a special VIP discount! Message Brimes now to claim!"},
+  {label:"Try Again",color:"#1a2438",msg:"😅 Unlucky! Keep spinning!"},
+  {label:"Free Signal",color:"#f5c542",msg:"⚡ You won a FREE premium trade signal! Join the group to receive it!"},
+  {label:"Try Again",color:"#1a2438",msg:"😅 Unlucky! Keep spinning!"},
+  {label:"1-on-1 Call",color:"#a855f7",msg:"💎 You won a FREE 1-on-1 strategy call with Brimes! Message him now!"},
+  {label:"Try Again",color:"#1a2438",msg:"😅 Unlucky! Keep spinning!"},
 ];
-let wheelAngle = 0, spinning = false;
-let spinTrials = parseInt(localStorage.getItem('brimes_spins') ?? '3');
+let wAngle = 0, spinning = false;
+let spinsLeft = parseInt(localStorage.getItem('brimes_spins') ?? '3');
 let hasWon = localStorage.getItem('brimes_won') === 'true';
-let guaranteedSpin = parseInt(localStorage.getItem('brimes_win_spin') ?? '-1');
-if(guaranteedSpin === -1){ guaranteedSpin = Math.floor(Math.random()*3)+1; localStorage.setItem('brimes_win_spin', guaranteedSpin); }
-let spinCount = parseInt(localStorage.getItem('brimes_spin_count') ?? '0');
-let targetIndex = 0;
+let winSpin = parseInt(localStorage.getItem('brimes_win_spin') ?? '-1');
+if(winSpin === -1){ winSpin = Math.floor(Math.random()*3)+1; localStorage.setItem('brimes_win_spin', winSpin); }
+let spinsDone = parseInt(localStorage.getItem('brimes_spin_count') ?? '0');
 
 function drawWheel(angle){
-    const canvas = document.getElementById('wheelCanvas');
-    if(!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const cx=130, cy=130, r=124;
-    const sa = (2*Math.PI)/wheelPrizes.length;
-    ctx.clearRect(0,0,260,260);
-    wheelPrizes.forEach((prize,i)=>{
-        const start = angle+i*sa, end = start+sa;
-        ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,start,end);
-        ctx.fillStyle = prize.color; ctx.fill();
-        ctx.strokeStyle='#0a192f'; ctx.lineWidth=2; ctx.stroke();
-        ctx.save(); ctx.translate(cx,cy); ctx.rotate(start+sa/2);
-        ctx.textAlign='right'; ctx.fillStyle='white'; ctx.font='bold 10px Segoe UI';
-        ctx.fillText(prize.label, r-8, 4); ctx.restore();
-    });
-    ctx.beginPath(); ctx.arc(cx,cy,18,0,2*Math.PI);
-    ctx.fillStyle='#010813'; ctx.fill();
-    ctx.strokeStyle='#22c55e'; ctx.lineWidth=3; ctx.stroke();
+  const canvas = document.getElementById('wheelCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx=120, cy=120, r=116, sa=(2*Math.PI)/prizes.length;
+  ctx.clearRect(0,0,240,240);
+  prizes.forEach((p,i)=>{
+    const s=angle+i*sa, e=s+sa;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,s,e);
+    ctx.fillStyle=p.color; ctx.fill();
+    ctx.strokeStyle='rgba(8,12,20,0.8)'; ctx.lineWidth=2; ctx.stroke();
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(s+sa/2);
+    ctx.textAlign='right'; ctx.fillStyle='rgba(255,255,255,0.9)';
+    ctx.font='bold 9px Syne,sans-serif';
+    ctx.fillText(p.label, r-8, 3.5); ctx.restore();
+  });
+  ctx.beginPath(); ctx.arc(cx,cy,16,0,2*Math.PI);
+  ctx.fillStyle='var(--bg)'; ctx.fill();
+  ctx.strokeStyle='var(--green)'; ctx.lineWidth=2.5; ctx.stroke();
 }
 
 function initSpinUI(){
-    const btn = document.getElementById('spinBtn');
-    const res = document.getElementById('spinResult');
-    if(isAdmin){
-        btn.disabled=false; btn.textContent='🔐 ADMIN SPIN!';
-    } else if(hasWon){
-        btn.disabled=true; btn.textContent='🏆 You Already Won!';
-        res.textContent='✅ You already claimed a prize! Join the group to redeem it! 🔥'; res.style.display='block';
-    } else if(spinTrials<=0){
-        btn.disabled=true; btn.textContent='❌ No Spins Left!';
-        res.textContent='😅 No more spins! Join the VIP group anyway — signals are 🔥!'; res.style.display='block';
-    } else {
-        btn.textContent = `🎰 SPIN NOW! (${spinTrials} left)`;
-    }
+  const btn = document.getElementById('spinBtn');
+  const res = document.getElementById('spinResult');
+  if(isAdmin){ btn.textContent='🔐 Admin Spin'; }
+  else if(hasWon){ btn.disabled=true; btn.textContent='🏆 Already Won!'; res.textContent='✅ You already claimed a prize! Join the group to redeem!'; res.style.display='block'; }
+  else if(spinsLeft<=0){ btn.disabled=true; btn.textContent='No Spins Left'; res.textContent='😅 No more spins! Join the VIP group — signals are 🔥!'; res.style.display='block'; }
+  else{ btn.textContent=`Spin Now — ${spinsLeft} Left`; }
 }
 
 function spinWheel(){
-    if(spinning) return;
-    if(!isAdmin && (spinTrials<=0 || hasWon)) return;
-    if(!isAdmin){ spinTrials--; spinCount++; localStorage.setItem('brimes_spins', spinTrials); localStorage.setItem('brimes_spin_count', spinCount); }
-    spinning = true;
-    const btn = document.getElementById('spinBtn');
-    btn.disabled = true;
-    document.getElementById('spinResult').style.display = 'none';
-    if(isAdmin) btn.textContent = '🔐 ADMIN SPIN!';
-    else btn.textContent = spinTrials > 0 ? `🎰 SPIN NOW! (${spinTrials} left)` : '🎰 LAST SPIN!';
-    const prizeIdx = [0,2,4,6], tryIdx = [1,3,5,7];
-    targetIndex = (spinCount===guaranteedSpin) ? prizeIdx[Math.floor(Math.random()*4)] : tryIdx[Math.floor(Math.random()*4)];
-    const sa = (2*Math.PI)/wheelPrizes.length;
-    const extraSpins = (Math.floor(Math.random()*5)+5)*2*Math.PI;
-    const tAngle = -(targetIndex*sa + sa/2 - Math.PI/2);
-    const totalAngle = extraSpins + ((tAngle - wheelAngle) % (2*Math.PI) + 2*Math.PI) % (2*Math.PI);
-    let start=null; const duration=4200; const startAngle=wheelAngle;
-    function animate(ts){
-        if(!start) start=ts;
-        const elapsed=ts-start, progress=Math.min(elapsed/duration,1);
-        const ease=1-Math.pow(1-progress,3);
-        wheelAngle = startAngle + totalAngle*ease;
-        drawWheel(wheelAngle);
-        if(progress<1){ requestAnimationFrame(animate); return; }
-        spinning=false;
-        const prize = wheelPrizes[targetIndex];
-        const res = document.getElementById('spinResult');
-        res.textContent = prize.msg; res.style.display='block';
-        if(!prize.label.includes('Try Again')){
-            hasWon=true; localStorage.setItem('brimes_won','true');
-            btn.disabled=true; btn.textContent='🏆 You Already Won!';
-            if(isAdmin){ btn.disabled=false; btn.textContent='🔐 ADMIN SPIN!'; }
-            launchConfetti();
-        } else if(spinTrials<=0 && !isAdmin){
-            btn.disabled=true; btn.textContent='❌ No Spins Left!';
-        } else {
-            btn.disabled=false;
-            btn.textContent = isAdmin ? '🔐 ADMIN SPIN!' : `🎰 SPIN NOW! (${spinTrials} left)`;
-        }
+  if(spinning) return;
+  if(!isAdmin && (spinsLeft<=0 || hasWon)) return;
+  if(!isAdmin){ spinsLeft--; spinsDone++; localStorage.setItem('brimes_spins',spinsLeft); localStorage.setItem('brimes_spin_count',spinsDone); }
+  spinning = true;
+  const btn = document.getElementById('spinBtn');
+  btn.disabled = true;
+  document.getElementById('spinResult').style.display = 'none';
+  const winIdx=[0,2,4,6], loseIdx=[1,3,5,7];
+  const target = (!isAdmin && spinsDone===winSpin) ? winIdx[Math.floor(Math.random()*4)] : loseIdx[Math.floor(Math.random()*4)];
+  const sa=(2*Math.PI)/prizes.length;
+  const extra=(Math.floor(Math.random()*5)+5)*2*Math.PI;
+  const dest=-(target*sa+sa/2-Math.PI/2);
+  const total=extra+((dest-wAngle)%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
+  let start=null; const dur=4200; const startA=wAngle;
+  function animate(ts){
+    if(!start) start=ts;
+    const prog=Math.min((ts-start)/dur,1);
+    const ease=1-Math.pow(1-prog,3);
+    wAngle=startA+total*ease;
+    drawWheel(wAngle);
+    if(prog<1){ requestAnimationFrame(animate); return; }
+    spinning=false;
+    const prize=prizes[target];
+    const res=document.getElementById('spinResult');
+    res.textContent=prize.msg; res.style.display='block';
+    if(!prize.label.includes('Try Again')){
+      hasWon=true; localStorage.setItem('brimes_won','true');
+      btn.disabled=true; btn.textContent='🏆 Already Won!';
+      if(isAdmin){ btn.disabled=false; btn.textContent='🔐 Admin Spin'; }
+      launchConfetti();
+    } else if(spinsLeft<=0 && !isAdmin){
+      btn.disabled=true; btn.textContent='No Spins Left';
+    } else {
+      btn.disabled=false;
+      btn.textContent=isAdmin?'🔐 Admin Spin':`Spin Now — ${spinsLeft} Left`;
     }
-    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
 }
 drawWheel(0);
 initSpinUI();
 
-// ── PAGE LOADER ──
+// PAGE LOADER
 window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('out');
     setTimeout(()=>{
-        const loader = document.getElementById('page-loader');
-        loader.classList.add('hide');
-        setTimeout(()=>{
-            loader.style.display='none';
-            // Tunde notification
-            const p = document.getElementById('join-pop');
-            document.getElementById('join-txt').innerHTML = `🔔 <strong>Tunde</strong> just joined the Free Group! ✅`;
-            p.style.right='20px';
-            setTimeout(()=> p.style.right='-350px', 5000);
-        }, 700);
-    }, 1800);
+      document.getElementById('loader').style.display='none';
+      const p=document.getElementById('join-pop');
+      p.innerHTML=`🔔 <strong>Tunde</strong> just joined the Free Group! ✅`;
+      p.style.right='16px';
+      setTimeout(()=> p.style.right='-320px', 5000);
+    }, 600);
+  }, 1800);
 });
 
-// ── EXIT POPUP ──
+// EXIT POPUP
 let lastScroll=0, exitShown=false;
 window.addEventListener('scroll',()=>{
-    const curr=window.scrollY;
-    if(!exitShown && lastScroll>300 && curr < lastScroll-80){
-        document.getElementById('exit-pop').classList.add('show');
-        exitShown=true;
-    }
-    lastScroll=curr;
+  const curr=window.scrollY;
+  if(!exitShown && lastScroll>300 && curr<lastScroll-80){ document.getElementById('exit-pop').classList.add('show'); exitShown=true; }
+  lastScroll=curr;
 });
-
 </script>
 </body>
 </html>
