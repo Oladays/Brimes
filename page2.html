@@ -30,22 +30,22 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-hei
 body::before{content:'';position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,217,126,0.06) 0%,transparent 70%);pointer-events:none;z-index:0}
 
 /* PAGE LOADER */
-#loader{position:fixed;inset:0;background:var(--bg);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity 0.5s,visibility 0.5s}
+#loader{position:fixed;inset:0;background:var(--bg);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity 0.5s,visibility 0.5s;text-align:center;padding:20px}
 #loader.out{opacity:0;visibility:hidden}
-.loader-logo{font-family:var(--font-head);font-size:20px;font-weight:800;letter-spacing:4px;color:var(--green);text-transform:uppercase}
-.loader-track{width:180px;height:2px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
+.loader-logo{font-family:var(--font-head);font-size:18px;font-weight:800;letter-spacing:3px;color:var(--green);text-transform:uppercase;text-align:center;text-shadow:0 0 15px #00d97e,0 0 35px rgba(0,217,126,0.5)}
+.loader-track{width:160px;height:2px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
 .loader-prog{height:100%;background:var(--green);border-radius:2px;animation:lprog 1.6s ease forwards}
 @keyframes lprog{from{width:0}to{width:100%}}
 
 /* RISK OVERLAY */
-#risk-overlay{position:fixed;inset:0;background:rgba(8,12,20,0.97);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(8px)}
+#risk-overlay{position:fixed;inset:0;background:rgba(8,12,20,0.97);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(8px);text-align:center}
 .risk-box{background:var(--surface);border:1px solid rgba(255,77,109,0.3);border-radius:20px;padding:28px 22px;max-width:400px;width:100%;text-align:center}
 .risk-icon{font-size:36px;margin-bottom:14px}
 .risk-title{font-family:var(--font-head);font-size:15px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px}
 .risk-text{font-size:12px;color:#94a3b8;line-height:1.8;margin-bottom:22px;font-weight:500}
 .risk-text strong{color:var(--text);font-weight:700}
-.risk-btn{width:100%;padding:18px;background:var(--green);color:var(--bg);border:none;border-radius:50px;font-family:var(--font-head);font-size:15px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;box-shadow:0 0 35px var(--green-glow);animation:btnpulse 2s infinite}
-@keyframes btnpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+.risk-btn{width:100%;padding:18px;background:var(--green);color:var(--bg);border:none;border-radius:50px;font-family:var(--font-head);font-size:15px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;box-shadow:0 0 20px #00d97e,0 0 50px rgba(0,217,126,0.5),0 0 80px rgba(0,217,126,0.2);animation:btnpulse 2s infinite}
+@keyframes btnpulse{0%,100%{transform:scale(1);box-shadow:0 0 20px #00d97e,0 0 50px rgba(0,217,126,0.5)}50%{transform:scale(1.04);box-shadow:0 0 30px #00d97e,0 0 70px rgba(0,217,126,0.7),0 0 100px rgba(0,217,126,0.3)}}
 
 /* TICKER */
 .ticker-bar{width:100%;background:var(--surface);border-bottom:1px solid var(--border);height:28px;overflow:hidden;display:flex;align-items:center;position:relative;z-index:10}
@@ -180,7 +180,7 @@ body::before{content:'';position:fixed;top:-200px;left:50%;transform:translateX(
 <!-- WELCOME OVERLAY -->
 <div id="risk-overlay">
   <div style="text-align:center;padding:30px 24px;max-width:400px;width:100%">
-    <div style="font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:3px;margin-bottom:10px;line-height:1.2;text-shadow:0 0 30px var(--green-glow)">WELCOME TO<br>BRIMES ACADEMY</div>
+    <div style="font-family:var(--font-head);font-size:26px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:3px;margin-bottom:10px;line-height:1.25;text-shadow:0 0 20px #00d97e,0 0 40px #00d97e,0 0 80px rgba(0,217,126,0.4);text-align:center">WELCOME TO<br>BRIMES ACADEMY</div>
     <div style="font-size:13px;color:#5a6478;margin-bottom:28px;min-height:22px" id="typingText"><span id="tcursor" style="display:inline-block;width:2px;height:14px;background:var(--green);animation:blink 0.7s infinite;vertical-align:middle"></span></div>
 
     <div style="background:rgba(255,77,109,0.08);border:1px solid rgba(255,77,109,0.25);border-radius:14px;padding:14px 16px;margin-bottom:26px;text-align:left">
