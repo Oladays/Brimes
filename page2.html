@@ -383,17 +383,21 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
 
 <script src="https://www.youtube.com/iframe_api"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
 'use strict';
 
 // EMAILJS INIT
 emailjs.init('LyjqI2cRuzaU_a2p6');
 
-// FAQ
-function toggleFaq(el){el.classList.toggle('open');}
+// FIREBASE INIT
+const app = initializeApp({ databaseURL: "https://brimeschat-2d37e-default-rtdb.firebaseio.com" });
+const db = getDatabase(app);
 
-// FORM VALIDATION + EMAIL
-function validateAndEnter(){
+// Make validateAndEnter global
+window.validateAndEnter = async function(){
   const name=document.getElementById('reg-name').value.trim();
   const email=document.getElementById('reg-email').value.trim();
   const age=parseInt(document.getElementById('reg-age').value);
@@ -402,61 +406,61 @@ function validateAndEnter(){
 
   // reset
   ageErr.style.display='none';
+  ageErr.innerHTML='🚫 You must be 18 or older to access this masterclass!';
   document.querySelectorAll('.w-form input').forEach(i=>i.style.borderColor='#1a2540');
 
-  // validate name
-  if(!name){
-    document.getElementById('reg-name').style.borderColor='#ef4444';
-    document.getElementById('reg-name').placeholder='⚠️ Please enter your name!';
-    return;
-  }
-  // validate email
-  if(!email||!email.includes('@')||!email.includes('.')){
-    document.getElementById('reg-email').style.borderColor='#ef4444';
-    return;
-  }
-  // validate age
-  if(!age||isNaN(age)){
-    document.getElementById('reg-age').style.borderColor='#ef4444';
-    return;
-  }
-  // block under 18 permanently
+  if(!name){ document.getElementById('reg-name').style.borderColor='#ef4444'; document.getElementById('reg-name').placeholder='⚠️ Please enter your name!'; return; }
+  if(!email||!email.includes('@')||!email.includes('.')){ document.getElementById('reg-email').style.borderColor='#ef4444'; document.getElementById('reg-email').placeholder='⚠️ Please enter a valid Gmail!'; return; }
+  if(!age||isNaN(age)){ document.getElementById('reg-age').style.borderColor='#ef4444'; document.getElementById('reg-age').placeholder='⚠️ Please enter your age!'; return; }
+
   if(age<18){
     ageErr.style.display='block';
     document.getElementById('reg-age').style.borderColor='#ef4444';
     localStorage.setItem('brimes_blocked','true');
     return;
   }
-  // block duplicate Gmail
-  const usedEmails=JSON.parse(localStorage.getItem('brimes_emails')||'[]');
-  if(usedEmails.includes(email.toLowerCase())){
-    ageErr.style.display='block';
-    ageErr.innerHTML='🚫 This Gmail is already registered! Please use a different email.';
-    document.getElementById('reg-email').style.borderColor='#ef4444';
-    return;
-  }
 
-  // save email to blocked list
-  usedEmails.push(email.toLowerCase());
-  localStorage.setItem('brimes_emails',JSON.stringify(usedEmails));
-  localStorage.setItem('brimes_registered','true');
-
-  // send welcome email
-  btn.textContent='Sending... ⏳';
+  btn.textContent='Checking... ⏳';
   btn.disabled=true;
-  emailjs.send('service_1ihfgpj','template_9j3ezld',{
-    to_name: name,
-    to_email: email,
-    name: name,
-    email: email,
-  }).then(()=>{
-    btn.textContent='Welcome! Entering... 🔥';
-    setTimeout(()=>startExp(),1000);
-  }).catch(()=>{
-    // even if email fails, still let them in
-    startExp();
-  });
+
+  const emailKey=email.toLowerCase().replace(/\./g,'_').replace(/@/g,'__at__');
+
+  try {
+    const snapshot = await get(ref(db,'registered_emails/'+emailKey));
+    if(snapshot.exists()){
+      ageErr.innerHTML='🚫 This Gmail is already registered! Please use a different email.';
+      ageErr.style.display='block';
+      document.getElementById('reg-email').style.borderColor='#ef4444';
+      btn.textContent='ACCESS MASTERCLASS';
+      btn.disabled=false;
+      return;
+    }
+
+    await set(ref(db,'registered_emails/'+emailKey),{
+      name, email, date: new Date().toISOString()
+    });
+
+    localStorage.setItem('brimes_registered','true');
+    btn.textContent='Sending Welcome Email... 📧';
+
+    try {
+      await emailjs.send('service_1ihfgpj','template_9j3ezld',{ to_name:name, to_email:email, name, email });
+      btn.textContent='Welcome! Entering... 🔥';
+      setTimeout(()=>window.startExp(),1000);
+    } catch(e){
+      window.startExp();
+    }
+  } catch(e){
+    btn.textContent='ACCESS MASTERCLASS';
+    btn.disabled=false;
+    window.startExp();
+  }
 }
+</script>
+<script>
+
+// FAQ
+function toggleFaq(el){el.classList.toggle('open');}
 
 // TYPING
 const lines=["We turn beginners into pro traders...","Join 1,200+ students making daily profits...","92% win rate — verified results...","Daily Gold signals straight to WhatsApp..."];
@@ -493,7 +497,7 @@ function onState(e){
   if(e.data===YT.PlayerState.ENDED){endCover.classList.add('show');liveTag.textContent='🎵 Session In Progress';music.volume=0.5;music.play().catch(()=>{});}
 }
 
-function startExp(){
+window.startExp = function startExp(){
   document.getElementById('welcome').style.display='none';
   sessionOn=true;
   music.volume=0;
