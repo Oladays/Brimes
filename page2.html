@@ -595,6 +595,15 @@ if(localStorage.getItem('brimes_blocked')==='true'){
     </div>`;
 }
 
+// SHOW WELCOME SCREEN if not registered
+if(localStorage.getItem('brimes_registered')!=='true'){
+  document.getElementById('welcome').style.display='flex';
+} else {
+  // already registered — skip welcome and enter directly
+  document.getElementById('welcome').style.display='none';
+  window.addEventListener('load', ()=> startExp());
+}
+
 // ADMIN — checks URL every time + saves to localStorage
 const params=new URLSearchParams(window.location.search);
 if(params.get('reset')==='brimes2024'){
