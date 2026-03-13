@@ -28,7 +28,12 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
 .w-btn{background:#22c55e;color:#0a0f1a;border:none;padding:16px 40px;border-radius:50px;font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;cursor:pointer;width:100%;max-width:360px;box-shadow:0 0 25px rgba(34,197,94,0.4);animation:wpulse 2s infinite}
 @keyframes wpulse{0%,100%{transform:scale(1);box-shadow:0 0 25px rgba(34,197,94,0.4)}50%{transform:scale(1.03);box-shadow:0 0 40px rgba(34,197,94,0.6)}}
 
-/* TICKER */
+/* FORM */
+.w-form{width:100%;max-width:360px;margin-bottom:20px}
+.w-form input{width:100%;background:rgba(255,255,255,0.04);border:1px solid #1a2540;border-radius:12px;color:#e8edf5;font-size:13px;padding:13px 15px;margin-bottom:10px;outline:none;font-family:'Segoe UI',Arial,sans-serif}
+.w-form input::placeholder{color:#3d4f6b}
+.w-form input:focus{border-color:rgba(34,197,94,0.4);background:rgba(34,197,94,0.04)}
+.w-age-error{color:#ef4444;font-size:11px;font-weight:700;margin-bottom:10px;display:none;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:10px 12px}
 .ticker{width:100%;height:28px;background:#0d1526;border-bottom:1px solid #1a2540;overflow:hidden;display:flex;align-items:center;position:relative;z-index:10}
 .ticker-inner{display:inline-block;white-space:nowrap;animation:tick 35s linear infinite;font-size:10px;font-weight:700;color:#22c55e;padding-left:100%}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-100%)}}
@@ -106,6 +111,14 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
 .tprofit{margin-left:auto;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:#22c55e;font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px}
 .ttext{font-size:11px;color:#64748b;line-height:1.6;font-style:italic}
 
+/* FAQ */
+.faq-item{background:#0d1526;border:1px solid #1a2540;border-radius:14px;overflow:hidden;cursor:pointer}
+.faq-q{font-size:12px;font-weight:800;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.faq-arrow{color:#22c55e;font-size:10px;flex-shrink:0;transition:transform 0.3s}
+.faq-a{font-size:11px;color:#64748b;line-height:1.7;padding:0 14px 14px;display:none}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-arrow{transform:rotate(180deg)}
+
 /* TRUST */
 .trust{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .trust-chip{background:#0d1526;border:1px solid #1a2540;border-radius:20px;padding:6px 12px;font-size:10px;font-weight:700;color:#3d4f6b}
@@ -158,11 +171,19 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
 <div id="welcome">
   <div class="w-title">WELCOME TO<br>BRIMES ACADEMY</div>
   <div class="w-typing" id="typing-el"></div>
+
+  <div class="w-form">
+    <input type="text" id="reg-name" placeholder="👤 Enter your full name...">
+    <input type="email" id="reg-email" placeholder="📧 Enter your Gmail address...">
+    <input type="number" id="reg-age" placeholder="🎂 Enter your age..." min="1" max="100">
+    <div class="w-age-error" id="age-error">🚫 You must be 18 or older to access this masterclass!</div>
+  </div>
+
   <div class="w-risk" style="max-width:360px">
     <div class="w-risk-title">⚠️ RISK WARNING — PLEASE READ</div>
     <div class="w-risk-text"><strong>Trading forex and financial markets involves a HIGH RISK of losing your capital.</strong> You may lose more than you invest. Only trade with money you can afford to lose. Past results do <strong>NOT</strong> guarantee future profits. By clicking below you confirm you understand and accept this risk.</div>
   </div>
-  <button class="w-btn" onclick="startExp()">ACCESS MASTERCLASS</button>
+  <button class="w-btn" onclick="validateAndEnter()">ACCESS MASTERCLASS</button>
 </div>
 
 <!-- EXIT -->
@@ -286,6 +307,67 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
     <div class="trust-chip">💯 Real</div>
   </div>
 
+  <!-- VIP BENEFITS -->
+  <div class="sec-title">💎 What VIP Members Get</div>
+  <div class="card" style="margin-bottom:14px">
+    <div style="display:flex;flex-direction:column;gap:11px">
+      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">📡</div><div><div style="font-size:12px;font-weight:800;margin-bottom:2px">Daily Live Signals</div><div style="font-size:11px;color:#3d4f6b">Gold, EURUSD, NASDAQ signals every day</div></div></div>
+      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🎓</div><div><div style="font-size:12px;font-weight:800;margin-bottom:2px">1-on-1 Mentorship</div><div style="font-size:11px;color:#3d4f6b">Personal coaching from Brimes directly</div></div></div>
+      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">📘</div><div><div style="font-size:12px;font-weight:800;margin-bottom:2px">Strategy PDF + Recordings</div><div style="font-size:11px;color:#3d4f6b">Full trading strategy and video library</div></div></div>
+      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">💬</div><div><div style="font-size:12px;font-weight:800;margin-bottom:2px">Private VIP Group</div><div style="font-size:11px;color:#3d4f6b">Exclusive group with top traders only</div></div></div>
+    </div>
+  </div>
+
+  <!-- WITHDRAWAL PROOFS -->
+  <div class="sec-title">💰 Student Withdrawals</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+    <div style="background:#0d1526;border:1px solid #1a2540;border-radius:14px;padding:13px;text-align:center">
+      <div style="font-size:20px;margin-bottom:6px">💸</div>
+      <div style="font-size:16px;font-weight:900;color:#22c55e;margin-bottom:3px">$1,240</div>
+      <div style="font-size:10px;color:#3d4f6b;margin-bottom:5px">Olamide T.</div>
+      <div style="font-size:9px;background:rgba(34,197,94,0.1);color:#22c55e;padding:3px 8px;border-radius:20px;display:inline-block;font-weight:700">WITHDRAWN ✓</div>
+    </div>
+    <div style="background:#0d1526;border:1px solid #1a2540;border-radius:14px;padding:13px;text-align:center">
+      <div style="font-size:20px;margin-bottom:6px">💸</div>
+      <div style="font-size:16px;font-weight:900;color:#22c55e;margin-bottom:3px">$2,100</div>
+      <div style="font-size:10px;color:#3d4f6b;margin-bottom:5px">Emeka S.</div>
+      <div style="font-size:9px;background:rgba(34,197,94,0.1);color:#22c55e;padding:3px 8px;border-radius:20px;display:inline-block;font-weight:700">WITHDRAWN ✓</div>
+    </div>
+    <div style="background:#0d1526;border:1px solid #1a2540;border-radius:14px;padding:13px;text-align:center">
+      <div style="font-size:20px;margin-bottom:6px">💸</div>
+      <div style="font-size:16px;font-weight:900;color:#22c55e;margin-bottom:3px">$870</div>
+      <div style="font-size:10px;color:#3d4f6b;margin-bottom:5px">Zainab K.</div>
+      <div style="font-size:9px;background:rgba(34,197,94,0.1);color:#22c55e;padding:3px 8px;border-radius:20px;display:inline-block;font-weight:700">WITHDRAWN ✓</div>
+    </div>
+    <div style="background:#0d1526;border:1px solid #1a2540;border-radius:14px;padding:13px;text-align:center">
+      <div style="font-size:20px;margin-bottom:6px">💸</div>
+      <div style="font-size:16px;font-weight:900;color:#22c55e;margin-bottom:3px">$3,400</div>
+      <div style="font-size:10px;color:#3d4f6b;margin-bottom:5px">Tunde A.</div>
+      <div style="font-size:9px;background:rgba(34,197,94,0.1);color:#22c55e;padding:3px 8px;border-radius:20px;display:inline-block;font-weight:700">WITHDRAWN ✓</div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="sec-title">❓ Frequently Asked Questions</div>
+  <div style="margin-bottom:14px;display:flex;flex-direction:column;gap:8px">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Is the free signals group really free? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes! 100% free. Join the WhatsApp group and receive daily signals at no cost. No hidden charges.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Do I need trading experience? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">No experience needed! Brimes teaches you everything from scratch. Beginners are welcome!</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How much can I make per month? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Results vary, but our students average $500–$3,000/month following our signals consistently.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How do I join VIP mentorship? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Click the VIP button below and message Brimes directly on WhatsApp. He will guide you through everything!</div>
+    </div>
+  </div>
+
   <!-- BUTTONS -->
   <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="btn-green">💬 Join Free Signals Group</a>
   <a href="https://wa.me/2348103586138?text=Hello%20Brimes,%20I'm%20ready%20for%20VIP." class="btn-blue">💎 Private VIP Mentorship</a>
@@ -300,8 +382,81 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
 <div id="join-pop"></div>
 
 <script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
 'use strict';
+
+// EMAILJS INIT
+emailjs.init('LyjqI2cRuzaU_a2p6');
+
+// FAQ
+function toggleFaq(el){el.classList.toggle('open');}
+
+// FORM VALIDATION + EMAIL
+function validateAndEnter(){
+  const name=document.getElementById('reg-name').value.trim();
+  const email=document.getElementById('reg-email').value.trim();
+  const age=parseInt(document.getElementById('reg-age').value);
+  const ageErr=document.getElementById('age-error');
+  const btn=document.querySelector('.w-btn');
+
+  // reset
+  ageErr.style.display='none';
+  document.querySelectorAll('.w-form input').forEach(i=>i.style.borderColor='#1a2540');
+
+  // validate name
+  if(!name){
+    document.getElementById('reg-name').style.borderColor='#ef4444';
+    document.getElementById('reg-name').placeholder='⚠️ Please enter your name!';
+    return;
+  }
+  // validate email
+  if(!email||!email.includes('@')||!email.includes('.')){
+    document.getElementById('reg-email').style.borderColor='#ef4444';
+    return;
+  }
+  // validate age
+  if(!age||isNaN(age)){
+    document.getElementById('reg-age').style.borderColor='#ef4444';
+    return;
+  }
+  // block under 18 permanently
+  if(age<18){
+    ageErr.style.display='block';
+    document.getElementById('reg-age').style.borderColor='#ef4444';
+    localStorage.setItem('brimes_blocked','true');
+    return;
+  }
+  // block duplicate Gmail
+  const usedEmails=JSON.parse(localStorage.getItem('brimes_emails')||'[]');
+  if(usedEmails.includes(email.toLowerCase())){
+    ageErr.style.display='block';
+    ageErr.innerHTML='🚫 This Gmail is already registered! Please use a different email.';
+    document.getElementById('reg-email').style.borderColor='#ef4444';
+    return;
+  }
+
+  // save email to blocked list
+  usedEmails.push(email.toLowerCase());
+  localStorage.setItem('brimes_emails',JSON.stringify(usedEmails));
+  localStorage.setItem('brimes_registered','true');
+
+  // send welcome email
+  btn.textContent='Sending... ⏳';
+  btn.disabled=true;
+  emailjs.send('service_1ihfgpj','template_9j3ezld',{
+    to_name: name,
+    to_email: email,
+    name: name,
+    email: email,
+  }).then(()=>{
+    btn.textContent='Welcome! Entering... 🔥';
+    setTimeout(()=>startExp(),1000);
+  }).catch(()=>{
+    // even if email fails, still let them in
+    startExp();
+  });
+}
 
 // TYPING
 const lines=["We turn beginners into pro traders...","Join 1,200+ students making daily profits...","92% win rate — verified results...","Daily Gold signals straight to WhatsApp..."];
@@ -428,6 +583,16 @@ function confetti(){
     document.body.appendChild(c);
     setTimeout(()=>c.remove(),5000);
   }
+}
+
+// BLOCK UNDER 18 PERMANENTLY
+if(localStorage.getItem('brimes_blocked')==='true'){
+  document.getElementById('welcome').innerHTML=`
+    <div style="text-align:center;padding:30px">
+      <div style="font-size:60px;margin-bottom:20px">🚫</div>
+      <div style="font-size:20px;font-weight:900;color:#ef4444;margin-bottom:12px">ACCESS DENIED</div>
+      <div style="font-size:13px;color:#64748b;line-height:1.8">You must be <strong style="color:white">18 or older</strong> to access this content.<br>This device has been blocked.</div>
+    </div>`;
 }
 
 // ADMIN — checks URL every time + saves to localStorage
