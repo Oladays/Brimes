@@ -3,7 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BRIMES Trading Signals Academy</title>
+<title>BRIMES Trading Signals Academy — Free Forex Signals Nigeria</title>
+<meta name="description" content="Join BRIMES Trading Signals Academy! Get free daily forex signals, Gold trading signals, 92% win rate. 1,200+ students making money every week in Nigeria.">
+<meta name="keywords" content="forex signals Nigeria, free forex signals, gold trading signals, forex trading Nigeria, learn forex Nigeria, trading academy Nigeria, forex mentor Nigeria, BRIMES academy">
+<meta name="author" content="Brimes Trading Academy">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (shows nice preview when you share link on WhatsApp/Facebook) -->
+<meta property="og:title" content="BRIMES Trading Signals Academy 🔥">
+<meta property="og:description" content="Free daily forex signals! 92% win rate. Join 1,200+ students making money every week!">
+<meta property="og:url" content="https://brimesacademy.netlify.app/page2.html">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BRIMES Trading Signals Academy">
+<meta name="twitter:description" content="Free daily forex signals! 92% win rate. Join 1,200+ students making money every week!">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow-x:hidden}
@@ -414,9 +429,14 @@ window.validateAndEnter = async function(){
   if(!age||isNaN(age)){ document.getElementById('reg-age').style.borderColor='#ef4444'; document.getElementById('reg-age').placeholder='⚠️ Please enter your age!'; return; }
 
   if(age<18){
-    ageErr.style.display='block';
-    document.getElementById('reg-age').style.borderColor='#ef4444';
+    // block immediately and permanently
     localStorage.setItem('brimes_blocked','true');
+    document.getElementById('welcome').innerHTML=`
+    <div style="text-align:center;padding:30px 24px">
+      <div style="font-size:60px;margin-bottom:16px">🚫</div>
+      <div style="font-family:inherit;font-size:20px;font-weight:900;color:#ef4444;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Access Denied</div>
+      <div style="font-size:13px;color:#64748b;line-height:1.9">You entered age <strong style="color:white">${age}</strong>.<br>You must be <strong style="color:white">18 or older</strong> to access this masterclass.<br><br>This device has been <strong style="color:#ef4444">permanently blocked.</strong><br>Use a different browser to try again.</div>
+    </div>`;
     return;
   }
 
