@@ -442,15 +442,27 @@ function validateAndEnter(){
 
   usedEmails.push(email.toLowerCase());
   localStorage.setItem('brimes_emails',JSON.stringify(usedEmails));
-  localStorage.setItem('brimes_registered','true');
 
-  btn.textContent='Sending Welcome Email... 📧';
+  btn.textContent='Sending Email... 📧';
   btn.disabled=true;
 
   // send welcome email to user
   emailjs.send('service_1ihfgpj','template_9j3ezld',{ to_name:name, to_email:email, name, email })
-    .then(()=>{ btn.textContent='Welcome! Entering... 🔥'; setTimeout(()=>startExp(),1000); })
-    .catch(()=>startExp());
+    .then(()=>{
+      // show "check your email" screen instead of entering directly
+      document.getElementById('welcome').innerHTML=`
+      <div style="text-align:center;padding:30px 24px;max-width:380px">
+        <div style="font-size:60px;margin-bottom:16px">📧</div>
+        <div style="font-size:20px;font-weight:900;color:#22c55e;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Check Your Email!</div>
+        <div style="font-size:13px;color:#64748b;line-height:1.9;margin-bottom:24px">We sent a link to <strong style="color:white">${email}</strong><br><br>Click the <strong style="color:#22c55e">"Click Here To Enter Masterclass"</strong> link in your email to access the site!<br><br><span style="color:#3d4f6b;font-size:11px">Check your spam folder if you don't see it!</span></div>
+        <div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:12px;padding:12px;font-size:11px;color:#64748b">📱 Open your Gmail app → Find email from Brimes Academy → Click the link!</div>
+      </div>`;
+    })
+    .catch(()=>{
+      // if email fails just let them in
+      localStorage.setItem('brimes_registered','true');
+      startExp();
+    });
 
   // notify BRIMES about new registration
   emailjs.send('service_1ihfgpj','template_tpznzd7',{
@@ -604,6 +616,12 @@ function confetti(){
   }
 }
 
+// AUTO ENTER IF COMING FROM EMAIL LINK
+if(new URLSearchParams(window.location.search).get('verified')==='true'){
+  localStorage.setItem('brimes_registered','true');
+  window.history.replaceState({},document.title,window.location.pathname);
+}
+
 // BLOCK UNDER 18 PERMANENTLY
 if(localStorage.getItem('brimes_blocked')==='true'){
   document.getElementById('welcome').innerHTML=`
@@ -750,5 +768,6 @@ window.addEventListener('scroll',()=>{
 </script>
 </body>
 </html>
+
 
 
