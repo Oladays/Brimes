@@ -447,9 +447,19 @@ function validateAndEnter(){
   btn.textContent='Sending Welcome Email... 📧';
   btn.disabled=true;
 
+  // send welcome email to user
   emailjs.send('service_1ihfgpj','template_9j3ezld',{ to_name:name, to_email:email, name, email })
     .then(()=>{ btn.textContent='Welcome! Entering... 🔥'; setTimeout(()=>startExp(),1000); })
     .catch(()=>startExp());
+
+  // notify BRIMES about new registration
+  emailjs.send('service_1ihfgpj','template_tpznzd7',{
+    type: '🆕 NEW REGISTRATION',
+    name: name,
+    email: email,
+    message: 'Age: '+age,
+    time: new Date().toLocaleString()
+  }).catch(()=>{});
 }
 
 // FAQ
@@ -525,7 +535,19 @@ function addMsg(n,m){
 function postMsg(){
   const n=document.getElementById('vName').value.trim();
   const m=document.getElementById('vMsg').value.trim();
-  if(n&&m){addMsg(n,m);document.getElementById('vName').value='';document.getElementById('vMsg').value='';}
+  if(n&&m){
+    addMsg(n,m);
+    document.getElementById('vName').value='';
+    document.getElementById('vMsg').value='';
+    // notify BRIMES about new comment
+    emailjs.send('service_1ihfgpj','template_tpznzd7',{
+      type: '💬 NEW COMMENT',
+      name: n,
+      email: 'N/A',
+      message: m,
+      time: new Date().toLocaleString()
+    }).catch(()=>{});
+  }
 }
 for(let i=0;i<5;i++) addMsg(names[i],texts[i]);
 
@@ -728,4 +750,5 @@ window.addEventListener('scroll',()=>{
 </script>
 </body>
 </html>
+
 
