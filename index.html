@@ -1,1 +1,739 @@
-<meta http-equiv="refresh" content="0; URL='https://oladays.github.io/Brimes/page2.html'" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRIMES Trading Signals Academy — Free Forex Signals Nigeria</title>
+<meta name="description" content="Join BRIMES Trading Signals Academy! Get free daily forex signals, Gold trading signals, 92% win rate. 1,200+ students making money every week in Nigeria.">
+<meta name="keywords" content="forex signals Nigeria, free forex signals, gold trading signals, forex trading Nigeria, learn forex Nigeria, trading academy Nigeria, forex mentor Nigeria, BRIMES academy">
+<meta name="author" content="Brimes Trading Academy">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (shows nice preview when you share link on WhatsApp/Facebook) -->
+<meta property="og:title" content="BRIMES Trading Signals Academy 🔥">
+<meta property="og:description" content="Free daily forex signals! 92% win rate. Join 1,200+ students making money every week!">
+<meta property="og:url" content="https://brimesacademy.netlify.app/page2.html">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BRIMES Trading Signals Academy">
+<meta name="twitter:description" content="Free daily forex signals! 92% win rate. Join 1,200+ students making money every week!">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow-x:hidden}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:#0a0f1a;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity 0.5s}
+#loader.hide{opacity:0;pointer-events:none}
+.loader-logo{font-size:16px;font-weight:900;letter-spacing:4px;color:#22c55e;text-transform:uppercase}
+.loader-bar{width:160px;height:3px;background:rgba(34,197,94,0.15);border-radius:3px;overflow:hidden}
+.loader-fill{height:100%;background:#22c55e;animation:lfill 1.6s ease forwards}
+@keyframes lfill{from{width:0}to{width:100%}}
+.loader-txt{font-size:10px;color:#3d4f6b;letter-spacing:2px}
+
+/* WELCOME OVERLAY */
+#welcome{position:fixed;inset:0;background:#0a0f1a;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center}
+.w-title{font-size:24px;font-weight:900;color:#22c55e;text-transform:uppercase;letter-spacing:2px;line-height:1.3;margin-bottom:10px;text-shadow:0 0 20px rgba(34,197,94,0.5)}
+.w-typing{font-size:13px;color:#4a5f7a;min-height:20px;margin-bottom:26px}
+.w-risk{background:rgba(239,68,68,0.1);border:2px solid rgba(239,68,68,0.4);border-radius:12px;padding:16px;margin-bottom:26px;text-align:left;width:100%;max-width:360px}
+.w-risk-title{color:#ef4444;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.w-risk-text{color:#cbd5e1;font-size:12px;line-height:1.75;font-weight:600}
+.w-risk-text strong{color:white;font-weight:900}
+.w-btn{background:#22c55e;color:#0a0f1a;border:none;padding:16px 40px;border-radius:50px;font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;cursor:pointer;width:100%;max-width:360px;box-shadow:0 0 25px rgba(34,197,94,0.4);animation:wpulse 2s infinite}
+@keyframes wpulse{0%,100%{transform:scale(1);box-shadow:0 0 25px rgba(34,197,94,0.4)}50%{transform:scale(1.03);box-shadow:0 0 40px rgba(34,197,94,0.6)}}
+
+/* FORM */
+.w-form{width:100%;max-width:360px;margin-bottom:20px}
+.w-form input{width:100%;background:rgba(255,255,255,0.04);border:1px solid #1a2540;border-radius:12px;color:#e8edf5;font-size:13px;padding:13px 15px;margin-bottom:10px;outline:none;font-family:'Segoe UI',Arial,sans-serif}
+.w-form input::placeholder{color:#3d4f6b}
+.w-form input:focus{border-color:rgba(34,197,94,0.4);background:rgba(34,197,94,0.04)}
+.w-age-error{color:#ef4444;font-size:11px;font-weight:700;margin-bottom:10px;display:none;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:10px 12px}
+.ticker{width:100%;height:28px;background:#0d1526;border-bottom:1px solid #1a2540;overflow:hidden;display:flex;align-items:center;position:relative;z-index:10}
+.ticker-inner{display:inline-block;white-space:nowrap;animation:tick 35s linear infinite;font-size:10px;font-weight:700;color:#22c55e;padding-left:100%}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
+/* NAV */
+.nav{width:100%;background:rgba(10,15,26,0.97);border-bottom:1px solid #1a2540;padding:13px 18px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000;backdrop-filter:blur(12px)}
+.nav-logo{font-size:11px;font-weight:900;color:#22c55e;text-transform:uppercase;letter-spacing:1.5px}
+.nav-live{font-size:10px;font-weight:700;color:#22c55e;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);padding:5px 11px;border-radius:20px;display:flex;align-items:center;gap:5px}
+.dot{width:6px;height:6px;border-radius:50%;background:#22c55e;animation:blink 1s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* PAGE */
+.page{width:100%;max-width:440px;padding:16px 14px 80px}
+
+/* CARD */
+.card{background:#0d1526;border:1px solid #1a2540;border-radius:18px;padding:18px;margin-bottom:14px}
+
+/* MENTOR */
+.mentor{display:flex;align-items:center;gap:12px}
+.mentor img{width:54px;height:54px;border-radius:10px;border:2px solid #22c55e;object-fit:cover;flex-shrink:0}
+.mentor-badge{display:inline-block;background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#60a5fa;font-size:9px;font-weight:800;padding:2px 8px;border-radius:20px;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
+.mentor-name{font-size:14px;font-weight:900;margin-bottom:3px}
+.mentor-live{font-size:10px;color:#64748b;display:flex;align-items:center;gap:5px}
+.rdot{width:6px;height:6px;border-radius:50%;background:#ef4444;animation:blink 1s infinite;flex-shrink:0}
+
+/* VIDEO */
+.video-wrap{position:relative;width:100%;padding-bottom:56.25%;border-radius:14px;overflow:hidden;background:#000;border:1px solid #1a2540;margin-bottom:14px}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none}
+.video-overlay{position:absolute;inset:0;z-index:5}
+.video-end{position:absolute;inset:0;z-index:4;background:#0d1526;display:none;align-items:center;justify-content:center}
+.video-end.show{display:flex}
+.video-end p{font-size:13px;font-weight:800;color:#22c55e;text-align:center;line-height:1.6}
+.live-tag{position:absolute;bottom:8px;left:8px;z-index:6;background:rgba(10,15,26,0.85);border:1px solid #22c55e;color:#22c55e;font-size:9px;font-weight:800;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:1px}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:#0d1526;border:1px solid #1a2540;border-radius:14px;padding:14px 8px;text-align:center}
+.stat-val{display:block;font-size:18px;font-weight:900;color:#22c55e;margin-bottom:3px}
+.stat-lbl{font-size:9px;color:#3d4f6b;text-transform:uppercase;letter-spacing:0.5px;font-weight:700}
+
+/* VIEWERS */
+.viewers{display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.15);border-radius:10px;padding:9px 14px;margin-bottom:14px}
+.viewers span{font-size:11px;font-weight:700;color:#ef4444}
+
+/* SECTION TITLE */
+.sec-title{font-size:10px;font-weight:800;color:#3d4f6b;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
+
+/* CHAT */
+.chat-feed{background:#080d18;border-radius:14px 14px 0 0;height:200px;overflow-y:auto;padding:14px;scroll-behavior:smooth}
+.chat-feed::-webkit-scrollbar{width:3px}
+.chat-feed::-webkit-scrollbar-thumb{background:#1a2540;border-radius:3px}
+.chat-msg{margin-bottom:9px;font-size:12px;padding:9px 12px;background:#0d1526;border-radius:10px;border-left:2px solid #22c55e;line-height:1.5}
+.chat-name{color:#22c55e;font-weight:800;margin-right:4px}
+.chat-inputs{background:#0d1526;border-radius:0 0 14px 14px;border-top:1px solid #1a2540;padding:12px}
+.chat-inputs input{width:100%;background:transparent;border:none;border-bottom:1px solid #1a2540;color:#e8edf5;font-size:12px;padding:8px 0;outline:none;margin-bottom:10px;font-family:'Segoe UI',Arial,sans-serif}
+.chat-inputs input::placeholder{color:#3d4f6b}
+.chat-post{width:100%;background:#3b82f6;color:white;border:none;padding:10px;border-radius:10px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;cursor:pointer}
+
+/* SPIN */
+.spin-card{background:#0d1526;border:1px solid #1a2540;border-radius:18px;padding:20px;margin-bottom:14px;text-align:center}
+.spin-title{font-size:14px;font-weight:900;margin-bottom:4px}
+.spin-sub{font-size:11px;color:#3d4f6b;margin-bottom:16px}
+.wheel-wrap{position:relative;width:240px;height:240px;margin:0 auto 16px}
+.wheel-ptr{position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:22px;z-index:5}
+.spin-btn{background:#22c55e;color:#0a0f1a;border:none;padding:13px 36px;border-radius:50px;font-size:13px;font-weight:900;cursor:pointer;letter-spacing:1px;text-transform:uppercase}
+.spin-btn:disabled{opacity:0.4;cursor:not-allowed}
+.spin-result{display:none;margin-top:12px;padding:12px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:12px;font-size:12px;font-weight:700;color:#22c55e;line-height:1.6}
+
+/* TESTIMONIALS */
+.tcard{background:#0d1526;border:1px solid #1a2540;border-radius:14px;padding:14px;margin-bottom:10px}
+.tcard-top{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.tavatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+.tname{font-size:12px;font-weight:800}
+.tstars{font-size:10px;color:#f59e0b}
+.tprofit{margin-left:auto;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:#22c55e;font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px}
+.ttext{font-size:11px;color:#64748b;line-height:1.6;font-style:italic}
+
+/* FAQ */
+.faq-item{background:#0d1526;border:1px solid #1a2540;border-radius:14px;overflow:hidden;cursor:pointer}
+.faq-q{font-size:12px;font-weight:800;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.faq-arrow{color:#22c55e;font-size:10px;flex-shrink:0;transition:transform 0.3s}
+.faq-a{font-size:11px;color:#64748b;line-height:1.7;padding:0 14px 14px;display:none}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-arrow{transform:rotate(180deg)}
+
+/* TRUST */
+.trust{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.trust-chip{background:#0d1526;border:1px solid #1a2540;border-radius:20px;padding:6px 12px;font-size:10px;font-weight:700;color:#3d4f6b}
+
+/* BUTTONS */
+.btn-green{display:flex;align-items:center;justify-content:center;padding:16px;background:#22c55e;color:#0a0f1a;border-radius:14px;font-size:13px;font-weight:900;text-decoration:none;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.btn-blue{display:flex;align-items:center;justify-content:center;padding:15px;background:transparent;color:#60a5fa;border:2px solid rgba(96,165,250,0.35);border-radius:14px;font-size:13px;font-weight:900;text-decoration:none;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+
+/* DISCLAIMER */
+.disclaimer{font-size:9px;color:#2a3a56;line-height:1.8;text-align:center;padding:12px;background:#0d1526;border:1px solid #1a2540;border-radius:12px}
+
+/* FLOAT WA */
+.float-wa{position:fixed;bottom:22px;right:18px;width:54px;height:54px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;z-index:900;box-shadow:0 4px 20px rgba(37,211,102,0.4);text-decoration:none;animation:wapulse 2.5s infinite}
+@keyframes wapulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,0.4)}50%{box-shadow:0 0 0 12px rgba(37,211,102,0)}}
+
+/* WA BUBBLE */
+#wa-bubble{position:fixed;bottom:86px;right:-260px;background:#0d1526;border:1px solid rgba(34,197,94,0.2);border-radius:14px 14px 0 14px;padding:12px 14px;width:210px;z-index:890;box-shadow:0 8px 30px rgba(0,0,0,0.5);transition:right 0.4s ease}
+#wa-bubble.show{right:76px}
+.wb-name{font-size:10px;font-weight:800;color:#22c55e;margin-bottom:4px}
+.wb-msg{font-size:11px;color:#64748b;line-height:1.5}
+.wb-time{font-size:9px;color:#2a3a56;text-align:right;margin-top:5px}
+
+/* POPUPS */
+#profit-pop{position:fixed;bottom:22px;left:-320px;background:#0d1526;border-left:3px solid #22c55e;border-radius:12px;padding:12px 14px;width:255px;z-index:880;font-size:12px;transition:left 0.4s ease;box-shadow:0 8px 25px rgba(0,0,0,0.5);line-height:1.5}
+#join-pop{position:fixed;bottom:86px;right:-320px;background:#0d1526;border-left:3px solid #3b82f6;border-radius:12px;padding:12px 14px;width:255px;z-index:880;font-size:12px;transition:right 0.4s ease;box-shadow:0 8px 25px rgba(0,0,0,0.5);line-height:1.5}
+
+/* EXIT */
+#exit-pop{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:9990;display:none;align-items:center;justify-content:center;padding:20px}
+#exit-pop.show{display:flex}
+.exit-box{background:#0d1526;border:1px solid rgba(34,197,94,0.2);border-radius:20px;padding:28px 22px;max-width:380px;width:100%;text-align:center}
+.exit-box h3{font-size:18px;font-weight:900;color:#ef4444;margin-bottom:10px}
+.exit-box p{font-size:12px;color:#64748b;line-height:1.7;margin-bottom:20px}
+.exit-close{background:none;border:1px solid #1a2540;color:#3d4f6b;padding:9px 22px;border-radius:10px;cursor:pointer;font-size:11px;margin-top:8px;width:100%}
+
+/* CONFETTI */
+.cfetti{position:fixed;top:-10px;pointer-events:none;z-index:99999;border-radius:2px;animation:cfall linear forwards}
+@keyframes cfall{from{transform:translateY(0) rotate(0deg);opacity:1}to{transform:translateY(105vh) rotate(720deg);opacity:0}}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">⚡ BRIMES ACADEMY</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <div class="loader-txt">LOADING MASTERCLASS...</div>
+</div>
+
+<!-- WELCOME -->
+<div id="welcome">
+  <div class="w-title">WELCOME TO<br>BRIMES ACADEMY</div>
+  <div class="w-typing" id="typing-el"></div>
+
+  <div class="w-form">
+    <input type="text" id="reg-name" placeholder="👤 Enter your full name...">
+    <input type="email" id="reg-email" placeholder="📧 Enter your Gmail address...">
+    <input type="number" id="reg-age" placeholder="🎂 Enter your age..." min="1" max="100">
+    <div class="w-age-error" id="age-error">🚫 You must be 18 or older to access this masterclass!</div>
+  </div>
+
+  <div class="w-risk" style="max-width:360px">
+    <div class="w-risk-title">⚠️ RISK WARNING — PLEASE READ</div>
+    <div class="w-risk-text"><strong>Trading forex and financial markets involves a HIGH RISK of losing your capital.</strong> You may lose more than you invest. Only trade with money you can afford to lose. Past results do <strong>NOT</strong> guarantee future profits. By clicking below you confirm you understand and accept this risk.</div>
+  </div>
+  <button class="w-btn" onclick="validateAndEnter()">ACCESS MASTERCLASS</button>
+</div>
+
+<!-- EXIT -->
+<div id="exit-pop">
+  <div class="exit-box">
+    <div style="font-size:36px;margin-bottom:12px">⚡</div>
+    <h3>Don't Leave Yet!</h3>
+    <p>You're about to miss <strong style="color:#22c55e">FREE daily trading signals</strong> making our students money every week!</p>
+    <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="btn-green" style="margin-bottom:0">🔥 Join Free — Last Chance</a>
+    <button class="exit-close" onclick="document.getElementById('exit-pop').classList.remove('show')">No thanks, I'll pass</button>
+  </div>
+</div>
+
+<!-- WA BUBBLE -->
+<div id="wa-bubble">
+  <div class="wb-name">💬 Brimes</div>
+  <div class="wb-msg" id="wa-msg">Hey! 👋 Ready to start making money from trading?</div>
+  <div class="wb-time">Just now ✓✓</div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">📈 XAUUSD 2,024.45 ▲ &nbsp;|&nbsp; EURUSD 1.0821 ▼ &nbsp;|&nbsp; GBPUSD 1.2644 ▲ &nbsp;|&nbsp; BTCUSD 51,204 ▲ &nbsp;|&nbsp; NASDAQ 18,240 ▲ &nbsp;|&nbsp; XAUUSD 2,024.45 ▲ &nbsp;|&nbsp; EURUSD 1.0821 ▼ &nbsp;|&nbsp; GBPUSD 1.2644 ▲</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">BRIMES Trading Academy</div>
+  <div class="nav-live"><div class="dot"></div><span id="live-count">1,200 Online</span></div>
+</nav>
+
+<div class="page">
+
+  <!-- MENTOR -->
+  <div class="card mentor">
+    <img src="mentor-pro.jpg" alt="Brimes">
+    <div>
+      <div class="mentor-badge">✓ Verified Mentor</div>
+      <div class="mentor-name">Master Trader: Brimes</div>
+      <div class="mentor-live"><div class="rdot"></div>LIVE — Masterclass In Progress</div>
+    </div>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="video-wrap">
+    <iframe id="ytVideo" src="https://www.youtube.com/embed/cXovfksZV08?enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&controls=0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+    <div class="video-end" id="endCover"><p>🎵 Session In Progress<br>Scroll down to join 👇</p></div>
+    <div class="video-overlay"></div>
+    <div class="live-tag" id="liveTag">🔴 LIVE Masterclass</div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><span class="stat-val">+4,200</span><span class="stat-lbl">Pips Gained</span></div>
+    <div class="stat"><span class="stat-val">92%</span><span class="stat-lbl">Win Rate</span></div>
+    <div class="stat"><span class="stat-val">5★</span><span class="stat-lbl">Rating</span></div>
+  </div>
+
+  <!-- VIEWERS -->
+  <div class="viewers">
+    <div class="dot" style="background:#ef4444"></div>
+    <span id="viewers">127 people viewing this page right now</span>
+  </div>
+
+  <audio id="bgMusic" loop><source src="song.mp3" type="audio/mpeg"></audio>
+
+  <!-- CHAT -->
+  <div class="sec-title">💬 Live Chat</div>
+  <div class="card" style="padding:0;overflow:hidden;margin-bottom:14px">
+    <div class="chat-feed" id="chat"></div>
+    <div class="chat-inputs">
+      <input type="text" id="vName" placeholder="Your name...">
+      <input type="text" id="vMsg" placeholder="Write a message...">
+      <button class="chat-post" onclick="postMsg()">Post to Live Chat</button>
+    </div>
+  </div>
+
+  <!-- SPIN -->
+  <div class="spin-card">
+    <div class="spin-title">🎰 Spin & Win a Free Gift</div>
+    <div class="spin-sub">Every visitor gets 3 free spins!</div>
+    <div class="wheel-wrap">
+      <div class="wheel-ptr">▼</div>
+      <canvas id="wheelCanvas" width="240" height="240" style="border-radius:50%;display:block;box-shadow:0 0 25px rgba(34,197,94,0.15)"></canvas>
+    </div>
+    <button class="spin-btn" id="spinBtn" onclick="doSpin()">Spin Now — 3 Left</button>
+    <div class="spin-result" id="spinResult"></div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="sec-title">⭐ Student Results</div>
+  <div class="tcard">
+    <div class="tcard-top">
+      <div class="tavatar" style="background:linear-gradient(135deg,#22c55e,#16a34a)">O</div>
+      <div><div class="tname">Olamide T.</div><div class="tstars">★★★★★</div></div>
+      <div class="tprofit">+$1,240</div>
+    </div>
+    <div class="ttext">"Before Brimes I was losing every trade. Now I'm consistent. Best investment I ever made!"</div>
+  </div>
+  <div class="tcard">
+    <div class="tcard-top">
+      <div class="tavatar" style="background:linear-gradient(135deg,#3b82f6,#6c63ff)">E</div>
+      <div><div class="tname">Emeka S.</div><div class="tstars">★★★★★</div></div>
+      <div class="tprofit">+$2,100</div>
+    </div>
+    <div class="ttext">"Brimes teaches you to think like a professional trader. 100% recommended!"</div>
+  </div>
+  <div class="tcard">
+    <div class="tcard-top">
+      <div class="tavatar" style="background:linear-gradient(135deg,#f59e0b,#f97316)">Z</div>
+      <div><div class="tname">Zainab K.</div><div class="tstars">★★★★★</div></div>
+      <div class="tprofit">+$870</div>
+    </div>
+    <div class="ttext">"Joined VIP last month and already withdrew $870. This is real!"</div>
+  </div>
+
+  <!-- TRUST -->
+  <div class="trust" style="margin-top:14px">
+    <div class="trust-chip">🔒 Secure</div>
+    <div class="trust-chip">✅ Verified</div>
+    <div class="trust-chip">💯 Real</div>
+  </div>
+
+  <!-- VIP BENEFITS -->
+  <div class="sec-title">💎 What VIP Members Get</div>
+  <div class="card" style="margin-bottom:14px">
+    <div style="display:flex;flex-direction:column;gap:11px">
+      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">📡</div><div><div style="font-size:12px;font-weight:800;margin-bottom:2px">Daily Live Signals</div><div style="font-size:11px;color:#3d4f6b">Gold, EURUSD, NASDAQ signals every day</div></div></div>
+      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🎓</div><div><div style="font-size:12px;font-weight:800;margin-bottom:2px">1-on-1 Mentorship</div><div style="font-size:11px;color:#3d4f6b">Personal coaching from Brimes directly</div></div></div>
+      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">📘</div><div><div style="font-size:12px;font-weight:800;margin-bottom:2px">Strategy PDF + Recordings</div><div style="font-size:11px;color:#3d4f6b">Full trading strategy and video library</div></div></div>
+      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">💬</div><div><div style="font-size:12px;font-weight:800;margin-bottom:2px">Private VIP Group</div><div style="font-size:11px;color:#3d4f6b">Exclusive group with top traders only</div></div></div>
+    </div>
+  </div>
+
+  <!-- WITHDRAWAL PROOFS -->
+  <div class="sec-title">💰 Student Withdrawals</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+    <div style="background:#0d1526;border:1px solid #1a2540;border-radius:14px;padding:13px;text-align:center">
+      <div style="font-size:20px;margin-bottom:6px">💸</div>
+      <div style="font-size:16px;font-weight:900;color:#22c55e;margin-bottom:3px">$1,240</div>
+      <div style="font-size:10px;color:#3d4f6b;margin-bottom:5px">Olamide T.</div>
+      <div style="font-size:9px;background:rgba(34,197,94,0.1);color:#22c55e;padding:3px 8px;border-radius:20px;display:inline-block;font-weight:700">WITHDRAWN ✓</div>
+    </div>
+    <div style="background:#0d1526;border:1px solid #1a2540;border-radius:14px;padding:13px;text-align:center">
+      <div style="font-size:20px;margin-bottom:6px">💸</div>
+      <div style="font-size:16px;font-weight:900;color:#22c55e;margin-bottom:3px">$2,100</div>
+      <div style="font-size:10px;color:#3d4f6b;margin-bottom:5px">Emeka S.</div>
+      <div style="font-size:9px;background:rgba(34,197,94,0.1);color:#22c55e;padding:3px 8px;border-radius:20px;display:inline-block;font-weight:700">WITHDRAWN ✓</div>
+    </div>
+    <div style="background:#0d1526;border:1px solid #1a2540;border-radius:14px;padding:13px;text-align:center">
+      <div style="font-size:20px;margin-bottom:6px">💸</div>
+      <div style="font-size:16px;font-weight:900;color:#22c55e;margin-bottom:3px">$870</div>
+      <div style="font-size:10px;color:#3d4f6b;margin-bottom:5px">Zainab K.</div>
+      <div style="font-size:9px;background:rgba(34,197,94,0.1);color:#22c55e;padding:3px 8px;border-radius:20px;display:inline-block;font-weight:700">WITHDRAWN ✓</div>
+    </div>
+    <div style="background:#0d1526;border:1px solid #1a2540;border-radius:14px;padding:13px;text-align:center">
+      <div style="font-size:20px;margin-bottom:6px">💸</div>
+      <div style="font-size:16px;font-weight:900;color:#22c55e;margin-bottom:3px">$3,400</div>
+      <div style="font-size:10px;color:#3d4f6b;margin-bottom:5px">Tunde A.</div>
+      <div style="font-size:9px;background:rgba(34,197,94,0.1);color:#22c55e;padding:3px 8px;border-radius:20px;display:inline-block;font-weight:700">WITHDRAWN ✓</div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="sec-title">❓ Frequently Asked Questions</div>
+  <div style="margin-bottom:14px;display:flex;flex-direction:column;gap:8px">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Is the free signals group really free? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes! 100% free. Join the WhatsApp group and receive daily signals at no cost. No hidden charges.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Do I need trading experience? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">No experience needed! Brimes teaches you everything from scratch. Beginners are welcome!</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How much can I make per month? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Results vary, but our students average $500–$3,000/month following our signals consistently.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How do I join VIP mentorship? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Click the VIP button below and message Brimes directly on WhatsApp. He will guide you through everything!</div>
+    </div>
+  </div>
+
+  <!-- BUTTONS -->
+  <a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="btn-green">💬 Join Free Signals Group</a>
+  <a href="https://wa.me/2348103586138?text=Hello%20Brimes,%20I'm%20ready%20for%20VIP." class="btn-blue">💎 Private VIP Mentorship</a>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">⚠️ Risk Disclaimer: Trading forex involves significant risk of loss. Past performance does not guarantee future results. Only trade with money you can afford to lose.</div>
+
+</div>
+
+<a href="https://chat.whatsapp.com/BtAjTILBhyD3G47gTcJuBO?mode=gi_t" class="float-wa">💬</a>
+<div id="profit-pop"></div>
+<div id="join-pop"></div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+'use strict';
+
+// EMAILJS INIT
+emailjs.init('LyjqI2cRuzaU_a2p6');
+
+// VALIDATE AND ENTER
+function validateAndEnter(){
+  const name=document.getElementById('reg-name').value.trim();
+  const email=document.getElementById('reg-email').value.trim();
+  const age=parseInt(document.getElementById('reg-age').value);
+  const ageErr=document.getElementById('age-error');
+  const btn=document.querySelector('.w-btn');
+
+  ageErr.style.display='none';
+  ageErr.innerHTML='🚫 You must be 18 or older to access this masterclass!';
+  document.querySelectorAll('.w-form input').forEach(i=>i.style.borderColor='#1a2540');
+
+  if(!name){ document.getElementById('reg-name').style.borderColor='#ef4444'; document.getElementById('reg-name').placeholder='⚠️ Please enter your name!'; return; }
+  if(!email||!email.includes('@')||!email.includes('.')){ document.getElementById('reg-email').style.borderColor='#ef4444'; document.getElementById('reg-email').placeholder='⚠️ Please enter a valid Gmail!'; return; }
+  if(!age||isNaN(age)){ document.getElementById('reg-age').style.borderColor='#ef4444'; document.getElementById('reg-age').placeholder='⚠️ Please enter your age!'; return; }
+
+  // block under 18 permanently
+  if(age<18){
+    localStorage.setItem('brimes_blocked','true');
+    document.getElementById('welcome').innerHTML=`
+    <div style="text-align:center;padding:30px 24px">
+      <div style="font-size:60px;margin-bottom:16px">🚫</div>
+      <div style="font-size:20px;font-weight:900;color:#ef4444;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Access Denied</div>
+      <div style="font-size:13px;color:#64748b;line-height:1.9">You entered age <strong style="color:white">${age}</strong>.<br>You must be <strong style="color:white">18 or older</strong> to access this masterclass.<br><br>This device has been <strong style="color:#ef4444">permanently blocked.</strong><br>Use a different browser to try again.</div>
+    </div>`;
+    return;
+  }
+
+  // check duplicate email in localStorage
+  const usedEmails=JSON.parse(localStorage.getItem('brimes_emails')||'[]');
+  if(usedEmails.includes(email.toLowerCase())){
+    ageErr.innerHTML='🚫 This Gmail is already registered! Please use a different email.';
+    ageErr.style.display='block';
+    document.getElementById('reg-email').style.borderColor='#ef4444';
+    return;
+  }
+
+  // save email
+  usedEmails.push(email.toLowerCase());
+  localStorage.setItem('brimes_emails',JSON.stringify(usedEmails));
+  localStorage.setItem('brimes_registered','true');
+
+  // send welcome email to user + notify you
+  btn.textContent='Sending Welcome Email... 📧';
+  btn.disabled=true;
+
+  emailjs.send('service_1ihfgpj','template_9j3ezld',{
+    to_name: name,
+    to_email: email,
+    name: name,
+    email: email,
+  }).then(()=>{
+    btn.textContent='Welcome! Entering... 🔥';
+    setTimeout(()=>startExp(), 1000);
+  }).catch(()=>startExp());
+}
+
+// FAQ
+function toggleFaq(el){el.classList.toggle('open');}
+
+// TYPING
+const lines=["We turn beginners into pro traders...","Join 1,200+ students making daily profits...","92% win rate — verified results...","Daily Gold signals straight to WhatsApp..."];
+let li=0,ci=0,del=false;
+function type(){
+  const el=document.getElementById('typing-el');
+  if(!el) return;
+  const cur=lines[li];
+  del?ci--:ci++;
+  el.textContent=cur.substring(0,ci);
+  if(!del&&ci===cur.length){del=true;setTimeout(type,1800);return;}
+  if(del&&ci===0){del=false;li=(li+1)%lines.length;}
+  setTimeout(type,del?40:68);
+}
+type();
+
+// YOUTUBE
+let player, sessionOn=false;
+const music=document.getElementById('bgMusic');
+const endCover=document.getElementById('endCover');
+const liveTag=document.getElementById('liveTag');
+
+function onYouTubeIframeAPIReady(){
+  player=new YT.Player('ytVideo',{events:{onStateChange:onState}});
+}
+function onState(e){
+  if(e.data===YT.PlayerState.PLAYING){
+    const t=setInterval(()=>{
+      if(!player){clearInterval(t);return;}
+      const c=player.getCurrentTime(),d=player.getDuration();
+      if(d>0&&c>=d-0.2){clearInterval(t);player.stopVideo();endCover.classList.add('show');liveTag.textContent='🎵 Session In Progress';music.volume=0.5;music.play().catch(()=>{});}
+    },400);
+  }
+  if(e.data===YT.PlayerState.ENDED){endCover.classList.add('show');liveTag.textContent='🎵 Session In Progress';music.volume=0.5;music.play().catch(()=>{});}
+}
+
+window.startExp = function startExp(){
+  document.getElementById('welcome').style.display='none';
+  sessionOn=true;
+  music.volume=0;
+  music.play().then(()=>{music.pause();music.currentTime=0;music.volume=0.5;}).catch(()=>{});
+  const f=document.getElementById('ytVideo');
+  f.src=f.src+'&autoplay=1&mute=0';
+  setTimeout(showProfit,15000);
+  setInterval(()=>addMsg(names[r(names.length)],texts[r(texts.length)]),4500);
+}
+
+document.addEventListener('visibilitychange',()=>{
+  if(!player) return;
+  if(document.hidden){try{player.pauseVideo();}catch(e){}music.pause();}
+  else{if(sessionOn&&!endCover.classList.contains('show')){try{player.playVideo();}catch(e){}}if(endCover.classList.contains('show'))music.play().catch(()=>{});}
+});
+
+// HELPERS
+function r(n){return Math.floor(Math.random()*n);}
+const names=["Olamide","Chisom","Abubakar","Funmi","Emeka","Zainab","Tunde","Blessing"];
+const texts=["Gold hit TP! 🔥","Best mentor ever!","Withdrawal received 💰","Up $100 today!","Signals are 10/10","Blue everywhere! 💎","Life changing!","Thank you Brimes 🙏"];
+
+// CHAT
+const chatBox=document.getElementById('chat');
+function addMsg(n,m){
+  const d=document.createElement('div');
+  d.className='chat-msg';
+  d.innerHTML=`<span class="chat-name">${n}</span>${m}`;
+  chatBox.appendChild(d);
+  chatBox.scrollTop=chatBox.scrollHeight;
+  if(chatBox.children.length>30) chatBox.firstChild.remove();
+}
+function postMsg(){
+  const n=document.getElementById('vName').value.trim();
+  const m=document.getElementById('vMsg').value.trim();
+  if(n&&m){addMsg(n,m);document.getElementById('vName').value='';document.getElementById('vMsg').value='';}
+}
+for(let i=0;i<5;i++) addMsg(names[i],texts[i]);
+
+// LIVE COUNT & VIEWERS
+setInterval(()=>{
+  const el=document.getElementById('live-count');
+  if(el) el.textContent=`${(r(120)+1180).toLocaleString()} Online`;
+},7000);
+setInterval(()=>{
+  const el=document.getElementById('viewers');
+  if(el) el.textContent=`${r(40)+110} people viewing this page right now`;
+},6000);
+
+// POPUPS — alternating, never together
+function showProfit(){
+  const p=document.getElementById('profit-pop');
+  const n=names[r(names.length)];
+  p.innerHTML=`<strong>${n}</strong> just made <strong style="color:#22c55e">$${r(400)+50}</strong> 💰`;
+  p.style.left='16px';
+  setTimeout(()=>{p.style.left='-320px';setTimeout(showJoin,15000);},5000);
+}
+function showJoin(){
+  const p=document.getElementById('join-pop');
+  const n=names[r(names.length)];
+  const a=["just joined VIP! 🔥","just joined the Free Group! ✅","just messaged Brimes! 💬"];
+  p.innerHTML=`🔔 <strong>${n}</strong> ${a[r(a.length)]}`;
+  p.style.right='16px';
+  setTimeout(()=>{p.style.right='-320px';setTimeout(showProfit,15000);},5000);
+}
+
+// WA BUBBLE
+const waMsgs=["Hey! 👋 Ready to start making money from trading?","Gold just hit TP! +$340 profit 🔥","Only 3 VIP spots left this week! 💎","Students are withdrawing daily 💰"];
+let waIdx=0;
+function showWa(){
+  const b=document.getElementById('wa-bubble');
+  document.getElementById('wa-msg').textContent=waMsgs[waIdx];
+  waIdx=(waIdx+1)%waMsgs.length;
+  b.classList.add('show');
+  setTimeout(()=>b.classList.remove('show'),5500);
+}
+setTimeout(showWa,8000);
+setInterval(showWa,30000);
+
+// CONFETTI
+function confetti(){
+  const cols=['#22c55e','#3b82f6','#f59e0b','#ef4444','#a855f7'];
+  for(let i=0;i<60;i++){
+    const c=document.createElement('div');
+    c.className='cfetti';
+    const s=r(8)+4;
+    c.style.cssText=`left:${Math.random()*100}%;background:${cols[r(cols.length)]};width:${s}px;height:${s}px;animation-delay:${Math.random()*1.5}s;animation-duration:${Math.random()*2+2.5}s`;
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
+  }
+}
+
+// BLOCK UNDER 18 PERMANENTLY
+if(localStorage.getItem('brimes_blocked')==='true'){
+  document.getElementById('welcome').innerHTML=`
+    <div style="text-align:center;padding:30px">
+      <div style="font-size:60px;margin-bottom:20px">🚫</div>
+      <div style="font-size:20px;font-weight:900;color:#ef4444;margin-bottom:12px">ACCESS DENIED</div>
+      <div style="font-size:13px;color:#64748b;line-height:1.8">You must be <strong style="color:white">18 or older</strong> to access this content.<br>This device has been blocked.</div>
+    </div>`;
+}
+
+// SHOW WELCOME SCREEN if not registered
+if(localStorage.getItem('brimes_registered')!=='true'){
+  document.getElementById('welcome').style.display='flex';
+} else {
+  // already registered — skip welcome and enter directly
+  document.getElementById('welcome').style.display='none';
+  window.addEventListener('load', ()=> startExp());
+}
+
+// ADMIN — checks URL every time + saves to localStorage
+const params=new URLSearchParams(window.location.search);
+if(params.get('reset')==='brimes2024'){
+  localStorage.setItem('brimes_admin','true');
+  ['brimes_spins','brimes_won','brimes_win_spin','brimes_spin_count'].forEach(k=>localStorage.removeItem(k));
+  window.history.replaceState({},document.title,window.location.pathname);
+  alert('✅ Admin mode ON! Unlimited spins!');
+}
+// Also activate if ?admin=brimes2024 in URL without resetting spins
+if(params.get('admin')==='brimes2024'){
+  localStorage.setItem('brimes_admin','true');
+  window.history.replaceState({},document.title,window.location.pathname);
+}
+const isAdmin=localStorage.getItem('brimes_admin')==='true';
+
+// SPIN WHEEL
+const prizes=[
+  {label:"Free PDF!",color:"#22c55e",msg:"🎉 You won our FREE Gold Strategy PDF! Join the group to claim it!"},
+  {label:"Try Again",color:"#111827",msg:"😅 Unlucky! Keep spinning!"},
+  {label:"VIP Discount",color:"#3b82f6",msg:"🔥 You won a VIP discount! Message Brimes now to claim!"},
+  {label:"Try Again",color:"#111827",msg:"😅 Unlucky! Keep spinning!"},
+  {label:"Free Signal",color:"#f59e0b",msg:"⚡ You won a FREE premium signal! Join the group to receive it!"},
+  {label:"Try Again",color:"#111827",msg:"😅 Unlucky! Keep spinning!"},
+  {label:"1-on-1 Call",color:"#a855f7",msg:"💎 You won a FREE 1-on-1 call with Brimes! Message him now!"},
+  {label:"Try Again",color:"#111827",msg:"😅 Unlucky! Keep spinning!"},
+];
+let wAngle=0,spinning=false;
+let spinsLeft=parseInt(localStorage.getItem('brimes_spins')??'3');
+let hasWon=localStorage.getItem('brimes_won')==='true';
+let winSpin=parseInt(localStorage.getItem('brimes_win_spin')??'-1');
+if(winSpin===-1){winSpin=r(3)+1;localStorage.setItem('brimes_win_spin',winSpin);}
+let spinsDone=parseInt(localStorage.getItem('brimes_spin_count')??'0');
+
+function drawWheel(a){
+  const cv=document.getElementById('wheelCanvas');
+  if(!cv) return;
+  const ctx=cv.getContext('2d'),cx=120,cy=120,rad=116,sa=(2*Math.PI)/prizes.length;
+  ctx.clearRect(0,0,240,240);
+  prizes.forEach((p,i)=>{
+    const s=a+i*sa,e=s+sa;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,rad,s,e);
+    ctx.fillStyle=p.color;ctx.fill();
+    ctx.strokeStyle='rgba(10,15,26,0.8)';ctx.lineWidth=2;ctx.stroke();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(s+sa/2);
+    ctx.textAlign='right';ctx.fillStyle='rgba(255,255,255,0.9)';
+    ctx.font='bold 9px Segoe UI,Arial,sans-serif';
+    ctx.fillText(p.label,rad-8,3.5);ctx.restore();
+  });
+  ctx.beginPath();ctx.arc(cx,cy,15,0,2*Math.PI);
+  ctx.fillStyle='#0a0f1a';ctx.fill();
+  ctx.strokeStyle='#22c55e';ctx.lineWidth=2.5;ctx.stroke();
+}
+
+function initSpin(){
+  const btn=document.getElementById('spinBtn'),res=document.getElementById('spinResult');
+  if(isAdmin){btn.textContent='🔐 Admin Spin';}
+  else if(hasWon){btn.disabled=true;btn.textContent='🏆 Already Won!';res.textContent='✅ You already claimed a prize! Join the group to redeem!';res.style.display='block';}
+  else if(spinsLeft<=0){btn.disabled=true;btn.textContent='No Spins Left';res.textContent='😅 No more spins! Join the VIP group — signals are 🔥!';res.style.display='block';}
+  else{btn.textContent=`Spin Now — ${spinsLeft} Left`;}
+}
+
+function doSpin(){
+  if(spinning) return;
+  if(!isAdmin&&(spinsLeft<=0||hasWon)) return;
+  if(!isAdmin){spinsLeft--;spinsDone++;localStorage.setItem('brimes_spins',spinsLeft);localStorage.setItem('brimes_spin_count',spinsDone);}
+  spinning=true;
+  const btn=document.getElementById('spinBtn');
+  btn.disabled=true;
+  document.getElementById('spinResult').style.display='none';
+  const wins=[0,2,4,6],loses=[1,3,5,7];
+  const target=isAdmin ? wins[r(4)] : ((!isAdmin&&spinsDone===winSpin)?wins[r(4)]:loses[r(4)]);
+  const sa=(2*Math.PI)/prizes.length;
+  const extra=(r(5)+5)*2*Math.PI;
+  const dest=-(target*sa+sa/2-Math.PI/2);
+  const total=extra+((dest-wAngle)%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
+  let t0=null;const dur=4200;const a0=wAngle;
+  function frame(ts){
+    if(!t0) t0=ts;
+    const prog=Math.min((ts-t0)/dur,1),ease=1-Math.pow(1-prog,3);
+    wAngle=a0+total*ease;
+    drawWheel(wAngle);
+    if(prog<1){requestAnimationFrame(frame);return;}
+    spinning=false;
+    const prize=prizes[target];
+    const res=document.getElementById('spinResult');
+    res.textContent=prize.msg;res.style.display='block';
+    if(!prize.label.includes('Try Again')){
+      hasWon=true;localStorage.setItem('brimes_won','true');
+      btn.disabled=true;btn.textContent='🏆 Already Won!';
+      if(isAdmin){btn.disabled=false;btn.textContent='🔐 Admin Spin';}
+      confetti();
+    } else if(spinsLeft<=0&&!isAdmin){
+      btn.disabled=true;btn.textContent='No Spins Left';
+    } else {
+      btn.disabled=false;
+      btn.textContent=isAdmin?'🔐 Admin Spin':`Spin Now — ${spinsLeft} Left`;
+    }
+  }
+  requestAnimationFrame(frame);
+}
+drawWheel(0);
+initSpin();
+
+// LOADER
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('hide');
+    setTimeout(()=>{
+      document.getElementById('loader').style.display='none';
+      const p=document.getElementById('join-pop');
+      p.innerHTML=`🔔 <strong>Tunde</strong> just joined the Free Group! ✅`;
+      p.style.right='16px';
+      setTimeout(()=>p.style.right='-320px',5000);
+    },600);
+  },1800);
+});
+
+// EXIT
+let lastY=0,exitShown=false;
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  if(!exitShown&&lastY>300&&y<lastY-80){document.getElementById('exit-pop').classList.add('show');exitShown=true;}
+  lastY=y;
+});
+</script>
+</body>
+</html>
