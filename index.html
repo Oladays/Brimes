@@ -142,6 +142,10 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
 .btn-green{display:flex;align-items:center;justify-content:center;padding:16px;background:#22c55e;color:#0a0f1a;border-radius:14px;font-size:13px;font-weight:900;text-decoration:none;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
 .btn-blue{display:flex;align-items:center;justify-content:center;padding:15px;background:transparent;color:#60a5fa;border:2px solid rgba(96,165,250,0.35);border-radius:14px;font-size:13px;font-weight:900;text-decoration:none;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
 
+/* SIGNAL TICKER */
+.sig-ticker{display:inline-block;white-space:nowrap;animation:sigtick 25s linear infinite;font-size:11px;font-weight:700;color:#22c55e}
+@keyframes sigtick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
 /* DISCLAIMER */
 .disclaimer{font-size:9px;color:#2a3a56;line-height:1.8;text-align:center;padding:12px;background:#0d1526;border:1px solid #1a2540;border-radius:12px}
 
@@ -315,6 +319,51 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
     <div class="ttext">"Joined VIP last month and already withdrew $870. This is real!"</div>
   </div>
 
+  <!-- COUNTDOWN TIMER -->
+  <div style="background:linear-gradient(135deg,rgba(239,68,68,0.1),rgba(239,68,68,0.05));border:1px solid rgba(239,68,68,0.3);border-radius:18px;padding:18px;margin-bottom:14px;text-align:center">
+    <div style="font-size:11px;font-weight:800;color:#ef4444;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px">⏰ VIP Offer Closes In</div>
+    <div style="display:flex;justify-content:center;gap:10px;margin-bottom:10px">
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:10px 14px;min-width:55px">
+        <div style="font-size:24px;font-weight:900;color:white" id="cd-h">00</div>
+        <div style="font-size:9px;color:#64748b;text-transform:uppercase">Hours</div>
+      </div>
+      <div style="font-size:24px;font-weight:900;color:#ef4444;padding-top:10px">:</div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:10px 14px;min-width:55px">
+        <div style="font-size:24px;font-weight:900;color:white" id="cd-m">00</div>
+        <div style="font-size:9px;color:#64748b;text-transform:uppercase">Mins</div>
+      </div>
+      <div style="font-size:24px;font-weight:900;color:#ef4444;padding-top:10px">:</div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:10px 14px;min-width:55px">
+        <div style="font-size:24px;font-weight:900;color:white" id="cd-s">00</div>
+        <div style="font-size:9px;color:#64748b;text-transform:uppercase">Secs</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#94a3b8">🔥 Only <strong style="color:#ef4444">3 VIP spots</strong> remaining this week!</div>
+  </div>
+
+  <!-- LIVE SIGNALS TICKER -->
+  <div style="background:#0d1526;border:1px solid #1a2540;border-radius:14px;padding:14px;margin-bottom:14px;overflow:hidden">
+    <div style="font-size:10px;font-weight:800;color:#3d4f6b;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px">📡 Live Signals Today</div>
+    <div style="overflow:hidden;white-space:nowrap">
+      <div class="sig-ticker">
+        🟢 XAUUSD BUY @ 2,312 TP HIT +$340 &nbsp;|&nbsp; 🟢 EURUSD BUY @ 1.0821 TP HIT +$120 &nbsp;|&nbsp; 🟢 NASDAQ BUY @ 18,240 TP HIT +$280 &nbsp;|&nbsp; 🟢 XAUUSD BUY @ 2,298 TP HIT +$410 &nbsp;|&nbsp; 🟢 GBPUSD BUY @ 1.2644 TP HIT +$95 &nbsp;|&nbsp;
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYMENT / VIP -->
+  <div style="background:linear-gradient(135deg,rgba(34,197,94,0.08),rgba(59,130,246,0.08));border:1px solid rgba(34,197,94,0.2);border-radius:18px;padding:18px;margin-bottom:14px;text-align:center">
+    <div style="font-size:11px;font-weight:800;color:#22c55e;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px">💎 VIP Mentorship</div>
+    <div style="font-size:28px;font-weight:900;color:white;margin-bottom:4px">₦50,000<span style="font-size:12px;color:#64748b">/month</span></div>
+    <div style="font-size:11px;color:#64748b;margin-bottom:14px">Cancel anytime • Instant access</div>
+    <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:14px;text-align:left">
+      <div style="font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:8px"><span style="color:#22c55e">✓</span> Daily live signals (Gold, EURUSD, NASDAQ)</div>
+      <div style="font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:8px"><span style="color:#22c55e">✓</span> 1-on-1 mentorship with Brimes</div>
+      <div style="font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:8px"><span style="color:#22c55e">✓</span> Strategy PDF + Video library</div>
+      <div style="font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:8px"><span style="color:#22c55e">✓</span> Private VIP WhatsApp group</div>
+    </div>
+  </div>
+
   <!-- TRUST -->
   <div class="trust" style="margin-top:14px">
     <div class="trust-chip">🔒 Secure</div>
@@ -323,16 +372,6 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
   </div>
 
   <!-- VIP BENEFITS -->
-  <div class="sec-title">💎 What VIP Members Get</div>
-  <div class="card" style="margin-bottom:14px">
-    <div style="display:flex;flex-direction:column;gap:11px">
-      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">📡</div><div><div style="font-size:12px;font-weight:800;margin-bottom:2px">Daily Live Signals</div><div style="font-size:11px;color:#3d4f6b">Gold, EURUSD, NASDAQ signals every day</div></div></div>
-      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🎓</div><div><div style="font-size:12px;font-weight:800;margin-bottom:2px">1-on-1 Mentorship</div><div style="font-size:11px;color:#3d4f6b">Personal coaching from Brimes directly</div></div></div>
-      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">📘</div><div><div style="font-size:12px;font-weight:800;margin-bottom:2px">Strategy PDF + Recordings</div><div style="font-size:11px;color:#3d4f6b">Full trading strategy and video library</div></div></div>
-      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">💬</div><div><div style="font-size:12px;font-weight:800;margin-bottom:2px">Private VIP Group</div><div style="font-size:11px;color:#3d4f6b">Exclusive group with top traders only</div></div></div>
-    </div>
-  </div>
-
   <!-- WITHDRAWAL PROOFS -->
   <div class="sec-title">💰 Student Withdrawals</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
@@ -443,6 +482,11 @@ function validateAndEnter(){
   usedEmails.push(email.toLowerCase());
   localStorage.setItem('brimes_emails',JSON.stringify(usedEmails));
 
+  // save to admin dashboard data
+  const allRegs = JSON.parse(localStorage.getItem('brimes_all_regs')||'[]');
+  allRegs.unshift({ name, email, age, date: new Date().toISOString() });
+  localStorage.setItem('brimes_all_regs', JSON.stringify(allRegs));
+
   btn.textContent='Sending Email... 📧';
   btn.disabled=true;
 
@@ -467,6 +511,30 @@ function validateAndEnter(){
     time: new Date().toLocaleString()
   }).catch(()=>{});
 }
+
+// COUNTDOWN TIMER
+function startCountdown(){
+  let saved=localStorage.getItem('brimes_countdown');
+  let end=saved?parseInt(saved):Date.now()+(2*60*60*1000);
+  if(!saved) localStorage.setItem('brimes_countdown',end);
+  function tick(){
+    const diff=end-Date.now();
+    if(diff<=0){end=Date.now()+(2*60*60*1000);localStorage.setItem('brimes_countdown',end);}
+    const h=Math.floor(diff/3600000);
+    const m=Math.floor((diff%3600000)/60000);
+    const s=Math.floor((diff%60000)/1000);
+    const pad=n=>String(n).padStart(2,'0');
+    const ch=document.getElementById('cd-h');
+    const cm=document.getElementById('cd-m');
+    const cs=document.getElementById('cd-s');
+    if(ch) ch.textContent=pad(h);
+    if(cm) cm.textContent=pad(m);
+    if(cs) cs.textContent=pad(s);
+    setTimeout(tick,1000);
+  }
+  tick();
+}
+startCountdown();
 
 // FAQ
 function toggleFaq(el){el.classList.toggle('open');}
@@ -545,6 +613,11 @@ function postMsg(){
     addMsg(n,m);
     document.getElementById('vName').value='';
     document.getElementById('vMsg').value='';
+    // save to admin dashboard
+    const allComs = JSON.parse(localStorage.getItem('brimes_all_comments')||'[]');
+    allComs.unshift({ name: n, message: m, time: new Date().toLocaleString() });
+    if(allComs.length > 100) allComs.pop();
+    localStorage.setItem('brimes_all_comments', JSON.stringify(allComs));
     // notify BRIMES about new comment
     emailjs.send('service_1ihfgpj','template_tpznzd7',{
       type: '💬 NEW COMMENT',
@@ -762,6 +835,7 @@ window.addEventListener('scroll',()=>{
 </script>
 </body>
 </html>
+
 
 
 
