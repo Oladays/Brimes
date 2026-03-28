@@ -420,7 +420,6 @@ function validateAndEnter(){
   if(!email||!email.includes('@')||!email.includes('.')){ document.getElementById('reg-email').style.borderColor='#ef4444'; document.getElementById('reg-email').placeholder='⚠️ Please enter a valid Gmail!'; return; }
   if(!age||isNaN(age)){ document.getElementById('reg-age').style.borderColor='#ef4444'; document.getElementById('reg-age').placeholder='⚠️ Please enter your age!'; return; }
 
-  // block under 18 permanently
   if(age<18){
     localStorage.setItem('brimes_blocked','true');
     document.getElementById('welcome').innerHTML=`
@@ -432,7 +431,7 @@ function validateAndEnter(){
     return;
   }
 
-  // check duplicate email in localStorage
+  // check duplicate email
   const usedEmails=JSON.parse(localStorage.getItem('brimes_emails')||'[]');
   if(usedEmails.includes(email.toLowerCase())){
     ageErr.innerHTML='🚫 This Gmail is already registered! Please use a different email.';
@@ -441,24 +440,16 @@ function validateAndEnter(){
     return;
   }
 
-  // save email
   usedEmails.push(email.toLowerCase());
   localStorage.setItem('brimes_emails',JSON.stringify(usedEmails));
   localStorage.setItem('brimes_registered','true');
 
-  // send welcome email to user + notify you
   btn.textContent='Sending Welcome Email... 📧';
   btn.disabled=true;
 
-  emailjs.send('service_1ihfgpj','template_9j3ezld',{
-    to_name: name,
-    to_email: email,
-    name: name,
-    email: email,
-  }).then(()=>{
-    btn.textContent='Welcome! Entering... 🔥';
-    setTimeout(()=>startExp(), 1000);
-  }).catch(()=>startExp());
+  emailjs.send('service_1ihfgpj','template_9j3ezld',{ to_name:name, to_email:email, name, email })
+    .then(()=>{ btn.textContent='Welcome! Entering... 🔥'; setTimeout(()=>startExp(),1000); })
+    .catch(()=>startExp());
 }
 
 // FAQ
@@ -737,3 +728,4 @@ window.addEventListener('scroll',()=>{
 </script>
 </body>
 </html>
+
