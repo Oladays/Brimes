@@ -9,10 +9,43 @@
 <meta name="author" content="Brimes Trading Academy">
 <meta name="robots" content="index, follow">
 
-<!-- Open Graph (shows nice preview when you share link on WhatsApp/Facebook) -->
+<!-- Open Graph -->
 <meta property="og:title" content="BRIMES Trading Signals Academy 🔥">
 <meta property="og:description" content="Free daily forex signals! 92% win rate. Join 1,200+ students making money every week!">
 <meta property="og:url" content="https://brimes.vercel.app">
+<meta property="og:type" content="website">
+
+<!-- Firebase REST API — no scripts needed! -->
+<script>
+const FB_URL = "https://brimeschat-2d37e-default-rtdb.firebaseio.com";
+
+// Save to Firebase via REST
+async function fbSet(path, data){
+  try{
+    await fetch(`${FB_URL}/${path}.json`, {
+      method: 'PUT',
+      body: JSON.stringify(data)
+    });
+  } catch(e){}
+}
+
+// Read from Firebase via REST
+async function fbGet(path){
+  try{
+    const r = await fetch(`${FB_URL}/${path}.json`);
+    return await r.json();
+  } catch(e){ return null; }
+}
+
+// Increment counter
+async function fbIncrement(path){
+  try{
+    const cur = await fbGet(path) || 0;
+    await fbSet(path, cur + 1);
+  } catch(e){}
+}
+</script>
+
 <meta property="og:type" content="website">
 
 <!-- Twitter Card -->
@@ -444,7 +477,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
 emailjs.init('LyjqI2cRuzaU_a2p6');
 
 // VALIDATE AND ENTER
-function validateAndEnter(){
+async function validateAndEnter(){
   const name=document.getElementById('reg-name').value.trim();
   const email=document.getElementById('reg-email').value.trim();
   const age=parseInt(document.getElementById('reg-age').value);
@@ -461,6 +494,7 @@ function validateAndEnter(){
 
   if(age<18){
     localStorage.setItem('brimes_blocked','true');
+    fbIncrement('stats/blocked');
     document.getElementById('welcome').innerHTML=`
     <div style="text-align:center;padding:30px 24px">
       <div style="font-size:60px;margin-bottom:16px">🚫</div>
@@ -470,46 +504,39 @@ function validateAndEnter(){
     return;
   }
 
-  // check duplicate email
-  const usedEmails=JSON.parse(localStorage.getItem('brimes_emails')||'[]');
-  if(usedEmails.includes(email.toLowerCase())){
+  btn.textContent='Checking... ⏳';
+  btn.disabled=true;
+
+  const emailKey=email.toLowerCase().replace(/[.#$\[\]@]/g,'_');
+
+  // check Firebase REST API if email already registered
+  const existing = await fbGet('registrations/'+emailKey);
+  if(existing){
     ageErr.innerHTML='🚫 This Gmail is already registered! Please use a different email.';
     ageErr.style.display='block';
     document.getElementById('reg-email').style.borderColor='#ef4444';
+    btn.textContent='ACCESS MASTERCLASS';
+    btn.disabled=false;
     return;
   }
 
-  usedEmails.push(email.toLowerCase());
-  localStorage.setItem('brimes_emails',JSON.stringify(usedEmails));
+  // save to Firebase REST API
+  fbSet('registrations/'+emailKey, { name, email, age, date: new Date().toISOString() });
 
-  // save to admin dashboard data
-  const allRegs = JSON.parse(localStorage.getItem('brimes_all_regs')||'[]');
-  allRegs.unshift({ name, email, age, date: new Date().toISOString() });
-  localStorage.setItem('brimes_all_regs', JSON.stringify(allRegs));
-
-  btn.textContent='Sending Email... 📧';
-  btn.disabled=true;
-
-  // show check email screen immediately
+  // show check email screen
   setTimeout(()=>{
     document.getElementById('welcome').innerHTML=`
     <div style="text-align:center;padding:30px 24px;max-width:380px">
       <div style="font-size:60px;margin-bottom:16px">📧</div>
       <div style="font-size:20px;font-weight:900;color:#22c55e;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Check Your Email!</div>
-      <div style="font-size:13px;color:#64748b;line-height:1.9;margin-bottom:24px">We sent a link to <strong style="color:white">${email}</strong><br><br>Click the <strong style="color:#22c55e">"Click Here To Enter Masterclass"</strong> link in your email to access the site!<br><br><span style="color:#3d4f6b;font-size:11px">Check your spam folder if you don't see it!</span></div>
-      <div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:12px;padding:12px;font-size:11px;color:#64748b">📱 Open your Gmail app → Find email from Brimes Academy → Click the link!</div>
+      <div style="font-size:13px;color:#64748b;line-height:1.9;margin-bottom:24px">We sent a link to <strong style="color:white">${email}</strong><br><br>Click the <strong style="color:#22c55e">"Click Here To Enter Masterclass"</strong> link in your email!<br><br><span style="color:#3d4f6b;font-size:11px">Check spam folder if you don't see it!</span></div>
+      <div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:12px;padding:12px;font-size:11px;color:#64748b">📱 Open Gmail → Find email from Brimes Academy → Click the link!</div>
     </div>`;
   }, 1500);
 
   // send emails in background
   emailjs.send('service_1ihfgpj','template_9j3ezld',{ to_name:name, to_email:email, name, email }).catch(()=>{});
-  emailjs.send('service_1ihfgpj','template_tpznzd7',{
-    type: '🆕 NEW REGISTRATION',
-    name: name,
-    email: email,
-    message: 'Age: '+age,
-    time: new Date().toLocaleString()
-  }).catch(()=>{});
+  emailjs.send('service_1ihfgpj','template_tpznzd7',{ type:'🆕 NEW REGISTRATION', name, email, message:'Age: '+age, time:new Date().toLocaleString() }).catch(()=>{});
 }
 
 // COUNTDOWN TIMER
@@ -835,6 +862,7 @@ window.addEventListener('scroll',()=>{
 </script>
 </body>
 </html>
+
 
 
 
