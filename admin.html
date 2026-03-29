@@ -7,8 +7,6 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;min-height:100vh}
-
-/* LOGIN */
 #login{position:fixed;inset:0;background:#0a0f1a;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
 .login-box{background:#0d1526;border:1px solid #1a2540;border-radius:20px;padding:28px 22px;max-width:360px;width:100%;text-align:center}
 .login-logo{font-size:36px;margin-bottom:12px}
@@ -18,48 +16,28 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
 .login-input:focus{border-color:rgba(34,197,94,0.4)}
 .login-btn{width:100%;background:#22c55e;color:#0a0f1a;border:none;padding:14px;border-radius:12px;font-size:14px;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:1px}
 .login-err{color:#ef4444;font-size:11px;margin-top:10px;display:none}
-
-/* DASHBOARD */
 #dashboard{display:none;padding:16px;max-width:500px;margin:0 auto;padding-bottom:40px}
-
-/* HEADER */
 .dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-top:10px}
 .dash-title{font-size:16px;font-weight:900;color:#22c55e;text-transform:uppercase;letter-spacing:1px}
 .dash-logout{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;padding:7px 14px;border-radius:10px;font-size:11px;font-weight:700;cursor:pointer}
-
-/* STATS */
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
 .stat-card{background:#0d1526;border:1px solid #1a2540;border-radius:16px;padding:16px;text-align:center}
 .stat-num{font-size:28px;font-weight:900;color:#22c55e;display:block;margin-bottom:4px}
 .stat-lbl{font-size:10px;color:#3d4f6b;text-transform:uppercase;letter-spacing:1px;font-weight:700}
-
-/* TABS */
-.tabs{display:flex;gap:8px;margin-bottom:16px}
-.tab{flex:1;padding:10px;background:#0d1526;border:1px solid #1a2540;border-radius:10px;font-size:11px;font-weight:800;color:#3d4f6b;cursor:pointer;text-align:center;text-transform:uppercase;letter-spacing:1px}
-.tab.active{background:rgba(34,197,94,0.1);border-color:rgba(34,197,94,0.3);color:#22c55e}
-
-/* TABLE */
 .table-wrap{background:#0d1526;border:1px solid #1a2540;border-radius:16px;overflow:hidden;margin-bottom:16px}
-.table-head{display:grid;padding:12px 14px;background:rgba(255,255,255,0.03);border-bottom:1px solid #1a2540;font-size:9px;font-weight:800;color:#3d4f6b;text-transform:uppercase;letter-spacing:1px}
-.reg-head{grid-template-columns:2fr 2fr 1fr 2fr}
-.com-head{grid-template-columns:2fr 3fr 2fr}
-.table-row{display:grid;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11px;align-items:center}
+.table-head{display:grid;padding:12px 14px;background:rgba(255,255,255,0.03);border-bottom:1px solid #1a2540;font-size:9px;font-weight:800;color:#3d4f6b;text-transform:uppercase;letter-spacing:1px;grid-template-columns:2fr 2fr 1fr 2fr}
+.table-row{display:grid;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11px;align-items:center;grid-template-columns:2fr 2fr 1fr 2fr}
 .table-row:last-child{border-bottom:none}
-.table-row:hover{background:rgba(255,255,255,0.02)}
-.reg-row{grid-template-columns:2fr 2fr 1fr 2fr}
-.com-row{grid-template-columns:2fr 3fr 2fr}
 .empty{text-align:center;padding:30px;color:#3d4f6b;font-size:12px}
-
-/* REFRESH */
 .refresh-btn{width:100%;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:#22c55e;padding:12px;border-radius:12px;font-size:12px;font-weight:800;cursor:pointer;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
-
-/* LOADING */
 .loading{text-align:center;padding:20px;color:#3d4f6b;font-size:12px}
+.live-tag{display:flex;align-items:center;gap:6px;font-size:10px;color:#22c55e;margin-bottom:16px}
+.ldot{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="login">
   <div class="login-box">
     <div class="login-logo">🔐</div>
@@ -67,175 +45,95 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
     <div class="login-sub">Brimes Trading Academy</div>
     <input type="password" class="login-input" id="pwd" placeholder="Enter password..." onkeydown="if(event.key==='Enter')checkLogin()">
     <button class="login-btn" onclick="checkLogin()">Login</button>
-    <div class="login-err" id="login-err">❌ Wrong password! Try again.</div>
+    <div class="login-err" id="login-err">❌ Wrong password!</div>
   </div>
 </div>
 
-<!-- DASHBOARD -->
 <div id="dashboard">
   <div class="dash-header">
     <div class="dash-title">⚡ Admin Panel</div>
     <button class="dash-logout" onclick="logout()">Logout</button>
   </div>
-
-  <!-- STATS -->
+  <div class="live-tag"><div class="ldot"></div>Live — Firebase REST API</div>
   <div class="stats-grid">
-    <div class="stat-card">
-      <span class="stat-num" id="total-reg">-</span>
-      <span class="stat-lbl">Registrations</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-num" id="total-com">-</span>
-      <span class="stat-lbl">Comments</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-num" id="today-reg">-</span>
-      <span class="stat-lbl">Today</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-num" id="blocked-count">-</span>
-      <span class="stat-lbl">Blocked</span>
-    </div>
+    <div class="stat-card"><span class="stat-num" id="total-reg">...</span><span class="stat-lbl">Registrations</span></div>
+    <div class="stat-card"><span class="stat-num" id="today-reg">...</span><span class="stat-lbl">Today</span></div>
+    <div class="stat-card"><span class="stat-num" id="blocked-count">...</span><span class="stat-lbl">Blocked</span></div>
+    <div class="stat-card"><span class="stat-num" id="total-emails">∞</span><span class="stat-lbl">Emails Sent</span></div>
   </div>
-
-  <!-- TABS -->
-  <div class="tabs">
-    <div class="tab active" onclick="showTab('regs')">👥 Registrations</div>
-    <div class="tab" onclick="showTab('coms')">💬 Comments</div>
-  </div>
-
-  <!-- REFRESH -->
   <button class="refresh-btn" onclick="loadData()">🔄 Refresh Data</button>
-
-  <!-- REGISTRATIONS TABLE -->
-  <div id="regs-table">
-    <div class="table-wrap">
-      <div class="table-head reg-head">
-        <span>Name</span>
-        <span>Email</span>
-        <span>Age</span>
-        <span>Date</span>
-      </div>
-      <div id="regs-body"><div class="loading">Loading...</div></div>
+  <div class="table-wrap">
+    <div class="table-head">
+      <span>Name</span><span>Email</span><span>Age</span><span>Date</span>
     </div>
+    <div id="regs-body"><div class="loading">Loading...</div></div>
   </div>
-
-  <!-- COMMENTS TABLE -->
-  <div id="coms-table" style="display:none">
-    <div class="table-wrap">
-      <div class="table-head com-head">
-        <span>Name</span>
-        <span>Message</span>
-        <span>Time</span>
-      </div>
-      <div id="coms-body"><div class="loading">Loading...</div></div>
-    </div>
-  </div>
-
 </div>
 
 <script>
 const PASSWORD = 'brimes2024';
-let regsData = [];
-let comsData = [];
+const FB = 'https://brimeschat-2d37e-default-rtdb.firebaseio.com';
 
-// LOGIN
+async function fbGet(path){
+  try{
+    const r = await fetch(`${FB}/${path}.json`);
+    return await r.json();
+  }catch(e){return null;}
+}
+
 function checkLogin(){
   const pwd = document.getElementById('pwd').value;
   if(pwd === PASSWORD){
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    sessionStorage.setItem('brimes_admin_logged', 'true');
+    document.getElementById('login').style.display='none';
+    document.getElementById('dashboard').style.display='block';
+    sessionStorage.setItem('brimes_admin','true');
     loadData();
   } else {
-    document.getElementById('login-err').style.display = 'block';
-    document.getElementById('pwd').style.borderColor = '#ef4444';
+    document.getElementById('login-err').style.display='block';
+    document.getElementById('pwd').style.borderColor='#ef4444';
   }
 }
 
 function logout(){
-  sessionStorage.removeItem('brimes_admin_logged');
-  document.getElementById('login').style.display = 'flex';
-  document.getElementById('dashboard').style.display = 'none';
-  document.getElementById('pwd').value = '';
+  sessionStorage.removeItem('brimes_admin');
+  document.getElementById('login').style.display='flex';
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('pwd').value='';
 }
 
-// Check if already logged in
-if(sessionStorage.getItem('brimes_admin_logged') === 'true'){
-  document.getElementById('login').style.display = 'none';
-  document.getElementById('dashboard').style.display = 'block';
+if(sessionStorage.getItem('brimes_admin')==='true'){
+  document.getElementById('login').style.display='none';
+  document.getElementById('dashboard').style.display='block';
   loadData();
 }
 
-// TABS
-function showTab(tab){
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  if(tab === 'regs'){
-    document.querySelector('.tab:first-child').classList.add('active');
-    document.getElementById('regs-table').style.display = 'block';
-    document.getElementById('coms-table').style.display = 'none';
-  } else {
-    document.querySelector('.tab:last-child').classList.add('active');
-    document.getElementById('regs-table').style.display = 'none';
-    document.getElementById('coms-table').style.display = 'block';
-  }
-}
-
-// LOAD DATA from EmailJS activity + localStorage
-function loadData(){
-  // Load registrations from localStorage (shared via emailjs notifications)
-  loadRegistrations();
-  loadComments();
-}
-
-function loadRegistrations(){
-  // Get from localStorage — populated when users register
-  const raw = localStorage.getItem('brimes_all_regs');
-  regsData = raw ? JSON.parse(raw) : [];
-
-  const body = document.getElementById('regs-body');
+async function loadData(){
+  document.getElementById('regs-body').innerHTML='<div class="loading">Loading from Firebase...</div>';
+  const data = await fbGet('registrations');
+  const regs = data ? Object.values(data) : [];
+  regs.sort((a,b)=>new Date(b.date)-new Date(a.date));
   const today = new Date().toDateString();
   let todayCount = 0;
-
-  if(regsData.length === 0){
-    body.innerHTML = `<div class="empty">No registrations yet! 😊<br>Share your link to get students!</div>`;
+  document.getElementById('total-reg').textContent = regs.length;
+  if(regs.length===0){
+    document.getElementById('regs-body').innerHTML='<div class="empty">No registrations yet! 😊<br>Share your link to get students!</div>';
   } else {
-    body.innerHTML = regsData.map(r => {
-      const date = new Date(r.date);
-      if(date.toDateString() === today) todayCount++;
-      return `<div class="table-row reg-row">
-        <span style="font-weight:700;color:#e8edf5">${r.name||'-'}</span>
+    document.getElementById('regs-body').innerHTML = regs.map(r=>{
+      const d = new Date(r.date);
+      if(d.toDateString()===today) todayCount++;
+      return `<div class="table-row">
+        <span style="font-weight:700">${r.name||'-'}</span>
         <span style="color:#64748b;font-size:10px">${r.email||'-'}</span>
         <span style="color:#22c55e;font-weight:700">${r.age||'-'}</span>
-        <span style="color:#3d4f6b;font-size:10px">${date.toLocaleDateString()}</span>
+        <span style="color:#3d4f6b;font-size:10px">${d.toLocaleDateString()}</span>
       </div>`;
     }).join('');
   }
-
-  document.getElementById('total-reg').textContent = regsData.length;
   document.getElementById('today-reg').textContent = todayCount;
-  document.getElementById('blocked-count').textContent = localStorage.getItem('brimes_blocked_count') || 0;
-}
-
-function loadComments(){
-  const raw = localStorage.getItem('brimes_all_comments');
-  comsData = raw ? JSON.parse(raw) : [];
-
-  const body = document.getElementById('coms-body');
-  if(comsData.length === 0){
-    body.innerHTML = `<div class="empty">No comments yet! 😊</div>`;
-  } else {
-    body.innerHTML = comsData.map(c => {
-      return `<div class="table-row com-row">
-        <span style="font-weight:700;color:#22c55e">${c.name||'-'}</span>
-        <span style="color:#94a3b8;font-size:11px">${c.message||'-'}</span>
-        <span style="color:#3d4f6b;font-size:10px">${c.time||'-'}</span>
-      </div>`;
-    }).join('');
-  }
-
-  document.getElementById('total-com').textContent = comsData.length;
+  const blocked = await fbGet('stats/blocked');
+  document.getElementById('blocked-count').textContent = blocked||0;
 }
 </script>
 </body>
 </html>
+
