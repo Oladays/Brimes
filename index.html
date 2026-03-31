@@ -576,7 +576,11 @@ async function validateAndEnter(){
   emailjs.send('service_1ihfgpj','template_9j3ezld',{ to_name:name, to_email:email, name, email }).catch(()=>{});
   emailjs.send('service_1ihfgpj','template_tpznzd7',{ type:'🆕 NEW REGISTRATION', name, email, message:'Age: '+age, time:new Date().toLocaleString() }).catch(()=>{});
 
-  // enter site immediately — no email verification needed!
+  // unlock audio on button click — key for mobile!
+  music.volume=0;
+  music.play().then(()=>{music.pause();music.currentTime=0;music.volume=0.5;}).catch(()=>{});
+
+  // enter site immediately!
   btn.textContent='Welcome! Entering... 🔥';
   setTimeout(()=>startExp(), 1000);
 }
@@ -663,14 +667,12 @@ function onState(e){
         player.stopVideo();
         endCover.classList.add('show');
         liveTag.textContent='🎵 Session In Progress';
-        // fix for mobile — try multiple times
         music.volume=0.5;
-        const playMusic=()=>{
-          music.play().catch(()=>{
-            setTimeout(playMusic, 1000);
-          });
-        };
-        playMusic();
+        music.play().catch(()=>{
+          // if blocked - play on next touch
+          document.addEventListener('touchstart',()=>music.play().catch(()=>{}),{once:true});
+          document.addEventListener('click',()=>music.play().catch(()=>{}),{once:true});
+        });
       }
     },400);
   }
@@ -678,12 +680,10 @@ function onState(e){
     endCover.classList.add('show');
     liveTag.textContent='🎵 Session In Progress';
     music.volume=0.5;
-    const playMusic=()=>{
-      music.play().catch(()=>{
-        setTimeout(playMusic, 1000);
-      });
-    };
-    playMusic();
+    music.play().catch(()=>{
+      document.addEventListener('touchstart',()=>music.play().catch(()=>{}),{once:true});
+      document.addEventListener('click',()=>music.play().catch(()=>{}),{once:true});
+    });
   }
 }
 
@@ -948,6 +948,7 @@ window.addEventListener('scroll',()=>{
 </script>
 </body>
 </html>
+
 
 
 
