@@ -577,8 +577,9 @@ async function validateAndEnter(){
   emailjs.send('service_1ihfgpj','template_tpznzd7',{ type:'🆕 NEW REGISTRATION', name, email, message:'Age: '+age, time:new Date().toLocaleString() }).catch(()=>{});
 
   // unlock audio on button click — key for mobile!
-  music.volume=0;
-  music.play().then(()=>{music.pause();music.currentTime=0;music.volume=0.5;}).catch(()=>{});
+  const bgm = document.getElementById('bgMusic');
+  bgm.volume=0;
+  bgm.play().then(()=>{bgm.pause();bgm.currentTime=0;bgm.volume=0.5;}).catch(()=>{});
 
   // enter site immediately!
   btn.textContent='Welcome! Entering... 🔥';
@@ -948,6 +949,7 @@ window.addEventListener('scroll',()=>{
 </script>
 </body>
 </html>
+
 
 
 
