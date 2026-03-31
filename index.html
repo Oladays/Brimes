@@ -175,6 +175,10 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
 .btn-green{display:flex;align-items:center;justify-content:center;padding:16px;background:#22c55e;color:#0a0f1a;border-radius:14px;font-size:13px;font-weight:900;text-decoration:none;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;box-shadow:0 0 15px rgba(34,197,94,0.3)}
 .btn-blue{display:flex;align-items:center;justify-content:center;padding:15px;background:transparent;color:#60a5fa;border:2px solid rgba(96,165,250,0.4);border-radius:14px;font-size:13px;font-weight:900;text-decoration:none;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;box-shadow:0 0 15px rgba(96,165,250,0.15)}
 
+/* TAP ANIMATIONS */
+@keyframes tappulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(34,197,94,0.6)}50%{transform:scale(1.1);box-shadow:0 0 0 15px rgba(34,197,94,0)}}
+@keyframes tapblink{0%,100%{opacity:1}50%{opacity:0.3}}
+
 /* URGENCY */
 @keyframes urgpulse{0%,100%{border-color:rgba(239,68,68,0.4)}50%{border-color:rgba(239,68,68,0.9)}}
 
@@ -290,9 +294,10 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;mi
     </div>
     <div class="video-overlay"></div>
     <div class="live-tag" id="liveTag" style="top:8px;bottom:auto">🔴 LIVE Masterclass</div>
-    <div id="waiting-msg" style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.75);border:1px solid rgba(34,197,94,0.3);border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;color:#22c55e;white-space:nowrap;z-index:8;display:flex;align-items:center;gap:6px">
-      <div style="width:6px;height:6px;background:#22c55e;border-radius:50%;animation:blink 1s infinite;flex-shrink:0"></div>
-      Waiting for host to start...
+    <!-- Tap for sound -->
+    <div id="play-overlay" onclick="tapToPlay()" style="position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:rgba(0,0,0,0.5);backdrop-filter:blur(2px)">
+      <div style="width:70px;height:70px;background:#22c55e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:14px;animation:tappulse 1s infinite">▶</div>
+      <div style="animation:tapblink 1s infinite;background:rgba(0,0,0,0.6);border:1.5px solid #22c55e;color:#22c55e;font-size:11px;font-weight:800;padding:8px 20px;border-radius:30px;letter-spacing:2px;text-transform:uppercase">🔊 Tap For Sound</div>
     </div>
   </div>
 
@@ -652,6 +657,20 @@ function type(){
 }
 type();
 
+// TAP TO PLAY
+function tapToPlay(){
+  const overlay = document.getElementById('play-overlay');
+  if(overlay) overlay.style.display='none';
+  // unlock audio
+  const bgm = document.getElementById('bgMusic');
+  bgm.volume=0;
+  bgm.play().then(()=>{bgm.pause();bgm.currentTime=0;bgm.volume=0.5;}).catch(()=>{});
+  // play video with sound
+  const f = document.getElementById('ytVideo');
+  if(f.src.includes('autoplay')) return;
+  f.src = f.src + '&autoplay=1&mute=0';
+}
+
 // YOUTUBE
 let player, sessionOn=false;
 const music=document.getElementById('bgMusic');
@@ -699,10 +718,9 @@ function onState(e){
 window.startExp = function startExp(){
   document.getElementById('welcome').style.display='none';
   sessionOn=true;
-  music.volume=0;
-  music.play().then(()=>{music.pause();music.currentTime=0;music.volume=0.5;}).catch(()=>{});
-  const f=document.getElementById('ytVideo');
-  f.src=f.src+'&autoplay=1&mute=0';
+  // show play overlay instead of autoplay
+  const overlay = document.getElementById('play-overlay');
+  if(overlay) overlay.style.display='flex';
   setTimeout(showProfit,15000);
   setInterval(()=>addMsg(names[r(names.length)],texts[r(texts.length)]),4500);
 }
@@ -957,6 +975,7 @@ window.addEventListener('scroll',()=>{
 </script>
 </body>
 </html>
+
 
 
 
