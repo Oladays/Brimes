@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRIMES Academy — Webinar Replay</title>
+<meta property="og:title" content="BRIMES Academy — Webinar Replay 🔥">
+<meta property="og:description" content="You missed our LIVE session? Watch the replay before it expires! Free forex signals daily — 92% win rate!">
+<meta property="og:image" content="https://raw.githubusercontent.com/Oladays/Brimes/main/mentor-pro.jpg">
+<meta property="og:url" content="https://brimes.vercel.app/replay.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Oladays/Brimes/main/mentor-pro.jpg">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0f1a;color:#e8edf5;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+
+/* URGENT BANNER */
+.urgent-bar{width:100%;background:linear-gradient(135deg,#ef4444,#dc2626);padding:10px 16px;text-align:center;font-size:11px;font-weight:800;color:white;letter-spacing:1px;text-transform:uppercase;animation:urgblink 2s infinite}
+@keyframes urgblink{0%,100%{opacity:1}50%{opacity:0.8}}
+
+/* NAV */
+.nav{width:100%;background:rgba(10,15,26,0.97);border-bottom:1px solid #1a2540;padding:13px 18px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.nav-logo{font-size:11px;font-weight:900;color:#22c55e;text-transform:uppercase;letter-spacing:1.5px}
+.nav-live{font-size:10px;font-weight:700;color:#ef4444;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);padding:5px 11px;border-radius:20px;display:flex;align-items:center;gap:5px}
+.rdot{width:6px;height:6px;border-radius:50%;background:#ef4444;animation:blink 1s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* PAGE */
+.page{width:100%;max-width:440px;padding:16px 14px 60px}
+
+/* REPLAY HEADER */
+.replay-header{text-align:center;margin-bottom:16px}
+.replay-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;font-size:10px;font-weight:800;padding:5px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.replay-title{font-size:20px;font-weight:900;color:white;line-height:1.3;margin-bottom:6px}
+.replay-sub{font-size:12px;color:#64748b}
+
+/* COUNTDOWN */
+.countdown{background:linear-gradient(135deg,rgba(239,68,68,0.1),rgba(239,68,68,0.05));border:1px solid rgba(239,68,68,0.3);border-radius:14px;padding:14px;margin-bottom:16px;text-align:center}
+.cd-label{font-size:10px;font-weight:800;color:#ef4444;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.cd-row{display:flex;justify-content:center;gap:8px}
+.cd-box{background:rgba(0,0,0,0.3);border-radius:10px;padding:10px 12px;min-width:52px}
+.cd-num{font-size:22px;font-weight:900;color:white;display:block}
+.cd-lbl{font-size:9px;color:#64748b;text-transform:uppercase}
+.cd-sep{font-size:22px;font-weight:900;color:#ef4444;padding-top:10px}
+
+/* VIDEO */
+.video-wrap{position:relative;width:100%;padding-bottom:56.25%;border-radius:16px;overflow:hidden;background:#000;border:1px solid #1a2540;margin-bottom:14px}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none}
+.video-overlay{position:absolute;inset:0;z-index:5}
+.replay-badge{position:absolute;top:8px;left:8px;z-index:6;background:rgba(239,68,68,0.9);color:white;font-size:9px;font-weight:800;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:1px}
+
+<!-- TAP TO PLAY -->
+<div id="play-overlay" onclick="tapToPlay()" style="position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:rgba(0,0,0,0.5);backdrop-filter:blur(2px)">
+  <div style="width:70px;height:70px;background:#22c55e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:14px;animation:tappulse 1s infinite">▶</div>
+  <div style="animation:tapblink 1s infinite;background:rgba(0,0,0,0.6);border:1.5px solid #22c55e;color:#22c55e;font-size:11px;font-weight:800;padding:8px 20px;border-radius:30px;letter-spacing:2px;text-transform:uppercase">🔊 Tap For Sound</div>
+</div>
+
+/* WARNING BOX */
+.warning{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:14px;margin-bottom:16px;display:flex;gap:10px;align-items:flex-start}
+.warning-icon{font-size:20px;flex-shrink:0}
+.warning-text{font-size:11px;color:#94a3b8;line-height:1.7}
+.warning-text strong{color:#f59e0b}
+
+/* WHAT YOU LEARN */
+.learn-card{background:#0d1526;border:1px solid #1a2540;border-radius:16px;padding:16px;margin-bottom:14px}
+.learn-title{font-size:11px;font-weight:800;color:#3d4f6b;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+.learn-item{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:12px}
+.learn-item:last-child{margin-bottom:0}
+.learn-icon{width:30px;height:30px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+
+/* BUTTONS */
+.btn-green{display:flex;align-items:center;justify-content:center;padding:16px;background:#22c55e;color:#0a0f1a;border-radius:14px;font-size:13px;font-weight:900;text-decoration:none;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;box-shadow:0 0 15px rgba(34,197,94,0.3)}
+.btn-blue{display:flex;align-items:center;justify-content:center;padding:15px;background:transparent;color:#60a5fa;border:2px solid rgba(96,165,250,0.4);border-radius:14px;font-size:13px;font-weight:900;text-decoration:none;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+
+@keyframes tappulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(34,197,94,0.6)}50%{transform:scale(1.1);box-shadow:0 0 0 15px rgba(34,197,94,0)}}
+@keyframes tapblink{0%,100%{opacity:1}50%{opacity:0.3}}
+</style>
+</head>
+<body>
+
+<!-- URGENT BANNER -->
+<div class="urgent-bar">⚠️ Replay Available For LIMITED TIME Only — Watch Before It's Removed!</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">BRIMES Academy</div>
+  <div class="nav-live"><div class="rdot"></div>REPLAY</div>
+</nav>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="replay-header">
+    <div class="replay-tag"><div class="rdot"></div> Webinar Replay</div>
+    <div class="replay-title">How To Make Money From Forex Signals Daily 🔥</div>
+    <div class="replay-sub">Recorded Live Session — Master Trader Brimes</div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown">
+    <div class="cd-label">⏰ Replay Expires In</div>
+    <div class="cd-row">
+      <div class="cd-box"><span class="cd-num" id="cd-h">24</span><span class="cd-lbl">Hours</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><span class="cd-num" id="cd-m">00</span><span class="cd-lbl">Mins</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><span class="cd-num" id="cd-s">00</span><span class="cd-lbl">Secs</span></div>
+    </div>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="video-wrap">
+    <iframe id="replayVideo" src="https://www.youtube.com/embed/qJMWCpHx3uo?enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&controls=1&showinfo=0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+    <div class="replay-badge">🎬 REPLAY</div>
+    <div id="play-overlay" onclick="tapToPlay()" style="position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:rgba(0,0,0,0.5);backdrop-filter:blur(2px)">
+      <div style="width:70px;height:70px;background:#22c55e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:14px;animation:tappulse 1s infinite">▶</div>
+      <div style="animation:tapblink 1s infinite;background:rgba(0,0,0,0.6);border:1.5px solid #22c55e;color:#22c55e;font-size:11px;font-weight:800;padding:8px 20px;border-radius:30px;letter-spacing:2px;text-transform:uppercase">🔊 Tap To Watch Replay</div>
+    </div>
+  </div>
+
+  <!-- WARNING -->
+  <div class="warning">
+    <div class="warning-icon">⚠️</div>
+    <div class="warning-text">This replay will be <strong>taken down soon</strong>. Watch it now and join our community before the link expires!</div>
+  </div>
+
+  <!-- WHAT YOU WILL LEARN -->
+  <div class="learn-card">
+    <div class="learn-title">📚 What You Will Learn</div>
+    <div class="learn-item"><div class="learn-icon">📊</div>How forex signals work and how to copy them</div>
+    <div class="learn-item"><div class="learn-icon">🥇</div>How to trade Gold (XAUUSD) profitably</div>
+    <div class="learn-item"><div class="learn-icon">💰</div>How students are withdrawing $500-$3,400/month</div>
+    <div class="learn-item"><div class="learn-icon">🚀</div>How to start with as little as $10</div>
+    <div class="learn-item"><div class="learn-icon">🛡️</div>How to manage risk and protect your capital</div>
+  </div>
+
+  <!-- BUTTONS -->
+  <a href="https://t.me/brimes_trading" class="btn-green">✈️ Join FREE Community Channel</a>
+
+</div>
+
+<script>
+// TAP TO PLAY
+function tapToPlay(){
+  const overlay = document.getElementById('play-overlay');
+  if(overlay) overlay.style.display='none';
+  const f = document.getElementById('replayVideo');
+  const savedTime = parseInt(localStorage.getItem('brimes_replay_pos')||'0');
+  const startAt = savedTime > 5 ? savedTime : 0;
+  f.src = `https://www.youtube.com/embed/qJMWCpHx3uo?enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&controls=1&showinfo=0&autoplay=1&start=${startAt}`;
+}
+
+// COUNTDOWN — 24 hours from first visit
+let end = localStorage.getItem('brimes_replay_end');
+if(!end){
+  end = Date.now() + (24*60*60*1000);
+  localStorage.setItem('brimes_replay_end', end);
+}
+end = parseInt(end);
+
+function tick(){
+  const diff = end - Date.now();
+  if(diff<=0){
+    document.getElementById('cd-h').textContent='00';
+    document.getElementById('cd-m').textContent='00';
+    document.getElementById('cd-s').textContent='00';
+    return;
+  }
+  const h=Math.floor(diff/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  const pad=n=>String(n).padStart(2,'0');
+  document.getElementById('cd-h').textContent=pad(h);
+  document.getElementById('cd-m').textContent=pad(m);
+  document.getElementById('cd-s').textContent=pad(s);
+  setTimeout(tick,1000);
+}
+tick();
+</script>
+</body>
+</html>
